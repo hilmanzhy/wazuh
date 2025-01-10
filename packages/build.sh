@@ -87,8 +87,8 @@ fi
 
 # Download source code if it is not shared from the local host
 if [ ! -d "/verprotect-local-src" ] ; then
-    curl -sL https://github.com/verprotect/verprotect/tarball/${VERPROTECT_BRANCH} | tar zx
-    short_commit_hash="$(curl -s https://api.github.com/repos/verprotect/verprotect/commits/${VERPROTECT_BRANCH} \
+    curl -sL https://github.com/wazuh/wazuh/tarball/${VERPROTECT_BRANCH} | tar zx
+    short_commit_hash="$(curl -s https://api.github.com/repos/wazuh/wazuh/commits/${VERPROTECT_BRANCH} \
                           | grep '"sha"' | head -n 1| cut -d '"' -f 4 | cut -c 1-11)"
 else
     if [ "${legacy}" = "no" ]; then
