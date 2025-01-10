@@ -1,13 +1,13 @@
 #!/bin/sh
 
-#Copyright (C) 2015, Wazuh Inc.
-# Install functions for Wazuh
-# Wazuh.com (https://github.com/wazuh)
+#Copyright (C) 2015, Verprotect Inc.
+# Install functions for Verprotect
+# Verprotect.com (https://github.com/wazuh)
 
 patch_version(){
         rm -rf $PREINSTALLEDDIR/etc/shared/ssh > /dev/null 2>&1
 }
-WazuhSetup(){
+VerprotectSetup(){
     patch_version
 }
 
@@ -78,7 +78,7 @@ CheckModuleIsEnabled(){
     echo ${is_disabled}
 }
 
-WazuhUpgrade()
+VerprotectUpgrade()
 {
     # Encode Agentd passlist if not encoded
 
@@ -113,7 +113,7 @@ WazuhUpgrade()
         fi
     fi
 
-    # Remove existing SQLite databases for Wazuh DB, only if upgrading from 3.2..3.6
+    # Remove existing SQLite databases for Verprotect DB, only if upgrading from 3.2..3.6
 
     MAJOR=$(echo $USER_OLD_VERSION | cut -dv -f2 | cut -d. -f1)
     MINOR=$(echo $USER_OLD_VERSION | cut -d. -f2)
@@ -150,7 +150,7 @@ WazuhUpgrade()
         rm -rf $PREINSTALLEDDIR/logs/ossec
     fi
 
-    # Remove deprecated Wazuh tools
+    # Remove deprecated Verprotect tools
 
     rm -f $PREINSTALLEDDIR/bin/ossec-control
     rm -f $PREINSTALLEDDIR/bin/ossec-regex
@@ -161,7 +161,7 @@ WazuhUpgrade()
     rm -f $PREINSTALLEDDIR/bin/syscheck_control
     rm -f $PREINSTALLEDDIR/bin/syscheck_update
 
-    # Remove old Wazuh daemons
+    # Remove old Verprotect daemons
 
     rm -f $PREINSTALLEDDIR/bin/ossec-agentd
     rm -f $PREINSTALLEDDIR/bin/ossec-agentlessd

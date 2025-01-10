@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * August 30, 2017.
  *
  * This program is free software; you can redistribute it

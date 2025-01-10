@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../wazuh_db/wdb.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
+#include "../verprotect_db/wdb.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"

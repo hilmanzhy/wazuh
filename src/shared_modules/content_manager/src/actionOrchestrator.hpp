@@ -1,6 +1,6 @@
 /*
- * Wazuh content manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect content manager
+ * Copyright (C) 2015, Verprotect Inc.
  * April 26, 2023.
  *
  * This program is free software; you can redistribute it

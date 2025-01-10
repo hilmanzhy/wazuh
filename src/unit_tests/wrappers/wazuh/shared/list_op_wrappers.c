@@ -1,4 +1,4 @@
-/* Copyright (C) 2023, Wazuh Inc.
+/* Copyright (C) 2023, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it

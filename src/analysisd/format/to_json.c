@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2015 Trend Micro Inc.
  * All rights reserved.
  *
@@ -16,7 +16,7 @@
 #include "mitre.h"
 #include "cJSON.h"
 #include "config.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 
 #define is_win_permission(x) (strchr(x, '|'))
 #define print_before_field(x, y) (x && *x && (!y || strcmp(x, y)))

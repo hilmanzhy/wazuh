@@ -1,6 +1,6 @@
 /*
- * Wazuh SysCollector
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SysCollector
+ * Copyright (C) 2015, Verprotect Inc.
  * January 12, 2021.
  *
  * This program is free software; you can redistribute it

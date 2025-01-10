@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -15,11 +15,11 @@
 
 #include "../../wrappers/posix/pthread_wrappers.h"
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_agent_upgrade_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_agent_upgrade_agent_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_agent_wrappers.h"
 
-#include "../../wazuh_modules/wmodules.h"
-#include "../../wazuh_modules/agent_upgrade/wm_agent_upgrade.h"
+#include "../../verprotect_modules/wmodules.h"
+#include "../../verprotect_modules/agent_upgrade/wm_agent_upgrade.h"
 #include "../../headers/shared.h"
 
 void* wm_agent_upgrade_main(wm_agent_upgrade* upgrade_config);
@@ -147,7 +147,7 @@ void test_wm_agent_upgrade_destroy(void **state)
     os_strdup("wazuh.com/packages", config->manager_config.wpk_repository);
     #endif
 
-    expect_string(__wrap__mtinfo, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtinfo, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtinfo, formatted_msg, "(8154): Module Agent Upgrade finished.");
 
     wm_agent_upgrade_destroy(config);

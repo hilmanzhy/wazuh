@@ -3,7 +3,7 @@
  * @brief DB integrity synchronization library definition.
  * @date 2019-08-14
  *
- * @copyright Copyright (C) 2015 Wazuh, Inc.
+ * @copyright Copyright (C) 2015 Verprotect, Inc.
  */
 
 /*
@@ -42,7 +42,7 @@ static const char * COMPONENT_NAMES[] = {
     [WDB_GENERIC_COMPONENT] = ""
 };
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 /* Remove static qualifier when unit testing */
 #define static
 
@@ -762,7 +762,7 @@ int wdb_get_global_group_hash(wdb_t * wdb, os_sha1 hexdigest) {
 }
 
 int wdb_global_group_hash_cache(wdb_global_group_hash_operations_t operation, os_sha1 hexdigest) {
-    #ifndef WAZUH_UNIT_TESTING
+    #ifndef VERPROTECT_UNIT_TESTING
         static os_sha1 global_group_hash = {0};
     #endif
 

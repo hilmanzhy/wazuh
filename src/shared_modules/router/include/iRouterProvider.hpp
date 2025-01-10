@@ -1,6 +1,6 @@
 /*
- * Wazuh router
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect router
+ * Copyright (C) 2015, Verprotect Inc.
  * Jun 26, 2023.
  *
  * This program is free software; you can redistribute it

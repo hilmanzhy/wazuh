@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Office365 events
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Office365 events
+ * Copyright (C) 2015, Verprotect Inc.
  * May 18, 2021.
  *
  * This program is free software; you can redistribute it
@@ -10,7 +10,7 @@
  */
 #if defined(WIN32) || defined(__linux__) || defined(__MACH__)
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #ifdef WIN32
@@ -23,7 +23,7 @@
 #include "wmodules.h"
 
 #ifdef WIN32
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 #define gmtime_r(x, y)
 #else
 #define gmtime_r(x, y) gmtime_s(y, x)
@@ -147,7 +147,7 @@ void * wm_office365_main(wm_office365* office365_config) {
         while (1) {
             sleep(office365_config->interval);
             wm_office365_execute_scan(office365_config, 0);
-            #ifdef WAZUH_UNIT_TESTING
+            #ifdef VERPROTECT_UNIT_TESTING
                 break;
             #endif
         }

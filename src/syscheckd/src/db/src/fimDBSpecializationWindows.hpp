@@ -1,6 +1,6 @@
 /*
- * Wazuh Syscheck
- * Copyright (C) 2022, Wazuh Inc.
+ * Verprotect Syscheck
+ * Copyright (C) 2022, Verprotect Inc.
  * March 6, 2022.
  *
  * This program is free software; you can redistribute it

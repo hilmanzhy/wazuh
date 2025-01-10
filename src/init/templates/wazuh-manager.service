@@ -1,5 +1,5 @@
 [Unit]
-Description=Wazuh manager
+Description=Verprotect manager
 Wants=network-online.target
 After=network.target network-online.target
 
@@ -7,9 +7,9 @@ After=network.target network-online.target
 Type=forking
 LimitNOFILE=65536
 
-ExecStart=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control start
-ExecStop=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control stop
-ExecReload=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control reload
+ExecStart=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control start
+ExecStop=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control stop
+ExecReload=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control reload
 
 KillMode=process
 RemainAfterExit=yes

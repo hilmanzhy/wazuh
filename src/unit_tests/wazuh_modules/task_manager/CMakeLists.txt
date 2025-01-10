@@ -1,8 +1,8 @@
 # Generate task manager library
 file(GLOB task_files
-    ${SRC_FOLDER}/wazuh_modules/*.o
-    ${SRC_FOLDER}/wazuh_modules/task_manager/*.o)
-list(REMOVE_ITEM task_files ${SRC_FOLDER}/wazuh_modules/main.o)
+    ${SRC_FOLDER}/verprotect_modules/*.o
+    ${SRC_FOLDER}/verprotect_modules/task_manager/*.o)
+list(REMOVE_ITEM task_files ${SRC_FOLDER}/verprotect_modules/main.o)
 
 add_library(TASK_O STATIC ${task_files})
 
@@ -19,7 +19,7 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(TASK_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(TASK_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
 include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
@@ -49,8 +49,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         TASK_O
         ${TEST_DEPS}
     )

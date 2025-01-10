@@ -1,6 +1,6 @@
 /*
- * Wazuh DB
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect DB
+ * Copyright (C) 2015, Verprotect Inc.
  * January 12, 2022.
  *
  * This program is free software; you can redistribute it

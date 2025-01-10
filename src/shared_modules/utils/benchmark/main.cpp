@@ -1,6 +1,6 @@
 /*
- * Wazuh - Content Migration tests
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect - Content Migration tests
+ * Copyright (C) 2015, Verprotect Inc.
  * March 03, 2023.
  *
  */

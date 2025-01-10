@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * April 15, 2019.
  *
  * This program is free software; you can redistribute it
@@ -13,7 +13,7 @@
 #ifndef WIN32
 
 /**
- * @brief Connects to Wazuh-DB socket
+ * @brief Connects to Verprotect-DB socket
  *
  * @return Socket descriptor or -1 if error.
  */
@@ -22,7 +22,7 @@ int wdbc_connect() {
 }
 
 /**
- * @brief Connects to Wazuh-DB socket with a maximum number of attempts.
+ * @brief Connects to Verprotect-DB socket with a maximum number of attempts.
  *
  * @param max_attempts Maximum number of attempts to connect.
  * @return int Socket descriptor or -1 if error.
@@ -56,13 +56,13 @@ int wdbc_connect_with_attempts(int max_attempts) {
 
 
 /**
- * @brief Sends query to Wazuh-DB and stores the response.
+ * @brief Sends query to Verprotect-DB and stores the response.
  *
  * @param[in] sock Client socket descriptor.
- * @param[in] query Query to be sent to Wazuh-DB.
- * @param[out] response Char pointer where the response from Wazuh-DB will be stored.
+ * @param[in] query Query to be sent to Verprotect-DB.
+ * @param[out] response Char pointer where the response from Verprotect-DB will be stored.
  * @param[in] len Lenght of the response param.
- * @post This function will read up to len bytes from Wazuh DB.
+ * @post This function will read up to len bytes from Verprotect DB.
  * @post This function will null-terminate response, the last byte may be truncated.
  * @retval -2 Error in the communication.
  * @retval -1 Error in the response from socket.
@@ -74,7 +74,7 @@ int wdbc_query(const int sock, const char *query, char *response, const int len)
     int retval = -2;
     ssize_t recv_len;
 
-    // Send query to Wazuh DB
+    // Send query to Verprotect DB
     if (OS_SendSecureTCP(sock, size + 1, query) != 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
             merror("database socket is full");
@@ -108,13 +108,13 @@ end:
 
 
 /**
- * @brief Check connection to Wazuh-DB, sends query and stores the response.
+ * @brief Check connection to Verprotect-DB, sends query and stores the response.
  *
  * @param[in] sock Pointer to the client socket descriptor.
- * @param[in] query Query to be sent to Wazuh-DB.
- * @param[out] response Char pointer where the response from Wazuh-DB will be stored.
+ * @param[in] query Query to be sent to Verprotect-DB.
+ * @param[out] response Char pointer where the response from Verprotect-DB will be stored.
  * @param[in] len Lenght of the response param.
- * @post This function will read up to len bytes from Wazuh DB.
+ * @post This function will read up to len bytes from Verprotect DB.
  * @post This function will null-terminate response, the last byte may be truncated.
  * @retval -2 Error in the communication.
  * @retval -1 Error in the response from socket.
@@ -135,14 +135,14 @@ int wdbc_query_ex(int *sock, const char *query, char *response, const int len) {
         }
     }
 
-    // Send query to Wazuh DB
+    // Send query to Verprotect DB
     if (retval = wdbc_query(*sock, query, response, len), retval != 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
             merror("database socket is full");
             return retval;
         } else if (errno == EPIPE) {
             // Retry to connect
-            merror("Connection with wazuh-db lost. Reconnecting.");
+            merror("Connection with verprotect-db lost. Reconnecting.");
             close(*sock);
             if (*sock = wdbc_connect(), *sock < 0) {
                 return retval;
@@ -162,12 +162,12 @@ int wdbc_query_ex(int *sock, const char *query, char *response, const int len) {
 
 
 /**
- * @brief Parse the result of the query to Wazuh-DB
+ * @brief Parse the result of the query to Verprotect-DB
  *
  * If payload is not NULL, this function stores the address of the result
  * argument, this is the substring after the first whitespace.
  *
- * @param result Result from the query to Wazuh-DB.
+ * @param result Result from the query to Verprotect-DB.
  * @param payload[out] Pointer inside the result where the payload starts.
  * @return Enum wdbc_result.
  */
@@ -205,8 +205,8 @@ int wdbc_parse_result(char *result, char **payload) {
  * @brief Combine wdbc_query_ex and wdbc_parse_result functions and return a JSON item.
  *
  * @param[in] sock Pointer to the client socket descriptor.
- * @param[in] query Query to be sent to Wazuh-DB.
- * @param[out] response Char pointer where the response from Wazuh-DB will be stored.
+ * @param[in] query Query to be sent to Verprotect-DB.
+ * @param[out] response Char pointer where the response from Verprotect-DB will be stored.
  * @param[in] len Lenght of the response param.
  * @return cJSON* on success or NULL on failure.
  */
@@ -221,7 +221,7 @@ cJSON * wdbc_query_parse_json(int *sock, const char *query, char *response, cons
         merror("Unable to connect to socket '%s'", WDB_LOCAL_SOCK);
         return NULL;
     case -1:
-        merror("No response from wazuh-db.");
+        merror("No response from verprotect-db.");
         return NULL;
     }
 
@@ -229,7 +229,7 @@ cJSON * wdbc_query_parse_json(int *sock, const char *query, char *response, cons
     case WDBC_OK:
         break;
     case WDBC_ERROR:
-        merror("Bad response from wazuh-db: %s", arg);
+        merror("Bad response from verprotect-db: %s", arg);
         // Fallthrough
     default:
         return NULL;
@@ -243,10 +243,10 @@ cJSON * wdbc_query_parse_json(int *sock, const char *query, char *response, cons
  * @brief Combine wdbc_query_ex and wdbc_parse_result functions.
  *
  * @param[in] sock Pointer to the client socket descriptor.
- * @param[in] query Query to be sent to Wazuh-DB.
- * @param[out] response Char pointer where the response from Wazuh-DB will be stored.
+ * @param[in] query Query to be sent to Verprotect-DB.
+ * @param[out] response Char pointer where the response from Verprotect-DB will be stored.
  * @param[in] len Lenght of the response param.
- * @param[out] payload Char pointer where the payload from Wazuh-DB will be stored.
+ * @param[out] payload Char pointer where the payload from Verprotect-DB will be stored.
  * @return Enum wdbc_result.
  */
 
@@ -258,14 +258,14 @@ wdbc_result wdbc_query_parse(int *sock, const char *query, char *response, const
     if (OS_SUCCESS == result) {
         status = wdbc_parse_result(response, &_payload);
         if (status == WDBC_ERROR){
-            merror("Bad response from wazuh-db: %s", _payload);
+            merror("Bad response from verprotect-db: %s", _payload);
         }
     }
     else if (-2 == result) {
         merror("Unable to connect to socket '%s'", WDB_LOCAL_SOCK);
     }
     else if (-1 == result) {
-        merror("No response from wazuh-db.");
+        merror("No response from verprotect-db.");
     }
 
     if (payload) {

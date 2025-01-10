@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Task management.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Task management.
+ * Copyright (C) 2015, Verprotect Inc.
  * July 13, 2020.
  *
  * This program is free software; you can redistribute it
@@ -10,7 +10,7 @@
  */
 
 #include "wdb.h"
-#include "wazuh_modules/wm_task_general.h"
+#include "verprotect_modules/wm_task_general.h"
 
 int wdb_task_insert_task(wdb_t* wdb, int agent_id, const char *node, const char *module, const char *command) {
     sqlite3_stmt *stmt = NULL;

@@ -184,10 +184,10 @@ list(APPEND wdb_tests_flags "-Wl,--wrap,wdb_get_cache_stmt -Wl,--wrap,wdb_step -
                             -Wl,--wrap,sqlite3_bind_text -Wl,--wrap,sqlite3_step -Wl,--wrap,sqlite3_bind_double -Wl,--wrap,sqlite3_changes \
                             -Wl,--wrap,sqlite3_bind_null -Wl,--wrap,sqlite3_errmsg ${DEBUG_OP_WRAPPERS}")
 
-list(APPEND wdb_tests_names "test_wazuh_db-config")
+list(APPEND wdb_tests_names "test_verprotect_db-config")
 list(APPEND wdb_tests_flags "${DEBUG_OP_WRAPPERS}")
 
-list(APPEND wdb_tests_names "test_wazuh_db_state")
+list(APPEND wdb_tests_names "test_verprotect_db_state")
 list(APPEND wdb_tests_flags "")
 
 list(APPEND wdb_tests_names "test_wdb_com")
@@ -203,9 +203,9 @@ list(APPEND wdb_tests_flags "-Wl,--wrap,wfopen,--wrap,fopen,--wrap,fclose,--wrap
 add_compile_options(-Wall)
 link_directories(${SRC_FOLDER}/build/shared_modules/router)
 
-# Wazuh-DB objects
-FILE(GLOB wazuh_db_objects ${SRC_FOLDER}/wazuh_db/*.o)
-list(REMOVE_ITEM wazuh_db_objects ${SRC_FOLDER}/wazuh_db/main.o ${SRC_FOLDER}/wazuh_db/wdb_shared.o)
+# Verprotect-DB objects
+FILE(GLOB verprotect_db_objects ${SRC_FOLDER}/verprotect_db/*.o)
+list(REMOVE_ITEM verprotect_db_objects ${SRC_FOLDER}/verprotect_db/main.o ${SRC_FOLDER}/verprotect_db/wdb_shared.o)
 
 # Compilig tests
 list(LENGTH wdb_tests_names count)
@@ -214,12 +214,12 @@ foreach(counter RANGE ${count})
     list(GET wdb_tests_names ${counter} test_name)
     list(GET wdb_tests_flags ${counter} test_flags)
 
-    add_executable(${test_name} ${test_name}.c ${wazuh_db_objects})
+    add_executable(${test_name} ${test_name}.c ${verprotect_db_objects})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         ${TEST_DEPS}
         router
     )

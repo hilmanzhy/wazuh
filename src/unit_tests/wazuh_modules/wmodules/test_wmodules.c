@@ -1,12 +1,12 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * Test corresponding to the wazuh-modulesd shared functions
+ * Test corresponding to the verprotect-modulesd shared functions
  */
 
 #include <stdarg.h>
@@ -15,7 +15,7 @@
 #include <cmocka.h>
 #include <time.h>
 
-#include "../../../wazuh_modules/wmodules.h"
+#include "../../../verprotect_modules/wmodules.h"
 
 static size_t echo(void * module, char * query, char ** output) {
     (void)module;

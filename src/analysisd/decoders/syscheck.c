@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -16,11 +16,11 @@
 #include "alerts/alerts.h"
 #include "decoder.h"
 #include "syscheck_op.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "os_net/os_net.h"
 #include "wazuhdb_op.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 /* Remove static qualifier when testing */
 #define static
 
@@ -79,13 +79,13 @@ static int fim_process_alert(_sdb *sdb, Eventinfo *lf, cJSON *event);
 */
 static int fim_generate_alert(Eventinfo *lf, syscheck_event_t event_type, cJSON *attributes, cJSON *old_attributes, cJSON *audit);
 
-// Send save query to Wazuh DB
+// Send save query to Verprotect DB
 static void fim_send_db_save(_sdb * sdb, const char * agent_id, cJSON * data);
 
-// Send delete query to Wazuh DB
+// Send delete query to Verprotect DB
 void fim_send_db_delete(_sdb * sdb, const char * agent_id, const char * path);
 
-// Send a query to Wazuh DB
+// Send a query to Verprotect DB
 void fim_send_db_query(int * sock, const char * query);
 
 // Build change comment
@@ -267,7 +267,7 @@ int DecodeSyscheck(Eventinfo *lf, _sdb *sdb)
     char *w_sum = NULL;
     char *f_name;
 
-    /* Every syscheck message must be in the following format (OSSEC - Wazuh v3.10):
+    /* Every syscheck message must be in the following format (OSSEC - Verprotect v3.10):
      * 'checksum' 'filename'
      * or
      * 'checksum'!'extradata' 'filename'
@@ -372,7 +372,7 @@ int fim_db_search(char *f_name, char *c_sum, char *w_sum, Eventinfo *lf, _sdb *s
         goto exit_fail;
     }
 
-    //extract changes and date_alert fields only available from wazuh_db
+    //extract changes and date_alert fields only available from verprotect_db
     sk_decode_extradata(&oldsum, check_sum);
 
     os_strdup(check_sum, old_check_sum);
@@ -1878,7 +1878,7 @@ void fim_adjust_checksum(sk_sum_t *newsum, char **checksum) {
 
         // We need to escape the character ':' from the permissions
         //because we are going to compare against escaped permissions
-        // sent by wazuh-db
+        // sent by verprotect-db
         char *esc_perms = wstr_replace(newsum->win_perm, ":", "\\:");
         wm_strcat(checksum, esc_perms, 0);
         free(esc_perms);

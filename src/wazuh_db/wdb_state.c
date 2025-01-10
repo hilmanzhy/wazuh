@@ -1,7 +1,7 @@
 /* wazuhdb state management functions
  * May 27, 2022
  *
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * All right reserved.
  *
  * This program is free software; you can redistribute it
@@ -13,7 +13,7 @@
 #include "wdb_state.h"
 #include <pthread.h>
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests
 #define STATIC
 #else
@@ -21,7 +21,7 @@
 #endif
 
 #ifndef ARGV0
-#define ARGV0 "wazuh-db"
+#define ARGV0 "verprotect-db"
 #endif
 
 #define timeval_to_milis(time) ((time.tv_sec * (uint64_t)1000) + (time.tv_usec / 1000))

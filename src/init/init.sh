@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Init functions for Wazuh
-# Copyright (C) 2015, Wazuh Inc.
+# Init functions for Verprotect
+# Copyright (C) 2015, Verprotect Inc.
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 UN=${NUNAME};
@@ -31,12 +31,12 @@ runInit()
         fi
         # RHEL 8 services must to be installed in /usr/lib/systemd/system/
         if [ "${DIST_NAME}" = "rhel" -a "${DIST_VER}" -ge "7" ] || [ "${DIST_NAME}" = "centos" -a "${DIST_VER}" -ge "7" ]; then
-            SERVICE_UNIT_PATH=/usr/lib/systemd/system/wazuh-$type.service
-            rm -f /etc/systemd/system/wazuh-$type.service
+            SERVICE_UNIT_PATH=/usr/lib/systemd/system/verprotect-$type.service
+            rm -f /etc/systemd/system/verprotect-$type.service
         else
-            SERVICE_UNIT_PATH=/etc/systemd/system/wazuh-$type.service
+            SERVICE_UNIT_PATH=/etc/systemd/system/verprotect-$type.service
         fi
-        GenerateService wazuh-$type.service > ${SERVICE_UNIT_PATH}
+        GenerateService verprotect-$type.service > ${SERVICE_UNIT_PATH}
         chown root:wazuh ${SERVICE_UNIT_PATH}
         systemctl daemon-reload
 
@@ -44,7 +44,7 @@ runInit()
 
         if [ "X${update_only}" = "X" ]
         then
-            systemctl enable "wazuh-"$type
+            systemctl enable "verprotect-"$type
         fi
 
         return 0;
@@ -173,11 +173,11 @@ runInit()
     fi
 
     if [ "X${UN}" = "XOpenBSD" -o "X${UN}" = "XNetBSD" -o "X${UN}" = "XFreeBSD" -o "X${UN}" = "XDragonFly" ]; then
-        # Checking for the presence of wazuh-control on rc.local
-        grep wazuh-control /etc/rc.local > /dev/null 2>&1
+        # Checking for the presence of verprotect-control on rc.local
+        grep verprotect-control /etc/rc.local > /dev/null 2>&1
         if [ $? != 0 ]; then
             echo "echo \"${starting}\"" >> /etc/rc.local
-            echo "${INSTALLDIR}/bin/wazuh-control start" >> /etc/rc.local
+            echo "${INSTALLDIR}/bin/verprotect-control start" >> /etc/rc.local
         fi
         echo " - ${systemis} ${NUNAME}."
         echo " - ${modifiedinit}"
@@ -187,10 +187,10 @@ runInit()
             echo " - ${systemis} Linux."
             echo " - ${modifiedinit}"
 
-            grep wazuh-control /etc/rc.d/rc.local > /dev/null 2>&1
+            grep verprotect-control /etc/rc.d/rc.local > /dev/null 2>&1
             if [ $? != 0 ]; then
                 echo "echo \"${starting}\"" >> /etc/rc.d/rc.local
-                echo "${INSTALLDIR}/bin/wazuh-control start" >> /etc/rc.d/rc.local
+                echo "${INSTALLDIR}/bin/verprotect-control start" >> /etc/rc.d/rc.local
             fi
             return 0;
         elif [ -d "/etc/rc.d/init.d" ]; then

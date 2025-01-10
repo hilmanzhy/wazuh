@@ -22,28 +22,28 @@
 !define MUI_UNICON uninstall.ico
 !define VERSION "4.10.0"
 !define REVISION "41008"
-!define NAME "Wazuh"
-!define SERVICE "WazuhSvc"
+!define NAME "Verprotect"
+!define SERVICE "VerprotectSvc"
 
 ; output file
 !ifndef OutFile
-    !define OutFile "wazuh-agent-${VERSION}.exe"
+    !define OutFile "verprotect-agent-${VERSION}.exe"
 !endif
 
 Var is_upgrade
 
 Name "${NAME} Windows Agent v${VERSION}"
-BrandingText "Copyright (C) 2015, Wazuh Inc."
+BrandingText "Copyright (C) 2015, Verprotect Inc."
 OutFile "${OutFile}"
 
 VIProductVersion "4.10.0.0"
 VIAddVersionKey ProductName "${NAME}"
-VIAddVersionKey CompanyName "Wazuh Inc."
-VIAddVersionKey LegalCopyright "2023 - Wazuh Inc."
-VIAddVersionKey FileDescription "Wazuh Agent installer"
+VIAddVersionKey CompanyName "Verprotect Inc."
+VIAddVersionKey LegalCopyright "2023 - Verprotect Inc."
+VIAddVersionKey FileDescription "Verprotect Agent installer"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey ProductVersion "${VERSION}"
-VIAddVersionKey InternalName "Wazuh Agent"
+VIAddVersionKey InternalName "Verprotect Agent"
 VIAddVersionKey OriginalFilename "${OutFile}"
 
 InstallDir "$PROGRAMFILES\ossec-agent"
@@ -139,7 +139,7 @@ Function .onInit
 FunctionEnd
 
 ; main install section
-Section "Wazuh Agent (required)" MainSec
+Section "Verprotect Agent (required)" MainSec
     ; set install type and cwd
     SectionIn RO
     SetOutPath $INSTDIR
@@ -185,8 +185,8 @@ Section "Wazuh Agent (required)" MainSec
     CreateDirectory "$INSTDIR\ruleset\sca"
 
     ; install files
-    File wazuh-agent.exe
-    File wazuh-agent-eventchannel.exe
+    File verprotect-agent.exe
+    File verprotect-agent-eventchannel.exe
     File default-ossec.conf
     File manage_agents.exe
     File /oname=win32ui.exe os_win32ui.exe
@@ -218,9 +218,9 @@ Section "Wazuh Agent (required)" MainSec
     File /oname=dbsync.dll ..\shared_modules\dbsync\build\bin\dbsync.dll
     File /oname=rsync.dll ..\shared_modules\rsync\build\bin\rsync.dll
     File /oname=sysinfo.dll ..\data_provider\build\bin\sysinfo.dll
-    File /oname=syscollector.dll ..\wazuh_modules\syscollector\build\bin\syscollector.dll
+    File /oname=syscollector.dll ..\verprotect_modules\syscollector\build\bin\syscollector.dll
     File /oname=libfimdb.dll ..\syscheckd/build/bin/libfimdb.dll
-    File /oname=queue\syscollector\norm_config.json ..\wazuh_modules\syscollector\norm_config.json
+    File /oname=queue\syscollector\norm_config.json ..\verprotect_modules\syscollector\norm_config.json
     File VERSION
     File REVISION
 
@@ -228,19 +228,19 @@ Section "Wazuh Agent (required)" MainSec
     FileOpen $0 "$INSTDIR\active-response\active-responses.log" w
     FileClose $0
 
-    ; use appropriate version of "wazuh-agent.exe"
+    ; use appropriate version of "verprotect-agent.exe"
     ${If} ${AtLeastWinVista}
-        Delete "$INSTDIR\wazuh-agent.exe"
-        Rename "$INSTDIR\wazuh-agent-eventchannel.exe" "$INSTDIR\wazuh-agent.exe"
+        Delete "$INSTDIR\verprotect-agent.exe"
+        Rename "$INSTDIR\verprotect-agent-eventchannel.exe" "$INSTDIR\verprotect-agent.exe"
     ${Else}
-        Delete "$INSTDIR\wazuh-agent-eventchannel.exe"
+        Delete "$INSTDIR\verprotect-agent-eventchannel.exe"
     ${Endif}
 
     ; write registry keys
     WriteRegStr HKLM SOFTWARE\ossec "Install_Dir" "$INSTDIR"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayName" "${NAME} Agent"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayVersion" "${VERSION}"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "Publisher" "Wazuh, Inc."
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "Publisher" "Verprotect, Inc."
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayIcon" '"$INSTDIR\favicon.ico"'
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "HelpLink" "https://wazuh.com"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "URLInfoAbout" "https://wazuh.com"
@@ -342,7 +342,7 @@ Section "Wazuh Agent (required)" MainSec
 
     ; install OSSEC service
     ServiceInstall:
-        nsExec::ExecToLog '"$INSTDIR\wazuh-agent.exe" install-service'
+        nsExec::ExecToLog '"$INSTDIR\verprotect-agent.exe" install-service'
         Pop $0
         ${If} $0 <> 1
             MessageBox MB_ABORTRETRYIGNORE|MB_ICONSTOP "$\r$\n\
@@ -421,7 +421,7 @@ Section "Uninstall"
     ; uninstall the services
     ; this also stops the service as well so it should be done early
     ServiceUninstall:
-        nsExec::ExecToLog '"$INSTDIR\wazuh-agent.exe" uninstall-service'
+        nsExec::ExecToLog '"$INSTDIR\verprotect-agent.exe" uninstall-service'
         Pop $0
         ${If} $0 <> 1
             MessageBox MB_ABORTRETRYIGNORE|MB_ICONSTOP "$\r$\n\
@@ -478,7 +478,7 @@ Section "Uninstall"
     DeleteRegKey HKLM SOFTWARE\OSSEC
 
     ; remove files and uninstaller
-    Delete "$INSTDIR\wazuh-agent.exe"
+    Delete "$INSTDIR\verprotect-agent.exe"
     Delete "$INSTDIR\agent-auth.exe"
     Delete "$INSTDIR\manage_agents.exe"
     Delete "$INSTDIR\ossec.conf"

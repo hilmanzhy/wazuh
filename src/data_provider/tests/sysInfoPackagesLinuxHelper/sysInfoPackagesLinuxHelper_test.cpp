@@ -1,6 +1,6 @@
 /*
- * Wazuh SysInfo
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SysInfo
+ * Copyright (C) 2015, Verprotect Inc.
  * January 28, 2021.
  *
  * This program is free software; you can redistribute it
@@ -378,7 +378,7 @@ TEST_F(SysInfoPackagesLinuxHelperTest, parsePacmanMultipleGroups)
     __alpm_list_t   dataThirdGroup  {};
     __alpm_list_t   dataFourthGroup {};
 
-    dataFirstGroup.data    = const_cast<char*>("Wazuh");
+    dataFirstGroup.data    = const_cast<char*>("Verprotect");
     dataFirstGroup.next    = &dataSecondGroup;
     dataSecondGroup.data   = const_cast<char*>("test");
     dataSecondGroup.next   = &dataThirdGroup;
@@ -400,7 +400,7 @@ TEST_F(SysInfoPackagesLinuxHelperTest, parsePacmanMultipleGroups)
 
     const auto& jsPackageInfo { PackageLinuxHelper::parsePacman(&mock) };
     EXPECT_FALSE(jsPackageInfo.empty());
-    EXPECT_EQ("Wazuh-test-Arch-lorem", jsPackageInfo["groups"]);
+    EXPECT_EQ("Verprotect-test-Arch-lorem", jsPackageInfo["groups"]);
 }
 
 TEST_F(SysInfoPackagesLinuxHelperTest, parsePacmanInformationNull)

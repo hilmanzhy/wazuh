@@ -1,9 +1,9 @@
 # Unit Tests
 ## Index
-1. [Compile Wazuh](#compile-wazuh)
+1. [Compile Verprotect](#compile-wazuh)
 2. [Compile and run unit tests for Linux targets](#compile-and-run-unit-tests-for-linux-targets)
 
-## Compile Wazuh
+## Compile Verprotect
 In order to run unit tests on a specific wazuh target, the project needs to be built with the `DEBUG` and `TEST` options as shown below:
 ```
 make deps RESOURCES_URL=file:///path/to/deps/

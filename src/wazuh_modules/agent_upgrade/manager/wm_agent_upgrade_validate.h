@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * August 10, 2020.
  *
  * This program is free software; you can redistribute it
@@ -47,7 +47,7 @@ int wm_agent_upgrade_validate_system(const char *platform, const char *os_major,
 
 /**
  * Check if agent is valid to upgrade
- * @param wazuh_version wazuh version of agent
+ * @param verprotect_version wazuh version of agent
  * @param platform platform of agent to validate
  * @param command wm_upgrade_command with the selected upgrade type
  * @param task pointer to task with the params
@@ -58,7 +58,7 @@ int wm_agent_upgrade_validate_system(const char *platform, const char *os_major,
  * @retval WM_UPGRADE_NEW_VERSION_GREATER_MASTER
  * @retval WM_UPGRADE_GLOBAL_DB_FAILURE
  * */
-int wm_agent_upgrade_validate_version(const char *wazuh_version, const char *platform, wm_upgrade_command command, void *task)  __attribute__((nonnull(4)));
+int wm_agent_upgrade_validate_version(const char *verprotect_version, const char *platform, wm_upgrade_command command, void *task)  __attribute__((nonnull(4)));
 
 /**
  * Translate architecture based on platform and package type if necessary

@@ -1,6 +1,6 @@
-# Wazuh configurations
+# Verprotect configurations
 
-Wazuh manager and agent configuration are managed and disposed to each module or system component in different ways.
+Verprotect manager and agent configuration are managed and disposed to each module or system component in different ways.
 
 Each module has a different configuration section, for specific information about each section please refer to online documentation.
 

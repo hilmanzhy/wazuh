@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * June 06, 2016.
  *
  * This program is free software; you can redistribute it
@@ -557,7 +557,7 @@ int wdb_rootcheck_insert(wdb_t * wdb, const rk_event_t *event);
 /* Update configuration assessment last date. Returns number of affected rows on success or -1 on error. */
 int wdb_rootcheck_update(wdb_t * wdb, const rk_event_t *event);
 
-/* Look for a configuration assessment entry in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Look for a configuration assessment entry in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_find(wdb_t * wdb, int pm_id, char * output);
 
 /* Update a configuration assessment entry. Returns ID on success or -1 on error (new) */
@@ -580,22 +580,22 @@ int wdb_sca_compliance_save(wdb_t * wdb, int id_check, char *key, char *value);
 /* Insert the rules of the policy checks,. Returns number of affected rows or -1 on error.  */
 int wdb_sca_rules_save(wdb_t * wdb, int id_check, char *type, char *rule);
 
-/* Look for a scan configuration assessment entry in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Look for a scan configuration assessment entry in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_scan_find(wdb_t * wdb, char *policy_id, char * output);
 
 /* Update scan info configuration assessment entry. Returns number of affected rows or -1 on error.  */
 int wdb_sca_scan_info_update_start(wdb_t * wdb, char * policy_id, int start_scan,int end_scan,int scan_id,int pass,int fail,int invalid,int total_checks,int score,char * hash);
 
-/* Look for a scan policy entry in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Look for a scan policy entry in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_policy_find(wdb_t * wdb, char *id, char * output);
 
-/* Gets the result of all checks in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Gets the result of all checks in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_checks_get_result(wdb_t * wdb, char * policy_id, char * output);
 
 /* Insert policy entry. Returns number of affected rows or -1 on error.  */
 int wdb_sca_policy_info_save(wdb_t * wdb,char *name,char * file,char * id,char * description,char *references, char *hash_file);
 
-/* Gets the result of all policies in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Gets the result of all policies in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_policy_get_id(wdb_t * wdb, char * output);
 
 /* Delete a configuration assessment policy. Returns 0 on success or -1 on error (new) */
@@ -631,7 +631,7 @@ void wdb_free_agent_info_data(agent_info_data *agent_data);
  *        This function will create or realloc an int array to place the values of the chunk.
  *        These values are obtained based on the provided json item string.
  *
- * @param [in] input The chunk obtained from WazuhDB to be parsed.
+ * @param [in] input The chunk obtained from VerprotectDB to be parsed.
  * @param [out] output An int array containing the parsed values. Must be freed by the caller.
  * @param [in] item Json string to search elements on the chunks.
  * @param [out] last_item Value of the last parsed item. If NULL no value is written.
@@ -644,7 +644,7 @@ wdbc_result wdb_parse_chunk_to_int(char* input, int** output, const char* item, 
  * @brief Function to parse a chunk response that contains the status of the query and a json array.
  *        This function will add the parsed response to the output_json (json) array.
  *
- * @param [in] input The chunk obtained from WazuhDB to be parsed.
+ * @param [in] input The chunk obtained from VerprotectDB to be parsed.
  * @param [out] output_json Json array in which the new elements will be added.
  * @param [in] item Json string to search elements on the chunks.
  * @param [out] last_item_value Value of the last item. If NULL no value is written.
@@ -656,7 +656,7 @@ wdbc_result wdb_parse_chunk_to_json_by_string_item(char* input, cJSON** output_j
  * @brief Function to parse a chunk response that contains the status of the query and a json array.
  *        This function will add the parsed response to the output RB tree.
  *
- * @param [in] input The chunk obtained from WazuhDB to be parsed.
+ * @param [in] input The chunk obtained from VerprotectDB to be parsed.
  * @param [out] output RB tree in which the new elements will be added.
  * @param [in] item Json string to search elements on the chunks.
  * @param [out] last_item Value of the last parsed item. If NULL no value is written.
@@ -1086,7 +1086,7 @@ int wdb_parse_agents_set_sys_osinfo(wdb_t * wdb, char * input, char * output);
 
 /**
  * @brief Function to parse generic dbsync message operation, and generate
- * a message to process in wazuh-db process.
+ * a message to process in verprotect-db process.
  *
  * @param wdb The Global struct database.
  * @param input Buffer input
@@ -2227,7 +2227,7 @@ w_err_t wdb_global_validate_groups(wdb_t *wdb, cJSON *j_groups, int agent_id);
 wdbc_result wdb_global_set_agent_groups(wdb_t *wdb, wdb_groups_set_mode_t mode, char* sync_status, cJSON* j_agents_group_info);
 
 /**
- * @brief Function to get the information of a particular agent stored in Wazuh DB.
+ * @brief Function to get the information of a particular agent stored in Verprotect DB.
  *
  * @param wdb The Global struct database.
  * @param id Agent id.
@@ -2538,7 +2538,7 @@ void wdbi_remove_by_pk(wdb_t *wdb, wdb_component_t component, const char * pk);
 sqlite3_stmt * wdb_get_cache_stmt(wdb_t * wdb, char const *query);
 
 /**
- * @brief Method to read the internal wazuh-db configuration.
+ * @brief Method to read the internal verprotect-db configuration.
  *
  * @return cJSON* Returns a cJSON object with the configuration requested.
  */

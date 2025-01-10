@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -22,7 +22,7 @@
 #include <openssl/md5.h>
 #include <openssl/sha.h>
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 #include "../../../unit_tests/wrappers/windows/winreg_wrappers.h"
 extern int _base_line;
 #else

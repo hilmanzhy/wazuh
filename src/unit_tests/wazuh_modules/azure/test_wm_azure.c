@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -17,15 +17,15 @@
 #include <time.h>
 
 #include "shared.h"
-#include "../../../wazuh_modules/wmodules.h"
-#include "../../../wazuh_modules/wm_azure.h"
+#include "../../../verprotect_modules/wmodules.h"
+#include "../../../verprotect_modules/wm_azure.h"
 
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
 #include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_exec_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
 
 #define TEST_MAX_DATES 5
 

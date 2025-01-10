@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -831,7 +831,7 @@ void test_w_homedir_env_var(void **state)
     expect_string(__wrap_realpath, path, argv0);
     will_return(__wrap_realpath, NULL);
 
-    expect_string(__wrap_getenv, name, WAZUH_HOME_ENV);
+    expect_string(__wrap_getenv, name, VERPROTECT_HOME_ENV);
     will_return(__wrap_getenv, "/home/wazuh");
 
     expect_string(__wrap_stat, __file, "/home/wazuh");
@@ -855,7 +855,7 @@ void test_w_homedir_stat_fail(void **state)
     will_return(__wrap_stat, &stat_buf);
     will_return(__wrap_stat, -1);
 
-    expect_string(__wrap__merror_exit, formatted_msg, "(1108): Unable to find Wazuh install directory. Export it to WAZUH_HOME environment variable.");
+    expect_string(__wrap__merror_exit, formatted_msg, "(1108): Unable to find Verprotect install directory. Export it to VERPROTECT_HOME environment variable.");
 
     expect_assert_failure(w_homedir(argv0));
 }

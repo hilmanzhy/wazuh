@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Security Configuration Assessment
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Security Configuration Assessment
+ * Copyright (C) 2015, Verprotect Inc.
  * November 25, 2018.
  *
  * This program is free software; you can redistribute it

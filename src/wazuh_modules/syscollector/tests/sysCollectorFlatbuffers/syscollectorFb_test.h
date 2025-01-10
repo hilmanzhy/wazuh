@@ -1,6 +1,6 @@
 /*
- * Wazuh SyscollectorFlatbuffers
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SyscollectorFlatbuffers
+ * Copyright (C) 2015, Verprotect Inc.
  * August 1, 2023.
  *
  * This program is free software; you can redistribute it

@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * October 19, 2020.
  *
  * This program is free software; you can redistribute it

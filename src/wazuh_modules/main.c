@@ -1,6 +1,6 @@
 /*
- * Wazuh Module Manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module Manager
+ * Copyright (C) 2015, Verprotect Inc.
  * April 22, 2016.
  *
  * This program is free software; you can redistribute it
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     }
 
     wmodule *cur_module;
-    wm_debug_level = getDefine_Int("wazuh_modules", "debug", 0, 2);
+    wm_debug_level = getDefine_Int("verprotect_modules", "debug", 0, 2);
 
     // Get command line options
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
         }
     }
 
-    mdebug1(WAZUH_HOMEDIR, home_path);
+    mdebug1(VERPROTECT_HOMEDIR, home_path);
     os_free(home_path);
 
     // Setup daemon
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 
 void wm_help()
 {
-    print_out("Wazuh Module Manager - %s\nWazuh Inc.", __ossec_version);
+    print_out("Verprotect Module Manager - %s\nVerprotect Inc.", __ossec_version);
     print_out(" ");
     print_out("Usage: %s -[d|f|h|t]", ARGV0);
     print_out(" ");

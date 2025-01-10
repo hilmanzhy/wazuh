@@ -1,5 +1,5 @@
 /* adopted from libowfat 0.9 (GPL) */
-/* Copyright (C) 2015, Wazuh Inc. */
+/* Copyright (C) 2015, Verprotect Inc. */
 
 #define NO_UINT32_MACROS
 #include "uint32.h"

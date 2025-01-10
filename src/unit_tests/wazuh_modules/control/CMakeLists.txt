@@ -1,4 +1,4 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -15,8 +15,8 @@ list(APPEND use_shared_libs 1)
 
 
 # Generate wazuh modules library
-file(GLOB control ../../../wazuh_modules/*.o)
-list(REMOVE_ITEM control ../../../wazuh_modules/main.o)
+file(GLOB control ../../../verprotect_modules/*.o)
+list(REMOVE_ITEM control ../../../verprotect_modules/main.o)
 
 add_library(CONTROL_O STATIC ${control})
 
@@ -33,7 +33,7 @@ set_target_properties(
   LINKER_LANGUAGE C
   )
 
-target_link_libraries(CONTROL_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(CONTROL_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 
 # Compiling tests
@@ -53,8 +53,8 @@ foreach(counter RANGE ${count})
     if(${TARGET} STREQUAL "server")
         target_link_libraries(
             ${test_name}
-            ${WAZUHLIB}
-            ${WAZUHEXT}
+            ${VERPROTECTLIB}
+            ${VERPROTECTEXT}
             CONTROL_O
             -lcmocka
             -ldl

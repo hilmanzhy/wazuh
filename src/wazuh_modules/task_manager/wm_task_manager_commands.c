@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Task management.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Task management.
+ * Copyright (C) 2015, Verprotect Inc.
  * July 13, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,7 +9,7 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #else
@@ -65,7 +65,7 @@ STATIC cJSON* wm_task_manager_command_upgrade_result(wm_task_manager_upgrade_res
 STATIC cJSON* wm_task_manager_command_upgrade_cancel_tasks(wm_task_manager_upgrade_cancel_tasks *task, int *error_code) __attribute__((nonnull));
 
 /**
- * Send messages to Wazuh DB.
+ * Send messages to Verprotect DB.
  * @param command Command to be send.
  * @param parameters cJSON with the parameters
  * @param error_code Variable to store an error code if something is wrong.
@@ -426,7 +426,7 @@ void* wm_task_manager_clean_tasks(void *arg) {
 
         w_sleep_until(sleep_time);
 
-    #ifdef WAZUH_UNIT_TESTING
+    #ifdef VERPROTECT_UNIT_TESTING
         break;
     #endif
     }

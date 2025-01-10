@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Docker
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Docker
+ * Copyright (C) 2015, Verprotect Inc.
  * October, 2018.
  *
  * This program is free software; you can redistribute it

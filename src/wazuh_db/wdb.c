@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * June 06, 2016.
  *
  * This program is free software; you can redistribute it
@@ -10,10 +10,10 @@
  */
 
 #include "wdb.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "wazuhdb_op.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests
 #define STATIC
 #else
@@ -1595,20 +1595,20 @@ sqlite3_stmt * wdb_get_cache_stmt(wdb_t * wdb, char const *query) {
 }
 
 cJSON* wdb_get_internal_config() {
-    cJSON* wazuh_db_config = cJSON_CreateObject();
+    cJSON* verprotect_db_config = cJSON_CreateObject();
     cJSON *root = cJSON_CreateObject();
 
-    cJSON_AddNumberToObject(wazuh_db_config, "commit_time_max", wconfig.commit_time_max);
-    cJSON_AddNumberToObject(wazuh_db_config, "commit_time_min", wconfig.commit_time_min);
-    cJSON_AddNumberToObject(wazuh_db_config, "open_db_limit", wconfig.open_db_limit);
-    cJSON_AddNumberToObject(wazuh_db_config, "worker_pool_size", wconfig.worker_pool_size);
-    cJSON_AddNumberToObject(wazuh_db_config, "fragmentation_threshold", wconfig.fragmentation_threshold);
-    cJSON_AddNumberToObject(wazuh_db_config, "fragmentation_delta", wconfig.fragmentation_delta);
-    cJSON_AddNumberToObject(wazuh_db_config, "free_pages_percentage", wconfig.free_pages_percentage);
-    cJSON_AddNumberToObject(wazuh_db_config, "max_fragmentation", wconfig.max_fragmentation);
-    cJSON_AddNumberToObject(wazuh_db_config, "check_fragmentation_interval", wconfig.check_fragmentation_interval);
+    cJSON_AddNumberToObject(verprotect_db_config, "commit_time_max", wconfig.commit_time_max);
+    cJSON_AddNumberToObject(verprotect_db_config, "commit_time_min", wconfig.commit_time_min);
+    cJSON_AddNumberToObject(verprotect_db_config, "open_db_limit", wconfig.open_db_limit);
+    cJSON_AddNumberToObject(verprotect_db_config, "worker_pool_size", wconfig.worker_pool_size);
+    cJSON_AddNumberToObject(verprotect_db_config, "fragmentation_threshold", wconfig.fragmentation_threshold);
+    cJSON_AddNumberToObject(verprotect_db_config, "fragmentation_delta", wconfig.fragmentation_delta);
+    cJSON_AddNumberToObject(verprotect_db_config, "free_pages_percentage", wconfig.free_pages_percentage);
+    cJSON_AddNumberToObject(verprotect_db_config, "max_fragmentation", wconfig.max_fragmentation);
+    cJSON_AddNumberToObject(verprotect_db_config, "check_fragmentation_interval", wconfig.check_fragmentation_interval);
 
-    cJSON_AddItemToObject(root, "wazuh_db", wazuh_db_config);
+    cJSON_AddItemToObject(root, "verprotect_db", verprotect_db_config);
 
     return root;
 }

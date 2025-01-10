@@ -820,7 +820,7 @@ constexpr auto FIM_SQL_DB_DUMP
 	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/mcelog.service',812,0,1596489275,0,0,131583,'f0de77d02db4c11db7f05dc6b2c6e29dfa1219c8');
 	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/smartd.service',813,0,1596489275,0,0,131583,'cda4389f32d41aff51d54e8c0795ffa7b2227d6c');
 	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/irqbalance.service',814,0,1596489275,0,0,131583,'090c97177a76788ba0cf7fe83da764530b0e749e');
-	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/wazuh-manager.service',815,0,1596489275,0,0,131583,'92b534adaad20ae46f396bd29d61a6ff30fa256c');
+	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/verprotect-manager.service',815,0,1596489275,0,0,131583,'92b534adaad20ae46f396bd29d61a6ff30fa256c');
 	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/netcf-transaction.service',816,0,1596489275,0,0,131583,'d9ddd3f6e65639bf9cf97531936dfadf8d22fed4');
 	INSERT INTO entry_path VALUES('/etc/systemd/system/multi-user.target.wants/rhsmcertd.service',817,0,1596489275,0,0,131583,'600e302004632ee1a928bc265f4a58759c5a7f21');
 	INSERT INTO entry_path VALUES('/etc/systemd/system/getty.target.wants/getty@tty1.service',818,0,1596489275,0,0,131583,'7f07d5019e16d544a1bc58b2994333ca461f6443');

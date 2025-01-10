@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -12,7 +12,7 @@
 #define WM_TASK_MANAGER_WRAPPERS_H
 
 #include "../../../../headers/shared.h"
-#include "../../../../wazuh_modules/wmodules.h"
+#include "../../../../verprotect_modules/wmodules.h"
 
 #ifndef CLIENT
 

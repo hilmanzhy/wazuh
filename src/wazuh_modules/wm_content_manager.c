@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for content updates.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for content updates.
+ * Copyright (C) 2015, Verprotect Inc.
  * May 1, 2023
  *
  * This program is free software; you can redistribute it
@@ -93,7 +93,7 @@ cJSON* wm_content_manager_dump()
     cJSON* root = cJSON_CreateObject();
     cJSON* wm_wd = cJSON_CreateObject();
     cJSON_AddStringToObject(wm_wd, "enabled", "yes");
-    cJSON_AddItemToObject(root, "wazuh_control", wm_wd);
+    cJSON_AddItemToObject(root, "verprotect_control", wm_wd);
     return root;
 }
 

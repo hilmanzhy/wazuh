@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent control
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent control
+ * Copyright (C) 2015, Verprotect Inc.
  * January, 2019
  *
  * This program is free software; you can redistribute it
@@ -9,7 +9,7 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #else
@@ -161,7 +161,7 @@ cJSON *wm_control_dump() {
     cJSON *root = cJSON_CreateObject();
     cJSON *wm_wd = cJSON_CreateObject();
     cJSON_AddStringToObject(wm_wd,"enabled","yes");
-    cJSON_AddItemToObject(root,"wazuh_control",wm_wd);
+    cJSON_AddItemToObject(root,"verprotect_control",wm_wd);
     return root;
 }
 

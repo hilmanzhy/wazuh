@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -17,8 +17,8 @@
 #include <cmocka.h>
 #include <time.h>
 #include "shared.h"
-#include "../../../wazuh_modules/wmodules.h"
-#include "../../../wazuh_modules/wm_ciscat.h"
+#include "../../../verprotect_modules/wmodules.h"
+#include "../../../verprotect_modules/wm_ciscat.h"
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
@@ -131,7 +131,7 @@ void test_interval_execution(void **state) {
     will_return_count(__wrap_FOREVER, 1, TEST_MAX_DATES);
     will_return(__wrap_FOREVER, 0);
     will_return_always(__wrap_os_random, 12345);
-    expect_string_count(__wrap__mterror, tag, "wazuh-modulesd:ciscat", TEST_MAX_DATES + 1);
+    expect_string_count(__wrap__mterror, tag, "verprotect-modulesd:ciscat", TEST_MAX_DATES + 1);
     expect_string_count(__wrap__mterror, formatted_msg, "Benchmark file '/var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml' not found.", TEST_MAX_DATES + 1);
     expect_any_always(__wrap__mtinfo, tag);
     expect_any_always(__wrap__mtinfo, formatted_msg);

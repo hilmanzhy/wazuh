@@ -1,12 +1,12 @@
-** Wazuh Windows Agent **
-** Copyright (C) 2015, Wazuh Inc. **
+** Verprotect Windows Agent **
+** Copyright (C) 2015, Verprotect Inc. **
 
 
-Thanks for installing the 'Wazuh Windows Agent'. Before you continue,
-make sure that you have an instance of the Wazuh manager running and configured
+Thanks for installing the 'Verprotect Windows Agent'. Before you continue,
+make sure that you have an instance of the Verprotect manager running and configured
 to accept this system as an agent.
 
-For more information on how to install the server version of Wazuh, look at:
+For more information on how to install the server version of Verprotect, look at:
 https://documentation.wazuh.com
 
 
@@ -23,7 +23,7 @@ https://documentation.wazuh.com
 
 1- How to obtain more information
 
-You can obtain more information about WAZUH on the following links:
+You can obtain more information about VERPROTECT on the following links:
 https://documentation.wazuh.com
 
 
@@ -43,6 +43,6 @@ The Windows agent does the following tasks:
 3- Questions/Support
 
 Visit the following link for information on how to get help or
-support for WAZUH:
+support for VERPROTECT:
 
 https://wazuh.com/

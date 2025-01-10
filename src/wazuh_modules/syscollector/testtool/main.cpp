@@ -1,6 +1,6 @@
 /*
- * Wazuh SysCollector Test tool
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SysCollector Test tool
+ * Copyright (C) 2015, Verprotect Inc.
  * October 7, 2020.
  *
  * This program is free software; you can redistribute it

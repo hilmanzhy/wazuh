@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 # Variables - do not modify them
 CHF="compiled_rules.h"
 
@@ -34,31 +34,31 @@ if [ "x$1" = "xlist" ]; then
 
 elif [ "x$1" = "xsave" ]; then
     if [ "X${2}" = "X" ]; then
-        echo "ERROR: You must specify the installation path. i.e.: ${0} $1 WAZUH_HOME"
+        echo "ERROR: You must specify the installation path. i.e.: ${0} $1 VERPROTECT_HOME"
         exit 1;
     fi    
-    WAZUH_HOME=${2}
+    VERPROTECT_HOME=${2}
 
-    eval $(${WAZUH_HOME}/bin/wazuh-control info 2>/dev/null)    
-    if [ "X$WAZUH_TYPE" = "X" ]; then
-        echo "ERROR: Unable to save rules. You must have Wazuh installed to do so."
+    eval $(${VERPROTECT_HOME}/bin/verprotect-control info 2>/dev/null)    
+    if [ "X$VERPROTECT_TYPE" = "X" ]; then
+        echo "ERROR: Unable to save rules. You must have Verprotect installed to do so."
         exit 1;
     fi
-    if [ "$WAZUH_TYPE" = "agent" ]; then
-        echo "ERROR: You must execute this script on Wazuh Manager"
+    if [ "$VERPROTECT_TYPE" = "agent" ]; then
+        echo "ERROR: You must execute this script on Verprotect Manager"
         exit 1;
     fi
 
-    ls ${WAZUH_HOME}/compiled_rules > /dev/null 2>&1
+    ls ${VERPROTECT_HOME}/compiled_rules > /dev/null 2>&1
     if [ ! $? = 0 ]; then
-        mkdir ${WAZUH_HOME}/compiled_rules > /dev/null 2>&1
+        mkdir ${VERPROTECT_HOME}/compiled_rules > /dev/null 2>&1
         if [ ! $? = 0 ]; then
             echo "ERROR: Unable to save rules. You must be root to do so."
             exit 1;
         fi
     fi
 
-    cp .function_list ${WAZUH_HOME}/compiled_rules/function_list > /dev/null 2>&1
+    cp .function_list ${VERPROTECT_HOME}/compiled_rules/function_list > /dev/null 2>&1
     if [ ! $? = 0 ]; then
         echo "ERROR: Unable to save rules. You must be root to do so."
         exit 1;
@@ -66,47 +66,47 @@ elif [ "x$1" = "xsave" ]; then
 
     for i in `ls *.c`; do
         if [ ! "x$i" = "xgeneric_samples.c" ]; then
-            cp $i ${WAZUH_HOME}/compiled_rules/ > /dev/null 2>&1
+            cp $i ${VERPROTECT_HOME}/compiled_rules/ > /dev/null 2>&1
         fi
     done
-    echo "*Save completed at ${WAZUH_HOME}/compiled_rules/";
+    echo "*Save completed at ${VERPROTECT_HOME}/compiled_rules/";
     exit 0;
 
 elif [ "x$1" = "xrestore" ]; then
     if [ "X${2}" = "X" ]; then
-        echo "ERROR: You must specify the installation path. i.e.: ${0} $1 WAZUH_HOME"
+        echo "ERROR: You must specify the installation path. i.e.: ${0} $1 VERPROTECT_HOME"
         exit 1;
     fi    
-    WAZUH_HOME=${2}
+    VERPROTECT_HOME=${2}
     
-    eval $(${WAZUH_HOME}/bin/wazuh-control info 2>/dev/null)    
-    if [ "X$WAZUH_TYPE" = "X" ]; then
-        echo "ERROR: Unable to save rules. You must have Wazuh installed to do so."
+    eval $(${VERPROTECT_HOME}/bin/verprotect-control info 2>/dev/null)    
+    if [ "X$VERPROTECT_TYPE" = "X" ]; then
+        echo "ERROR: Unable to save rules. You must have Verprotect installed to do so."
         exit 1;
     fi
-    if [ "$WAZUH_TYPE" = "agent" ]; then
-        echo "ERROR: You must execute this script on Wazuh Manager"
+    if [ "$VERPROTECT_TYPE" = "agent" ]; then
+        echo "ERROR: You must execute this script on Verprotect Manager"
         exit 1;
     fi
 
-    ls ${WAZUH_HOME}/compiled_rules/function_list > /dev/null 2>&1
+    ls ${VERPROTECT_HOME}/compiled_rules/function_list > /dev/null 2>&1
     if [ ! $? = 0 ]; then
         echo "*No local compiled rules available to restore."
         exit 0;
     fi
 
-    cat  ${WAZUH_HOME}/compiled_rules/function_list >> .function_list
+    cat  ${VERPROTECT_HOME}/compiled_rules/function_list >> .function_list
     if [ ! $? = 0 ]; then
         echo "ERROR: Unable to restore rules. Function list not present."
         exit 1;
     fi
 
-    for i in `ls ${WAZUH_HOME}/compiled_rules/*.c`; do
+    for i in `ls ${VERPROTECT_HOME}/compiled_rules/*.c`; do
         if [ ! "x$i" = "xgeneric_samples.c" ]; then
             cp $i ./ > /dev/null 2>&1
         fi
     done
-    echo "*Restore completed from ${WAZUH_HOME}/compiled_rules/";
+    echo "*Restore completed from ${VERPROTECT_HOME}/compiled_rules/";
     exit 0;
 
 elif [ "x$1" = "xbuild" ]; then

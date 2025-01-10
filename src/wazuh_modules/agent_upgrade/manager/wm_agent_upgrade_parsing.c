@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * July 3, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,14 +9,14 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #else
 #define STATIC static
 #endif
 
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "wm_agent_upgrade_parsing.h"
 #include "wm_agent_upgrade_tasks.h"
 
@@ -49,7 +49,7 @@ STATIC wm_upgrade_task* wm_agent_upgrade_parse_upgrade_command(const cJSON* para
  * Example:
  * Custom WPK Package
  * {
- *      "file_path" : "./wazuh_wpk"
+ *      "file_path" : "./verprotect_wpk"
  *      "installer" : "installer.sh"
  * }
  * @param params JSON where the task parameters are

@@ -1,6 +1,6 @@
 /*
- * Wazuh logging helper
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect logging helper
+ * Copyright (C) 2015, Verprotect Inc.
  * September 15, 2022.
  *
  * This program is free software; you can redistribute it

@@ -60,6 +60,26 @@ replace_content() {
   done
 }
 
+rollback_content() {
+  for item in "$1"/*; do
+    # Skip jika item tidak ada
+    [ -e "$item" ] || continue
+
+    # Proses direktori terlebih dahulu (rekursif)
+    if [ -d "$item" ]; then
+      replace_content "$item"
+    fi
+
+    # Proses file
+    if [ -f "$item" ]; then
+      # Ganti isi file: wazuh → verprotect, Wazuh → Verprotect, WAZUH → VERPROTECT
+      sed -i 's/verprotect.com/wazuh.com/g' "$item"
+      sed -i 's/verprotect\/verprotect/wazuh\/wazuh/g' "$item"
+      sed -i 's/WAZUH/VERPROTECT/g' "$item"
+    fi
+  done
+}
+
 # Direktori awal (default: direktori saat ini)
 start_dir="."
 

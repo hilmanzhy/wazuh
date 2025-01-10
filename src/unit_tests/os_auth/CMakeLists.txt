@@ -20,7 +20,7 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(OS_AUTH_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(OS_AUTH_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
 include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
@@ -67,8 +67,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${os_auth_test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         OS_AUTH_O
         ${TEST_DEPS}
     )

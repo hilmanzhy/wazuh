@@ -1,6 +1,6 @@
 /*
- * Wazuh DB pool handler headers
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect DB pool handler headers
+ * Copyright (C) 2015, Verprotect Inc.
  * February 16, 2024.
  *
  * This program is free software; you can redistribute it

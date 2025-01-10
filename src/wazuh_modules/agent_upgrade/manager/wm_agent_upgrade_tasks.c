@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * July 3, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,14 +9,14 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests
 #define STATIC
 #else
 #define STATIC static
 #endif
 
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "wm_agent_upgrade_tasks.h"
 #include "wm_agent_upgrade_parsing.h"
 #include "os_net/os_net.h"
@@ -110,7 +110,7 @@ void wm_agent_upgrade_free_agent_info(wm_agent_info* agent_info) {
         os_free(agent_info->major_version);
         os_free(agent_info->minor_version);
         os_free(agent_info->architecture);
-        os_free(agent_info->wazuh_version);
+        os_free(agent_info->verprotect_version);
         os_free(agent_info->connection_status);
         os_free(agent_info->package_type);
         os_free(agent_info);

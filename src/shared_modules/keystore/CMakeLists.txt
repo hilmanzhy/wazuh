@@ -42,11 +42,11 @@ add_library(keystore STATIC ${KEYSTORE_SRC})
 
 target_link_libraries(keystore rocksdb wazuhext)
 
-add_executable(wazuh-keystore src/main.cpp)
+add_executable(verprotect-keystore src/main.cpp)
 
-target_link_libraries(wazuh-keystore keystore)
+target_link_libraries(verprotect-keystore keystore)
 
-set_target_properties(wazuh-keystore PROPERTIES
+set_target_properties(verprotect-keystore PROPERTIES
     BUILD_RPATH_USE_ORIGIN TRUE
     BUILD_RPATH "$ORIGIN/../lib"
 )

@@ -35,8 +35,8 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(MONITOR_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
-target_link_libraries(MAILD_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(MONITOR_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
+target_link_libraries(MAILD_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
 include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
@@ -66,8 +66,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         MONITOR_O
         MAILD_O
         ${TEST_DEPS}

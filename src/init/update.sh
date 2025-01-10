@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
-# Shell script update functions for Wazuh
+# Copyright (C) 2015, Verprotect Inc.
+# Shell script update functions for Verprotect
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 FALSE="false"
@@ -26,7 +26,7 @@ doUpdatecleanup()
 }
 
 ##########
-# Checks if Wazuh is installed by taking the installdir from the services
+# Checks if Verprotect is installed by taking the installdir from the services
 # files (if exists) and taking into account the installation type.
 #
 # getPreinstalledDirByType()
@@ -36,28 +36,28 @@ getPreinstalledDirByType()
     # Checking for Systemd
     if hash ps 2>&1 > /dev/null && hash grep 2>&1 > /dev/null && [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
 
-        SED_EXTRACT_PREINSTALLEDDIR="s/^ExecStart=\/usr\/bin\/env \(.*\)\/bin\/wazuh-control start$/\1/p"
+        SED_EXTRACT_PREINSTALLEDDIR="s/^ExecStart=\/usr\/bin\/env \(.*\)\/bin\/verprotect-control start$/\1/p"
 
-        if [ "X$pidir_service_name" = "Xwazuh-manager" ] || [ "X$pidir_service_name" = "Xwazuh-local" ]; then #manager, hibrid or local
+        if [ "X$pidir_service_name" = "Xverprotect-manager" ] || [ "X$pidir_service_name" = "Xverprotect-local" ]; then #manager, hibrid or local
             type="manager"
         else
             type="agent"
         fi
 
-        # Get the unit file and extract the Wazuh home path
-        PREINSTALLEDDIR=$(systemctl cat wazuh-${type}.service 2>/dev/null | sed -n "${SED_EXTRACT_PREINSTALLEDDIR}")
+        # Get the unit file and extract the Verprotect home path
+        PREINSTALLEDDIR=$(systemctl cat verprotect-${type}.service 2>/dev/null | sed -n "${SED_EXTRACT_PREINSTALLEDDIR}")
         if [ -n "${PREINSTALLEDDIR}" ] && [ -d "${PREINSTALLEDDIR}" ]; then
             return 0;
         fi
 
         # If fail, find the service file
         # RHEL 8 / Amazon / openSUSE Tumbleweed the services should be installed in /usr/lib/systemd/system/
-        if [ -f /usr/lib/systemd/system/wazuh-${type}.service ]; then
-            SERVICE_UNIT_PATH=/usr/lib/systemd/system/wazuh-${type}.service
+        if [ -f /usr/lib/systemd/system/verprotect-${type}.service ]; then
+            SERVICE_UNIT_PATH=/usr/lib/systemd/system/verprotect-${type}.service
         fi
         # Others
-        if [ -f /etc/systemd/system/wazuh-${type}.service ]; then
-            SERVICE_UNIT_PATH=/etc/systemd/system/wazuh-${type}.service
+        if [ -f /etc/systemd/system/verprotect-${type}.service ]; then
+            SERVICE_UNIT_PATH=/etc/systemd/system/verprotect-${type}.service
         fi
 
         if [ -f "$SERVICE_UNIT_PATH" ]; then
@@ -75,7 +75,7 @@ getPreinstalledDirByType()
     if [ -r "/etc/redhat-release" ]; then
         if [ -d /etc/rc.d/init.d ]; then
             if [ -f /etc/rc.d/init.d/${pidir_service_name} ]; then
-                PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
+                PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
                 if [ -d "$PREINSTALLEDDIR" ]; then
                     return 0;
                 else
@@ -89,7 +89,7 @@ getPreinstalledDirByType()
     # Checking for Gentoo
     if [ -r "/etc/gentoo-release" ]; then
         if [ -f /etc/init.d/${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -102,7 +102,7 @@ getPreinstalledDirByType()
     # Checking for Suse
     if [ -r "/etc/SuSE-release" ]; then
         if [ -f /etc/init.d/${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -115,7 +115,7 @@ getPreinstalledDirByType()
     # Checking for Slackware
     if [ -r "/etc/slackware-version" ]; then
         if [ -f /etc/rc.d/rc.${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/rc.d/rc.${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/rc.d/rc.${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -127,8 +127,8 @@ getPreinstalledDirByType()
     fi
     # Checking for Darwin
     if [ "X${NUNAME}" = "XDarwin" ]; then
-        if [ -f /Library/StartupItems/WAZUH/WAZUH ]; then
-            PREINSTALLEDDIR=`sed -n 's/^ *//; s/^\s*\(.*\)\/bin\/wazuh-control start$/\1/p' /Library/StartupItems/WAZUH/WAZUH`
+        if [ -f /Library/StartupItems/VERPROTECT/VERPROTECT ]; then
+            PREINSTALLEDDIR=`sed -n 's/^ *//; s/^\s*\(.*\)\/bin\/verprotect-control start$/\1/p' /Library/StartupItems/VERPROTECT/VERPROTECT`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -141,7 +141,7 @@ getPreinstalledDirByType()
     # Checking for SunOS
     if [ "X${UN}" = "XSunOS" ]; then
         if [ -f /etc/init.d/${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -154,7 +154,7 @@ getPreinstalledDirByType()
     # Checking for HP-UX
     if [ "X${UN}" = "XHP-UX" ]; then
         if [ -f /sbin/init.d/${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /sbin/init.d/${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /sbin/init.d/${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -167,7 +167,7 @@ getPreinstalledDirByType()
     # Checking for AIX
     if [ "X${UN}" = "XAIX" ]; then
         if [ -f /etc/rc.d/init.d/${pidir_service_name} ]; then
-            PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
+            PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -179,10 +179,10 @@ getPreinstalledDirByType()
     fi
     # Checking for BSD
     if [ "X${UN}" = "XOpenBSD" -o "X${UN}" = "XNetBSD" -o "X${UN}" = "XFreeBSD" -o "X${UN}" = "XDragonFly" ]; then
-        # Checking for the presence of wazuh-control on rc.local
-        grep wazuh-control /etc/rc.local > /dev/null 2>&1
+        # Checking for the presence of verprotect-control on rc.local
+        grep verprotect-control /etc/rc.local > /dev/null 2>&1
         if [ $? = 0 ]; then
-            PREINSTALLEDDIR=`sed -n 's/^\(.*\)\/bin\/wazuh-control start$/\1/p' /etc/rc.local`
+            PREINSTALLEDDIR=`sed -n 's/^\(.*\)\/bin\/verprotect-control start$/\1/p' /etc/rc.local`
             if [ -d "$PREINSTALLEDDIR" ]; then
                 return 0;
             else
@@ -194,9 +194,9 @@ getPreinstalledDirByType()
     elif [ "X${NUNAME}" = "XLinux" ]; then
         # Checking for Linux
         if [ -e "/etc/rc.d/rc.local" ]; then
-            grep wazuh-control /etc/rc.d/rc.local > /dev/null 2>&1
+            grep verprotect-control /etc/rc.d/rc.local > /dev/null 2>&1
             if [ $? = 0 ]; then
-                PREINSTALLEDDIR=`sed -n 's/^\(.*\)\/bin\/wazuh-control start$/\1/p' /etc/rc.d/rc.local`
+                PREINSTALLEDDIR=`sed -n 's/^\(.*\)\/bin\/verprotect-control start$/\1/p' /etc/rc.d/rc.local`
                 if [ -d "$PREINSTALLEDDIR" ]; then
                     return 0;
                 else
@@ -208,7 +208,7 @@ getPreinstalledDirByType()
         # Checking for Linux (SysV)
         elif [ -d "/etc/rc.d/init.d" ]; then
             if [ -f /etc/rc.d/init.d/${pidir_service_name} ]; then
-                PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
+                PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/rc.d/init.d/${pidir_service_name}`
                 if [ -d "$PREINSTALLEDDIR" ]; then
                     return 0;
                 else
@@ -220,7 +220,7 @@ getPreinstalledDirByType()
         # Checking for Debian (Ubuntu or derivative)
         elif [ -d "/etc/init.d" -a -f "/usr/sbin/update-rc.d" ]; then
             if [ -f /etc/init.d/${pidir_service_name} ]; then
-                PREINSTALLEDDIR=`sed -n 's/^WAZUH_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
+                PREINSTALLEDDIR=`sed -n 's/^VERPROTECT_HOME=\(.*\)$/\1/p' /etc/init.d/${pidir_service_name}`
                 if [ -d "$PREINSTALLEDDIR" ]; then
                     return 0;
                 else
@@ -236,13 +236,13 @@ getPreinstalledDirByType()
 }
 
 ##########
-# Checks if Wazuh is installed in the specified path by searching for the control binary.
+# Checks if Verprotect is installed in the specified path by searching for the control binary.
 #
-# isWazuhInstalled()
+# isVerprotectInstalled()
 ##########
-isWazuhInstalled()
+isVerprotectInstalled()
 {
-    if [ -f "${1}/bin/wazuh-control" ]; then
+    if [ -f "${1}/bin/verprotect-control" ]; then
         return 0;
     elif [ -f "${1}/bin/ossec-control" ]; then
         return 0;
@@ -252,11 +252,11 @@ isWazuhInstalled()
 }
 
 ##########
-# Checks if Wazuh is installed by trying with each installation type.
+# Checks if Verprotect is installed by trying with each installation type.
 # If it finds an installation, it sets the PREINSTALLEDDIR variable.
-# After that it checks if Wazuh is truly installed there, if it is installed it returns TRUE.
+# After that it checks if Verprotect is truly installed there, if it is installed it returns TRUE.
 # If it isn't installed continue searching in other installation types and replacing PREINSTALLEDDIR variable.
-# It returns FALSE if Wazuh isn't installed in any of this.
+# It returns FALSE if Verprotect isn't installed in any of this.
 #
 # getPreinstalledDir()
 ##########
@@ -267,27 +267,27 @@ getPreinstalledDir()
         . ${OSSEC_INIT}
         if [ -d "$DIRECTORY" ]; then
             PREINSTALLEDDIR="$DIRECTORY"
-            if isWazuhInstalled $PREINSTALLEDDIR; then
+            if isVerprotectInstalled $PREINSTALLEDDIR; then
                 return 0;
             fi
         fi
     fi
 
-    # Getting preinstalled dir for Wazuh manager and hibrid installations
-    pidir_service_name="wazuh-manager"
-    if getPreinstalledDirByType && isWazuhInstalled $PREINSTALLEDDIR; then
+    # Getting preinstalled dir for Verprotect manager and hibrid installations
+    pidir_service_name="verprotect-manager"
+    if getPreinstalledDirByType && isVerprotectInstalled $PREINSTALLEDDIR; then
         return 0;
     fi
 
-    # Getting preinstalled dir for Wazuh agent installations
-    pidir_service_name="wazuh-agent"
-    if getPreinstalledDirByType && isWazuhInstalled $PREINSTALLEDDIR; then
+    # Getting preinstalled dir for Verprotect agent installations
+    pidir_service_name="verprotect-agent"
+    if getPreinstalledDirByType && isVerprotectInstalled $PREINSTALLEDDIR; then
         return 0;
     fi
 
-    # Getting preinstalled dir for Wazuh local installations
-    pidir_service_name="wazuh-local"
-    if getPreinstalledDirByType && isWazuhInstalled $PREINSTALLEDDIR; then
+    # Getting preinstalled dir for Verprotect local installations
+    pidir_service_name="verprotect-local"
+    if getPreinstalledDirByType && isVerprotectInstalled $PREINSTALLEDDIR; then
         return 0;
     fi
 
@@ -304,7 +304,7 @@ getPreinstalledType()
             getPreinstalledDir
         fi
 
-        TYPE=`$PREINSTALLEDDIR/bin/wazuh-control info -t`
+        TYPE=`$PREINSTALLEDDIR/bin/verprotect-control info -t`
     fi
 
     echo $TYPE
@@ -321,7 +321,7 @@ getPreinstalledVersion()
             getPreinstalledDir
         fi
 
-        VERSION=`$PREINSTALLEDDIR/bin/wazuh-control info -v`
+        VERSION=`$PREINSTALLEDDIR/bin/verprotect-control info -v`
     fi
 
     echo $VERSION
@@ -335,7 +335,7 @@ getPreinstalledName()
     if [ -f "${OSSEC_INIT}" ]; then
         . ${OSSEC_INIT}
     else
-        NAME="Wazuh"
+        NAME="Verprotect"
     fi
 
     echo $NAME
@@ -352,15 +352,15 @@ UpdateStartOSSEC()
     fi
 
     if [ `stat /proc/1/exe 2> /dev/null | grep "systemd" | wc -l` -ne 0 ]; then
-        systemctl start wazuh-$TYPE
+        systemctl start verprotect-$TYPE
     elif [ `stat /proc/1/exe 2> /dev/null | grep "init.d" | wc -l` -ne 0 ]; then
-        service wazuh-$TYPE start
+        service verprotect-$TYPE start
     else
         # Considering that this function is only used after finishing the installation
         # the INSTALLDIR variable is always set. It could have either the default value,
         # or a value equals to the PREINSTALLEDDIR, or a value specified by the user.
         # The last two possibilities are set in the setInstallDir function.
-        $INSTALLDIR/bin/wazuh-control start
+        $INSTALLDIR/bin/verprotect-control start
     fi
 }
 
@@ -380,12 +380,12 @@ UpdateStopOSSEC()
     fi
 
     if [ `stat /proc/1/exe 2> /dev/null | grep "systemd" | wc -l` -ne 0 ]; then
-        systemctl stop wazuh-$TYPE
+        systemctl stop verprotect-$TYPE
     elif [ `stat /proc/1/exe 2> /dev/null | grep "init.d" | wc -l` -ne 0 ]; then
-        service wazuh-$TYPE stop
+        service verprotect-$TYPE stop
     fi
 
-    # Make sure Wazuh is stopped
+    # Make sure Verprotect is stopped
     if [ "X$PREINSTALLEDDIR" = "X" ]; then
         getPreinstalledDir
     fi
@@ -393,7 +393,7 @@ UpdateStopOSSEC()
     if [ -f "$PREINSTALLEDDIR/bin/ossec-control" ]; then
         $PREINSTALLEDDIR/bin/ossec-control stop > /dev/null 2>&1
     else
-        $PREINSTALLEDDIR/bin/wazuh-control stop > /dev/null 2>&1
+        $PREINSTALLEDDIR/bin/verprotect-control stop > /dev/null 2>&1
     fi
 
     sleep 2
@@ -407,12 +407,12 @@ UpdateStopOSSEC()
     rm $PREINSTALLEDDIR/wodles/aws/aws > /dev/null 2>&1 # this script has been renamed
     rm $PREINSTALLEDDIR/wodles/aws/aws.py > /dev/null 2>&1 # this script has been renamed
 
-    # Deleting plain-text agent information if exists (it was migrated to Wazuh DB in v4.1)
+    # Deleting plain-text agent information if exists (it was migrated to Verprotect DB in v4.1)
     if [ -d "$PREINSTALLEDDIR/queue/agent-info" ]; then
         rm -rf $PREINSTALLEDDIR/queue/agent-info > /dev/null 2>&1
     fi
 
-    # Deleting plain-text rootcheck information if exists (it was migrated to Wazuh DB in v4.1)
+    # Deleting plain-text rootcheck information if exists (it was migrated to Verprotect DB in v4.1)
     if [ -d "$PREINSTALLEDDIR/queue/rootcheck" ]; then
         rm -rf $PREINSTALLEDDIR/queue/rootcheck > /dev/null 2>&1
     fi
@@ -438,8 +438,8 @@ UpdateOldVersions()
         done
     fi
 
-    # If it is Wazuh 2.0 or newer, exit
-    if [ "X$USER_OLD_NAME" = "XWazuh" ]; then
+    # If it is Verprotect 2.0 or newer, exit
+    if [ "X$USER_OLD_NAME" = "XVerprotect" ]; then
         return
     fi
 
@@ -489,8 +489,8 @@ UpdateOldVersions()
         chmod 750 $BACKUP_RULESET > /dev/null 2>&1
         chown root:wazuh $BACKUP_RULESET > /dev/null 2>&1
 
-        # Backup decoders: Wazuh v1.0.1 to v1.1.1
-        old_decoders="ossec_decoders wazuh_decoders"
+        # Backup decoders: Verprotect v1.0.1 to v1.1.1
+        old_decoders="ossec_decoders verprotect_decoders"
         for old_decoder in $old_decoders
         do
             if [ -d "$PREINSTALLEDDIR/etc/$old_decoder" ]; then
@@ -498,7 +498,7 @@ UpdateOldVersions()
             fi
         done
 
-        # Backup decoders: Wazuh v1.0 and OSSEC
+        # Backup decoders: Verprotect v1.0 and OSSEC
         if [ -f "$PREINSTALLEDDIR/etc/decoder.xml" ]; then
             mv "$PREINSTALLEDDIR/etc/decoder.xml" $BACKUP_RULESET
         fi

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 #ifndef WDB_SYSCOLLECTOR_WRAPPERS_H
 #define WDB_SYSCOLLECTOR_WRAPPERS_H
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 int __wrap_wdb_osinfo_save(wdb_t * wdb,
                            const char * scan_id,

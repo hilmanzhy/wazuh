@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -31,7 +31,7 @@
 #include "wrappers/wazuh/shared/randombytes_wrappers.h"
 #include "wrappers/wazuh/syscheckd/config_wrappers.h"
 #include "wrappers/wazuh/syscheckd/create_db_wrappers.h"
-#include "wrappers/wazuh/wazuh_modules/wm_exec_wrappers.h"
+#include "wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
 #include "wrappers/wazuh/shared/validate_op_wrappers.h"
 #include "wrappers/windows/winevt_wrappers.h"
 #include "wrappers/windows/ntsecapi_wrappers.h"

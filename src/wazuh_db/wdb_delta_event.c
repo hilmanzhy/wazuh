@@ -1,6 +1,6 @@
 #include "wdb.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests
 #define STATIC
 #else

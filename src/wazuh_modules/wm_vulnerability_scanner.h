@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for routing messages to the right module
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for routing messages to the right module
+ * Copyright (C) 2015, Verprotect Inc.
  * May 1, 2023
  *
  * This program is free software; you can redistribute it

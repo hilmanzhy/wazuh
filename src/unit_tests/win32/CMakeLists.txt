@@ -21,7 +21,7 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(WIN32 ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(WIN32 ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 link_directories(${SRC_FOLDER}/syscheckd/build/bin)
 
 #include wrappers
@@ -48,8 +48,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${win32_test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         WIN32
         ${TEST_DEPS}
         fimdb

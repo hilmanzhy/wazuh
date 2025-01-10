@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
-# wazuh-control        This shell script takes care of starting
+# Copyright (C) 2015, Verprotect Inc.
+# verprotect-control        This shell script takes care of starting
 #                      or stopping ossec-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
@@ -25,8 +25,8 @@ if [ $? = 0 ]; then
 . ${PLIST};
 fi
 
-AUTHOR="Wazuh Inc."
-DAEMONS="wazuh-modulesd wazuh-monitord wazuh-logcollector wazuh-syscheckd wazuh-analysisd wazuh-maild wazuh-execd wazuh-db wazuh-agentlessd wazuh-integratord wazuh-dbd wazuh-csyslogd"
+AUTHOR="Verprotect Inc."
+DAEMONS="verprotect-modulesd verprotect-monitord verprotect-logcollector verprotect-syscheckd verprotect-analysisd verprotect-maild verprotect-execd verprotect-db verprotect-agentlessd verprotect-integratord verprotect-dbd verprotect-csyslogd"
 
 # Reverse order of daemons
 SDAEMONS=$(echo $DAEMONS | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }')
@@ -217,13 +217,13 @@ testconfig()
 
 start_service()
 {
-    echo "Starting Wazuh $VERSION..."
-    TEST=$(${DIR}/bin/wazuh-logtest-legacy -t  2>&1)
+    echo "Starting Verprotect $VERSION..."
+    TEST=$(${DIR}/bin/verprotect-logtest-legacy -t  2>&1)
     echo $TEST
 
     if [ ! -z "$TEST" ]; then
-        echo "wazuh-analysisd: Configuration error. Exiting."
-        touch ${DIR}/var/run/wazuh-analysisd.failed
+        echo "verprotect-analysisd: Configuration error. Exiting."
+        touch ${DIR}/var/run/verprotect-analysisd.failed
         exit 1;
     fi
 
@@ -263,7 +263,7 @@ start_service()
     if [ $? = 0 ]; then
         echo ""
         echo "Starting sub agent directory (for hybrid mode)"
-        ${DIR}/ossec-agent/bin/wazuh-control start
+        ${DIR}/ossec-agent/bin/verprotect-control start
     fi
 
     echo "Completed."
@@ -283,7 +283,7 @@ pstatus()
         for pid in `cat ${DIR}/var/run/${pfile}-*.pid 2>/dev/null`; do
             ps -p ${pid} > /dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process ${pid} not used by Wazuh, removing..."
+                echo "${pfile}: Process ${pid} not used by Verprotect, removing..."
                 rm -f ${DIR}/var/run/${pfile}-${pid}.pid
                 continue;
             fi
@@ -343,17 +343,17 @@ stop_service()
     if [ $? = 0 ]; then
         echo ""
         echo "Stopping sub agent directory (for hybrid mode)"
-        ${DIR}/ossec-agent/bin/wazuh-control stop
+        ${DIR}/ossec-agent/bin/verprotect-control stop
     fi
-    echo "Wazuh $VERSION Stopped"
+    echo "Verprotect $VERSION Stopped"
 }
 
 info()
 {
     if [ "X${1}" = "X" ]; then
-        echo "WAZUH_VERSION=\"${VERSION}\""
-        echo "WAZUH_REVISION=\"${REVISION}\""
-        echo "WAZUH_TYPE=\"${TYPE}\""
+        echo "VERPROTECT_VERSION=\"${VERSION}\""
+        echo "VERPROTECT_REVISION=\"${REVISION}\""
+        echo "VERPROTECT_TYPE=\"${TYPE}\""
     else
         case ${1} in
             -v) echo "${VERSION}" ;;
@@ -393,7 +393,7 @@ restart)
     restart_service
     ;;
 reload)
-    DAEMONS=$(echo $DAEMONS | sed 's/wazuh-execd//')
+    DAEMONS=$(echo $DAEMONS | sed 's/verprotect-execd//')
     restart_service
     ;;
 status)

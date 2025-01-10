@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -15,7 +15,7 @@
 #include <errno.h>
 #include "shared.h"
 #include "os_net.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 
 #ifdef WIN32
 #pragma GCC diagnostic push

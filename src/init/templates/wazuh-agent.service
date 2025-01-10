@@ -1,14 +1,14 @@
 [Unit]
-Description=Wazuh agent
+Description=Verprotect agent
 Wants=network-online.target
 After=network.target network-online.target
 
 [Service]
 Type=forking
 
-ExecStart=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control start
-ExecStop=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control stop
-ExecReload=/usr/bin/env WAZUH_HOME_TMP/bin/wazuh-control reload
+ExecStart=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control start
+ExecStop=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control stop
+ExecReload=/usr/bin/env VERPROTECT_HOME_TMP/bin/verprotect-control reload
 
 KillMode=process
 RemainAfterExit=yes

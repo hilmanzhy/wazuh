@@ -1,6 +1,6 @@
 /*
- * Wazuh SyscollectorFlatbuffers
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SyscollectorFlatbuffers
+ * Copyright (C) 2015, Verprotect Inc.
  * August 1, 2023.
  *
  * This program is free software; you can redistribute it
@@ -233,7 +233,7 @@ TEST(SyscollectorFbTest, JSONParseOsInfo)
 {
 
     const std::string alert_json =
-        "{\n  agent_info: {\n    agent_id: \"001\"\n  },\n  data_type: \"state\",\n  data: {\n    attributes_type: \"syscollector_osinfo\",\n    attributes: {\n      checksum: \"1691513227478039559\",\n      hostname: \"Supercomputer\",\n      os_codename: \"focal\",\n      os_major: \"200\",\n      os_minor: \"000\",\n      os_name: \"Wazuh OS\",\n      os_patch: \"2\",\n      os_platform: \"bsd\",\n      os_version: \"200.000.2\",\n      release: \"5.4.0-153-generic\",\n      scan_time: \"0000/00/00 00:00:00\",\n      sysname: \"Linux\",\n      version: \"#170-WazuhOS SMP Fri Jun 16 13:43:31 UTC 2023\"\n    },\n    index: \"WazuhOS\",\n    timestamp: \"\"\n  }\n}\n";
+        "{\n  agent_info: {\n    agent_id: \"001\"\n  },\n  data_type: \"state\",\n  data: {\n    attributes_type: \"syscollector_osinfo\",\n    attributes: {\n      checksum: \"1691513227478039559\",\n      hostname: \"Supercomputer\",\n      os_codename: \"focal\",\n      os_major: \"200\",\n      os_minor: \"000\",\n      os_name: \"Verprotect OS\",\n      os_patch: \"2\",\n      os_platform: \"bsd\",\n      os_version: \"200.000.2\",\n      release: \"5.4.0-153-generic\",\n      scan_time: \"0000/00/00 00:00:00\",\n      sysname: \"Linux\",\n      version: \"#170-VerprotectOS SMP Fri Jun 16 13:43:31 UTC 2023\"\n    },\n    index: \"VerprotectOS\",\n    timestamp: \"\"\n  }\n}\n";
 
     flatbuffers::Parser parser;
     std::string schemaFile;

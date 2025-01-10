@@ -1,7 +1,7 @@
 /*
- * Wazuh Certificate creation tool.
+ * Verprotect Certificate creation tool.
  *
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * May 16, 2021.
  *
  * This program is free software; you can redistribute it

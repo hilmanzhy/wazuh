@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All right reserved.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 
 #define DEVPF       ("/dev/pf")
 #define PFCTL_RULES ("/etc/pf.conf")
-#define PFCTL_TABLE ("wazuh_fwtable")
+#define PFCTL_TABLE ("verprotect_fwtable")
 
 /**
  * @brief check if firewall is configured

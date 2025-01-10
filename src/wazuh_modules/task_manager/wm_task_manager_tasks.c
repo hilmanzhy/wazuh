@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * October 19, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,14 +9,14 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests
 #define STATIC
 #else
 #define STATIC static
 #endif
 
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "wm_task_manager_tasks.h"
 
 wm_task_manager_upgrade* wm_task_manager_init_upgrade_parameters() {

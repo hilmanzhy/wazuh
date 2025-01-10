@@ -18,7 +18,7 @@ set_target_properties(
     LINKER_LANGUAGE C
   )
 
-target_link_libraries(CSYSLOGD_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(CSYSLOGD_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
 include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
@@ -44,8 +44,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${csyslogd_test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         CSYSLOGD_O
         ${TEST_DEPS}
     )

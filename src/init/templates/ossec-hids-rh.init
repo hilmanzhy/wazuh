@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
-# OSSEC         Controls Wazuh on Redhat-based systems
+# Copyright (C) 2015, Verprotect Inc.
+# OSSEC         Controls Verprotect on Redhat-based systems
 # Author:       Kayvan A. Sylvan <kayvan@sylvan.com>
 # Author:       Daniel B. Cid <dcid@ossec.net>
 #
 # chkconfig: 2345 99 15
-# description: Starts and stops Wazuh (Host Intrusion Detection System)
+# description: Starts and stops Verprotect (Host Intrusion Detection System)
 #
 # This will work on Redhat systems (maybe others too)
 
@@ -15,12 +15,12 @@ export LANG=C
 
 . /etc/init.d/functions
 
-WAZUH_HOME=WAZUH_HOME_TMP
-WAZUH_CONTROL="$WAZUH_HOME/bin/wazuh-control"
+VERPROTECT_HOME=VERPROTECT_HOME_TMP
+VERPROTECT_CONTROL="$VERPROTECT_HOME/bin/verprotect-control"
 
 start() {
-    echo -n "Starting Wazuh: "
-    ${WAZUH_CONTROL} start > /dev/null
+    echo -n "Starting Verprotect: "
+    ${VERPROTECT_CONTROL} start > /dev/null
     RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
         success
@@ -32,8 +32,8 @@ start() {
 }
 
 stop() {
-    echo -n "Stopping Wazuh: "
-    ${WAZUH_CONTROL} stop > /dev/null
+    echo -n "Stopping Verprotect: "
+    ${VERPROTECT_CONTROL} stop > /dev/null
     RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
         success
@@ -45,7 +45,7 @@ stop() {
 }
 
 status() {
-    ${WAZUH_CONTROL} status
+    ${VERPROTECT_CONTROL} status
     RETVAL=$?
     return $RETVAL
 }

@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * July 3, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,20 +9,20 @@
  * Foundation.
  */
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #else
 #define STATIC static
 #endif
 
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "wm_agent_upgrade_manager.h"
 #include "wm_agent_upgrade_parsing.h"
 #include "wm_agent_upgrade_tasks.h"
 #include "wm_agent_upgrade_validate.h"
 #include "wm_agent_upgrade_upgrades.h"
-#include "wazuh_db/helpers/wdb_global_helpers.h"
+#include "verprotect_db/helpers/wdb_global_helpers.h"
 
 /**
  * Analyze agent information and returns a JSON to be sent to the task manager
@@ -278,10 +278,10 @@ STATIC int wm_agent_upgrade_analyze_agent(int agent_id, wm_agent_task *agent_tas
             os_strdup(value->valuestring, agent_task->agent_info->architecture);
         }
 
-        // Wazuh version
+        // Verprotect version
         value = cJSON_GetObjectItem(agent_info->child, "version");
         if(cJSON_IsString(value) && value->valuestring != NULL){
-            os_strdup(value->valuestring, agent_task->agent_info->wazuh_version);
+            os_strdup(value->valuestring, agent_task->agent_info->verprotect_version);
         }
 
         // Connection status
@@ -337,8 +337,8 @@ STATIC int wm_agent_upgrade_validate_agent_task(const wm_agent_task *agent_task)
         return validate_result;
     }
 
-    // Validate Wazuh version to upgrade
-    validate_result = wm_agent_upgrade_validate_version(agent_task->agent_info->wazuh_version, agent_task->agent_info->platform, agent_task->task_info->command, agent_task->task_info->task);
+    // Validate Verprotect version to upgrade
+    validate_result = wm_agent_upgrade_validate_version(agent_task->agent_info->verprotect_version, agent_task->agent_info->platform, agent_task->task_info->command, agent_task->task_info->task);
 
     return validate_result;
 }

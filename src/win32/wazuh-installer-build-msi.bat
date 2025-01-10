@@ -6,13 +6,13 @@ set VERSION=%1
 set REVISION=%2
 
 REM IF VERSION or REVISION are empty, ask for their value
-IF [%VERSION%] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
-IF [%REVISION%] == [] set /p REVISION=Enter the revision of the Wazuh agent:
+IF [%VERSION%] == [] set /p VERSION=Enter the version of the Verprotect agent (x.y.z):
+IF [%REVISION%] == [] set /p REVISION=Enter the revision of the Verprotect agent:
 
-SET MSI_NAME=wazuh-agent-%VERSION%-%REVISION%.msi
+SET MSI_NAME=verprotect-agent-%VERSION%-%REVISION%.msi
 
-candle.exe -nologo "wazuh-installer.wxs" -out "wazuh-installer.wixobj" -ext WixUtilExtension -ext WixUiExtension
-light.exe "wazuh-installer.wixobj" -out "%MSI_NAME%"  -ext WixUtilExtension -ext WixUiExtension
+candle.exe -nologo "verprotect-installer.wxs" -out "verprotect-installer.wixobj" -ext WixUtilExtension -ext WixUiExtension
+light.exe "verprotect-installer.wixobj" -out "%MSI_NAME%"  -ext WixUtilExtension -ext WixUiExtension
 
 signtool sign /a /tr http://timestamp.digicert.com /fd SHA256 /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 

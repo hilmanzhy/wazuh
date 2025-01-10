@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Fluent Forwarder
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Fluent Forwarder
+ * Copyright (C) 2015, Verprotect Inc.
  * March 26, 2019.
  *
  * This program is free software; you can redistribute it

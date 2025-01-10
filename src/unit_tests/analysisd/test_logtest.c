@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -581,7 +581,7 @@ void test_w_logtest_init_error_parameters(void **state)
 {
     will_return(__wrap_ReadConfig, OS_INVALID);
 
-    expect_string(__wrap__merror, formatted_msg, "(7304): Invalid wazuh-logtest configuration");
+    expect_string(__wrap__merror, formatted_msg, "(7304): Invalid verprotect-logtest configuration");
 
     w_logtest_init();
 

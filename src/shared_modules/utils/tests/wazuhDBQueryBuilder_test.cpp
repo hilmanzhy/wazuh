@@ -1,6 +1,6 @@
 /*
- * Wazuh shared modules utils
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect shared modules utils
+ * Copyright (C) 2015, Verprotect Inc.
  * Nov 1, 2023.
  *
  * This program is free software; you can redistribute it
@@ -13,21 +13,21 @@
 #include "wazuhDBQueryBuilder.hpp"
 #include <string>
 
-TEST_F(WazuhDBQueryBuilderTest, GlobalTest)
+TEST_F(VerprotectDBQueryBuilderTest, GlobalTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder().global().selectAll().fromTable("agent").build();
+    std::string message = VerprotectDBQueryBuilder::builder().global().selectAll().fromTable("agent").build();
     EXPECT_EQ(message, "global sql SELECT * FROM agent ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, AgentTest)
+TEST_F(VerprotectDBQueryBuilderTest, AgentTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder().agent("0").selectAll().fromTable("sys_programs").build();
+    std::string message = VerprotectDBQueryBuilder::builder().agent("0").selectAll().fromTable("sys_programs").build();
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, WhereTest)
+TEST_F(VerprotectDBQueryBuilderTest, WhereTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder()
+    std::string message = VerprotectDBQueryBuilder::builder()
                               .agent("0")
                               .selectAll()
                               .fromTable("sys_programs")
@@ -37,9 +37,9 @@ TEST_F(WazuhDBQueryBuilderTest, WhereTest)
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs WHERE name = 'bash' ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, WhereAndTest)
+TEST_F(VerprotectDBQueryBuilderTest, WhereAndTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder()
+    std::string message = VerprotectDBQueryBuilder::builder()
                               .agent("0")
                               .selectAll()
                               .fromTable("sys_programs")
@@ -51,9 +51,9 @@ TEST_F(WazuhDBQueryBuilderTest, WhereAndTest)
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs WHERE name = 'bash' AND version = '1' ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, WhereOrTest)
+TEST_F(VerprotectDBQueryBuilderTest, WhereOrTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder()
+    std::string message = VerprotectDBQueryBuilder::builder()
                               .agent("0")
                               .selectAll()
                               .fromTable("sys_programs")
@@ -65,9 +65,9 @@ TEST_F(WazuhDBQueryBuilderTest, WhereOrTest)
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs WHERE name = 'bash' OR version = '1' ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, WhereIsNullTest)
+TEST_F(VerprotectDBQueryBuilderTest, WhereIsNullTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder()
+    std::string message = VerprotectDBQueryBuilder::builder()
                               .agent("0")
                               .selectAll()
                               .fromTable("sys_programs")
@@ -77,9 +77,9 @@ TEST_F(WazuhDBQueryBuilderTest, WhereIsNullTest)
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs WHERE name IS NULL ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, WhereIsNotNullTest)
+TEST_F(VerprotectDBQueryBuilderTest, WhereIsNotNullTest)
 {
-    std::string message = WazuhDBQueryBuilder::builder()
+    std::string message = VerprotectDBQueryBuilder::builder()
                               .agent("0")
                               .selectAll()
                               .fromTable("sys_programs")
@@ -89,9 +89,9 @@ TEST_F(WazuhDBQueryBuilderTest, WhereIsNotNullTest)
     EXPECT_EQ(message, "agent 0 sql SELECT * FROM sys_programs WHERE name IS NOT NULL ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, InvalidValue)
+TEST_F(VerprotectDBQueryBuilderTest, InvalidValue)
 {
-    EXPECT_THROW(WazuhDBQueryBuilder::builder()
+    EXPECT_THROW(VerprotectDBQueryBuilder::builder()
                      .agent("0")
                      .selectAll()
                      .fromTable("sys_programs")
@@ -101,9 +101,9 @@ TEST_F(WazuhDBQueryBuilderTest, InvalidValue)
                  std::runtime_error);
 }
 
-TEST_F(WazuhDBQueryBuilderTest, InvalidColumn)
+TEST_F(VerprotectDBQueryBuilderTest, InvalidColumn)
 {
-    EXPECT_THROW(WazuhDBQueryBuilder::builder()
+    EXPECT_THROW(VerprotectDBQueryBuilder::builder()
                      .agent("0")
                      .selectAll()
                      .fromTable("sys_programs")
@@ -113,9 +113,9 @@ TEST_F(WazuhDBQueryBuilderTest, InvalidColumn)
                  std::runtime_error);
 }
 
-TEST_F(WazuhDBQueryBuilderTest, InvalidTable)
+TEST_F(VerprotectDBQueryBuilderTest, InvalidTable)
 {
-    EXPECT_THROW(WazuhDBQueryBuilder::builder()
+    EXPECT_THROW(VerprotectDBQueryBuilder::builder()
                      .agent("0")
                      .selectAll()
                      .fromTable("sys_programs'")
@@ -125,38 +125,38 @@ TEST_F(WazuhDBQueryBuilderTest, InvalidTable)
                  std::runtime_error);
 }
 
-TEST_F(WazuhDBQueryBuilderTest, GlobalGetCommand)
+TEST_F(VerprotectDBQueryBuilderTest, GlobalGetCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().globalGetCommand("agent-info 1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().globalGetCommand("agent-info 1").build();
     EXPECT_EQ(message, "global get-agent-info 1 ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, GlobalFindCommand)
+TEST_F(VerprotectDBQueryBuilderTest, GlobalFindCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().globalFindCommand("agent 1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().globalFindCommand("agent 1").build();
     EXPECT_EQ(message, "global find-agent 1 ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, GlobalSelectCommand)
+TEST_F(VerprotectDBQueryBuilderTest, GlobalSelectCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().globalSelectCommand("agent-name 1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().globalSelectCommand("agent-name 1").build();
     EXPECT_EQ(message, "global select-agent-name 1 ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, AgentGetOsInfoCommand)
+TEST_F(VerprotectDBQueryBuilderTest, AgentGetOsInfoCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().agentGetOsInfoCommand("1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().agentGetOsInfoCommand("1").build();
     EXPECT_EQ(message, "agent 1 osinfo get ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, AgentGetHotfixesCommand)
+TEST_F(VerprotectDBQueryBuilderTest, AgentGetHotfixesCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().agentGetHotfixesCommand("1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().agentGetHotfixesCommand("1").build();
     EXPECT_EQ(message, "agent 1 hotfix get ");
 }
 
-TEST_F(WazuhDBQueryBuilderTest, AgentGetPackagesCommand)
+TEST_F(VerprotectDBQueryBuilderTest, AgentGetPackagesCommand)
 {
-    std::string message = WazuhDBQueryBuilder::builder().agentGetPackagesCommand("1").build();
+    std::string message = VerprotectDBQueryBuilder::builder().agentGetPackagesCommand("1").build();
     EXPECT_EQ(message, "agent 1 package get ");
 }

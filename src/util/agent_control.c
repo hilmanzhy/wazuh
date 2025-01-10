@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
             return 0;
         case 1:
             master = get_master_node();
-            merror("Wazuh is running in cluster mode: %s is not available in worker nodes. Please, try again in the master node: %s.", ARGV0, master);
+            merror("Verprotect is running in cluster mode: %s is not available in worker nodes. Please, try again in the master node: %s.", ARGV0, master);
             free(master);
             return 0;
     }
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 
     }
 
-    mdebug1(WAZUH_HOMEDIR, home_path);
+    mdebug1(VERPROTECT_HOMEDIR, home_path);
 
     /* Prepare JSON Structure */
     if(json_output)

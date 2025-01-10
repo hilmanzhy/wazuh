@@ -1,6 +1,6 @@
 /*
- * Wazuh Shared Configuration Manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Shared Configuration Manager
+ * Copyright (C) 2015, Verprotect Inc.
  * Jun 1, 2022.
  *
  * This program is free software; you can redistribute it
@@ -12,7 +12,7 @@
 #ifndef WDB_DELTA_EVENT_WRAPPERS_H
 #define WDB_DELTA_EVENT_WRAPPERS_H
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 
 bool __wrap_wdb_delete_dbsync(wdb_t * wdb, struct kv const * kv_value, cJSON * data);

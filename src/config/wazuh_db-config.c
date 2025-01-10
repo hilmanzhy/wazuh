@@ -1,6 +1,6 @@
 /*
- * Wazuh-DB settings manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect-DB settings manager
+ * Copyright (C) 2015, Verprotect Inc.
  * Dec 17, 2021.
  *
  * This program is free software; you can redistribute it
@@ -11,8 +11,8 @@
 
 #include "shared.h"
 #include "config.h"
-#include "config/wazuh_db-config.h"
-#include "wazuh_db/wdb.h"
+#include "config/verprotect_db-config.h"
+#include "verprotect_db/wdb.h"
 #include "headers/string_op.h"
 
 static short eval_bool(const char *str) {
@@ -27,7 +27,7 @@ static short eval_bool(const char *str) {
     }
 }
 
-int Read_WazuhDB(const OS_XML *xml, XML_NODE child_node) {
+int Read_VerprotectDB(const OS_XML *xml, XML_NODE child_node) {
     const char *xml_backup = "backup";
     const char *xml_database = "database";
     const char *xml_database_global = "global";
@@ -56,10 +56,10 @@ int Read_WazuhDB(const OS_XML *xml, XML_NODE child_node) {
         return OS_INVALID;
     }
 
-    return Read_WazuhDB_Backup(xml, node, WDB_GLOBAL_BACKUP);
+    return Read_VerprotectDB_Backup(xml, node, WDB_GLOBAL_BACKUP);
 }
 
-int Read_WazuhDB_Backup(const OS_XML *xml, xml_node * node, int const BACKUP_NODE) {
+int Read_VerprotectDB_Backup(const OS_XML *xml, xml_node * node, int const BACKUP_NODE) {
     const char* xml_enabled = "enabled";
     const char* xml_interval = "interval";
     const char* xml_max_files = "max_files";

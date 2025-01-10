@@ -1,6 +1,6 @@
 /*
- * Wazuh - Content Merge Tool
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect - Content Merge Tool
+ * Copyright (C) 2015, Verprotect Inc.
  * January 10, 2023.
  *
  */

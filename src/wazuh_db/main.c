@@ -1,6 +1,6 @@
 /*
- * Wazuh Database Daemon
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Database Daemon
+ * Copyright (C) 2015, Verprotect Inc.
  * January 03, 2018.
  *
  * This program is free software; you can redistribute it
@@ -90,39 +90,39 @@ int main(int argc, char ** argv)
 
     // Read internal options
 
-    wconfig.worker_pool_size = getDefine_Int("wazuh_db", "worker_pool_size", 1, 32);
-    wconfig.commit_time_min = getDefine_Int("wazuh_db", "commit_time_min", 1, 3600);
-    wconfig.commit_time_max = getDefine_Int("wazuh_db", "commit_time_max", 1, 3600);
-    wconfig.open_db_limit = getDefine_Int("wazuh_db", "open_db_limit", 1, 4096);
-    nofile = getDefine_Int("wazuh_db", "rlimit_nofile", 1024, 1048576);
+    wconfig.worker_pool_size = getDefine_Int("verprotect_db", "worker_pool_size", 1, 32);
+    wconfig.commit_time_min = getDefine_Int("verprotect_db", "commit_time_min", 1, 3600);
+    wconfig.commit_time_max = getDefine_Int("verprotect_db", "commit_time_max", 1, 3600);
+    wconfig.open_db_limit = getDefine_Int("verprotect_db", "open_db_limit", 1, 4096);
+    nofile = getDefine_Int("verprotect_db", "rlimit_nofile", 1024, 1048576);
 
-    wconfig.fragmentation_threshold = getDefine_Int("wazuh_db", "fragmentation_threshold", 0, 100);
-    wconfig.fragmentation_delta = getDefine_Int("wazuh_db", "fragmentation_delta", 0, 100);
-    wconfig.free_pages_percentage = getDefine_Int("wazuh_db", "free_pages_percentage", 0, 99);
-    wconfig.max_fragmentation = getDefine_Int("wazuh_db", "max_fragmentation", 0, 100);
-    wconfig.check_fragmentation_interval = getDefine_Int("wazuh_db", "check_fragmentation_interval", 1, 30758400);
+    wconfig.fragmentation_threshold = getDefine_Int("verprotect_db", "fragmentation_threshold", 0, 100);
+    wconfig.fragmentation_delta = getDefine_Int("verprotect_db", "fragmentation_delta", 0, 100);
+    wconfig.free_pages_percentage = getDefine_Int("verprotect_db", "free_pages_percentage", 0, 99);
+    wconfig.max_fragmentation = getDefine_Int("verprotect_db", "max_fragmentation", 0, 100);
+    wconfig.check_fragmentation_interval = getDefine_Int("verprotect_db", "check_fragmentation_interval", 1, 30758400);
 
     // Allocating memory for configuration structures and setting default values
     wdb_init_conf();
 
     int modules = 0;
-    modules |= WAZUHDB;
+    modules |= VERPROTECTDB;
     modules |= CCLUSTER;
 
     // Read ossec.conf
     if (ReadConfig(modules, OSSECCONF, &gconfig, NULL) < 0) {
-        merror_exit("Invalid configuration block for Wazuh-DB.");
+        merror_exit("Invalid configuration block for Verprotect-DB.");
     }
 
     if (!isDebug()) {
         int debug_level;
 
-        for (debug_level = getDefine_Int("wazuh_db", "debug", 0, 2); debug_level; debug_level--) {
+        for (debug_level = getDefine_Int("verprotect_db", "debug", 0, 2); debug_level; debug_level--) {
             nowDebug();
         }
     }
 
-    mdebug1(WAZUH_HOMEDIR, home_path);
+    mdebug1(VERPROTECT_HOMEDIR, home_path);
 
     if (test_config) {
         exit(0);

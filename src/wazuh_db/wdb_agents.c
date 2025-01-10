@@ -1,6 +1,6 @@
 /*
- * Wazuh DB helper module for agents database
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect DB helper module for agents database
+ * Copyright (C) 2015, Verprotect Inc.
  * February 10, 2021.
  *
  * This program is free software; you can redistribute it
@@ -12,7 +12,7 @@
 #include "wdb_agents.h"
 #include "cJSON.h"
 #include "os_err.h"
-#include "wazuh_db/wdb.h"
+#include "verprotect_db/wdb.h"
 
 cJSON* wdb_agents_get_sys_osinfo(wdb_t *wdb){
     sqlite3_stmt* stmt = wdb_init_stmt_in_cache(wdb, WDB_STMT_OSINFO_GET);

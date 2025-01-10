@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -127,7 +127,7 @@ bool check_uninstall_permission(const char *token, const char *host, bool ssl_ve
 char* authenticate_and_get_token(const char *userpass, const char *host, bool ssl_verify);
 
 /**
- * Function with all the necessary functionality to process the uninstallation validation of the Wazuh agent package.
+ * Function with all the necessary functionality to process the uninstallation validation of the Verprotect agent package.
  * @param uninstall_auth_token API token used for the request
  * @param uninstall_auth_login API user and password separated by colon
  * @param uninstall_auth_host host and port used for the request

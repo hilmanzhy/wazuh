@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -37,7 +37,7 @@ void set_current_time(time_t _time) {
  *          "<run_on_start>yes</run_on_start>\n"
  *          "<skip_on_error>yes</skip_on_error>\n"
  *          "<bucket type=\"config\">\n"
- *          "    <name>wazuh-aws-wodle</name>\n"
+ *          "    <name>verprotect-aws-wodle</name>\n"
  *          "    <path>config</path>\n"
  *          "   <aws_profile>default</aws_profile>\n"
  *          "</bucket>"

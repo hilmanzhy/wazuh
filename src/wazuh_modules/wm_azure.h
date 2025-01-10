@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Azure
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Azure
+ * Copyright (C) 2015, Verprotect Inc.
  * September, 2018.
  *
  * This program is free software; you can redistribute it

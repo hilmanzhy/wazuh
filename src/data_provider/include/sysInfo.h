@@ -1,6 +1,6 @@
 /*
- * Wazuh SysInfo
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SysInfo
+ * Copyright (C) 2015, Verprotect Inc.
  * November 11, 2020.
  *
  * This program is free software; you can redistribute it
@@ -15,7 +15,7 @@
 
 // Define EXPORTED for any platform
 #include "commonDefs.h"
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 #define EXPORTED
 #else
 #ifndef EXPORTED

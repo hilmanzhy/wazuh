@@ -1,4 +1,4 @@
-# Copyright (C) 2023, Wazuh Inc.
+# Copyright (C) 2023, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -6,7 +6,7 @@
 # Foundation.
 
 # Generate wazuh modules library
-file(GLOB wm_exec ../../../wazuh_modules/wm_exec.o)
+file(GLOB wm_exec ../../../verprotect_modules/wm_exec.o)
 
 add_library(WM_EXEC_O STATIC ${wm_exec})
 
@@ -23,7 +23,7 @@ set_target_properties(
   LINKER_LANGUAGE C
 )
 
-target_link_libraries(WM_EXEC_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(WM_EXEC_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 if(${TARGET} STREQUAL "winagent")
     link_directories(${SRC_FOLDER}/syscheckd/build/bin)
@@ -55,8 +55,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         WM_EXEC_O
         ${TEST_DEPS}
     )

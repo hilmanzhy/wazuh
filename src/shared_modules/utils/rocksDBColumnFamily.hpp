@@ -1,6 +1,6 @@
 /*
- * Wazuh Utils - rocksDB queue.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Utils - rocksDB queue.
+ * Copyright (C) 2015, Verprotect Inc.
  * April 9, 2024.
  *
  * This program is free software; you can redistribute it

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -12,8 +12,8 @@ INSTALLDIR=${1}
 CONF_FILE="${INSTALLDIR}/etc/ossec.conf"
 TMP_ENROLLMENT="${INSTALLDIR}/tmp/enrollment-configuration"
 TMP_SERVER="${INSTALLDIR}/tmp/server-configuration"
-WAZUH_REGISTRATION_PASSWORD_PATH="etc/authd.pass"
-WAZUH_MACOS_AGENT_DEPLOYMENT_VARS="/tmp/wazuh_envs"
+VERPROTECT_REGISTRATION_PASSWORD_PATH="etc/authd.pass"
+VERPROTECT_MACOS_AGENT_DEPLOYMENT_VARS="/tmp/verprotect_envs"
 
 
 # Set default sed alias
@@ -136,78 +136,78 @@ add_parameter () {
 
 get_deprecated_vars () {
 
-    if [ -n "${WAZUH_MANAGER_IP}" ] && [ -z "${WAZUH_MANAGER}" ]; then
-        WAZUH_MANAGER=${WAZUH_MANAGER_IP}
+    if [ -n "${VERPROTECT_MANAGER_IP}" ] && [ -z "${VERPROTECT_MANAGER}" ]; then
+        VERPROTECT_MANAGER=${VERPROTECT_MANAGER_IP}
     fi
-    if [ -n "${WAZUH_AUTHD_SERVER}" ] && [ -z "${WAZUH_REGISTRATION_SERVER}" ]; then
-        WAZUH_REGISTRATION_SERVER=${WAZUH_AUTHD_SERVER}
+    if [ -n "${VERPROTECT_AUTHD_SERVER}" ] && [ -z "${VERPROTECT_REGISTRATION_SERVER}" ]; then
+        VERPROTECT_REGISTRATION_SERVER=${VERPROTECT_AUTHD_SERVER}
     fi
-    if [ -n "${WAZUH_AUTHD_PORT}" ] && [ -z "${WAZUH_REGISTRATION_PORT}" ]; then
-        WAZUH_REGISTRATION_PORT=${WAZUH_AUTHD_PORT}
+    if [ -n "${VERPROTECT_AUTHD_PORT}" ] && [ -z "${VERPROTECT_REGISTRATION_PORT}" ]; then
+        VERPROTECT_REGISTRATION_PORT=${VERPROTECT_AUTHD_PORT}
     fi
-    if [ -n "${WAZUH_PASSWORD}" ] && [ -z "${WAZUH_REGISTRATION_PASSWORD}" ]; then
-        WAZUH_REGISTRATION_PASSWORD=${WAZUH_PASSWORD}
+    if [ -n "${VERPROTECT_PASSWORD}" ] && [ -z "${VERPROTECT_REGISTRATION_PASSWORD}" ]; then
+        VERPROTECT_REGISTRATION_PASSWORD=${VERPROTECT_PASSWORD}
     fi
-    if [ -n "${WAZUH_NOTIFY_TIME}" ] && [ -z "${WAZUH_KEEP_ALIVE_INTERVAL}" ]; then
-        WAZUH_KEEP_ALIVE_INTERVAL=${WAZUH_NOTIFY_TIME}
+    if [ -n "${VERPROTECT_NOTIFY_TIME}" ] && [ -z "${VERPROTECT_KEEP_ALIVE_INTERVAL}" ]; then
+        VERPROTECT_KEEP_ALIVE_INTERVAL=${VERPROTECT_NOTIFY_TIME}
     fi
-    if [ -n "${WAZUH_CERTIFICATE}" ] && [ -z "${WAZUH_REGISTRATION_CA}" ]; then
-        WAZUH_REGISTRATION_CA=${WAZUH_CERTIFICATE}
+    if [ -n "${VERPROTECT_CERTIFICATE}" ] && [ -z "${VERPROTECT_REGISTRATION_CA}" ]; then
+        VERPROTECT_REGISTRATION_CA=${VERPROTECT_CERTIFICATE}
     fi
-    if [ -n "${WAZUH_PEM}" ] && [ -z "${WAZUH_REGISTRATION_CERTIFICATE}" ]; then
-        WAZUH_REGISTRATION_CERTIFICATE=${WAZUH_PEM}
+    if [ -n "${VERPROTECT_PEM}" ] && [ -z "${VERPROTECT_REGISTRATION_CERTIFICATE}" ]; then
+        VERPROTECT_REGISTRATION_CERTIFICATE=${VERPROTECT_PEM}
     fi
-    if [ -n "${WAZUH_KEY}" ] && [ -z "${WAZUH_REGISTRATION_KEY}" ]; then
-        WAZUH_REGISTRATION_KEY=${WAZUH_KEY}
+    if [ -n "${VERPROTECT_KEY}" ] && [ -z "${VERPROTECT_REGISTRATION_KEY}" ]; then
+        VERPROTECT_REGISTRATION_KEY=${VERPROTECT_KEY}
     fi
-    if [ -n "${WAZUH_GROUP}" ] && [ -z "${WAZUH_AGENT_GROUP}" ]; then
-        WAZUH_AGENT_GROUP=${WAZUH_GROUP}
+    if [ -n "${VERPROTECT_GROUP}" ] && [ -z "${VERPROTECT_AGENT_GROUP}" ]; then
+        VERPROTECT_AGENT_GROUP=${VERPROTECT_GROUP}
     fi
 
 }
 
 set_vars () {
 
-    export WAZUH_MANAGER
-    export WAZUH_MANAGER_PORT
-    export WAZUH_PROTOCOL
-    export WAZUH_REGISTRATION_SERVER
-    export WAZUH_REGISTRATION_PORT
-    export WAZUH_REGISTRATION_PASSWORD
-    export WAZUH_KEEP_ALIVE_INTERVAL
-    export WAZUH_TIME_RECONNECT
-    export WAZUH_REGISTRATION_CA
-    export WAZUH_REGISTRATION_CERTIFICATE
-    export WAZUH_REGISTRATION_KEY
-    export WAZUH_AGENT_NAME
-    export WAZUH_AGENT_GROUP
+    export VERPROTECT_MANAGER
+    export VERPROTECT_MANAGER_PORT
+    export VERPROTECT_PROTOCOL
+    export VERPROTECT_REGISTRATION_SERVER
+    export VERPROTECT_REGISTRATION_PORT
+    export VERPROTECT_REGISTRATION_PASSWORD
+    export VERPROTECT_KEEP_ALIVE_INTERVAL
+    export VERPROTECT_TIME_RECONNECT
+    export VERPROTECT_REGISTRATION_CA
+    export VERPROTECT_REGISTRATION_CERTIFICATE
+    export VERPROTECT_REGISTRATION_KEY
+    export VERPROTECT_AGENT_NAME
+    export VERPROTECT_AGENT_GROUP
     export ENROLLMENT_DELAY
     # The following variables are yet supported but all of them are deprecated
-    export WAZUH_MANAGER_IP
-    export WAZUH_NOTIFY_TIME
-    export WAZUH_AUTHD_SERVER
-    export WAZUH_AUTHD_PORT
-    export WAZUH_PASSWORD
-    export WAZUH_GROUP
-    export WAZUH_CERTIFICATE
-    export WAZUH_KEY
-    export WAZUH_PEM
+    export VERPROTECT_MANAGER_IP
+    export VERPROTECT_NOTIFY_TIME
+    export VERPROTECT_AUTHD_SERVER
+    export VERPROTECT_AUTHD_PORT
+    export VERPROTECT_PASSWORD
+    export VERPROTECT_GROUP
+    export VERPROTECT_CERTIFICATE
+    export VERPROTECT_KEY
+    export VERPROTECT_PEM
 
-    if [ -r "${WAZUH_MACOS_AGENT_DEPLOYMENT_VARS}" ]; then
-        . ${WAZUH_MACOS_AGENT_DEPLOYMENT_VARS}
-        rm -rf "${WAZUH_MACOS_AGENT_DEPLOYMENT_VARS}"
+    if [ -r "${VERPROTECT_MACOS_AGENT_DEPLOYMENT_VARS}" ]; then
+        . ${VERPROTECT_MACOS_AGENT_DEPLOYMENT_VARS}
+        rm -rf "${VERPROTECT_MACOS_AGENT_DEPLOYMENT_VARS}"
     fi
 
 }
 
 unset_vars() {
 
-    vars=(WAZUH_MANAGER_IP WAZUH_PROTOCOL WAZUH_MANAGER_PORT WAZUH_NOTIFY_TIME \
-          WAZUH_TIME_RECONNECT WAZUH_AUTHD_SERVER WAZUH_AUTHD_PORT WAZUH_PASSWORD \
-          WAZUH_AGENT_NAME WAZUH_GROUP WAZUH_CERTIFICATE WAZUH_KEY WAZUH_PEM \
-          WAZUH_MANAGER WAZUH_REGISTRATION_SERVER WAZUH_REGISTRATION_PORT \
-          WAZUH_REGISTRATION_PASSWORD WAZUH_KEEP_ALIVE_INTERVAL WAZUH_REGISTRATION_CA \
-          WAZUH_REGISTRATION_CERTIFICATE WAZUH_REGISTRATION_KEY WAZUH_AGENT_GROUP \
+    vars=(VERPROTECT_MANAGER_IP VERPROTECT_PROTOCOL VERPROTECT_MANAGER_PORT VERPROTECT_NOTIFY_TIME \
+          VERPROTECT_TIME_RECONNECT VERPROTECT_AUTHD_SERVER VERPROTECT_AUTHD_PORT VERPROTECT_PASSWORD \
+          VERPROTECT_AGENT_NAME VERPROTECT_GROUP VERPROTECT_CERTIFICATE VERPROTECT_KEY VERPROTECT_PEM \
+          VERPROTECT_MANAGER VERPROTECT_REGISTRATION_SERVER VERPROTECT_REGISTRATION_PORT \
+          VERPROTECT_REGISTRATION_PASSWORD VERPROTECT_KEEP_ALIVE_INTERVAL VERPROTECT_REGISTRATION_CA \
+          VERPROTECT_REGISTRATION_CERTIFICATE VERPROTECT_REGISTRATION_KEY VERPROTECT_AGENT_GROUP \
           ENROLLMENT_DELAY)
 
     for var in "${vars[@]}"; do
@@ -295,21 +295,21 @@ main () {
 
     get_deprecated_vars
 
-    if [ -z "${WAZUH_MANAGER}" ] && [ -n "${WAZUH_PROTOCOL}" ]; then
-        PROTOCOLS=( $(tolower "${WAZUH_PROTOCOL//,/ }") )
+    if [ -z "${VERPROTECT_MANAGER}" ] && [ -n "${VERPROTECT_PROTOCOL}" ]; then
+        PROTOCOLS=( $(tolower "${VERPROTECT_PROTOCOL//,/ }") )
         edit_value_tag "protocol" "${PROTOCOLS[0]}"
     fi
 
-    if [ -n "${WAZUH_MANAGER}" ]; then
+    if [ -n "${VERPROTECT_MANAGER}" ]; then
         if [ ! -f "${INSTALLDIR}/logs/ossec.log" ]; then
             touch -f "${INSTALLDIR}/logs/ossec.log"
             chmod 660 "${INSTALLDIR}/logs/ossec.log"
             chown root:wazuh "${INSTALLDIR}/logs/ossec.log"
         fi
 
-        # Check if multiples IPs are defined in variable WAZUH_MANAGER
-        ADDRESSES=( ${WAZUH_MANAGER//,/ } ) 
-        PROTOCOLS=( $(tolower "${WAZUH_PROTOCOL//,/ }") )
+        # Check if multiples IPs are defined in variable VERPROTECT_MANAGER
+        ADDRESSES=( ${VERPROTECT_MANAGER//,/ } ) 
+        PROTOCOLS=( $(tolower "${VERPROTECT_PROTOCOL//,/ }") )
         # Get uniques values if all protocols are the same
         if ( [ "${#PROTOCOLS[@]}" -ge "${#ADDRESSES[@]}" ] && ( ( ! echo "${PROTOCOLS[@]}" | grep -q -w "tcp" ) || ( ! echo "${PROTOCOLS[@]}" | grep -q -w "udp" ) ) ) || [ ${#PROTOCOLS[@]} -eq 0 ] || ( ! echo "${PROTOCOLS[@]}" | grep -q -w "udp" ) ; then
             ADDRESSES=( $(echo "${ADDRESSES[@]}" |  tr ' ' '\n' | cat -n | sort -uk2 | sort -n | cut -f2- | tr '\n' ' ') ) 
@@ -318,33 +318,33 @@ main () {
         add_adress_block
     fi
 
-    edit_value_tag "port" "${WAZUH_MANAGER_PORT}"
+    edit_value_tag "port" "${VERPROTECT_MANAGER_PORT}"
 
-    if [ -n "${WAZUH_REGISTRATION_SERVER}" ] || [ -n "${WAZUH_REGISTRATION_PORT}" ] || [ -n "${WAZUH_REGISTRATION_CA}" ] || [ -n "${WAZUH_REGISTRATION_CERTIFICATE}" ] || [ -n "${WAZUH_REGISTRATION_KEY}" ] || [ -n "${WAZUH_AGENT_NAME}" ] || [ -n "${WAZUH_AGENT_GROUP}" ] || [ -n "${ENROLLMENT_DELAY}" ] || [ -n "${WAZUH_REGISTRATION_PASSWORD}" ]; then
+    if [ -n "${VERPROTECT_REGISTRATION_SERVER}" ] || [ -n "${VERPROTECT_REGISTRATION_PORT}" ] || [ -n "${VERPROTECT_REGISTRATION_CA}" ] || [ -n "${VERPROTECT_REGISTRATION_CERTIFICATE}" ] || [ -n "${VERPROTECT_REGISTRATION_KEY}" ] || [ -n "${VERPROTECT_AGENT_NAME}" ] || [ -n "${VERPROTECT_AGENT_GROUP}" ] || [ -n "${ENROLLMENT_DELAY}" ] || [ -n "${VERPROTECT_REGISTRATION_PASSWORD}" ]; then
         add_auto_enrollment
-        set_auto_enrollment_tag_value "manager_address" "${WAZUH_REGISTRATION_SERVER}"
-        set_auto_enrollment_tag_value "port" "${WAZUH_REGISTRATION_PORT}"
-        set_auto_enrollment_tag_value "server_ca_path" "${WAZUH_REGISTRATION_CA}"
-        set_auto_enrollment_tag_value "agent_certificate_path" "${WAZUH_REGISTRATION_CERTIFICATE}"
-        set_auto_enrollment_tag_value "agent_key_path" "${WAZUH_REGISTRATION_KEY}"
-        set_auto_enrollment_tag_value "authorization_pass_path" "${WAZUH_REGISTRATION_PASSWORD_PATH}"
-        set_auto_enrollment_tag_value "agent_name" "${WAZUH_AGENT_NAME}"
-        set_auto_enrollment_tag_value "groups" "${WAZUH_AGENT_GROUP}"
+        set_auto_enrollment_tag_value "manager_address" "${VERPROTECT_REGISTRATION_SERVER}"
+        set_auto_enrollment_tag_value "port" "${VERPROTECT_REGISTRATION_PORT}"
+        set_auto_enrollment_tag_value "server_ca_path" "${VERPROTECT_REGISTRATION_CA}"
+        set_auto_enrollment_tag_value "agent_certificate_path" "${VERPROTECT_REGISTRATION_CERTIFICATE}"
+        set_auto_enrollment_tag_value "agent_key_path" "${VERPROTECT_REGISTRATION_KEY}"
+        set_auto_enrollment_tag_value "authorization_pass_path" "${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
+        set_auto_enrollment_tag_value "agent_name" "${VERPROTECT_AGENT_NAME}"
+        set_auto_enrollment_tag_value "groups" "${VERPROTECT_AGENT_GROUP}"
         set_auto_enrollment_tag_value "delay_after_enrollment" "${ENROLLMENT_DELAY}"
         delete_blank_lines "${TMP_ENROLLMENT}"
         concat_conf
     fi
 
             
-    if [ -n "${WAZUH_REGISTRATION_PASSWORD}" ]; then
-        echo "${WAZUH_REGISTRATION_PASSWORD}" > "${INSTALLDIR}/${WAZUH_REGISTRATION_PASSWORD_PATH}"
-        chmod 640 "${INSTALLDIR}"/"${WAZUH_REGISTRATION_PASSWORD_PATH}"
-        chown root:wazuh "${INSTALLDIR}"/"${WAZUH_REGISTRATION_PASSWORD_PATH}"
+    if [ -n "${VERPROTECT_REGISTRATION_PASSWORD}" ]; then
+        echo "${VERPROTECT_REGISTRATION_PASSWORD}" > "${INSTALLDIR}/${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
+        chmod 640 "${INSTALLDIR}"/"${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
+        chown root:wazuh "${INSTALLDIR}"/"${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
     fi
 
     # Options to be modified in ossec.conf
-    edit_value_tag "notify_time" "${WAZUH_KEEP_ALIVE_INTERVAL}"
-    edit_value_tag "time-reconnect" "${WAZUH_TIME_RECONNECT}"
+    edit_value_tag "notify_time" "${VERPROTECT_KEEP_ALIVE_INTERVAL}"
+    edit_value_tag "time-reconnect" "${VERPROTECT_TIME_RECONNECT}"
 
     unset_vars
 

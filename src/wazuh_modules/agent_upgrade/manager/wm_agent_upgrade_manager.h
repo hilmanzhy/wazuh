@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * July 30, 2020.
  *
  * This program is free software; you can redistribute it
@@ -113,7 +113,7 @@ typedef struct _wm_agent_info {
     char *major_version;         ///> OS major version of the agent
     char *minor_version;         ///> OS minor version of the agent
     char *architecture;          ///> architecture of the agent
-    char *wazuh_version;         ///> wazuh version of the agent
+    char *verprotect_version;         ///> wazuh version of the agent
     char *connection_status;     ///> connection_status of the agent
     char *package_type;          ///> package type of the agent (DEB, RPM, etc.)
 } wm_agent_info;

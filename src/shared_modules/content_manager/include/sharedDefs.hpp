@@ -1,6 +1,6 @@
 /*
- * Wazuh content manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect content manager
+ * Copyright (C) 2015, Verprotect Inc.
  * March 25, 2023.
  *
  * This program is free software; you can redistribute it
@@ -17,7 +17,7 @@
 #include <functional>
 #include <string>
 
-#define WM_CONTENTUPDATER "wazuh-modulesd:content-updater"
+#define WM_CONTENTUPDATER "verprotect-modulesd:content-updater"
 
 #include "loggerHelper.h"
 

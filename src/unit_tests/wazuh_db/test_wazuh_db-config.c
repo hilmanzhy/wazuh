@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -15,26 +15,26 @@
 
 #include "../../headers/shared.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../config/wazuh_db-config.h"
-#include "../../wazuh_db/wdb.h"
+#include "../../config/verprotect_db-config.h"
+#include "../../verprotect_db/wdb.h"
 
 /* setup/teardown */
 
-int wazuh_db_setup() {
+int verprotect_db_setup() {
     wdb_init_conf();
 
     return OS_SUCCESS;
 }
 
-int  wazuh_db_teardown() {
+int  verprotect_db_teardown() {
     wdb_free_conf();
 
     return OS_SUCCESS;
 }
 
-/* Read_WazuhDB tests */
+/* Read_VerprotectDB tests */
 
-void test_Read_WazuhDB_element_NULL(void **state)
+void test_Read_VerprotectDB_element_NULL(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -45,13 +45,13 @@ void test_Read_WazuhDB_element_NULL(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1231): Invalid NULL element in the configuration.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
 }
 
-void test_Read_WazuhDB_element_invalid(void **state)
+void test_Read_VerprotectDB_element_invalid(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -64,14 +64,14 @@ void test_Read_WazuhDB_element_invalid(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1230): Invalid element in the configuration: 'invalid'.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_attribute_NULL(void **state)
+void test_Read_VerprotectDB_attribute_NULL(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -84,14 +84,14 @@ void test_Read_WazuhDB_attribute_NULL(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1233): Invalid attribute '' in the configuration: 'backup'.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_attribute_invalid(void **state)
+void test_Read_VerprotectDB_attribute_invalid(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -104,14 +104,14 @@ void test_Read_WazuhDB_attribute_invalid(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1233): Invalid attribute 'invalid' in the configuration: 'backup'.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_attribute_value_invalid(void **state)
+void test_Read_VerprotectDB_attribute_value_invalid(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -124,14 +124,14 @@ void test_Read_WazuhDB_attribute_value_invalid(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'database': value.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_content_NULL(void **state)
+void test_Read_VerprotectDB_content_NULL(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -144,14 +144,14 @@ void test_Read_WazuhDB_content_NULL(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1231): Invalid NULL element in the configuration.");
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_valid_config(void **state)
+void test_Read_VerprotectDB_valid_config(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -165,7 +165,7 @@ void test_Read_WazuhDB_valid_config(void **state)
     OS_ReadXMLString(test_config, &xml);
     nodes = OS_GetElementsbyNode(&xml, NULL);
 
-    int ret = Read_WazuhDB(&xml, nodes);
+    int ret = Read_VerprotectDB(&xml, nodes);
 
     assert_int_equal(ret, OS_SUCCESS);
     assert_int_equal(wconfig.wdb_backup_settings[WDB_GLOBAL_BACKUP]->enabled, 1);
@@ -176,9 +176,9 @@ void test_Read_WazuhDB_valid_config(void **state)
     OS_ClearXML(&xml);
 }
 
-/* Read_WazuhDB_Backup tests */
+/* Read_VerprotectDB_Backup tests */
 
-void test_Read_WazuhDB_Backup_element_NULL(void **state)
+void test_Read_VerprotectDB_Backup_element_NULL(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -191,14 +191,14 @@ void test_Read_WazuhDB_Backup_element_NULL(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1231): Invalid NULL element in the configuration.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_element_invalid(void **state)
+void test_Read_VerprotectDB_Backup_element_invalid(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -212,14 +212,14 @@ void test_Read_WazuhDB_Backup_element_invalid(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1230): Invalid element in the configuration: 'invalid'.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_content_NULL(void **state)
+void test_Read_VerprotectDB_Backup_content_NULL(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -233,14 +233,14 @@ void test_Read_WazuhDB_Backup_content_NULL(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1234): Invalid NULL content for element: invalid.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_enabled_empty_value(void **state)
+void test_Read_VerprotectDB_Backup_enabled_empty_value(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -254,14 +254,14 @@ void test_Read_WazuhDB_Backup_enabled_empty_value(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'enabled': .");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_enabled_invalid_value(void **state)
+void test_Read_VerprotectDB_Backup_enabled_invalid_value(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -275,14 +275,14 @@ void test_Read_WazuhDB_Backup_enabled_invalid_value(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'enabled': 123.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_interval_invalid_value(void **state)
+void test_Read_VerprotectDB_Backup_interval_invalid_value(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -297,14 +297,14 @@ void test_Read_WazuhDB_Backup_interval_invalid_value(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'interval': invalid.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_maxfiles_invalid_string(void **state)
+void test_Read_VerprotectDB_Backup_maxfiles_invalid_string(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -320,14 +320,14 @@ void test_Read_WazuhDB_Backup_maxfiles_invalid_string(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'max_files': invalid.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_maxfiles_invalid_value(void **state)
+void test_Read_VerprotectDB_Backup_maxfiles_invalid_value(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -343,14 +343,14 @@ void test_Read_WazuhDB_Backup_maxfiles_invalid_value(void **state)
 
     expect_string(__wrap__merror, formatted_msg, "(1235): Invalid value for element 'max_files': 0.");
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_INVALID);
 
     OS_ClearNode(nodes);
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_valid_config(void **state)
+void test_Read_VerprotectDB_Backup_valid_config(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -364,7 +364,7 @@ void test_Read_WazuhDB_Backup_valid_config(void **state)
     OS_ReadXMLString(test_config, &xml);
     nodes = OS_GetElementsbyNode(&xml, NULL);
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_SUCCESS);
     assert_int_equal(wconfig.wdb_backup_settings[WDB_GLOBAL_BACKUP]->enabled, 1);
     assert_int_equal(wconfig.wdb_backup_settings[WDB_GLOBAL_BACKUP]->interval, 86400);
@@ -374,7 +374,7 @@ void test_Read_WazuhDB_Backup_valid_config(void **state)
     OS_ClearXML(&xml);
 }
 
-void test_Read_WazuhDB_Backup_valid_config2(void **state)
+void test_Read_VerprotectDB_Backup_valid_config2(void **state)
 {
     XML_NODE nodes = NULL;
     OS_XML xml;
@@ -388,7 +388,7 @@ void test_Read_WazuhDB_Backup_valid_config2(void **state)
     OS_ReadXMLString(test_config, &xml);
     nodes = OS_GetElementsbyNode(&xml, NULL);
 
-    int ret = Read_WazuhDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
+    int ret = Read_VerprotectDB_Backup(&xml, nodes[0], WDB_GLOBAL_BACKUP);
     assert_int_equal(ret, OS_SUCCESS);
     assert_int_equal(wconfig.wdb_backup_settings[WDB_GLOBAL_BACKUP]->enabled, 0);
     assert_int_equal(wconfig.wdb_backup_settings[WDB_GLOBAL_BACKUP]->interval, 43200);
@@ -401,25 +401,25 @@ void test_Read_WazuhDB_Backup_valid_config2(void **state)
 int main(void)
 {
     const struct CMUnitTest tests[] = {
-        // Tests Read_WazuhDB
-        cmocka_unit_test(test_Read_WazuhDB_element_NULL),
-        cmocka_unit_test(test_Read_WazuhDB_element_invalid),
-        cmocka_unit_test(test_Read_WazuhDB_attribute_NULL),
-        cmocka_unit_test(test_Read_WazuhDB_attribute_invalid),
-        cmocka_unit_test(test_Read_WazuhDB_attribute_value_invalid),
-        cmocka_unit_test(test_Read_WazuhDB_valid_config),
-        // Tests Read_WazuhDB_Backup
-        cmocka_unit_test(test_Read_WazuhDB_Backup_element_NULL),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_element_invalid),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_content_NULL),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_enabled_empty_value),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_enabled_invalid_value),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_interval_invalid_value),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_maxfiles_invalid_string),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_maxfiles_invalid_value),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_valid_config),
-        cmocka_unit_test(test_Read_WazuhDB_Backup_valid_config2),
+        // Tests Read_VerprotectDB
+        cmocka_unit_test(test_Read_VerprotectDB_element_NULL),
+        cmocka_unit_test(test_Read_VerprotectDB_element_invalid),
+        cmocka_unit_test(test_Read_VerprotectDB_attribute_NULL),
+        cmocka_unit_test(test_Read_VerprotectDB_attribute_invalid),
+        cmocka_unit_test(test_Read_VerprotectDB_attribute_value_invalid),
+        cmocka_unit_test(test_Read_VerprotectDB_valid_config),
+        // Tests Read_VerprotectDB_Backup
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_element_NULL),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_element_invalid),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_content_NULL),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_enabled_empty_value),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_enabled_invalid_value),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_interval_invalid_value),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_maxfiles_invalid_string),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_maxfiles_invalid_value),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_valid_config),
+        cmocka_unit_test(test_Read_VerprotectDB_Backup_valid_config2),
     };
 
-    return cmocka_run_group_tests(tests, wazuh_db_setup, wazuh_db_teardown);
+    return cmocka_run_group_tests(tests, verprotect_db_setup, verprotect_db_teardown);
 }

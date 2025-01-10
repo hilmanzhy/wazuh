@@ -1,6 +1,6 @@
 /*
- * Wazuh Module Manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module Manager
+ * Copyright (C) 2015, Verprotect Inc.
  * April 27, 2016.
  *
  * This program is free software; you can redistribute it
@@ -18,7 +18,7 @@
 wmodule *wmodules = NULL;   // Config: linked list of all modules.
 int wm_task_nice = 0;       // Nice value for tasks.
 static gid_t wm_gid;               // Group ID.
-int wm_max_eps;             // Maximum events per second sent by OpenScap and CIS-CAT Wazuh Module
+int wm_max_eps;             // Maximum events per second sent by OpenScap and CIS-CAT Verprotect Module
 int wm_kill_timeout;        // Time for a process to quit before killing it
 int wm_debug_level;
 
@@ -63,9 +63,9 @@ int wm_config() {
 
     // Get defined values from internal_options
 
-    wm_task_nice = getDefine_Int("wazuh_modules", "task_nice", -20, 19);
-    wm_max_eps = getDefine_Int("wazuh_modules", "max_eps", 1, 1000);
-    wm_kill_timeout = getDefine_Int("wazuh_modules", "kill_timeout", 0, 3600);
+    wm_task_nice = getDefine_Int("verprotect_modules", "task_nice", -20, 19);
+    wm_max_eps = getDefine_Int("verprotect_modules", "max_eps", 1, 1000);
+    wm_kill_timeout = getDefine_Int("verprotect_modules", "kill_timeout", 0, 3600);
 
     if(wm_initialize_default_modules(&wmodules) < 0) {
         return OS_INVALID;
@@ -390,10 +390,10 @@ cJSON *getModulesInternalOptions(void) {
     cJSON *root = cJSON_CreateObject();
     cJSON *internals = cJSON_CreateObject();
 
-    cJSON_AddNumberToObject(internals,"wazuh_modules.task_nice",wm_task_nice);
-    cJSON_AddNumberToObject(internals,"wazuh_modules.max_eps",wm_max_eps);
-    cJSON_AddNumberToObject(internals,"wazuh_modules.kill_timeout",wm_kill_timeout);
-    cJSON_AddNumberToObject(internals,"wazuh_modules.debug",wm_debug_level);
+    cJSON_AddNumberToObject(internals,"verprotect_modules.task_nice",wm_task_nice);
+    cJSON_AddNumberToObject(internals,"verprotect_modules.max_eps",wm_max_eps);
+    cJSON_AddNumberToObject(internals,"verprotect_modules.kill_timeout",wm_kill_timeout);
+    cJSON_AddNumberToObject(internals,"verprotect_modules.debug",wm_debug_level);
 
     cJSON_AddItemToObject(root,"internal_options",internals);
 

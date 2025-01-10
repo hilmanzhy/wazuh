@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -14,14 +14,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../wazuh_modules/wmodules.h"
-#include "../../wazuh_modules/wm_gcp.h"
+#include "../../verprotect_modules/wmodules.h"
+#include "../../verprotect_modules/wm_gcp.h"
 #include "../../headers/defs.h"
 #include "../../wrappers/externals/cJSON/cJSON_wrappers.h"
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
 #include "../../wrappers/wazuh/shared/schedule_scan_wrappers.h"
 #include "../../wrappers/wazuh/shared/time_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_exec_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
 
 void wm_gcp_pubsub_run(const wm_gcp_pubsub *data);
 cJSON *wm_gcp_pubsub_dump(const wm_gcp_pubsub *data);
@@ -351,8 +351,8 @@ static int teardown_gcp_bucket_destroy(void **state) {
 static void test_wm_gcp_pubsub_run_error_running_command(void **state)  {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -364,11 +364,11 @@ static void test_wm_gcp_pubsub_run_error_running_command(void **state)  {
     will_return(__wrap_isDebug, 1);
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -386,8 +386,8 @@ static void test_wm_gcp_pubsub_run_error_running_command(void **state)  {
 static void test_wm_gcp_pubsub_run_unknown_error(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -399,11 +399,11 @@ static void test_wm_gcp_pubsub_run_unknown_error(void **state) {
     will_return(__wrap_isDebug, 1);
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -423,8 +423,8 @@ static void test_wm_gcp_pubsub_run_unknown_error(void **state) {
 static void test_wm_gcp_pubsub_run_unknown_error_no_description(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -437,11 +437,11 @@ static void test_wm_gcp_pubsub_run_unknown_error_no_description(void **state) {
     will_return(__wrap_isDebug, 1);
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -460,8 +460,8 @@ static void test_wm_gcp_pubsub_run_unknown_error_no_description(void **state) {
 static void test_wm_gcp_pubsub_run_error_parsing_args(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -474,11 +474,11 @@ static void test_wm_gcp_pubsub_run_error_parsing_args(void **state) {
     will_return(__wrap_isDebug, 1);
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -497,8 +497,8 @@ static void test_wm_gcp_pubsub_run_error_parsing_args(void **state) {
 static void test_wm_gcp_pubsub_run_error_parsing_args_no_description(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -512,11 +512,11 @@ static void test_wm_gcp_pubsub_run_error_parsing_args_no_description(void **stat
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -536,8 +536,8 @@ static void test_wm_gcp_pubsub_run_error_parsing_args_no_description(void **stat
 static void test_wm_gcp_pubsub_run_generic_error(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -549,11 +549,11 @@ static void test_wm_gcp_pubsub_run_generic_error(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -573,8 +573,8 @@ static void test_wm_gcp_pubsub_run_generic_error(void **state) {
 static void test_wm_gcp_pubsub_run_generic_error_no_description(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -586,11 +586,11 @@ static void test_wm_gcp_pubsub_run_generic_error_no_description(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -609,8 +609,8 @@ static void test_wm_gcp_pubsub_run_generic_error_no_description(void **state) {
 static void test_wm_gcp_pubsub_run_logging_warning_message_warning(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -622,11 +622,11 @@ static void test_wm_gcp_pubsub_run_logging_warning_message_warning(void **state)
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -645,8 +645,8 @@ static void test_wm_gcp_pubsub_run_logging_warning_message_warning(void **state)
 static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug_discarded(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -659,11 +659,11 @@ static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug_discarded(voi
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -680,8 +680,8 @@ static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug_discarded(voi
 static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -694,11 +694,11 @@ static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug(void **state)
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -717,8 +717,8 @@ static void test_wm_gcp_pubsub_run_logging_debug_message_not_debug(void **state)
 static void test_wm_gcp_pubsub_run_logging_info_message_info(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -731,11 +731,11 @@ static void test_wm_gcp_pubsub_run_logging_info_message_info(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -754,8 +754,8 @@ static void test_wm_gcp_pubsub_run_logging_info_message_info(void **state) {
 static void test_wm_gcp_pubsub_run_logging_info_message_debug(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -768,11 +768,11 @@ static void test_wm_gcp_pubsub_run_logging_info_message_debug(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -788,8 +788,8 @@ static void test_wm_gcp_pubsub_run_logging_info_message_debug(void **state) {
 static void test_wm_gcp_pubsub_run_logging_info_message_warning(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -802,11 +802,11 @@ static void test_wm_gcp_pubsub_run_logging_info_message_warning(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -824,8 +824,8 @@ static void test_wm_gcp_pubsub_run_logging_info_message_warning(void **state) {
 static void test_wm_gcp_pubsub_run_logging_warning_message_error(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -837,11 +837,11 @@ static void test_wm_gcp_pubsub_run_logging_warning_message_error(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -859,8 +859,8 @@ static void test_wm_gcp_pubsub_run_logging_warning_message_error(void **state) {
 static void test_wm_gcp_pubsub_run_logging_warning_multiline_message_error(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -872,11 +872,11 @@ static void test_wm_gcp_pubsub_run_logging_warning_multiline_message_error(void 
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -894,8 +894,8 @@ static void test_wm_gcp_pubsub_run_logging_warning_multiline_message_error(void 
 static void test_wm_gcp_pubsub_run_logging_warning_multimessage_message_error(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -907,11 +907,11 @@ static void test_wm_gcp_pubsub_run_logging_warning_multimessage_message_error(vo
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -935,8 +935,8 @@ static void test_wm_gcp_pubsub_run_logging_warning_multimessage_message_error(vo
 static void test_wm_gcp_pubsub_run_logging_default_message_debug(void **state) {
     wm_gcp_pubsub *gcp_config = *state;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -947,11 +947,11 @@ static void test_wm_gcp_pubsub_run_logging_default_message_debug(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 6");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 6");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -972,8 +972,8 @@ static void test_wm_gcp_pubsub_dump_success_logging_debug(void **state) {
     gcp_pubsub_dump_data->config->max_messages = 100;
     gcp_pubsub_dump_data->config->num_threads = 2;
 
-    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_pubsub_dump_data->config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     will_return(__wrap_cJSON_CreateObject, gcp_pubsub_dump_data->root);
@@ -1004,9 +1004,9 @@ static void test_wm_gcp_pubsub_dump_success_logging_debug(void **state) {
     assert_non_null(num_threads);
     assert_int_equal(num_threads->valueint, 2);
     cJSON *project_id = cJSON_GetObjectItem(gcp_pubsub, "project_id");
-    assert_string_equal(cJSON_GetStringValue(project_id), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(project_id), "verprotect-gcp-test");
     cJSON *subscription_name = cJSON_GetObjectItem(gcp_pubsub, "subscription_name");
-    assert_string_equal(cJSON_GetStringValue(subscription_name), "wazuh-subscription-test");
+    assert_string_equal(cJSON_GetStringValue(subscription_name), "verprotect-subscription-test");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_pubsub, "credentials_file");
     assert_string_equal(cJSON_GetStringValue(credentials_file), "/wazuh/credentials/test.json");
 }
@@ -1020,8 +1020,8 @@ static void test_wm_gcp_pubsub_dump_success_logging_info(void **state) {
     gcp_pubsub_dump_data->config->max_messages = 100;
     gcp_pubsub_dump_data->config->num_threads = 2;
 
-    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_pubsub_dump_data->config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     will_return(__wrap_cJSON_CreateObject, gcp_pubsub_dump_data->root);
@@ -1052,9 +1052,9 @@ static void test_wm_gcp_pubsub_dump_success_logging_info(void **state) {
     assert_non_null(num_threads);
     assert_int_equal(num_threads->valueint, 2);
     cJSON *project_id = cJSON_GetObjectItem(gcp_pubsub, "project_id");
-    assert_string_equal(cJSON_GetStringValue(project_id), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(project_id), "verprotect-gcp-test");
     cJSON *subscription_name = cJSON_GetObjectItem(gcp_pubsub, "subscription_name");
-    assert_string_equal(cJSON_GetStringValue(subscription_name), "wazuh-subscription-test");
+    assert_string_equal(cJSON_GetStringValue(subscription_name), "verprotect-subscription-test");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_pubsub, "credentials_file");
     assert_string_equal(cJSON_GetStringValue(credentials_file), "/wazuh/credentials/test.json");
 }
@@ -1067,8 +1067,8 @@ static void test_wm_gcp_pubsub_dump_success_logging_warning(void **state) {
     gcp_pubsub_dump_data->config->max_messages = 100;
     gcp_pubsub_dump_data->config->num_threads = 2;
 
-    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_pubsub_dump_data->config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     will_return(__wrap_cJSON_CreateObject, gcp_pubsub_dump_data->root);
@@ -1099,9 +1099,9 @@ static void test_wm_gcp_pubsub_dump_success_logging_warning(void **state) {
     assert_non_null(num_threads);
     assert_int_equal(num_threads->valueint, 2);
     cJSON *project_id = cJSON_GetObjectItem(gcp_pubsub, "project_id");
-    assert_string_equal(cJSON_GetStringValue(project_id), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(project_id), "verprotect-gcp-test");
     cJSON *subscription_name = cJSON_GetObjectItem(gcp_pubsub, "subscription_name");
-    assert_string_equal(cJSON_GetStringValue(subscription_name), "wazuh-subscription-test");
+    assert_string_equal(cJSON_GetStringValue(subscription_name), "verprotect-subscription-test");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_pubsub, "credentials_file");
     assert_string_equal(cJSON_GetStringValue(credentials_file), "/wazuh/credentials/test.json");
 }
@@ -1114,8 +1114,8 @@ static void test_wm_gcp_pubsub_dump_error_allocating_wm_wd(void **state) {
     gcp_pubsub_dump_data->config->max_messages = 100;
     gcp_pubsub_dump_data->config->num_threads = 2;
 
-    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_pubsub_dump_data->config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     // Since we won't use wm_wd, we can just free it to prevent memory leaks.
@@ -1143,8 +1143,8 @@ static void test_wm_gcp_pubsub_dump_error_allocating_root(void **state) {
     gcp_pubsub_dump_data->config->pull_on_start = 0;
     gcp_pubsub_dump_data->config->max_messages = 100;
 
-    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_pubsub_dump_data->config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_pubsub_dump_data->config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_pubsub_dump_data->config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     // Since we won't use wm_wd or root, we can just free them to prevent memory leaks.
@@ -1195,8 +1195,8 @@ static void test_wm_gcp_pubsub_main_pull_on_start(void **state) {
     gcp_config->enabled = 1;
     gcp_config->pull_on_start = 1;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -1219,11 +1219,11 @@ static void test_wm_gcp_pubsub_main_pull_on_start(void **state) {
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1250,8 +1250,8 @@ static void test_wm_gcp_pubsub_main_sleep_then_run(void **state) {
     gcp_config->enabled = 1;
     gcp_config->pull_on_start = 1;
 
-    snprintf(gcp_config->project_id, OS_SIZE_1024, "wazuh-gcp-test");
-    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "wazuh-subscription-test");
+    snprintf(gcp_config->project_id, OS_SIZE_1024, "verprotect-gcp-test");
+    snprintf(gcp_config->subscription_name, OS_SIZE_1024, "verprotect-subscription-test");
     snprintf(gcp_config->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
 
     gcp_config->max_messages = 10;
@@ -1288,11 +1288,11 @@ static void test_wm_gcp_pubsub_main_sleep_then_run(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_PUBSUB_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type pubsub --project wazuh-gcp-test --subscription_id wazuh-subscription-test "
+        "wodles/gcloud/gcloud --integration_type pubsub --project verprotect-gcp-test --subscription_id verprotect-subscription-test "
         "--credentials_file /wazuh/credentials/test.json --max_messages 10 --num_threads 2 --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1317,7 +1317,7 @@ static void test_wm_gcp_bucket_run_success(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1331,11 +1331,11 @@ static void test_wm_gcp_bucket_run_success(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1352,7 +1352,7 @@ static void test_wm_gcp_bucket_run_error_running_command(void **state)  {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1367,11 +1367,11 @@ static void test_wm_gcp_bucket_run_error_running_command(void **state)  {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1390,7 +1390,7 @@ static void test_wm_gcp_bucket_run_error(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1405,11 +1405,11 @@ static void test_wm_gcp_bucket_run_error(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1429,7 +1429,7 @@ static void test_wm_gcp_bucket_run_error_no_description(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1443,11 +1443,11 @@ static void test_wm_gcp_bucket_run_error_no_description(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1467,7 +1467,7 @@ static void test_wm_gcp_bucket_run_error_parsing_args(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1482,11 +1482,11 @@ static void test_wm_gcp_bucket_run_error_parsing_args(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1506,7 +1506,7 @@ static void test_wm_gcp_bucket_run_error_parsing_args_no_description(void **stat
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1521,11 +1521,11 @@ static void test_wm_gcp_bucket_run_error_parsing_args_no_description(void **stat
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1545,7 +1545,7 @@ static void test_wm_gcp_bucket_run_generic_error(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1558,11 +1558,11 @@ static void test_wm_gcp_bucket_run_generic_error(void **state) {
     will_return(__wrap_isDebug, 0);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1583,7 +1583,7 @@ static void test_wm_gcp_bucket_run_generic_error_no_description(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1597,11 +1597,11 @@ static void test_wm_gcp_bucket_run_generic_error_no_description(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test "
         "--credentials_file /wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1622,7 +1622,7 @@ static void test_wm_gcp_bucket_run_logging_debug_message_debug(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1638,11 +1638,11 @@ static void test_wm_gcp_bucket_run_logging_debug_message_debug(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1662,7 +1662,7 @@ static void test_wm_gcp_bucket_run_logging_debug_message_not_debug_discarded(voi
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1676,11 +1676,11 @@ static void test_wm_gcp_bucket_run_logging_debug_message_not_debug_discarded(voi
     will_return(__wrap_isDebug, 2);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1697,7 +1697,7 @@ static void test_wm_gcp_bucket_run_logging_debug_message_not_debug(void **state)
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1711,11 +1711,11 @@ static void test_wm_gcp_bucket_run_logging_debug_message_not_debug(void **state)
     will_return(__wrap_isDebug, 2);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 2");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1734,7 +1734,7 @@ static void test_wm_gcp_bucket_run_logging_info_message_info(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1748,11 +1748,11 @@ static void test_wm_gcp_bucket_run_logging_info_message_info(void **state) {
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1772,7 +1772,7 @@ static void test_wm_gcp_bucket_run_logging_info_message_debug(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1788,11 +1788,11 @@ static void test_wm_gcp_bucket_run_logging_info_message_debug(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1809,7 +1809,7 @@ static void test_wm_gcp_bucket_run_logging_info_message_warning(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1823,11 +1823,11 @@ static void test_wm_gcp_bucket_run_logging_info_message_warning(void **state) {
     will_return(__wrap_isDebug, 1);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1847,7 +1847,7 @@ static void test_wm_gcp_bucket_run_logging_warning_message_warning(void **state)
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1860,11 +1860,11 @@ static void test_wm_gcp_bucket_run_logging_warning_message_warning(void **state)
     will_return(__wrap_isDebug, 0);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1883,7 +1883,7 @@ static void test_wm_gcp_bucket_run_logging_warning_message_debug(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1896,11 +1896,11 @@ static void test_wm_gcp_bucket_run_logging_warning_message_debug(void **state) {
     will_return(__wrap_isDebug, 0);
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1917,7 +1917,7 @@ static void test_wm_gcp_bucket_run_logging_warning_message_error(void **state) {
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1932,11 +1932,11 @@ static void test_wm_gcp_bucket_run_logging_warning_message_error(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1955,7 +1955,7 @@ static void test_wm_gcp_bucket_run_logging_warning_multiline_message_error(void 
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -1970,11 +1970,11 @@ static void test_wm_gcp_bucket_run_logging_warning_multiline_message_error(void 
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -1993,7 +1993,7 @@ static void test_wm_gcp_bucket_run_logging_warning_multimessage_message_error(vo
     wm_gcp_bucket_base *gcp_config = *state;
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2009,11 +2009,11 @@ static void test_wm_gcp_bucket_run_logging_warning_multimessage_message_error(vo
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -2043,7 +2043,7 @@ static void test_wm_gcp_bucket_dump_success_logging_debug(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2071,7 +2071,7 @@ static void test_wm_gcp_bucket_dump_success_logging_debug(void **state) {
     cJSON *gcp_bucket = cJSON_GetObjectItem(gcp_bucket_dump_data->dump->child, "buckets");
     assert_non_null(gcp_bucket);
     cJSON *bucket = cJSON_GetObjectItem(gcp_bucket->child, "bucket");
-    assert_string_equal(cJSON_GetStringValue(bucket), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(bucket), "verprotect-gcp-test");
     cJSON *type = cJSON_GetObjectItem(gcp_bucket->child, "type");
     assert_string_equal(cJSON_GetStringValue(type), "access_logs");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_bucket->child, "credentials_file");
@@ -2086,7 +2086,7 @@ static void test_wm_gcp_bucket_dump_success_logging_info(void **state) {
     gcp_bucket_dump_data->config->enabled = 1;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2117,7 +2117,7 @@ static void test_wm_gcp_bucket_dump_success_logging_info(void **state) {
     cJSON *gcp_bucket = cJSON_GetObjectItem(gcp_bucket_dump_data->dump->child, "buckets");
     assert_non_null(gcp_bucket);
     cJSON *bucket = cJSON_GetObjectItem(gcp_bucket->child, "bucket");
-    assert_string_equal(cJSON_GetStringValue(bucket), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(bucket), "verprotect-gcp-test");
     cJSON *type = cJSON_GetObjectItem(gcp_bucket->child, "type");
     assert_string_equal(cJSON_GetStringValue(type), "access_logs");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_bucket->child, "credentials_file");
@@ -2131,7 +2131,7 @@ static void test_wm_gcp_bucket_dump_success(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 1;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2163,7 +2163,7 @@ static void test_wm_gcp_bucket_dump_success(void **state) {
     cJSON *gcp_bucket = cJSON_GetObjectItem(gcp_bucket_dump_data->dump->child, "buckets");
     assert_non_null(gcp_bucket);
     cJSON *bucket = cJSON_GetObjectItem(gcp_bucket->child, "bucket");
-    assert_string_equal(cJSON_GetStringValue(bucket), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(bucket), "verprotect-gcp-test");
     cJSON *type = cJSON_GetObjectItem(gcp_bucket->child, "type");
     assert_string_equal(cJSON_GetStringValue(type), "access_logs");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_bucket->child, "credentials_file");
@@ -2177,7 +2177,7 @@ static void test_wm_gcp_bucket_dump_success_logging_critical(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2207,7 +2207,7 @@ static void test_wm_gcp_bucket_dump_success_logging_critical(void **state) {
     cJSON *gcp_bucket = cJSON_GetObjectItem(gcp_bucket_dump_data->dump->child, "buckets");
     assert_non_null(gcp_bucket);
     cJSON *bucket = cJSON_GetObjectItem(gcp_bucket->child, "bucket");
-    assert_string_equal(cJSON_GetStringValue(bucket), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(bucket), "verprotect-gcp-test");
     cJSON *type = cJSON_GetObjectItem(gcp_bucket->child, "type");
     assert_string_equal(cJSON_GetStringValue(type), "access_logs");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_bucket->child, "credentials_file");
@@ -2221,7 +2221,7 @@ static void test_wm_gcp_bucket_dump_success_logging_default(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2251,7 +2251,7 @@ static void test_wm_gcp_bucket_dump_success_logging_default(void **state) {
     cJSON *gcp_bucket = cJSON_GetObjectItem(gcp_bucket_dump_data->dump->child, "buckets");
     assert_non_null(gcp_bucket);
     cJSON *bucket = cJSON_GetObjectItem(gcp_bucket->child, "bucket");
-    assert_string_equal(cJSON_GetStringValue(bucket), "wazuh-gcp-test");
+    assert_string_equal(cJSON_GetStringValue(bucket), "verprotect-gcp-test");
     cJSON *type = cJSON_GetObjectItem(gcp_bucket->child, "type");
     assert_string_equal(cJSON_GetStringValue(type), "access_logs");
     cJSON *credentials_file = cJSON_GetObjectItem(gcp_bucket->child, "credentials_file");
@@ -2265,7 +2265,7 @@ static void test_wm_gcp_bucket_dump_error_allocating_wm_wd(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2293,7 +2293,7 @@ static void test_wm_gcp_bucket_dump_error_allocating_root(void **state) {
     gcp_bucket_dump_data->config->enabled = 0;
     gcp_bucket_dump_data->config->run_on_start = 0;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2349,7 +2349,7 @@ static void test_wm_gcp_bucket_main_run_on_start(void **state) {
     wm_gcp_bucket *cur_bucket = gcp_config->buckets;
     void *ret;
 
-    snprintf(cur_bucket->bucket, OS_SIZE_1024, "wazuh-gcp-test");
+    snprintf(cur_bucket->bucket, OS_SIZE_1024, "verprotect-gcp-test");
     snprintf(cur_bucket->type, OS_SIZE_1024, "access_logs");
     snprintf(cur_bucket->credentials_file, OS_SIZE_1024, "/wazuh/credentials/test.json");
     snprintf(cur_bucket->prefix, OS_SIZE_1024, "access_logs/");
@@ -2378,11 +2378,11 @@ static void test_wm_gcp_bucket_main_run_on_start(void **state) {
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);
     expect_string(__wrap__mtdebug1, formatted_msg, "Launching command: "
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
 
     expect_string(__wrap_wm_exec, command,
-        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name wazuh-gcp-test --credentials_file "
+        "wodles/gcloud/gcloud --integration_type access_logs --bucket_name verprotect-gcp-test --credentials_file "
         "/wazuh/credentials/test.json --prefix access_logs/ --only_logs_after 2021-JAN-01 --remove --log_level 1");
     expect_value(__wrap_wm_exec, secs, 0);
     expect_value(__wrap_wm_exec, add_path, NULL);
@@ -2393,7 +2393,7 @@ static void test_wm_gcp_bucket_main_run_on_start(void **state) {
     will_return(__wrap_isDebug, 1);
 
     expect_string(__wrap__mtinfo, tag, WM_GCP_BUCKET_LOGTAG);
-    expect_string(__wrap__mtinfo, formatted_msg, "Executing Bucket Analysis: (Bucket: wazuh-gcp-test, "
+    expect_string(__wrap__mtinfo, formatted_msg, "Executing Bucket Analysis: (Bucket: verprotect-gcp-test, "
         "Path: access_logs/, Type: access_logs, Credentials file: /wazuh/credentials/test.json)");
 
     expect_string(__wrap__mtdebug1, tag, WM_GCP_BUCKET_LOGTAG);

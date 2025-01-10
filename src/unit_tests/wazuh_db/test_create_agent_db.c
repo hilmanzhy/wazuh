@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * May 2, 2024.
  *
  * This program is free software; you can redistribute it
@@ -15,7 +15,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 #include "../wrappers/common.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
 #include "../wrappers/wazuh/shared/file_op_wrappers.h"

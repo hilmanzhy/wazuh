@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
-# wazuh-control        This shell script takes care of starting
+# Copyright (C) 2015, Verprotect Inc.
+# verprotect-control        This shell script takes care of starting
 #                      or stopping ossec-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
@@ -25,10 +25,10 @@ if [ $? = 0 ]; then
 . ${PLIST};
 fi
 
-AUTHOR="Wazuh Inc."
+AUTHOR="Verprotect Inc."
 USE_JSON=false
-DAEMONS="wazuh-clusterd wazuh-modulesd wazuh-monitord wazuh-logcollector wazuh-remoted wazuh-syscheckd wazuh-analysisd wazuh-maild wazuh-execd wazuh-db wazuh-authd wazuh-agentlessd wazuh-integratord wazuh-dbd wazuh-csyslogd wazuh-apid"
-OP_DAEMONS="wazuh-clusterd wazuh-maild wazuh-agentlessd wazuh-integratord wazuh-dbd wazuh-csyslogd"
+DAEMONS="verprotect-clusterd verprotect-modulesd verprotect-monitord verprotect-logcollector verprotect-remoted verprotect-syscheckd verprotect-analysisd verprotect-maild verprotect-execd verprotect-db verprotect-authd verprotect-agentlessd verprotect-integratord verprotect-dbd verprotect-csyslogd verprotect-apid"
+OP_DAEMONS="verprotect-clusterd verprotect-maild verprotect-agentlessd verprotect-integratord verprotect-dbd verprotect-csyslogd"
 DEPRECATED_DAEMONS="ossec-authd"
 
 # Reverse order of daemons
@@ -260,17 +260,17 @@ start_service()
 {
 
     if [ $USE_JSON = false ]; then
-        echo "Starting Wazuh $VERSION..."
+        echo "Starting Verprotect $VERSION..."
     fi
 
-    TEST=$(${DIR}/bin/wazuh-logtest-legacy -t  2>&1 | grep "ERROR")
+    TEST=$(${DIR}/bin/verprotect-logtest-legacy -t  2>&1 | grep "ERROR")
     if [ ! -z "$TEST" ]; then
         if [ $USE_JSON = true ]; then
             echo -n '{"error":21,"message":"OSSEC analysisd: Testing rules failed. Configuration error."}'
         else
             echo "OSSEC analysisd: Testing rules failed. Configuration error. Exiting."
         fi
-        touch ${DIR}/var/run/wazuh-analysisd.failed
+        touch ${DIR}/var/run/verprotect-analysisd.failed
         exit 1;
     fi
 
@@ -296,15 +296,15 @@ start_service()
         echo -n '{"error":0,"data":['
     fi
     for i in ${SDAEMONS}; do
-        ## If wazuh-maild is disabled, don't try to start it.
-        if [ X"$i" = "Xwazuh-maild" ]; then
+        ## If verprotect-maild is disabled, don't try to start it.
+        if [ X"$i" = "Xverprotect-maild" ]; then
              grep "<email_notification>no<" ${DIR}/etc/ossec.conf >/dev/null 2>&1
              if [ $? = 0 ]; then
                  continue
              fi
         fi
-        ## If wazuh-clusterd is disabled, don't try to start it.
-        if [ X"$i" = "Xwazuh-clusterd" ]; then
+        ## If verprotect-clusterd is disabled, don't try to start it.
+        if [ X"$i" = "Xverprotect-clusterd" ]; then
              start_config="$(grep -n "<cluster>" ${DIR}/etc/ossec.conf | cut -d':' -f 1)"
              end_config="$(grep -n "</cluster>" ${DIR}/etc/ossec.conf | cut -d':' -f 1)"
              if [ -n "${start_config}" ] && [ -n "${end_config}" ]; then
@@ -316,8 +316,8 @@ start_service()
                 continue
              fi
         fi
-        ## If wazuh-authd is disabled, don't try to start it.
-        if [ X"$i" = "Xwazuh-authd" ]; then
+        ## If verprotect-authd is disabled, don't try to start it.
+        if [ X"$i" = "Xverprotect-authd" ]; then
              start_config="$(grep -n "<auth>" ${DIR}/etc/ossec.conf | cut -d':' -f 1)"
              end_config="$(grep -n "</auth>" ${DIR}/etc/ossec.conf | cut -d':' -f 1)"
              if [ -n "${start_config}" ] && [ -n "${end_config}" ]; then
@@ -430,7 +430,7 @@ pstatus()
             ps -p ${pid} > /dev/null 2>&1
             if [ ! $? = 0 ]; then
                 if [ $USE_JSON = false ]; then
-                    echo "${pfile}: Process ${pid} not used by Wazuh, removing..."
+                    echo "${pfile}: Process ${pid} not used by Verprotect, removing..."
                 fi
                 rm -f ${DIR}/var/run/${pfile}-${pid}.pid
                 continue;
@@ -516,7 +516,7 @@ stop_service()
     if [ $USE_JSON = true ]; then
         echo -n ']}'
     else
-        echo "Wazuh $VERSION Stopped"
+        echo "Verprotect $VERSION Stopped"
     fi
 }
 
@@ -525,14 +525,14 @@ info()
     if [ "X${1}" = "X" ]; then
         if [ $USE_JSON = true ]; then
             echo -n '{"error":0,"data":['
-            echo -n '{"WAZUH_VERSION":"'${VERSION}'"},'
-            echo -n '{"WAZUH_REVISION":"'${REVISION}'"},'
-            echo -n '{"WAZUH_TYPE":"'${TYPE}'"}'
+            echo -n '{"VERPROTECT_VERSION":"'${VERSION}'"},'
+            echo -n '{"VERPROTECT_REVISION":"'${REVISION}'"},'
+            echo -n '{"VERPROTECT_TYPE":"'${TYPE}'"}'
             echo -n ']}'
         else
-            echo "WAZUH_VERSION=\"${VERSION}\""
-            echo "WAZUH_REVISION=\"${REVISION}\""
-            echo "WAZUH_TYPE=\"${TYPE}\""
+            echo "VERPROTECT_VERSION=\"${VERSION}\""
+            echo "VERPROTECT_REVISION=\"${REVISION}\""
+            echo "VERPROTECT_TYPE=\"${TYPE}\""
         fi
     else
         case "${1}" in
@@ -586,7 +586,7 @@ restart)
     restart_service
     ;;
 reload)
-    DAEMONS=$(echo $DAEMONS | sed 's/wazuh-execd//')
+    DAEMONS=$(echo $DAEMONS | sed 's/verprotect-execd//')
     restart_service
     ;;
 status)

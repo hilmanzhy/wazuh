@@ -1,4 +1,4 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -21,8 +21,8 @@ list(APPEND tests_flags "-Wl,--wrap,sched_scan_read,--wrap,realpath,--wrap,IsFil
 list(APPEND use_shared_libs 0)
 
 # Generate wazuh modules library
-file(GLOB gcp ../../../wazuh_modules/*.o ../../../config/*.o)
-list(REMOVE_ITEM gcp ../../../wazuh_modules/main.o)
+file(GLOB gcp ../../../verprotect_modules/*.o ../../../config/*.o)
+list(REMOVE_ITEM gcp ../../../verprotect_modules/main.o)
 
 add_library(GCP_O STATIC ${gcp})
 
@@ -39,7 +39,7 @@ set_target_properties(
   LINKER_LANGUAGE C
   )
 
-target_link_libraries(GCP_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(GCP_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 
 # Compiling tests
@@ -53,8 +53,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         GCP_O
         -ldl
         -lcmocka

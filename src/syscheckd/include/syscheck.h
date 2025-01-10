@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -26,7 +26,7 @@
 #define AUDIT_SOCKET                "queue/sockets/audit"
 #define AUDIT_CONF_FILE             "etc/af_wazuh.conf"
 #define AUDIT_HEALTHCHECK_DIR       "tmp"
-#define AUDIT_HEALTHCHECK_KEY       "wazuh_hc"
+#define AUDIT_HEALTHCHECK_KEY       "verprotect_hc"
 #define AUDIT_HEALTHCHECK_FILE      "tmp/audit_hc"
 
 #ifdef WIN32

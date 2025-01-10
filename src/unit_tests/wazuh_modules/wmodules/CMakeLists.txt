@@ -1,4 +1,4 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -7,8 +7,8 @@
 
 # Generate wmodules library
 file(GLOB wmodules_files
-    ${SRC_FOLDER}/wazuh_modules/*.o)
-list(REMOVE_ITEM wmodules_files ${SRC_FOLDER}/wazuh_modules/main.o)
+    ${SRC_FOLDER}/verprotect_modules/*.o)
+list(REMOVE_ITEM wmodules_files ${SRC_FOLDER}/verprotect_modules/main.o)
 
 add_library(WMODULES_O STATIC ${wmodules_files})
 
@@ -25,7 +25,7 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(WMODULES_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(WMODULES_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
 include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
@@ -45,8 +45,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         WMODULES_O
         ${TEST_DEPS}
     )

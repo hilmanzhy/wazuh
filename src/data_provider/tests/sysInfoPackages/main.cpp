@@ -1,6 +1,6 @@
 /*
- * Wazuh SysInfo
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SysInfo
+ * Copyright (C) 2015, Verprotect Inc.
  * July 16, 2023.
  *
  * This program is free software; you can redistribute it

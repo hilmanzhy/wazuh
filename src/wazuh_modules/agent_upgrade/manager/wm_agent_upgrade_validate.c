@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Agent Upgrading
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Agent Upgrading
+ * Copyright (C) 2015, Verprotect Inc.
  * July 20, 2020.
  *
  * This program is free software; you can redistribute it
@@ -9,11 +9,11 @@
  * Foundation.
  */
 
-#include "wazuh_db/helpers/wdb_global_helpers.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_db/helpers/wdb_global_helpers.h"
+#include "verprotect_modules/wmodules.h"
 #include "wm_agent_upgrade_validate.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Redefine ossec_version
 #undef __ossec_version
 #define __ossec_version "v3.13.0"
@@ -145,17 +145,17 @@ int wm_agent_upgrade_validate_system(const char *platform, const char *os_major,
     return return_code;
 }
 
-int wm_agent_upgrade_validate_version(const char *wazuh_version, const char *platform, wm_upgrade_command command, void *task) {
+int wm_agent_upgrade_validate_version(const char *verprotect_version, const char *platform, wm_upgrade_command command, void *task) {
     char *tmp_agent_version = NULL;
     char *manager_version = NULL;
     int return_code = WM_UPGRADE_GLOBAL_DB_FAILURE;
 
-    if (wazuh_version) {
-        if (tmp_agent_version = strchr(wazuh_version, 'v'), tmp_agent_version) {
+    if (verprotect_version) {
+        if (tmp_agent_version = strchr(verprotect_version, 'v'), tmp_agent_version) {
 
-            if (compare_wazuh_versions(tmp_agent_version, WM_UPGRADE_MINIMAL_VERSION_SUPPORT, true) < 0) {
+            if (compare_verprotect_versions(tmp_agent_version, WM_UPGRADE_MINIMAL_VERSION_SUPPORT, true) < 0) {
                 return_code = WM_UPGRADE_NOT_MINIMAL_VERSION_SUPPORTED;
-            } else if (compare_wazuh_versions(tmp_agent_version, WM_UPGRADE_MINIMAL_VERSION_SUPPORT_MACOS, true) < 0 && !strcmp(platform, "darwin")) {
+            } else if (compare_verprotect_versions(tmp_agent_version, WM_UPGRADE_MINIMAL_VERSION_SUPPORT_MACOS, true) < 0 && !strcmp(platform, "darwin")) {
                 return_code = WM_UPGRADE_NOT_MINIMAL_VERSION_SUPPORTED;
             } else if (WM_UPGRADE_UPGRADE == command) {
                 wm_upgrade_task *upgrade_task = (wm_upgrade_task *)task;
@@ -166,9 +166,9 @@ int wm_agent_upgrade_validate_version(const char *wazuh_version, const char *pla
                     os_strdup(upgrade_task->custom_version ? upgrade_task->custom_version : manager_version, upgrade_task->wpk_version);
 
                     if (!upgrade_task->force_upgrade) {
-                        if (compare_wazuh_versions(tmp_agent_version, upgrade_task->wpk_version, true) >= 0) {
+                        if (compare_verprotect_versions(tmp_agent_version, upgrade_task->wpk_version, true) >= 0) {
                             return_code = WM_UPGRADE_NEW_VERSION_LEES_OR_EQUAL_THAT_CURRENT;
-                        } else if (compare_wazuh_versions(upgrade_task->wpk_version, manager_version, true) > 0) {
+                        } else if (compare_verprotect_versions(upgrade_task->wpk_version, manager_version, true) > 0) {
                             return_code = WM_UPGRADE_NEW_VERSION_GREATER_MASTER;
                         }
                     }
@@ -228,7 +228,7 @@ int wm_agent_upgrade_validate_wpk_version(wm_agent_info *agent_info, wm_upgrade_
     if (!task->wpk_repository) {
         if (wpk_repository_config) {
             os_strdup(wpk_repository_config, task->wpk_repository);
-        } else if (compare_wazuh_versions(task->wpk_version, "v4.0.0", true) < 0) {
+        } else if (compare_verprotect_versions(task->wpk_version, "v4.0.0", true) < 0) {
             os_strdup(WM_UPGRADE_WPK_REPO_URL_3_X, task->wpk_repository);
         } else {
             if (sscanf(task->wpk_version, "v%d.%*d.%*d", &ver) != 1 &&
@@ -264,25 +264,25 @@ int wm_agent_upgrade_validate_wpk_version(wm_agent_info *agent_info, wm_upgrade_
     if (!strcmp(agent_info->platform, "windows")) {
         snprintf(path_url, OS_SIZE_2048, "%swindows/",
                  repository_url);
-        snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_windows.wpk",
+        snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_windows.wpk",
                  task->wpk_version);
     } else if (!strcmp(agent_info->platform, "darwin")) {
-        if (compare_wazuh_versions(task->wpk_version, WM_UPGRADE_NEW_VERSION_STRUCTURE_REPOSITORY, true) >= 0) {
+        if (compare_verprotect_versions(task->wpk_version, WM_UPGRADE_NEW_VERSION_STRUCTURE_REPOSITORY, true) >= 0) {
             // Resolve package architecture
             package_architecture = wm_agent_upgrade_translate_arch(agent_info->platform, agent_info->package_type, agent_info->architecture);
             snprintf(path_url, OS_SIZE_2048, "%smacos/%s/%s/",
                     repository_url, agent_info->package_type, package_architecture);
-            snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_macos_%s.%s.wpk",
+            snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_macos_%s.%s.wpk",
                     task->wpk_version, package_architecture, agent_info->package_type);
         } else {
             snprintf(path_url, OS_SIZE_2048, "%smacos/%s/%s/",
                     repository_url, agent_info->architecture, agent_info->package_type);
-            snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_macos_%s.wpk",
+            snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_macos_%s.wpk",
                     task->wpk_version, agent_info->architecture);
         }
     } else {
-        if (compare_wazuh_versions(task->wpk_version, WM_UPGRADE_NEW_LINUX_VERSION_REPOSITORY, true) >= 0) {
-            if (compare_wazuh_versions(task->wpk_version, WM_UPGRADE_NEW_VERSION_STRUCTURE_REPOSITORY, true) >= 0) {
+        if (compare_verprotect_versions(task->wpk_version, WM_UPGRADE_NEW_LINUX_VERSION_REPOSITORY, true) >= 0) {
+            if (compare_verprotect_versions(task->wpk_version, WM_UPGRADE_NEW_VERSION_STRUCTURE_REPOSITORY, true) >= 0) {
                 if (task->package_type) {
                     if (agent_info->package_type) {
                         if (strcmp(task->package_type, agent_info->package_type) != 0) {
@@ -310,23 +310,23 @@ int wm_agent_upgrade_validate_wpk_version(wm_agent_info *agent_info, wm_upgrade_
                 package_architecture = wm_agent_upgrade_translate_arch(agent_info->platform, agent_info->package_type, agent_info->architecture);
                 snprintf(path_url, OS_SIZE_2048, "%slinux/%s/%s/",
                          repository_url, agent_info->package_type, package_architecture);
-                snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_linux_%s.%s.wpk",
+                snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_linux_%s.%s.wpk",
                          task->wpk_version, package_architecture, agent_info->package_type);
             } else {
                 snprintf(path_url, OS_SIZE_2048, "%slinux/%s/",
                          repository_url, agent_info->architecture);
-                snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_linux_%s.wpk",
+                snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_linux_%s.wpk",
                          task->wpk_version, agent_info->architecture);
             }
         } else if (!strcmp(agent_info->platform, "ubuntu")) {
             snprintf(path_url, OS_SIZE_2048, "%s%s/%s.%s/%s/",
                      repository_url, agent_info->platform, agent_info->major_version, agent_info->minor_version, agent_info->architecture);
-            snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_%s_%s.%s_%s.wpk",
+            snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_%s_%s.%s_%s.wpk",
                      task->wpk_version, agent_info->platform, agent_info->major_version, agent_info->minor_version, agent_info->architecture);
         } else {
             snprintf(path_url, OS_SIZE_2048, "%s%s/%s/%s/",
                      repository_url, agent_info->platform, agent_info->major_version, agent_info->architecture);
-            snprintf(file_url, OS_SIZE_2048, "wazuh_agent_%s_%s_%s_%s.wpk",
+            snprintf(file_url, OS_SIZE_2048, "verprotect_agent_%s_%s_%s_%s.wpk",
                      task->wpk_version, agent_info->platform, agent_info->major_version, agent_info->architecture);
         }
     }
@@ -346,7 +346,7 @@ int wm_agent_upgrade_validate_wpk_version(wm_agent_info *agent_info, wm_upgrade_
                 *next_line = '\0';
                 if (sha1 = strchr(version, ' '), sha1) {
                     *sha1 = '\0';
-                    if (compare_wazuh_versions(task->wpk_version, version, true) == 0) {
+                    if (compare_verprotect_versions(task->wpk_version, version, true) == 0) {
                         // Save WPK url, file name and sha1
                         os_strdup(sha1 + 1, task->wpk_sha1);
                         os_strdup(file_url, task->wpk_file);
@@ -363,7 +363,7 @@ int wm_agent_upgrade_validate_wpk_version(wm_agent_info *agent_info, wm_upgrade_
         if (version) {
             if (sha1 = strchr(version, ' '), sha1) {
                 *sha1 = '\0';
-                if (compare_wazuh_versions(task->wpk_version, version, true) == 0) {
+                if (compare_verprotect_versions(task->wpk_version, version, true) == 0) {
                     // Save WPK url, file name and sha1
                     os_strdup(sha1 + 1, task->wpk_sha1);
                     os_strdup(file_url, task->wpk_file);

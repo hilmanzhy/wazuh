@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -880,7 +880,7 @@ void test_audit_read_events_select_case_0(void **state) {
     int *audit_sock = *state;
     errno = EEXIST;
     char * buffer = " \
-        type=SYSCALL msg=audit(1571914029.306:3004254): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"wazuh_fim\"\n\
+        type=SYSCALL msg=audit(1571914029.306:3004254): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"verprotect_fim\"\n\
         type=CWD msg=audit(1571914029.306:3004254): cwd=\"/root/test\"\n\
         type=PATH msg=audit(1571914029.306:3004254): item=0 name=\"/root/test\" inode=110 dev=08:02 mode=040755 ouid=0 ogid=0 rdev=00:00 nametype=PARENT cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
         type=PATH msg=audit(1571914029.306:3004254): item=1 name=\"test\" inode=19 dev=08:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=DELETE cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
@@ -1013,13 +1013,13 @@ void test_audit_read_events_select_success_recv_success(void **state) {
     audit_thread_active.data = 1;
     errno = EEXIST;
     char * buffer = " \
-        type=SYSCALL msg=audit(1571914029.306:3004254): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"wazuh_fim\"\n\
+        type=SYSCALL msg=audit(1571914029.306:3004254): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"verprotect_fim\"\n\
         type=CWD msg=audit(1571914029.306:3004254): cwd=\"/root/test\"\n\
         type=PATH msg=audit(1571914029.306:3004254): item=0 name=\"/root/test\" inode=110 dev=08:02 mode=040755 ouid=0 ogid=0 rdev=00:00 nametype=PARENT cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
         type=PATH msg=audit(1571914029.306:3004254): item=1 name=\"test\" inode=19 dev=08:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=DELETE cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
         type=PROCTITLE msg=audit(1571914029.306:3004254): proctitle=726D0074657374\n\
         type=EOE msg=audit(1571914029.306:3004254):\n\
-        type=SYSCALL msg=audit(1571914029.306:3004255): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"wazuh_fim\"\n\
+        type=SYSCALL msg=audit(1571914029.306:3004255): arch=c000003e syscall=263 success=yes exit=0 a0=ffffff9c a1=55c5f8170490 a2=0 a3=7ff365c5eca0 items=2 ppid=3211 pid=44082 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts3 ses=5 comm=\"test\" exe=\"74657374C3B1\" key=\"verprotect_fim\"\n\
         type=CWD msg=audit(1571914029.306:3004255): cwd=\"/root/test\"\n\
         type=PATH msg=audit(1571914029.306:3004255): item=0 name=\"/root/test\" inode=110 dev=08:02 mode=040755 ouid=0 ogid=0 rdev=00:00 nametype=PARENT cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
         type=PATH msg=audit(1571914029.306:3004255): item=1 name=\"test\" inode=19 dev=08:02 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=DELETE cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0\n\
@@ -1279,13 +1279,13 @@ void test_audit_create_rules_file(void **state) {
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test0' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test1' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_any(__wrap_fclose, _File);
@@ -1332,13 +1332,13 @@ void test_audit_create_rules_file_fclose_fail(void **state) {
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test0' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test1' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_any(__wrap_fclose, _File);
@@ -1365,13 +1365,13 @@ void test_audit_create_rules_file_symlink_exist(void **state) {
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test0' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test1' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_any(__wrap_fclose, _File);
@@ -1414,13 +1414,13 @@ void test_audit_create_rules_file_unlink_fail(void **state) {
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test0' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test1' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_any(__wrap_fclose, _File);
@@ -1460,13 +1460,13 @@ void test_audit_create_rules_file_symlink_fail(void **state) {
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test0' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test0 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_string(__wrap__mdebug2, formatted_msg, "(6365): Added directory '/test1' to audit rules file.");
 
     expect_any(__wrap_fprintf, __stream);
-    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k wazuh_fim\n");
+    expect_string(__wrap_fprintf, formatted_msg, "-w /test1 -p wa -k verprotect_fim\n");
     will_return(__wrap_fprintf, 0);
 
     expect_any(__wrap_fclose, _File);

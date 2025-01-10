@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -14,10 +14,10 @@
 #include <stdio.h>
 
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
 
-#include "../../wazuh_modules/wmodules.h"
-#include "../../wazuh_modules/agent_upgrade/manager/wm_agent_upgrade_tasks.h"
+#include "../../verprotect_modules/wmodules.h"
+#include "../../verprotect_modules/agent_upgrade/manager/wm_agent_upgrade_tasks.h"
 #include "../../headers/shared.h"
 
 // Setup / teardown
@@ -236,7 +236,7 @@ void test_wm_agent_upgrade_update_status_success_callback_ok(void **state)
     expect_string(__wrap_wm_agent_upgrade_parse_agent_upgrade_command_response, agent_response, agent_res);
     will_return(__wrap_wm_agent_upgrade_parse_agent_upgrade_command_response, 0);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtdebug1, formatted_msg, "(8167): Upgrade result file has been successfully erased from the agent.");
 
     cJSON *result = wm_agent_upgrade_update_status_success_callback(&error, input);
@@ -501,7 +501,7 @@ void test_wm_agent_upgrade_task_module_callback_no_callbacks_error(void **state)
     expect_value(__wrap_wm_agent_upgrade_parse_data_response, agent_int, 10);
     will_return(__wrap_wm_agent_upgrade_parse_data_response, error2);
 
-    expect_string(__wrap__mterror, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mterror, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mterror, formatted_msg, "(8123): There has been an error executing the request in the tasks manager.");
 
     int result = wm_agent_upgrade_task_module_callback(output, input, NULL, NULL);
@@ -584,7 +584,7 @@ void test_wm_agent_upgrade_task_module_callback_error_callback_error(void **stat
     expect_value(__wrap_wm_agent_upgrade_parse_data_response, agent_int, 10);
     will_return(__wrap_wm_agent_upgrade_parse_data_response, error2);
 
-    expect_string(__wrap__mterror, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mterror, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mterror, formatted_msg, "(8123): There has been an error executing the request in the tasks manager.");
 
     int result = wm_agent_upgrade_task_module_callback(output, input, NULL, wm_agent_upgrade_remove_entry);
@@ -691,7 +691,7 @@ void test_wm_agent_upgrade_task_module_callback_success_error_callback_error(voi
     expect_value(__wrap_wm_agent_upgrade_parse_data_response, agent_int, 10);
     will_return(__wrap_wm_agent_upgrade_parse_data_response, error2);
 
-    expect_string(__wrap__mterror, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mterror, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mterror, formatted_msg, "(8123): There has been an error executing the request in the tasks manager.");
 
     int result = wm_agent_upgrade_task_module_callback(output, input, wm_agent_upgrade_upgrade_success_callback, wm_agent_upgrade_remove_entry);

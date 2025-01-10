@@ -8,14 +8,14 @@
 
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_syscollector_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_agents_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_delta_event_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_syscollector_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_agents_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_delta_event_wrappers.h"
 
 
 #include "os_err.h"
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 typedef struct test_struct {
     wdb_t *wdb;

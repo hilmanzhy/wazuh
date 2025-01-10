@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 #ifndef WDB_WRAPPERS_H
 #define WDB_WRAPPERS_H
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 wdb_t* __wrap_wdb_open_global();
 

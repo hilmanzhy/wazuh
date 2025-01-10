@@ -1,6 +1,6 @@
 /*
- * Wazuh Syscheck
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Syscheck
+ * Copyright (C) 2015, Verprotect Inc.
  * September 9, 2021.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 
 #include <string.h>
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 #include "fimDBHelpersUTInterface.hpp"
 #else
 #include "fimDB.hpp"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -17,7 +17,7 @@
 ossec_config config_inst;
 HWND hStatus;
 
-/* Dialog -- About WAZUH */
+/* Dialog -- About VERPROTECT */
 BOOL CALLBACK AboutDlgProc(HWND hwnd, UINT Message,
        WPARAM wParam,
        __attribute__((unused))LPARAM lParam)
@@ -297,7 +297,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam,
 
                 case UI_MENU_MANAGE_START:
 
-                    /* Start WAZUH  -- must have a valid config before */
+                    /* Start VERPROTECT  -- must have a valid config before */
                     if (strcmp(config_inst.server, FL_NOSERVER) != 0) {
                         ret_code = os_start_service();
                     } else {
@@ -322,7 +322,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam,
                     break;
                 case UI_MENU_MANAGE_STOP:
 
-                    /* Stop WAZUH */
+                    /* Stop VERPROTECT */
                     ret_code = os_stop_service();
                     if (ret_code == 1) {
                         config_read(hwnd);
@@ -357,7 +357,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam,
 
                     ret_code = os_stop_service();
 
-                    /* Start WAZUH */
+                    /* Start VERPROTECT */
                     ret_code = os_start_service();
                     if (ret_code == 0) {
                         MessageBox(hwnd, "Unable to restart agent (check config)",

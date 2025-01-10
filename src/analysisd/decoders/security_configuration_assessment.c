@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2015, Wazuh Inc.
+* Copyright (C) 2015, Verprotect Inc.
 * December 05, 2018.
 *
 * This program is free software; you can redistribute it
@@ -16,7 +16,7 @@
 #include "decoder.h"
 #include "external/cJSON/cJSON.h"
 #include "plugin_decoders.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "os_net/os_net.h"
 #include "os_crypto/sha256/sha256_op.h"
 #include "string_op.h"

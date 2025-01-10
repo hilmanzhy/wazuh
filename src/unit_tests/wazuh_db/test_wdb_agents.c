@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * March, 2021.
  *
  * This program is free software; you can redistribute it
@@ -16,13 +16,13 @@
 #include <string.h>
 
 #include "os_err.h"
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
 #include "wazuhdb_op.h"
-#include "../wazuh_db/wdb_agents.h"
+#include "../verprotect_db/wdb_agents.h"
 
 /* setup/teardown */
 

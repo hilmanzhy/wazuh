@@ -1,6 +1,6 @@
 /*
- * Wazuh cmdLine args parser
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect cmdLine args parser
+ * Copyright (C) 2015, Verprotect Inc.
  * Agoust 6, 2023.
  *
  * This program is free software; you can redistribute it

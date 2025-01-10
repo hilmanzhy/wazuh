@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * April 15, 2019.
  *
  * This program is free software; you can redistribute it
@@ -19,7 +19,7 @@
 #define FIELD_SEPARATOR_DBSYNC "|"
 #define FIELD_SEPARATOR_DBSYNC_ESCAPE "\uffff"
 
-/// Enumeration of communication with Wazuh DB status.
+/// Enumeration of communication with Verprotect DB status.
 typedef enum wdbc_result {
         WDBC_OK,        ///< Command processed successfully
         WDBC_DUE,       ///< Command processed successfully with pending data
@@ -41,7 +41,7 @@ wdbc_result wdbc_query_parse(int *sock, const char *query, char *response, const
 /**
  * @brief Closes a socket connection if exists
  *
- * @param[in] sock A Wazuh DB socket connection.
+ * @param[in] sock A Verprotect DB socket connection.
  * @return real close output if sock is connected, 0 otherwise
  */
 int wdbc_close(int* sock);

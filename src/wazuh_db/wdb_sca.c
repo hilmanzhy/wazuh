@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * June 06, 2016.
  *
  * This program is free software; you can redistribute it
@@ -12,7 +12,7 @@
 #include "wdb.h"
 #include "os_crypto/sha256/sha256_op.h"
 
-/* Look for a configuration assessment entry in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Look for a configuration assessment entry in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_find(wdb_t * wdb, int pm_id, char * output) {
 
     if (!wdb->transaction && wdb_begin2(wdb) < 0){
@@ -300,7 +300,7 @@ int wdb_sca_check_rules_delete(wdb_t * wdb) {
     }
 }
 
-/* Look for a scan configuration assessment entry in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Look for a scan configuration assessment entry in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_scan_find(wdb_t * wdb, char *policy_id, char * output) {
 
     if (!wdb->transaction && wdb_begin2(wdb) < 0){
@@ -597,7 +597,7 @@ int wdb_sca_scan_info_update_start(wdb_t * wdb, char * policy_id, int start_scan
     }
 }
 
-/* Gets the result of all checks in Wazuh DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
+/* Gets the result of all checks in Verprotect DB. Returns 1 if found, 0 if not, or -1 on error. (new) */
 int wdb_sca_checks_get_result(wdb_t * wdb, char * policy_id, char * output) {
 
     if (!wdb->transaction && wdb_begin2(wdb) < 0){

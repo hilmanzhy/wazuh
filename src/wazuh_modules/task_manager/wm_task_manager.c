@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for Task management.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for Task management.
+ * Copyright (C) 2015, Verprotect Inc.
  * July 13, 2020.
  *
  * This program is free software; you can redistribute it
@@ -16,7 +16,7 @@
 #include "wm_task_manager_tasks.h"
 #include "../os_net/os_net.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 
@@ -206,7 +206,7 @@ STATIC void* wm_task_manager_main(wm_task_manager* task_config) {
         }
         os_free(buffer);
 
-    #ifdef WAZUH_UNIT_TESTING
+    #ifdef VERPROTECT_UNIT_TESTING
         break;
     #endif
     }

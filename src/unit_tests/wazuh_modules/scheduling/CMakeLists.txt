@@ -1,4 +1,4 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -14,9 +14,9 @@ list(APPEND shared_libs "wmodules_scheduling_helpers.h")
 list(APPEND shared_libs "wmodules_scheduling_helpers.c")
 
 # Generate modulesd library
-file(GLOB modulesd_files ../../../wazuh_modules/*.o)
-list(REMOVE_ITEM modulesd_files ../../../wazuh_modules/main.o)
-file(GLOB syscollector_files ../../../wazuh_modules/syscollector/*.o)
+file(GLOB modulesd_files ../../../verprotect_modules/*.o)
+list(REMOVE_ITEM modulesd_files ../../../verprotect_modules/main.o)
+file(GLOB syscollector_files ../../../verprotect_modules/syscollector/*.o)
 
 add_library(SCHEDULING_MODULESD_O STATIC ${modulesd_files})
 
@@ -34,7 +34,7 @@ set_target_properties(
   LINKER_LANGUAGE C
 )
 
-target_link_libraries(SCHEDULING_MODULESD_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(SCHEDULING_MODULESD_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 
 # Compiling tests
@@ -54,8 +54,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         SCHEDULING_MODULESD_O
         -ldl
         -lcmocka

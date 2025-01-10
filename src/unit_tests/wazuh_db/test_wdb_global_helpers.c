@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * July 5, 2016.
  *
  * This program is free software; you can redistribute it
@@ -16,7 +16,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../wazuh_db/helpers/wdb_global_helpers.h"
+#include "../verprotect_db/helpers/wdb_global_helpers.h"
 #include "wazuhdb_op.h"
 
 #include "../wrappers/posix/dirent_wrappers.h"
@@ -26,7 +26,7 @@
 #include "../wrappers/libc/stdio_wrappers.h"
 #include "../wrappers/libc/string_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
 #include "../wrappers/posix/stat_wrappers.h"
 
 extern int test_mode;
@@ -138,7 +138,7 @@ void test_wdb_insert_agent_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_insert_agent(id, name, ip, register_ip, internal_key, group, keep_date, NULL);
 
@@ -186,7 +186,7 @@ void test_wdb_insert_agent_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -245,7 +245,7 @@ void test_wdb_insert_agent_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -304,14 +304,14 @@ void test_wdb_insert_agent_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -362,14 +362,14 @@ void test_wdb_insert_agent_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -444,14 +444,14 @@ void test_wdb_insert_agent_success_keep_date(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -470,7 +470,7 @@ void test_wdb_update_agent_name_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_update_agent_name(id, name, NULL);
 
@@ -501,7 +501,7 @@ void test_wdb_update_agent_name_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -541,7 +541,7 @@ void test_wdb_update_agent_name_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -581,14 +581,14 @@ void test_wdb_update_agent_name_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -622,14 +622,14 @@ void test_wdb_update_agent_name_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -682,7 +682,7 @@ void test_wdb_update_agent_data_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_update_agent_data(agent_data, NULL);
 
@@ -787,7 +787,7 @@ void test_wdb_update_agent_data_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -908,7 +908,7 @@ void test_wdb_update_agent_data_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1029,14 +1029,14 @@ void test_wdb_update_agent_data_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -1143,14 +1143,14 @@ void test_wdb_update_agent_data_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -1167,11 +1167,11 @@ void test_wdb_get_agent_info_error_no_json_response(void **state) {
     cJSON *root = NULL;
     int id = 1;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent's 1 information.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent's 1 information.");
 
     root = wdb_get_agent_info(id, NULL);
 
@@ -1182,7 +1182,7 @@ void test_wdb_get_agent_info_success(void **state) {
     cJSON *root = NULL;
     int id = 1;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, (cJSON *)1);
 
@@ -1197,11 +1197,11 @@ void test_wdb_get_agent_labels_error_no_json_response(void **state) {
     cJSON *root = NULL;
     int id = 1;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent's 1 labels.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent's 1 labels.");
 
     root = wdb_get_agent_labels(id, NULL);
 
@@ -1212,7 +1212,7 @@ void test_wdb_get_agent_labels_success(void **state) {
     cJSON *root = NULL;
     int id = 1;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, (cJSON *)1);
 
@@ -1232,7 +1232,7 @@ void test_wdb_update_agent_keepalive_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_update_agent_keepalive(id, connection_status, sync_status, NULL);
 
@@ -1266,7 +1266,7 @@ void test_wdb_update_agent_keepalive_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1309,7 +1309,7 @@ void test_wdb_update_agent_keepalive_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1352,14 +1352,14 @@ void test_wdb_update_agent_keepalive_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -1396,14 +1396,14 @@ void test_wdb_update_agent_keepalive_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -1423,7 +1423,7 @@ void test_wdb_update_agent_connection_status_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_update_agent_connection_status(id, connection_status, sync_status, NULL, 0);
 
@@ -1459,7 +1459,7 @@ void test_wdb_update_agent_connection_status_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1504,7 +1504,7 @@ void test_wdb_update_agent_connection_status_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1549,14 +1549,14 @@ void test_wdb_update_agent_connection_status_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -1595,14 +1595,14 @@ void test_wdb_update_agent_connection_status_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -1622,7 +1622,7 @@ void test_wdb_update_agent_status_code_error_json(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_update_agent_status_code(id, 0, version, sync_status, NULL);
 
@@ -1636,8 +1636,8 @@ void test_wdb_update_agent_status_code_error_socket(void **state)
     const char *version = "v4.5.0";
     const char *sync_status = "synced";
 
-    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
-    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}";
+    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
+    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}";
     const char *response = "err";
 
     will_return(__wrap_cJSON_CreateObject, 1);
@@ -1650,7 +1650,7 @@ void test_wdb_update_agent_status_code_error_socket(void **state)
     expect_string(__wrap_cJSON_AddNumberToObject, name, "status_code");
     expect_value(__wrap_cJSON_AddNumberToObject, number, INVALID_VERSION);
     expect_string(__wrap_cJSON_AddStringToObject, name, "version");
-    expect_string(__wrap_cJSON_AddStringToObject, string, "Wazuh v4.5.0");
+    expect_string(__wrap_cJSON_AddStringToObject, string, "Verprotect v4.5.0");
     expect_string(__wrap_cJSON_AddStringToObject, name, "sync_status");
     expect_string(__wrap_cJSON_AddStringToObject, string, "synced");
 
@@ -1658,7 +1658,7 @@ void test_wdb_update_agent_status_code_error_socket(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1667,7 +1667,7 @@ void test_wdb_update_agent_status_code_error_socket(void **state)
 
     // Handling result
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error in the response from socket");
-    expect_string(__wrap__mdebug2, formatted_msg, "Global DB SQL query: global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
+    expect_string(__wrap__mdebug2, formatted_msg, "Global DB SQL query: global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
 
     ret = wdb_update_agent_status_code(id, INVALID_VERSION, version, sync_status, NULL);
 
@@ -1681,8 +1681,8 @@ void test_wdb_update_agent_status_code_error_sql_execution(void **state)
     const char *version = "v4.5.0";
     const char *sync_status = "synced";
 
-    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
-    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}";
+    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
+    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}";
     const char *response = "err";
 
     will_return(__wrap_cJSON_CreateObject, 1);
@@ -1695,7 +1695,7 @@ void test_wdb_update_agent_status_code_error_sql_execution(void **state)
     expect_string(__wrap_cJSON_AddNumberToObject, name, "status_code");
     expect_value(__wrap_cJSON_AddNumberToObject, number, INVALID_VERSION);
     expect_string(__wrap_cJSON_AddStringToObject, name, "version");
-    expect_string(__wrap_cJSON_AddStringToObject, string, "Wazuh v4.5.0");
+    expect_string(__wrap_cJSON_AddStringToObject, string, "Verprotect v4.5.0");
     expect_string(__wrap_cJSON_AddStringToObject, name, "sync_status");
     expect_string(__wrap_cJSON_AddStringToObject, string, "synced");
 
@@ -1703,7 +1703,7 @@ void test_wdb_update_agent_status_code_error_sql_execution(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1712,7 +1712,7 @@ void test_wdb_update_agent_status_code_error_sql_execution(void **state)
 
     // Handling result
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Cannot execute SQL query; err database queue/db/global.db");
-    expect_string(__wrap__mdebug2, formatted_msg, "Global DB SQL query: global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
+    expect_string(__wrap__mdebug2, formatted_msg, "Global DB SQL query: global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
 
     ret = wdb_update_agent_status_code(id, INVALID_VERSION, version, sync_status, NULL);
 
@@ -1726,8 +1726,8 @@ void test_wdb_update_agent_status_code_error_result(void **state)
     const char *version = "v4.5.0";
     const char *sync_status = "synced";
 
-    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
-    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}";
+    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
+    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}";
     const char *response = "err";
 
     will_return(__wrap_cJSON_CreateObject, 1);
@@ -1740,7 +1740,7 @@ void test_wdb_update_agent_status_code_error_result(void **state)
     expect_string(__wrap_cJSON_AddNumberToObject, name, "status_code");
     expect_value(__wrap_cJSON_AddNumberToObject, number, INVALID_VERSION);
     expect_string(__wrap_cJSON_AddStringToObject, name, "version");
-    expect_string(__wrap_cJSON_AddStringToObject, string, "Wazuh v4.5.0");
+    expect_string(__wrap_cJSON_AddStringToObject, string, "Verprotect v4.5.0");
     expect_string(__wrap_cJSON_AddStringToObject, name, "sync_status");
     expect_string(__wrap_cJSON_AddStringToObject, string, "synced");
 
@@ -1748,14 +1748,14 @@ void test_wdb_update_agent_status_code_error_result(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -1772,8 +1772,8 @@ void test_wdb_update_agent_status_code_success(void **state)
     const char *version = "v4.5.0";
     const char *sync_status = "synced";
 
-    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}");
-    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Wazuh v4.5.0\",\"sync_status\":\"synced\"}";
+    const char *json_str = strdup("{\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}");
+    const char *query_str = "global update-status-code {\"id\":1,\"status_code\":-1,\"version\":\"Verprotect v4.5.0\",\"sync_status\":\"synced\"}";
     const char *response = "err";
 
     will_return(__wrap_cJSON_CreateObject, 1);
@@ -1786,7 +1786,7 @@ void test_wdb_update_agent_status_code_success(void **state)
     expect_string(__wrap_cJSON_AddNumberToObject, name, "status_code");
     expect_value(__wrap_cJSON_AddNumberToObject, number, INVALID_VERSION);
     expect_string(__wrap_cJSON_AddStringToObject, name, "version");
-    expect_string(__wrap_cJSON_AddStringToObject, string, "Wazuh v4.5.0");
+    expect_string(__wrap_cJSON_AddStringToObject, string, "Verprotect v4.5.0");
     expect_string(__wrap_cJSON_AddStringToObject, name, "sync_status");
     expect_string(__wrap_cJSON_AddStringToObject, string, "synced");
 
@@ -1794,14 +1794,14 @@ void test_wdb_update_agent_status_code_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -1816,11 +1816,11 @@ void test_wdb_get_agent_name_error_no_json_response(void **state) {
     int id = 1;
     char *name = NULL;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent's 1 name.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent's 1 name.");
 
     name = wdb_get_agent_name(id, NULL);
 
@@ -1840,7 +1840,7 @@ void test_wdb_get_agent_name_success(void **state) {
     __real_cJSON_AddItemToObject(row, "name", str);
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -1867,7 +1867,7 @@ void test_wdb_get_agent_name_not_found(void **state) {
     root = __real_cJSON_CreateArray();
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -1894,14 +1894,14 @@ void test_wdb_remove_agent_remove_db_error(void **state)
     char *query_str = "global delete-agent 1";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -1921,7 +1921,7 @@ void test_wdb_remove_agent_error_socket(void **state)
     char *query_str = "global delete-agent 1";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1945,7 +1945,7 @@ void test_wdb_remove_agent_error_sql_execution(void **state)
     char *query_str = "global delete-agent 1";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -1969,14 +1969,14 @@ void test_wdb_remove_agent_error_result(void **state)
     char *query_str = "global delete-agent 1";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -1994,14 +1994,14 @@ void test_wdb_remove_agent_success(void **state)
     char *query_str = "global delete-agent 1";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -2016,11 +2016,11 @@ void test_wdb_get_agent_group_error_no_json_response(void **state) {
     int id = 1;
     char *name = NULL;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent's 1 group.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent's 1 group.");
 
     name = wdb_get_agent_group(id, NULL);
 
@@ -2040,7 +2040,7 @@ void test_wdb_get_agent_group_success(void **state) {
     __real_cJSON_AddItemToObject(row, "group", str);
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2080,7 +2080,7 @@ void test_wdb_find_agent_error_json_input(void **state)
 
     will_return(__wrap_cJSON_CreateObject, NULL);
 
-    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Wazuh DB.");
+    expect_string(__wrap__mdebug1, formatted_msg, "Error creating data JSON for Verprotect DB.");
 
     ret = wdb_find_agent(name, ip, NULL);
 
@@ -2108,12 +2108,12 @@ void test_wdb_find_agent_error_json_output(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
     // Handling result
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB for agent ID.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB for agent ID.");
 
     ret = wdb_find_agent(name_str, ip_str, NULL);
 
@@ -2148,7 +2148,7 @@ void test_wdb_find_agent_success(void **state)
     will_return(__wrap_cJSON_PrintUnformatted, json_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2170,7 +2170,7 @@ void test_wdb_get_all_agents_wdbc_query_error(void **state) {
     const char *query_str = "global get-all-agents last_id 0";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2186,14 +2186,14 @@ void test_wdb_get_all_agents_wdbc_parse_error(void **state) {
     const char *query_str = "global get-all-agents last_id 0";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -2213,14 +2213,14 @@ void test_wdb_get_all_agents_success(void **state) {
     cJSON* id2 = cJSON_CreateNumber(2);
     cJSON* id3 = cJSON_CreateNumber(3);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, test_payload);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
     will_return(__wrap_cJSON_Parse, test_json);
@@ -2254,14 +2254,14 @@ void test_wdb_get_all_agents_rbtree_wdbc_query_error(void **state) {
     const char *query_str = "global get-all-agents last_id 0";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_INVALID);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get agent's IDs.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get agent's IDs.");
 
     rb_tree *tree = wdb_get_all_agents_rbtree(false, NULL);
 
@@ -2272,18 +2272,18 @@ void test_wdb_get_all_agents_rbtree_wdbc_parse_error(void **state) {
     const char *query_str = "global get-all-agents last_id 0";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get agent's IDs.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get agent's IDs.");
 
     rb_tree *tree = wdb_get_all_agents_rbtree(false, NULL);
 
@@ -2301,14 +2301,14 @@ void test_wdb_get_all_agents_rbtree_success(void **state) {
     cJSON* id2 = cJSON_CreateNumber(2);
     cJSON* id3 = cJSON_CreateNumber(3);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, test_payload);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
     will_return(__wrap_cJSON_Parse, test_json);
@@ -2338,11 +2338,11 @@ void test_wdb_find_group_error_no_json_response(void **state) {
     int id = 0;
     char *name = "test_group";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent group id.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent group id.");
 
     id = wdb_find_group(name, NULL);
 
@@ -2358,7 +2358,7 @@ void test_wdb_find_group_success(void **state) {
     __real_cJSON_AddNumberToObject(row, "id", 1);
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2384,7 +2384,7 @@ void test_wdb_insert_group_error_socket(void **state)
     const char *query_str = "global insert-agent-group test_group";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2408,7 +2408,7 @@ void test_wdb_insert_group_error_sql_execution(void **state)
     const char *query_str = "global insert-agent-group test_group";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2432,14 +2432,14 @@ void test_wdb_insert_group_error_result(void **state)
     const char *query_str = "global insert-agent-group test_group";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -2457,14 +2457,14 @@ void test_wdb_insert_group_success(void **state)
     const char *query_str = "global insert-agent-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -2483,7 +2483,7 @@ void test_wdb_remove_group_db_generic_error_sql_execution(void **state)
     const char *query_str = "global delete-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2504,7 +2504,7 @@ void test_wdb_remove_group_db_error_sql_execution(void **state)
     const char *query_str = "global delete-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2525,14 +2525,14 @@ void test_wdb_remove_group_db_error_result(void **state)
     const char *query_str = "global delete-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -2549,14 +2549,14 @@ void test_wdb_remove_group_db_success(void **state)
     const char *query_str = "global delete-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -2569,11 +2569,11 @@ void test_wdb_remove_group_db_success(void **state)
 void test_wdb_update_groups_error_json(void **state) {
     int ret = 0;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to update groups.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to update groups.");
 
     ret = wdb_update_groups(SHAREDCFG_DIR, NULL);
 
@@ -2602,7 +2602,7 @@ void test_wdb_update_groups_error_max_path(void **state) {
     __real_cJSON_AddItemToObject(row2, "name", str2);
     __real_cJSON_AddItemToArray(root, row2);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2638,7 +2638,7 @@ void test_wdb_update_groups_removing_group_db(void **state) {
     __real_cJSON_AddItemToObject(row, "name", str);
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2654,7 +2654,7 @@ void test_wdb_update_groups_removing_group_db(void **state) {
     const char *query_str = "global delete-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2686,7 +2686,7 @@ void test_wdb_update_groups_error_adding_new_groups(void **state) {
     __real_cJSON_AddItemToObject(row, "name", str);
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2726,7 +2726,7 @@ void test_wdb_update_groups_success(void **state) {
     os_calloc(1, sizeof(struct dirent), dir_ent);
     strncpy(dir_ent->d_name, "test_group\0", 11);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 
@@ -2745,24 +2745,24 @@ void test_wdb_update_groups_success(void **state) {
     will_return(__wrap_IsDir, 0);
 
     //// Call to wdb_find_group
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get the agent group id.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get the agent group id.");
 
     //// Call to wdb_insert_group
     const char *query_str = "global insert-agent-group test_group";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -2900,7 +2900,7 @@ void test_wdb_reset_agents_connection_error_socket(void **state)
     const char *query_str = "global reset-agents-connection synced";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2923,7 +2923,7 @@ void test_wdb_reset_agents_connection_error_sql_execution(void **state)
     const char *query_str = "global reset-agents-connection synced";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -2946,14 +2946,14 @@ void test_wdb_reset_agents_connection_error_result(void **state)
     const char *query_str = "global reset-agents-connection synced";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
     expect_string(__wrap__mdebug1, formatted_msg, "Global DB Error reported in the result of the query");
@@ -2970,14 +2970,14 @@ void test_wdb_reset_agents_connection_success(void **state)
     const char *query_str = "global reset-agents-connection synced";
     const char *response = "ok";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -2993,7 +2993,7 @@ void test_wdb_get_agents_by_connection_status_query_error(void **state)
     const char *query_str = "global get-agents-by-connection-status 0 active";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3012,7 +3012,7 @@ void test_wdb_get_agents_ids_of_current_node_query_error(void **state)
     char *cluster_node_name = NULL;
     cluster_node_name = strdup("node01");
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_get_node_name, cluster_node_name);
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
@@ -3030,14 +3030,14 @@ void test_wdb_get_agents_by_connection_status_parse_error(void **state)
     const char *query_str = "global get-agents-by-connection-status 0 active";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -3053,7 +3053,7 @@ void test_wdb_get_agents_ids_of_current_node_parse_error(void **state)
     char *cluster_node_name = NULL;
     cluster_node_name = strdup("node01");
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_get_node_name, cluster_node_name);
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
@@ -3061,7 +3061,7 @@ void test_wdb_get_agents_ids_of_current_node_parse_error(void **state)
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -3082,14 +3082,14 @@ void test_wdb_get_agents_by_connection_status_success(void **state)
     cJSON* id2 = cJSON_CreateNumber(2);
     cJSON* id3 = cJSON_CreateNumber(3);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, test_payload);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
     will_return(__wrap_cJSON_Parse, test_json);
@@ -3131,7 +3131,7 @@ void test_wdb_get_agents_ids_of_current_node_success(void **state)
     cJSON* id2 = cJSON_CreateNumber(2);
     cJSON* id3 = cJSON_CreateNumber(3);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_get_node_name, cluster_node_name);
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
@@ -3139,7 +3139,7 @@ void test_wdb_get_agents_ids_of_current_node_success(void **state)
     will_return(__wrap_wdbc_query_ex, test_payload);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
     will_return(__wrap_cJSON_Parse, test_json);
@@ -3173,7 +3173,7 @@ void test_wdb_disconnect_agents_wdbc_query_error(void **state) {
     const char *query_str = "global disconnect-agents 0 100 syncreq";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3189,14 +3189,14 @@ void test_wdb_disconnect_agents_wdbc_parse_error(void **state) {
     const char *query_str = "global disconnect-agents 0 100 syncreq";
     const char *response = "err";
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -3216,14 +3216,14 @@ void test_wdb_disconnect_agents_success(void **state) {
     cJSON* id2 = cJSON_CreateNumber(2);
     cJSON* id3 = cJSON_CreateNumber(3);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, test_payload);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
     will_return(__wrap_cJSON_Parse, test_json);
@@ -3537,14 +3537,14 @@ void test_wdb_set_agent_groups_csv_success(void **state) {
     will_return(__wrap_cJSON_PrintUnformatted, data->data_in_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_value(__wrap_wdbc_query_ex, *sock, data->socket);
     expect_string(__wrap_wdbc_query_ex, query, data->query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, data->response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -3611,7 +3611,7 @@ void test_wdb_set_agent_groups_socket_error(void **state) {
     will_return(__wrap_cJSON_PrintUnformatted, data->data_in_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_value(__wrap_wdbc_query_ex, *sock, data->socket);
     expect_string(__wrap_wdbc_query_ex, query, data->query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3670,14 +3670,14 @@ void test_wdb_set_agent_groups_query_error(void **state) {
     will_return(__wrap_cJSON_PrintUnformatted, data->data_in_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_value(__wrap_wdbc_query_ex, *sock, data->socket);
     expect_string(__wrap_wdbc_query_ex, query, data->query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, data->response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_ERROR);
 
@@ -3731,14 +3731,14 @@ void test_wdb_set_agent_groups_success(void **state) {
     will_return(__wrap_cJSON_PrintUnformatted, data->data_in_str);
     expect_function_call(__wrap_cJSON_Delete);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_value(__wrap_wdbc_query_ex, *sock, data->socket);
     expect_string(__wrap_wdbc_query_ex, query, data->query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, data->response);
     will_return(__wrap_wdbc_query_ex, OS_SUCCESS);
 
-    // Parsing Wazuh DB result
+    // Parsing Verprotect DB result
     expect_any(__wrap_wdbc_parse_result, result);
     will_return(__wrap_wdbc_parse_result, WDBC_OK);
 
@@ -3756,14 +3756,14 @@ void test_wdb_get_distinct_agent_groups_error_no_json_response(void **state) {
 
     will_return(__wrap_cJSON_CreateArray, NULL);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
     will_return(__wrap_wdbc_query_ex, response);
     will_return(__wrap_wdbc_query_ex, OS_INVALID);
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get agent's groups.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get agent's groups.");
 
     expect_function_call(__wrap_cJSON_Delete);
 
@@ -3779,7 +3779,7 @@ void test_wdb_get_distinct_agent_groups_error_parse_chunk(void **state) {
 
     will_return(__wrap_cJSON_CreateArray, NULL);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3788,7 +3788,7 @@ void test_wdb_get_distinct_agent_groups_error_parse_chunk(void **state) {
 
     expect_string(__wrap__mdebug1, formatted_msg, "Invalid JSON array.");
 
-    expect_string(__wrap__merror, formatted_msg, "Error querying Wazuh DB to get agent's groups.");
+    expect_string(__wrap__merror, formatted_msg, "Error querying Verprotect DB to get agent's groups.");
 
     expect_function_call(__wrap_cJSON_Delete);
 
@@ -3806,7 +3806,7 @@ void test_wdb_get_distinct_agent_groups_success(void **state) {
 
     will_return(__wrap_cJSON_CreateArray, __real_cJSON_CreateArray());
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3843,7 +3843,7 @@ void test_wdb_get_distinct_agent_groups_success_due_ok(void **state) {
 
     will_return(__wrap_cJSON_CreateArray, __real_cJSON_CreateArray());
 
-    // Calling Wazuh DB 1
+    // Calling Verprotect DB 1
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str1);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);
@@ -3860,7 +3860,7 @@ void test_wdb_get_distinct_agent_groups_success_due_ok(void **state) {
 
     will_return(__wrap_cJSON_GetObjectItem, str_obj1);
 
-    // Calling Wazuh DB 2
+    // Calling Verprotect DB 2
     expect_any(__wrap_wdbc_query_ex, *sock);
     expect_string(__wrap_wdbc_query_ex, query, query_str2);
     expect_value(__wrap_wdbc_query_ex, len, WDBOUTPUT_SIZE);

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 #ifndef WDB_GLOBAL_WRAPPERS_H
 #define WDB_GLOBAL_WRAPPERS_H
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 int __wrap_wdb_global_insert_agent(wdb_t *wdb, int id, char* name, char* ip, char* register_ip, char* internal_key,char* group, int date_add);
 

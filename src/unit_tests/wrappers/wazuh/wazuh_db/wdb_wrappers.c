@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -200,13 +200,13 @@ cJSON* __wrap_wdbc_query_parse_json(__attribute__((unused)) int *sock,
         merror("Unable to connect to socket '%s'", WDB_LOCAL_SOCK);
         break;
     case -1:
-        merror("No response from wazuh-db.");
+        merror("No response from verprotect-db.");
         break;
     case 0:
         break;
     case 1:
         snprintf(response, OS_SIZE_6144, "%s", mock_ptr_type(char*));
-        merror("Bad response from wazuh-db: %s", response + 4);
+        merror("Bad response from verprotect-db: %s", response + 4);
         break;
     }
 

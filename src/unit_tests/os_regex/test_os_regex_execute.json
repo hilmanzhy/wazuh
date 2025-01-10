@@ -4,84 +4,84 @@
         "batch_test": [
             {
                 "description": "Literal match. Match all.",
-                "pattern": "hi Wazuh",
-                "log": "hi Wazuh",
+                "pattern": "hi Verprotect",
+                "log": "hi Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
             {
                 "description": "Literal match. Match all, with capture groups.",
-                "pattern": "(hi) (Wazuh)",
-                "log": "hi Wazuh",
+                "pattern": "(hi) (Verprotect)",
+                "log": "hi Verprotect",
                 "end_match": "h",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Literal match, with the end flag. It does not match.",
-                "pattern": "hi Wazuh$",
-                "log": "hi Wazuh 123",
+                "pattern": "hi Verprotect$",
+                "log": "hi Verprotect 123",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Literal match, with groups and the end flag. It does not match.",
-                "pattern": "(hi) (Wazuh)$",
-                "log": "hi Wazuh 123",
+                "pattern": "(hi) (Verprotect)$",
+                "log": "hi Verprotect 123",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Dont match at all.",
-                "pattern": "hi Wazuh",
-                "log": "bye Wazuh",
+                "pattern": "hi Verprotect",
+                "log": "bye Verprotect",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Match with prefix and group.",
-                "pattern": "(hi) (Wazuh)",
-                "log": "prefixhi Wazuh",
+                "pattern": "(hi) (Verprotect)",
+                "log": "prefixhi Verprotect",
                 "end_match": "h",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match with sufix and group.",
-                "pattern": "(hi) (Wazuh)",
-                "log": "fixhi Wazuhsub",
+                "pattern": "(hi) (Verprotect)",
+                "log": "fixhi Verprotectsub",
                 "end_match": "hsub",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match with adjacent capture groups.",
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
-                "pattern": "(hi)(Wazuh)",
-                "log": "hiWazuh",
+                "pattern": "(hi)(Verprotect)",
+                "log": "hiVerprotect",
                 "end_match": "h",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match with adjacent capture groups and context.",
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
-                "pattern": "(hi)(Wazuh)",
-                "log": "prefixhiWazuhsub",
+                "pattern": "(hi)(Verprotect)",
+                "log": "prefixhiVerprotectsub",
                 "end_match": "hsub",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             }
         ]
@@ -91,15 +91,15 @@
         "batch_test": [
             {
                 "description": "Regex match all and the END_SET is set.",
-                "pattern": "hi Wazuh$",
-                "log": "hi Wazuh",
+                "pattern": "hi Verprotect$",
+                "log": "hi Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
             {
                 "description": "Empty pattern END_SET and BEGIN_SET are set.",
                 "pattern": "^$",
-                "log": "hi Wazuh",
+                "log": "hi Verprotect",
                 "end_match": null,
                 "captured_groups": []
             },
@@ -135,25 +135,25 @@
             },
             {
                 "description": "Pattern ends and the END_SET is not set.",
-                "pattern": "hi Wazuh",
-                "log": "hi Wazuh!",
+                "pattern": "hi Verprotect",
+                "log": "hi Verprotect!",
                 "end_match": "h!",
                 "captured_groups": []
             },
             {
                 "description": "Partial match and then re-match ('st_error' test).",
-                "pattern": "(hi) (Wazuh)",
-                "log": "XX hi Wa hi WazuhXX",
+                "pattern": "(hi) (Verprotect)",
+                "log": "XX hi Wa hi VerprotectXX",
                 "end_match": "hXX",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Partial match and then re-match ('st_error' + BEGIN_SET test).",
-                "pattern": "^(hi) (Wazuh)",
-                "log": "hi Wa hi WazuhXX",
+                "pattern": "^(hi) (Verprotect)",
+                "log": "hi Wa hi VerprotectXX",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -165,7 +165,7 @@
             {
                 "description": "Match all.",
                 "pattern": "\\w\\w\\s\\S\\S\\S\\S\\S",
-                "log": "hi Wazuh",
+                "log": "hi Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
@@ -186,7 +186,7 @@
             {
                 "description": "Match all with capture groups.",
                 "pattern": "\\w(\\w\\s\\S)\\S(\\S\\S\\S)",
-                "log": "hi Wazuh",
+                "log": "hi Verprotect",
                 "end_match": "h",
                 "captured_groups": [
                     "i W",
@@ -203,11 +203,11 @@
             {
                 "description": "Parcial match and fail but then re-match with capture group.",
                 "pattern": "(\\w\\w)\\s(\\S\\S\\S\\S\\S)",
-                "log": "hi Waz hi Wazuh.",
+                "log": "hi Waz hi Verprotect.",
                 "end_match": "h.",
                 "captured_groups": [
                     "hi",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -215,20 +215,20 @@
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w\\w\\s)(\\S\\S\\S\\S\\S)",
-                "log": "hi Waz hi Wazuh.",
+                "log": "hi Waz hi Verprotect.",
                 "end_match": "h.",
                 "captured_groups": [
                     "hi ",
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Parcial match and fail but then re-match with one capture group.",
                 "pattern": "(\\w\\w\\s\\S\\S\\S\\S\\S)\\p$",
-                "log": "hi Waz hi Wazuh.",
+                "log": "hi Waz hi Verprotect.",
                 "end_match": ".",
                 "captured_groups": [
-                    "hi Wazuh"
+                    "hi Verprotect"
                 ]
             }
         ]
@@ -241,7 +241,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "\\w+",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
@@ -250,10 +250,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w+)",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -262,7 +262,7 @@
                 "ignore_result": true,
                 "debug": false,
                 "pattern": "^\\w+$",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
@@ -271,23 +271,23 @@
                 "ignore_result": true,
                 "debug": false,
                 "pattern": "^(\\w+)$",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Parcial match and fail, with flags.",
                 "pattern": "^\\w+$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Parcial match and fail with capture group and flags.",
                 "pattern": "^(\\w+)$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
@@ -338,7 +338,7 @@
             {
                 "description": "Match all, with backslashed token.",
                 "pattern": "\\w+\\s",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -363,10 +363,10 @@
             {
                 "description": "Match all, capture the first token, with backslashed token.",
                 "pattern": "(\\w+)\\s",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -379,7 +379,7 @@
             {
                 "description": "Match all.",
                 "pattern": "\\w+ ",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -404,16 +404,16 @@
             {
                 "description": "Match all and capture the first word.",
                 "pattern": "(\\w+) ",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match all, with a literal at the end.",
                 "pattern": "\\w+\\s1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -438,10 +438,10 @@
             {
                 "description": "Match all, with a literal at the end, capture the first word.",
                 "pattern": "(\\w+)\\s1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -454,7 +454,7 @@
             {
                 "description": "Match, with a postfix and a literal space",
                 "pattern": "\\w+ 1",
-                "log": "Wazuh 123",
+                "log": "Verprotect 123",
                 "end_match": "123",
                 "captured_groups": []
             },
@@ -479,10 +479,10 @@
             {
                 "description": "Match, with a postfix and a literal space, capture the first token.",
                 "pattern": "(\\w+) 1",
-                "log": "Wazuh 123",
+                "log": "Verprotect 123",
                 "end_match": "123",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -495,7 +495,7 @@
             {
                 "description": "Match all with flags.",
                 "pattern": "^\\w+\\s$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -520,10 +520,10 @@
             {
                 "description": "Match all with backslashed token and flags.",
                 "pattern": "^(\\w+)\\s$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -536,7 +536,7 @@
             {
                 "description": "Match all with flags.",
                 "pattern": "^\\w+ $",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -561,23 +561,23 @@
             {
                 "description": "Match minimum log with flags and capture the first token.",
                 "pattern": "^(\\w+) $",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Fail match becouse of flags.",
                 "pattern": "^\\w+ $",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Fail match becouse of flags.",
                 "pattern": "^(\\w+ )$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -749,17 +749,17 @@
             {
                 "description": "Match all.",
                 "pattern": "\\w+\\s+",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
             {
                 "description": "Match all with group.",
                 "pattern": "(\\w+)\\s+",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -767,47 +767,47 @@
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w+)(\\s+)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "Match all with no consecutive group and opcional.",
                 "pattern": "(\\w+)\\d*(\\s+)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "Match all with no consecutive group and opcional",
                 "pattern": "(\\w+)\\d*(\\s+)",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "Match all with no consecutive group.",
                 "pattern": "(\\w+)\\d+(\\s+)",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "Match all with literal at the end.",
                 "pattern": "\\w+\\s+1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -832,10 +832,10 @@
             {
                 "description": "Match all with literal at the end and capture the first token.",
                 "pattern": " (\\w+)\\s+1",
-                "log": " Wazuh 1",
+                "log": " Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -850,7 +850,7 @@
                 "ignore_result": true,
                 "__know_issue": "Err retval.",
                 "pattern": "^\\w+\\s+$",
-                "log": "Wazuh  ",
+                "log": "Verprotect  ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -884,14 +884,14 @@
             {
                 "description": "Dont match.",
                 "pattern": "^\\w+\\s+$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Dont match.",
                 "pattern": "^(\\w+\\s+)$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -933,10 +933,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "debug": false,
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -975,7 +975,7 @@
                 "pattern": "\\w+\\s*",
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -984,10 +984,10 @@
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "pattern": "(\\w+\\s*)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh "
+                    "Verprotect "
                 ]
             },
             {
@@ -995,10 +995,10 @@
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w+)(\\s*)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -1007,7 +1007,7 @@
                 "pattern": "(\\w+)\\d+(\\s*)",
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
@@ -1016,10 +1016,10 @@
                 "pattern": "(\\w+)\\d+(\\s*)",
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -1029,17 +1029,17 @@
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "debug": false,
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "Match all with literal at the end.",
                 "pattern": "\\w+\\s*1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -1064,10 +1064,10 @@
             {
                 "description": "Match all with literal at the end and capture the first token.",
                 "pattern": " (\\w+)\\s*1",
-                "log": " Wazuh 1",
+                "log": " Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1084,7 +1084,7 @@
                 "ignore_result": true,
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "pattern": "^\\w+\\s*$",
-                "log": "Wazuh  ",
+                "log": "Verprotect  ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1124,14 +1124,14 @@
             {
                 "description": "Dont match.",
                 "pattern": "^\\w+\\s*$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Dont match.",
                 "pattern": "^(\\w+\\s*)$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -1238,36 +1238,36 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "\\w*",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
             {
                 "description": "Match 0-0",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG 4 Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG 4 Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "skip_test": true,
                 "pattern": "\\d*",
-                "log": "Wazuh",
-                "end_match": "Wazuh",
+                "log": "Verprotect",
+                "end_match": "Verprotect",
                 "captured_groups": []
             },
             {
                 "description": "Mach all with capture group.",
                 "ignore_result": true,
                 "pattern": "(\\w*)",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match 0-0, with capture group",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "skip_test": true,
                 "pattern": "(\\d*)",
-                "log": "Wazuh",
-                "end_match": "Wazuh",
+                "log": "Verprotect",
+                "end_match": "Verprotect",
                 "captured_groups": [
                     ""
                 ]
@@ -1278,7 +1278,7 @@
                 "ignore_result": true,
                 "debug": false,
                 "pattern": "^\\w*$",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": []
             },
@@ -1287,23 +1287,23 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "^(\\w*)$",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Parcial match and fail, with flags.",
                 "pattern": "^\\w*$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Parcial match and fail, with flags and capture group.",
                 "pattern": "^(\\w*)$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
@@ -1384,7 +1384,7 @@
             {
                 "description": "Match all.",
                 "pattern": "\\w*\\s",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1427,10 +1427,10 @@
             {
                 "description": "Mtch all, with backslashed token and capture the first token.",
                 "pattern": "(\\w*)\\s",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1450,7 +1450,7 @@
             {
                 "description": "Match all with literal.",
                 "pattern": "\\w* ",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1475,16 +1475,16 @@
             {
                 "description": "Match all, with literal token and capture the first token.",
                 "pattern": "(\\w*) ",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "description": "Match all, with literal token.",
                 "pattern": "\\w*\\s1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -1509,10 +1509,10 @@
             {
                 "description": "Match all, with backlashed token and capture the first token.",
                 "pattern": "(\\w*)\\s1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1525,7 +1525,7 @@
             {
                 "description": "Match, with liteals token.",
                 "pattern": "\\w* 1",
-                "log": "Wazuh 123",
+                "log": "Verprotect 123",
                 "end_match": "123",
                 "captured_groups": []
             },
@@ -1550,10 +1550,10 @@
             {
                 "description": "Match, with liteals token and capture the first token.",
                 "pattern": "(\\w*) 1",
-                "log": "Wazuh 123",
+                "log": "Verprotect 123",
                 "end_match": "123",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1566,7 +1566,7 @@
             {
                 "description": "Match all with backlashed token and flags.",
                 "pattern": "^\\w*\\s$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1591,10 +1591,10 @@
             {
                 "description": "Match all with backlashed token and flags.",
                 "pattern": "^(\\w*)\\s$",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1607,7 +1607,7 @@
             {
                 "description": "Match all with literal token and flags.",
                 "pattern": "^\\w* $",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1631,21 +1631,21 @@
             },
             {
                 "pattern": "^(\\w*) $",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "pattern": "^\\w* $",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "pattern": "^(\\w* )$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -1814,56 +1814,56 @@
             },
             {
                 "pattern": "\\w*\\s+",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
             {
                 "pattern": "(\\w*)\\s+",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w*)(\\s+)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "2 no consecutive groups, and opcional.",
                 "pattern": "(\\w*)\\d*(\\s+)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "2 no consecutive groups, and opcional.",
                 "pattern": "(\\w*)\\d*(\\s+)",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "description": "2 groups no consecutive",
                 "pattern": "(\\w*)\\d+(\\s+)",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -1872,10 +1872,10 @@
                 "pattern": "(\\w*)\\d*(\\s*)",
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -1884,10 +1884,10 @@
                 "pattern": "(\\w*)\\d*(\\s*)",
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -1896,16 +1896,16 @@
                 "pattern": "(\\w*)\\d+(\\s*)",
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "pattern": "\\w*\\s+1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -1927,10 +1927,10 @@
             },
             {
                 "pattern": " (\\w*)\\s+1",
-                "log": " Wazuh 1",
+                "log": " Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -1943,7 +1943,7 @@
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "pattern": "^\\w*\\s+$",
-                "log": "Wazuh  ",
+                "log": "Verprotect  ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -1974,14 +1974,14 @@
             {
                 "description": "Dont match.",
                 "pattern": "^\\w*\\s+$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Dont match.",
                 "pattern": "^(\\w*\\s+)$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -2014,7 +2014,7 @@
             },
             {
                 "pattern": "(\\w*\\s*)",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "__known_issue_2:": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "skip_test": true,
                 "log": " ",
@@ -2025,10 +2025,10 @@
             },
             {
                 "pattern": "(\\w*\\s*)",
-                "log": "Wazuh",
+                "log": "Verprotect",
                 "end_match": "h",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -2066,7 +2066,7 @@
                 "ignore_result": true,
                 "debug": false,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -2076,20 +2076,20 @@
                 "debug": false,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "pattern": "(\\w*\\s*)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh "
+                    "Verprotect "
                 ]
             },
             {
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "(\\w*)(\\s*)",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -2132,7 +2132,7 @@
                 "pattern": "(\\w*)\\d+(\\s*)",
                 "ignore_result": true,
                 "__known_issue": "It should match but does not, adjacent capture groups are not supported. BUG 1 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh ",
+                "log": "Verprotect ",
                 "end_match": null,
                 "captured_groups": []
             },
@@ -2141,10 +2141,10 @@
                 "pattern": "(\\w*)\\d+(\\s*)",
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
@@ -2153,16 +2153,16 @@
                 "pattern": "(\\w*)\\d*(\\s*)",
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
-                "log": "Wazuh123 ",
+                "log": "Verprotect123 ",
                 "end_match": " ",
                 "captured_groups": [
-                    "Wazuh",
+                    "Verprotect",
                     " "
                 ]
             },
             {
                 "pattern": "\\w*\\s*1",
-                "log": "Wazuh 1",
+                "log": "Verprotect 1",
                 "end_match": "1",
                 "captured_groups": []
             },
@@ -2184,10 +2184,10 @@
             },
             {
                 "pattern": " (\\w*)\\s*1",
-                "log": " Wazuh 1",
+                "log": " Verprotect 1",
                 "end_match": "1",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -2202,7 +2202,7 @@
                 "ignore_result": true,
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "pattern": "^\\w*\\s*$",
-                "log": "Wazuh  ",
+                "log": "Verprotect  ",
                 "end_match": " ",
                 "captured_groups": []
             },
@@ -2239,14 +2239,14 @@
             {
                 "description": "Dont match.",
                 "pattern": "^\\w*\\s*$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             },
             {
                 "description": "Dont match.",
                 "pattern": "^(\\w*\\s*)$",
-                "log": "Wazuh -",
+                "log": "Verprotect -",
                 "end_match": null,
                 "captured_groups": []
             }
@@ -2448,10 +2448,10 @@
                 "__prts_items_array_1": "(1 group x2 + 1 null)  x 8 size = 24 bytes",
                 "__prts_array_2": "0x0",
                 "pattern": "hi (\\w+).",
-                "log": "Hi Wazuh.",
+                "log": "Hi Verprotect.",
                 "end_match": ".",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -2530,10 +2530,10 @@
                 "__prts_items_array_1": "(1 group x2 + 1 null)  x 8 size = 24 bytes",
                 "__prts_array_2": "0x0",
                 "pattern": "hi (\\w+).",
-                "log": "Hi Wazuh.",
+                "log": "Hi Verprotect.",
                 "end_match": ".",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             }
         ]
@@ -2549,10 +2549,10 @@
                 "__prts_items_array_1": "(1 group x2 + 1 null)  x 8 size = 24 bytes",
                 "__prts_array_2": "0x0",
                 "pattern": "hi (\\w+).",
-                "log": "Hi Wazuh.",
+                "log": "Hi Verprotect.",
                 "end_match": ".",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -2619,10 +2619,10 @@
                 "__prts_items_array_1": "(1 group x2 + 1 null)  x 8 size = 24 bytes",
                 "__prts_array_2": "0x0",
                 "pattern": "hi (\\w+).",
-                "log": "Hi Wazuh.",
+                "log": "Hi Verprotect.",
                 "end_match": ".",
                 "captured_groups": [
-                    "Wazuh"
+                    "Verprotect"
                 ]
             },
             {
@@ -3496,7 +3496,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern \\w+ \\d+",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3505,10 +3505,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern (\\w+ \\d+)",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3516,7 +3516,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "^Pattern \\w+ \\d+",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3525,10 +3525,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "^Pattern (\\w+ \\d+)",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3536,7 +3536,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern \\w+ \\d+$",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3545,10 +3545,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern (\\w+ \\d+)$",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3556,7 +3556,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern \\w* \\d*",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3565,10 +3565,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern (\\w* \\d*)",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3576,7 +3576,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "^Pattern \\w* \\d*",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3585,10 +3585,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "^Pattern (\\w* \\d*)",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3596,7 +3596,7 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern \\w* \\d*$",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": []
             },
@@ -3605,10 +3605,10 @@
                 "__known_issue": "Matches but if the regex ends with a token with the quantifier '+' or '*', then it does not return the pointer to the last character matched, as it should be. BUG 3 of issue: https://github.com/wazuh/wazuh/issues/14420",
                 "ignore_result": true,
                 "pattern": "Pattern (\\w* \\d*)$",
-                "log": "Pattern Wazuh 123",
+                "log": "Pattern Verprotect 123",
                 "end_match": "3",
                 "captured_groups": [
-                    "Wazuh 123"
+                    "Verprotect 123"
                 ]
             },
             {
@@ -3787,7 +3787,7 @@
             },
             {
                 "description": "This test overflows the heap buffer.",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "skip_test": true,
                 "pattern": "\\d*",
                 "log": "subpattern123",
@@ -3816,7 +3816,7 @@
             },
             {
                 "description": "This test overflows the heap buffer.",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "skip_test": true,
                 "pattern": "(\\d*)",
                 "log": "subpattern123",
@@ -3899,7 +3899,7 @@
             },
             {
                 "description": "This test overflows the heap buffer.",
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "skip_test": true,
                 "pattern": "^\\d*",
                 "log": "subpattern123",
@@ -3929,7 +3929,7 @@
             {
                 "description": "This test overflows the heap buffer.",
                 "skip_test": true,
-                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Wazuh/Wazuh/issues/14249",
+                "__known_issue": "When the regex consists only of tokens with '*' quantifiers, then it always matches. When it matches having 0 matching characters, then it returns the pointer poiting to one byte before the beginning of the string. BUG Issue: https://github.com/Verprotect/Verprotect/issues/14249",
                 "pattern": "^(\\d*)",
                 "log": "subpattern123",
                 "end_match": null,

@@ -1,6 +1,6 @@
 /*
- * Wazuh shared modules utils
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect shared modules utils
+ * Copyright (C) 2015, Verprotect Inc.
  * October 8, 2020.
  *
  * This program is free software; you can redistribute it

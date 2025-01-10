@@ -1,6 +1,6 @@
 /*
- * Wazuh keystore
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect keystore
+ * Copyright (C) 2015, Verprotect Inc.
  * January 24, 2024.
  *
  * This program is free software; you can redistribute it

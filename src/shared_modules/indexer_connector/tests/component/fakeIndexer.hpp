@@ -1,6 +1,6 @@
 /*
- * Wazuh Indexer Connector - Component tests
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Indexer Connector - Component tests
+ * Copyright (C) 2015, Verprotect Inc.
  * January 09, 2024.
  *
  * This program is free software; you can redistribute it
@@ -134,7 +134,7 @@ public:
                      {
                          const auto response = nlohmann::json::array({{{"epoch", "1726271464"},
                                                                        {"timestamp", "23:51:04"},
-                                                                       {"cluster", "wazuh-cluster"},
+                                                                       {"cluster", "verprotect-cluster"},
                                                                        {"status", m_health},
                                                                        {"node.total", "1"},
                                                                        {"node.data", "1"},

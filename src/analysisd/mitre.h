@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -29,7 +29,7 @@ typedef struct technique_data {
 /**
  * @brief This function fills Hash Table using Mitre technique ID as Key and technique's tactics as info.
  *
- * It connects to Wazuh-DB to get all IDs that are in mitre.db and their tactics and then it inserts these to Hash table.
+ * It connects to Verprotect-DB to get all IDs that are in mitre.db and their tactics and then it inserts these to Hash table.
  *
  * @return int, it returns 0 on success and -1 on failure.
  */

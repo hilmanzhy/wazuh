@@ -1,6 +1,6 @@
 /*
- * Wazuh - Indexer connector.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect - Indexer connector.
+ * Copyright (C) 2015, Verprotect Inc.
  * June 2, 2023.
  *
  * This program is free software; you can redistribute it
@@ -214,7 +214,7 @@ nlohmann::json IndexerConnector::getAgentDocumentsIds(const std::string& url,
 {
     nlohmann::json postData;
     nlohmann::json responseJson;
-    constexpr auto ELEMENTS_PER_QUERY {10000}; // The max value for queries is 10000 in the wazuh-indexer.
+    constexpr auto ELEMENTS_PER_QUERY {10000}; // The max value for queries is 10000 in the verprotect-indexer.
 
     postData["query"]["match"]["agent.id"] = agentId;
     postData["size"] = ELEMENTS_PER_QUERY;

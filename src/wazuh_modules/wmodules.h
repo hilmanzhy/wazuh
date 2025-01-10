@@ -1,6 +1,6 @@
 /*
- * Wazuh Module Manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module Manager
+ * Copyright (C) 2015, Verprotect Inc.
  * April 22, 2016.
  *
  * This program is free software; you can redistribute it
@@ -89,7 +89,7 @@ typedef enum crypto_type {
 
 extern wmodule *wmodules;       // Loaded modules.
 extern int wm_task_nice;        // Nice value for tasks.
-extern int wm_max_eps;          // Maximum events per second sent by OpenScap Wazuh Module
+extern int wm_max_eps;          // Maximum events per second sent by OpenScap Verprotect Module
 extern int wm_kill_timeout;     // Time for a process to quit before killing it
 extern int wm_debug_level;
 
@@ -103,7 +103,7 @@ int modulesSync(char* args);
 void wm_add(wmodule *module);
 
 /*
- * @brief Get ID group of Wazuh user.
+ * @brief Get ID group of Verprotect user.
  *
  * @return ID group.
  */

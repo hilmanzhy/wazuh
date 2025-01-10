@@ -1,5 +1,5 @@
 /* Remote request listener
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * Jun 07, 2017.
  *
  * This program is free software; you can redistribute it
@@ -14,7 +14,7 @@
 #include "execd.h"
 #include "os_crypto/sha1/sha1_op.h"
 #include "os_crypto/signature/signature.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 #include "external/zlib/zlib.h"
 #include "client-agent/agentd.h"
 #include "logcollector/logcollector.h"
@@ -199,7 +199,7 @@ size_t wcom_restart(char ** output) {
             exec_cmd[1] = "manager";
 #endif
         } else {
-            exec_cmd[0] = "bin/wazuh-control";
+            exec_cmd[0] = "bin/verprotect-control";
             exec_cmd[1] = "restart";
         }
 
@@ -222,7 +222,7 @@ size_t wcom_restart(char ** output) {
         static char command[OS_FLSIZE];
         snprintf(command, sizeof(command), "%s/%s", AR_BINDIR, "restart-wazuh.exe");
         char *cmd[2] = { command, NULL };
-        char *cmd_parameters = "{\"version\":1,\"origin\":{\"name\":\"\",\"module\":\"wazuh-execd\"},\"command\":\"add\",\"parameters\":{\"extra_args\":[],\"alert\":{},\"program\":\"restart-wazuh.exe\"}}";
+        char *cmd_parameters = "{\"version\":1,\"origin\":{\"name\":\"\",\"module\":\"verprotect-execd\"},\"command\":\"add\",\"parameters\":{\"extra_args\":[],\"alert\":{},\"program\":\"restart-wazuh.exe\"}}";
         wfd_t *wfd = wpopenv(cmd[0], cmd, W_BIND_STDIN);
         if (wfd) {
             /* Send alert to AR script */
@@ -318,11 +318,11 @@ error:
 }
 
 size_t wcom_check_manager_config(char **output) {
-    static const char *daemons[] = {"bin/wazuh-authd", "bin/wazuh-remoted",
-                                    "bin/wazuh-execd", "bin/wazuh-analysisd", "bin/wazuh-logcollector",
-                                    "bin/wazuh-integratord", "bin/wazuh-syscheckd", "bin/wazuh-maild",
-                                    "bin/wazuh-modulesd", "bin/wazuh-clusterd", "bin/wazuh-agentlessd",
-                                    "bin/wazuh-integratord", "bin/wazuh-dbd", "bin/wazuh-csyslogd", NULL
+    static const char *daemons[] = {"bin/verprotect-authd", "bin/verprotect-remoted",
+                                    "bin/verprotect-execd", "bin/verprotect-analysisd", "bin/verprotect-logcollector",
+                                    "bin/verprotect-integratord", "bin/verprotect-syscheckd", "bin/verprotect-maild",
+                                    "bin/verprotect-modulesd", "bin/verprotect-clusterd", "bin/verprotect-agentlessd",
+                                    "bin/verprotect-integratord", "bin/verprotect-dbd", "bin/verprotect-csyslogd", NULL
                                     };
 
     int response_retval = 0;

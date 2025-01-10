@@ -1,6 +1,6 @@
 /*
- * Wazuh DB pool handler definition
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect DB pool handler definition
+ * Copyright (C) 2015, Verprotect Inc.
  * February 16, 2024.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 
 #include "wdb_pool.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define STATIC
 #else

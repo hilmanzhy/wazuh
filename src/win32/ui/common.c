@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -199,7 +199,7 @@ int config_read(__attribute__((unused)) HWND hwnd)
     /* Get version/revision */
 
     if (tmp_str = cat_file(VERSION_FILE, NULL), tmp_str) {
-        snprintf(buffer, sizeof(buffer), "Wazuh %s", tmp_str);
+        snprintf(buffer, sizeof(buffer), "Verprotect %s", tmp_str);
         os_strdup(buffer, config_inst.version);
     }
 

@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * July 5, 2016.
  *
  * This program is free software; you can redistribute it
@@ -69,7 +69,7 @@ int wdb_insert_agent(int id,
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -158,7 +158,7 @@ int wdb_update_agent_name(int id, const char *name, int *sock) {
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -212,7 +212,7 @@ int wdb_update_agent_data(agent_info_data *agent_data, int *sock) {
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -289,7 +289,7 @@ int wdb_update_agent_keepalive(int id, const char *connection_status, const char
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -345,7 +345,7 @@ int wdb_update_agent_connection_status(int id, const char *connection_status, co
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -402,16 +402,16 @@ int wdb_update_agent_status_code(int id, agent_status_code_t status_code, const 
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
     cJSON_AddNumberToObject(data_in, "id", id);
     cJSON_AddNumberToObject(data_in, "status_code", status_code);
     if (version != NULL) {
-        char wazuh_version[OS_SIZE_128 + 1] = "";
-        snprintf(wazuh_version, OS_SIZE_128, "%s %s", __ossec_name, version);
-        cJSON_AddStringToObject(data_in, "version", wazuh_version);
+        char verprotect_version[OS_SIZE_128 + 1] = "";
+        snprintf(verprotect_version, OS_SIZE_128, "%s %s", __ossec_name, version);
+        cJSON_AddStringToObject(data_in, "version", verprotect_version);
     }
     cJSON_AddStringToObject(data_in, "sync_status", sync_status);
     data_in_str = cJSON_PrintUnformatted(data_in);
@@ -461,7 +461,7 @@ int* wdb_get_all_agents(bool include_manager, int *sock) {
     int aux_sock = -1;
 
     while (status == WDBC_DUE) {
-        // Query WazuhDB
+        // Query VerprotectDB
         snprintf(wdbquery, sizeof(wdbquery), global_db_commands[WDB_GET_ALL_AGENTS], last_id);
         if (wdbc_query_ex(sock?sock:&aux_sock, wdbquery, wdboutput, sizeof(wdboutput)) == 0) {
             status = wdb_parse_chunk_to_int(wdboutput, &array, "id", &last_id, &len);
@@ -493,7 +493,7 @@ rb_tree* wdb_get_all_agents_rbtree(bool include_manager, int *sock) {
     tree = rbtree_init();
 
     while (status == WDBC_DUE) {
-        // Query WazuhDB
+        // Query VerprotectDB
         snprintf(wdbquery, sizeof(wdbquery), global_db_commands[WDB_GET_ALL_AGENTS], last_id);
         if (wdbc_query_ex(sock?sock:&aux_sock, wdbquery, wdboutput, sizeof(wdboutput)) == 0) {
             status = wdb_parse_chunk_to_rbtree(wdboutput, &tree, "id", &last_id);
@@ -504,7 +504,7 @@ rb_tree* wdb_get_all_agents_rbtree(bool include_manager, int *sock) {
     }
 
     if (status == WDBC_ERROR) {
-        merror("Error querying Wazuh DB to get agent's IDs.");
+        merror("Error querying Verprotect DB to get agent's IDs.");
         rbtree_destroy(tree);
         tree = NULL;
     }
@@ -534,7 +534,7 @@ int wdb_find_agent(const char *name, const char *ip, int *sock) {
     data_in = cJSON_CreateObject();
 
     if (!data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -553,7 +553,7 @@ int wdb_find_agent(const char *name, const char *ip, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB for agent ID.");
+        merror("Error querying Verprotect DB for agent ID.");
         return OS_INVALID;
     }
 
@@ -583,7 +583,7 @@ cJSON* wdb_get_agent_info(int id, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB to get the agent's %d information.", id);
+        merror("Error querying Verprotect DB to get the agent's %d information.", id);
         return NULL;
     }
 
@@ -604,7 +604,7 @@ cJSON* wdb_get_agent_labels(int id, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB to get the agent's %d labels.", id);
+        merror("Error querying Verprotect DB to get the agent's %d labels.", id);
         return NULL;
     }
 
@@ -627,7 +627,7 @@ char* wdb_get_agent_name(int id, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB to get the agent's %d name.", id);
+        merror("Error querying Verprotect DB to get the agent's %d name.", id);
         return NULL;
     }
 
@@ -658,7 +658,7 @@ char* wdb_get_agent_group(int id, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB to get the agent's %d group.", id);
+        merror("Error querying Verprotect DB to get the agent's %d group.", id);
         return NULL;
     }
 
@@ -687,7 +687,7 @@ int wdb_find_group(const char *name, int *sock) {
     }
 
     if (!root) {
-        merror("Error querying Wazuh DB to get the agent group id.");
+        merror("Error querying Verprotect DB to get the agent group id.");
         return OS_INVALID;
     }
 
@@ -710,7 +710,7 @@ int wdb_update_groups(const char *dirname, int *sock) {
     root = wdbc_query_parse_json(sock?sock:&aux_sock, global_db_commands[WDB_SELECT_GROUPS], wdboutput, sizeof(wdboutput));
 
     if (!root) {
-        merror("Error querying Wazuh DB to update groups.");
+        merror("Error querying Verprotect DB to update groups.");
         if (!sock) {
             wdbc_close(&aux_sock);
         }
@@ -865,7 +865,7 @@ int wdb_set_agent_groups(int id, char** groups_array, char* mode, char* sync_sta
     }
     cJSON* j_data_in = cJSON_CreateObject();
     if (!j_data_in) {
-        mdebug1("Error creating data JSON for Wazuh DB.");
+        mdebug1("Error creating data JSON for Verprotect DB.");
         return OS_INVALID;
     }
 
@@ -965,7 +965,7 @@ int* wdb_get_agents_by_connection_status(const char* connection_status, int *soc
     int aux_sock = -1;
 
     while (status == WDBC_DUE) {
-        // Query WazuhDB
+        // Query VerprotectDB
         snprintf(wdbquery, sizeof(wdbquery), global_db_commands[WDB_GET_AGENTS_BY_CONNECTION_STATUS], last_id, connection_status);
         if (wdbc_query_ex(sock?sock:&aux_sock, wdbquery, wdboutput, sizeof(wdboutput)) == 0) {
             status = wdb_parse_chunk_to_int(wdboutput, &array, "id", &last_id, &len);
@@ -1080,7 +1080,7 @@ int* wdb_disconnect_agents(int keepalive, const char *sync_status, int *sock) {
     int aux_sock = -1;
 
     while (status == WDBC_DUE) {
-        // Query WazuhDB
+        // Query VerprotectDB
         snprintf(wdbquery, sizeof(wdbquery), global_db_commands[WDB_DISCONNECT_AGENTS], last_id, keepalive, sync_status);
         if (wdbc_query_ex(sock?sock:&aux_sock, wdbquery, wdboutput, sizeof(wdboutput)) == 0) {
             status = wdb_parse_chunk_to_int(wdboutput, &array, "id", &last_id, &len);
@@ -1188,7 +1188,7 @@ int* wdb_get_agents_ids_of_current_node(const char* connection_status, int *sock
 
     node_name = get_node_name();
     while (status == WDBC_DUE) {
-        // Query WazuhDB
+        // Query VerprotectDB
         snprintf(wdbquery, sizeof(wdbquery), global_db_commands[WDB_GET_AGENTS_BY_CONNECTION_STATUS_AND_NODE], last_id, connection_status, node_name, limit);
         if (wdbc_query_ex(sock?sock:&aux_sock, wdbquery, wdboutput, sizeof(wdboutput)) == 0) {
             status = wdb_parse_chunk_to_int(wdboutput, &array, "id", &last_id, &len);
@@ -1269,7 +1269,7 @@ cJSON* wdb_get_distinct_agent_groups(int *sock) {
     os_free(tmp_last_hash_group);
 
     if (status == WDBC_ERROR) {
-        merror("Error querying Wazuh DB to get agent's groups.");
+        merror("Error querying Verprotect DB to get agent's groups.");
         cJSON_Delete(root);
         root = NULL;
     }

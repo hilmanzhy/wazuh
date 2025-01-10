@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -12,7 +12,7 @@
 #include "agentd.h"
 #include "os_net/os_net.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
     // Remove static qualifier when unit testing
     #define STATIC
     #ifdef WIN32
@@ -404,7 +404,7 @@ STATIC void send_msg_on_startup(void) {
     snprintf(msg, OS_MAXSTR, OS_AG_STARTED,
             keys.keyentries[0]->name,
             keys.keyentries[0]->ip->ip);
-    os_snprintf(fmsg, OS_MAXSTR, "%c:%s:%s", LOCALFILE_MQ, "wazuh-agent", msg);
+    os_snprintf(fmsg, OS_MAXSTR, "%c:%s:%s", LOCALFILE_MQ, "verprotect-agent", msg);
 
     send_msg(fmsg, -1);
 }

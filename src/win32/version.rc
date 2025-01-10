@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -43,11 +43,11 @@ BEGIN
 	BEGIN
 		BLOCK "040904b0"
         BEGIN
-		VALUE "CompanyName",        "Wazuh Inc."
-		VALUE "FileDescription",    "Wazuh Agent"
+		VALUE "CompanyName",        "Verprotect Inc."
+		VALUE "FileDescription",    "Verprotect Agent"
 		VALUE "FileVersion",        QUOTE(VER_PRODUCTVERSION_STR)
-		VALUE "LegalCopyright",     "Copyright (C) Wazuh, Inc."
-		VALUE "ProductName",        "Wazuh Windows Agent"
+		VALUE "LegalCopyright",     "Copyright (C) Verprotect, Inc."
+		VALUE "ProductName",        "Verprotect Windows Agent"
 		VALUE "ProductVersion",     QUOTE(VER_PRODUCTVERSION_STR)
          VALUE "Info",               "https://www.wazuh.com"
          VALUE "License",            "GPLv2"

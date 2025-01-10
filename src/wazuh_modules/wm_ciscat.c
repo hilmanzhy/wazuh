@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for CIS-CAT
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for CIS-CAT
+ * Copyright (C) 2015, Verprotect Inc.
  * December, 2017.
  *
  * This program is free software; you can redistribute it

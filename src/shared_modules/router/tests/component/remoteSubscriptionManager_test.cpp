@@ -1,6 +1,6 @@
 /*
- * Wazuh router - RemoteSubscriptionManager tests
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect router - RemoteSubscriptionManager tests
+ * Copyright (C) 2015, Verprotect Inc.
  * December 19, 2023.
  *
  * This program is free software; you can redistribute it

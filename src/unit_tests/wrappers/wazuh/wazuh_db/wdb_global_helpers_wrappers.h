@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -11,7 +11,7 @@
 #ifndef WDB_GLOBAL_HELPERS_WRAPPERS_H
 #define WDB_GLOBAL_HELPERS_WRAPPERS_H
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 
 cJSON *__wrap_wdb_get_agent_labels(int id, int *sock);
 int __wrap_wdb_find_agent(const char *name, const char *ip, __attribute__((unused)) int *sock);

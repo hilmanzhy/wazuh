@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -94,7 +94,7 @@ void prepare_post_audit_healthcheck_thread() {
 
     expect_string(__wrap_audit_delete_rule, path, AUDIT_HEALTHCHECK_DIR);
     expect_value(__wrap_audit_delete_rule, perms, PERMS);
-    expect_string(__wrap_audit_delete_rule, key, "wazuh_hc");
+    expect_string(__wrap_audit_delete_rule, key, "verprotect_hc");
     will_return(__wrap_audit_delete_rule, 1);
 
     expect_value(__wrap_atomic_int_set, atomic, &hc_thread_active);

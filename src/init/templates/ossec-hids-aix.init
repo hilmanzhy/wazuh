@@ -2,34 +2,34 @@
 #
 # name: ossec
 # purpose: Init script for ossec-hids
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 # Aug. 07 2008 Chris Cuevas
 #
 
-WAZUH_HOME=WAZUH_HOME_TMP
-WAZUH_CONTROL="$WAZUH_HOME/bin/wazuh-control"
+VERPROTECT_HOME=VERPROTECT_HOME_TMP
+VERPROTECT_CONTROL="$VERPROTECT_HOME/bin/verprotect-control"
 
 case "$1" in
 start)
-    if [ -f "$WAZUH_CONTROL" ]; then
-        echo "Starting Wazuh"
-        ${WAZUH_CONTROL} start
+    if [ -f "$VERPROTECT_CONTROL" ]; then
+        echo "Starting Verprotect"
+        ${VERPROTECT_CONTROL} start
     fi
     ;;
 stop)
-    if [ -f "$WAZUH_CONTROL" ]; then
-        echo "Stopping Wazuh"
-        ${WAZUH_CONTROL} stop
+    if [ -f "$VERPROTECT_CONTROL" ]; then
+        echo "Stopping Verprotect"
+        ${VERPROTECT_CONTROL} stop
     fi
     ;;
 status)
-    if [ -f "$WAZUH_CONTROL" ]; then
-        ${WAZUH_CONTROL} status
+    if [ -f "$VERPROTECT_CONTROL" ]; then
+        ${VERPROTECT_CONTROL} status
     fi
     ;;
 restart)
-    if [ -f "$WAZUH_CONTROL" ]; then
-        ${WAZUH_CONTROL} restart
+    if [ -f "$VERPROTECT_CONTROL" ]; then
+        ${VERPROTECT_CONTROL} restart
     fi
     ;;
 *)

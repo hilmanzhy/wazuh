@@ -1,5 +1,5 @@
 #include "shared.h"
-#include "wazuh_modules/wmodules.h"
+#include "verprotect_modules/wmodules.h"
 
 
 static const char *XML_INTERVAL = "interval";
@@ -7,7 +7,7 @@ static const char *XML_SCAN_DAY = "day";
 static const char *XML_WEEK_DAY = "wday";
 static const char *XML_TIME = "time";
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static for unit testing
 #define static
 #endif

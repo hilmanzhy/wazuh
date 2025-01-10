@@ -1,4 +1,4 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -21,11 +21,11 @@ include_directories(${SRC_FOLDER}/external/cJSON)
 include_directories(${SRC_FOLDER}/external/msgpack/include)
 include_directories(${SRC_FOLDER}/shared_modules/common)
 include_directories(${SRC_FOLDER}/shared_modules/router/include/)
-add_definitions(-DWAZUH_UNIT_TESTING)
+add_definitions(-DVERPROTECT_UNIT_TESTING)
 
-# Wazuh libraries
-find_library(WAZUHLIB NAMES libwazuh.a HINTS "${SRC_FOLDER}")
-if(NOT WAZUHLIB)
+# Verprotect libraries
+find_library(VERPROTECTLIB NAMES libwazuh.a HINTS "${SRC_FOLDER}")
+if(NOT VERPROTECTLIB)
   message(FATAL_ERROR "libwazuh.a not found in ${SRC_FOLDER} Aborting...")
 endif()
 
@@ -37,11 +37,11 @@ if(NOT TARGET)
   message(FATAL_ERROR "No TARGET specified. Aborting...")
 elseif(${TARGET} STREQUAL "server")
   include("./server.cmake")
-  configure_file("config_files/test_global.conf" "wazuh_modules/vulnerability_detection/test_global.conf" COPYONLY)
-  configure_file("config_files/test_vulnerability_detection_multiple_configuration.conf" "wazuh_modules/vulnerability_detection/test_vulnerability_detection_multiple_configuration.conf" COPYONLY)
-  configure_file("config_files/test_vulnerability_detection_duplicate_configuration.conf" "wazuh_modules/vulnerability_detection/test_vulnerability_detection_duplicate_configuration.conf" COPYONLY)
-  configure_file("config_files/test_vulnerability_detection.conf" "wazuh_modules/vulnerability_detection/test_vulnerability_detection.conf" COPYONLY)
-  configure_file("config_files/test_global_no_cti_url.conf" "wazuh_modules/vulnerability_detection/test_global_no_cti_url.conf" COPYONLY)
+  configure_file("config_files/test_global.conf" "verprotect_modules/vulnerability_detection/test_global.conf" COPYONLY)
+  configure_file("config_files/test_vulnerability_detection_multiple_configuration.conf" "verprotect_modules/vulnerability_detection/test_vulnerability_detection_multiple_configuration.conf" COPYONLY)
+  configure_file("config_files/test_vulnerability_detection_duplicate_configuration.conf" "verprotect_modules/vulnerability_detection/test_vulnerability_detection_duplicate_configuration.conf" COPYONLY)
+  configure_file("config_files/test_vulnerability_detection.conf" "verprotect_modules/vulnerability_detection/test_vulnerability_detection.conf" COPYONLY)
+  configure_file("config_files/test_global_no_cti_url.conf" "verprotect_modules/vulnerability_detection/test_global_no_cti_url.conf" COPYONLY)
 elseif(${TARGET} STREQUAL "agent")
   include("./agent.cmake")
   configure_file("config_files/test_anti_tampering.conf" "client-agent/test_anti_tampering.conf" COPYONLY)
@@ -53,7 +53,7 @@ else()
   message(FATAL_ERROR "Invalid TARGET '${TARGET}'. Aborting...")
 endif()
 
-if(NOT WAZUHEXT)
+if(NOT VERPROTECTEXT)
   message(FATAL_ERROR "libwazuhext not found! Aborting...")
 endif()
 
@@ -130,7 +130,7 @@ add_custom_target(coverage
     COMMAND ${LCOV_PATH} --gcov-tool ${GCOV_PATH} --remove coverage.total "*external/*" --remove coverage.total "*unit_tests/*" --remove coverage.total "*data_provider/*" --remove coverage.total "*shared_modules/*" --remove coverage.total "*syscollector/*" --remove coverage.total "*syscheckd/src/db/*" --rc lcov_branch_coverage=1 --output-file coverage.info.cleaned
 
     # Generate HTML report
-    COMMAND ${GENHTML_PATH} -q --output-directory coverage-report --title "WAZUH unit-tests coverage" --rc lcov_branch_coverage=1 --legend coverage.info.cleaned
+    COMMAND ${GENHTML_PATH} -q --output-directory coverage-report --title "VERPROTECT unit-tests coverage" --rc lcov_branch_coverage=1 --legend coverage.info.cleaned
 
     # Clean counters
     COMMAND ${CMAKE_COMMAND} -E remove coverage.base coverage.total coverage.info.cleaned

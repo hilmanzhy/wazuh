@@ -1,5 +1,5 @@
 /*
- * Wazuh Module for Microsoft Graph
+ * Verprotect Module for Microsoft Graph
  * Copyright (C) 2023, InfoDefense Inc.
  * March, 2023.
  *

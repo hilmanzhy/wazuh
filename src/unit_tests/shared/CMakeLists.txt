@@ -334,8 +334,8 @@ foreach(counter RANGE ${count})
     if(${TARGET} STREQUAL "server")
         target_link_libraries(
             ${test_name}
-            ${WAZUHLIB}
-            ${WAZUHEXT}
+            ${VERPROTECTLIB}
+            ${VERPROTECTEXT}
             ANALYSISD_O
             ${TEST_DEPS}
         )

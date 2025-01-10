@@ -1,6 +1,6 @@
 /*
- * Wazuh Module Manager
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module Manager
+ * Copyright (C) 2015, Verprotect Inc.
  * November 11, 2020.
  *
  * This program is free software; you can redistribute it
@@ -21,7 +21,7 @@
 #endif
 
 #ifndef ARGV0
-#define ARGV0 "wazuh-modulesd"
+#define ARGV0 "verprotect-modulesd"
 #endif // ARGV0
 
 #ifdef WIN32

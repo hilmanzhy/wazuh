@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -12,7 +12,7 @@
 #include "read-agents.h"
 #include "os_net/os_net.h"
 #include "wazuhdb_op.h"
-#include "wazuh_db/helpers/wdb_global_helpers.h"
+#include "verprotect_db/helpers/wdb_global_helpers.h"
 
 #ifndef WIN32
 static int _get_time_fim_scan(const char* agent_id, agent_info *agt_info) __attribute__((nonnull(1)));
@@ -126,7 +126,7 @@ int send_msg_to_agent(int msocket, const char *msg, const char *agt_id, const ch
 
             json_agt_info = wdb_get_agent_info(id_array[i], &sock);
             if (!json_agt_info) {
-                merror("Failed to get agent '%d' information from Wazuh DB.", id_array[i]);
+                merror("Failed to get agent '%d' information from Verprotect DB.", id_array[i]);
                 continue;
             }
 
@@ -308,7 +308,7 @@ agent_info *get_agent_info(const char *agent_id){
     json_agt_info = wdb_get_agent_info(atoi(agent_id), NULL);
 
     if (!json_agt_info) {
-        mdebug1("Failed to get agent '%s' information from Wazuh DB.",agent_id);
+        mdebug1("Failed to get agent '%s' information from Verprotect DB.",agent_id);
         return NULL;
     }
 
@@ -376,7 +376,7 @@ agent_status_t get_agent_status(int agent_id){
     json_agt_info = wdb_get_agent_info(agent_id, NULL);
 
     if (!json_agt_info) {
-        mdebug1("Failed to get agent '%d' information from Wazuh DB.", agent_id);
+        mdebug1("Failed to get agent '%d' information from Verprotect DB.", agent_id);
         return status;
     }
 
@@ -426,7 +426,7 @@ char **get_agents(int flag){
 
         json_agt_info = wdb_get_agent_info(id_array[i], &sock);
         if (!json_agt_info) {
-            mdebug1("Failed to get agent '%d' information from Wazuh DB.", id_array[i]);
+            mdebug1("Failed to get agent '%d' information from Verprotect DB.", id_array[i]);
             continue;
         }
 

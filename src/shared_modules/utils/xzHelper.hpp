@@ -1,6 +1,6 @@
 /*
- * Wazuh - Shared Modules utils
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect - Shared Modules utils
+ * Copyright (C) 2015, Verprotect Inc.
  * April 19, 2023.
  *
  */

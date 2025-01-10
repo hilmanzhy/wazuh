@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * September, 2020.
  *
  * This program is free software; you can redistribute it
@@ -15,12 +15,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 #include "../wrappers/common.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_metadata_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_global_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_metadata_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_global_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
 #include "../wrappers/posix/stat_wrappers.h"
 #include "../wrappers/posix/unistd_wrappers.h"

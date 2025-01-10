@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All right reserved.
  *
  * This program is a free software; you can redistribute it
@@ -9,7 +9,7 @@
 
 #include "mitre.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 // Remove static qualifier when unit testing
 #define static
 #endif
@@ -64,12 +64,12 @@ int mitre_load() {
     /* Connect to wdb */
     sock = wdbc_connect_with_attempts(5);
     if (sock < 0) {
-        merror("Unable to connect to Wazuh-DB for Mitre matrix information.");
+        merror("Unable to connect to Verprotect-DB for Mitre matrix information.");
         result = -1;
         goto end;
     }
 
-    /* Getting technique ID and name from Mitre's database in Wazuh-DB  */
+    /* Getting technique ID and name from Mitre's database in Verprotect-DB  */
     snprintf(wazuhdb_query, OS_SIZE_6144, SQL_GET_ALL_TECHNIQUES, MAX_TECHNIQUES_REQUEST, offset);
     techniques_json = wdbc_query_parse_json(&sock, wazuhdb_query, response, OS_MAXSTR);
 
@@ -119,7 +119,7 @@ int mitre_load() {
             /* Create tactics list */
             tactics_list = OSList_Create();
 
-            /* Getting tactics from Mitre's database in Wazuh-DB */
+            /* Getting tactics from Mitre's database in Verprotect-DB */
             snprintf(wazuhdb_query, OS_SIZE_6144, SQL_GET_ALL_TECHNIQUE_PHASES, tech_id);
             phases_json = wdbc_query_parse_json(&sock, wazuhdb_query, response, OS_MAXSTR);
 
@@ -145,7 +145,7 @@ int mitre_load() {
                 }
                 tactic_id = tactic_id_json->valuestring;
 
-                /* Getting tactic ID and name from Mitre's database in Wazuh-DB  */
+                /* Getting tactic ID and name from Mitre's database in Verprotect-DB  */
                 snprintf(wazuhdb_query, OS_SIZE_6144, SQL_GET_TACTIC_INFORMATION, tactic_id);
                 tactic_json = wdbc_query_parse_json(&sock, wazuhdb_query, response, OS_MAXSTR);
 
@@ -219,7 +219,7 @@ int mitre_load() {
 
         offset += MAX_TECHNIQUES_REQUEST;
 
-        /* Getting technique ID and name from Mitre's database in Wazuh-DB  */
+        /* Getting technique ID and name from Mitre's database in Verprotect-DB  */
         snprintf(wazuhdb_query, OS_SIZE_6144, SQL_GET_ALL_TECHNIQUES, MAX_TECHNIQUES_REQUEST, offset);
         techniques_json = wdbc_query_parse_json(&sock, wazuhdb_query, response, OS_MAXSTR);
 

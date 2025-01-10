@@ -1,6 +1,6 @@
 /*
- * Wazuh-DB Common variables and functions.
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect-DB Common variables and functions.
+ * Copyright (C) 2015, Verprotect Inc.
  * Nov 22, 2023.
  *
  * This program is free software; you can redistribute it

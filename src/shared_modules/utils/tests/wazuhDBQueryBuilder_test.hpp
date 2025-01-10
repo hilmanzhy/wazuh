@@ -1,6 +1,6 @@
 /*
- * Wazuh shared modules utils
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect shared modules utils
+ * Copyright (C) 2015, Verprotect Inc.
  * Nov 1, 2023.
  *
  * This program is free software; you can redistribute it
@@ -9,19 +9,19 @@
  * Foundation.
  */
 
-#ifndef _WAZUH_DB_QUERY_BUILDER_TEST_HPP
-#define _WAZUH_DB_QUERY_BUILDER_TEST_HPP
+#ifndef _VERPROTECT_DB_QUERY_BUILDER_TEST_HPP
+#define _VERPROTECT_DB_QUERY_BUILDER_TEST_HPP
 
 #include "gtest/gtest.h"
 
-class WazuhDBQueryBuilderTest : public ::testing::Test
+class VerprotectDBQueryBuilderTest : public ::testing::Test
 {
 protected:
-    WazuhDBQueryBuilderTest() = default;
-    virtual ~WazuhDBQueryBuilderTest() = default;
+    VerprotectDBQueryBuilderTest() = default;
+    virtual ~VerprotectDBQueryBuilderTest() = default;
 
     void SetUp() override {};
     void TearDown() override {};
 };
 
-#endif // _WAZUH_DB_QUERY_BUILDER_TEST_HPP
+#endif // _VERPROTECT_DB_QUERY_BUILDER_TEST_HPP

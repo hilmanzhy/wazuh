@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -15,13 +15,13 @@
 
 #include "../../wrappers/common.h"
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_db/wdb_global_helpers_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_db/wdb_global_helpers_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
 
-#include "../../wazuh_modules/wmodules.h"
-#include "../../wazuh_modules/agent_upgrade/manager/wm_agent_upgrade_manager.h"
-#include "../../wazuh_modules/agent_upgrade/manager/wm_agent_upgrade_tasks.h"
+#include "../../verprotect_modules/wmodules.h"
+#include "../../verprotect_modules/agent_upgrade/manager/wm_agent_upgrade_manager.h"
+#include "../../verprotect_modules/agent_upgrade/manager/wm_agent_upgrade_tasks.h"
 #include "../../headers/shared.h"
 
 int wm_agent_upgrade_analyze_agent(int agent_id, wm_agent_task *agent_task);
@@ -147,7 +147,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_ok(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_ACTIVE;
     wm_upgrade_task *upgrade_task = NULL;
 
@@ -158,7 +158,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_ok(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_task = wm_agent_upgrade_init_upgrade_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE;
@@ -185,7 +185,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_ok(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, wazuh_version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, verprotect_version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, "v4.1.0");
@@ -205,7 +205,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_custom_ok(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_ACTIVE;
     wm_upgrade_custom_task *upgrade_custom_task = NULL;
 
@@ -216,7 +216,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_custom_ok(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_custom_task = wm_agent_upgrade_init_upgrade_custom_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE_CUSTOM;
@@ -243,7 +243,7 @@ void test_wm_agent_upgrade_validate_agent_task_upgrade_custom_ok(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, wazuh_version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, verprotect_version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, WM_UPGRADE_SUCCESS);
@@ -262,7 +262,7 @@ void test_wm_agent_upgrade_validate_agent_task_version_err(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_ACTIVE;
     wm_upgrade_task *upgrade_task = NULL;
 
@@ -273,7 +273,7 @@ void test_wm_agent_upgrade_validate_agent_task_version_err(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_task = wm_agent_upgrade_init_upgrade_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE;
@@ -300,7 +300,7 @@ void test_wm_agent_upgrade_validate_agent_task_version_err(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, wazuh_version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, verprotect_version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, "");
@@ -320,7 +320,7 @@ void test_wm_agent_upgrade_validate_agent_task_system_err(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_ACTIVE;
     wm_upgrade_task *upgrade_task = NULL;
 
@@ -331,7 +331,7 @@ void test_wm_agent_upgrade_validate_agent_task_system_err(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_task = wm_agent_upgrade_init_upgrade_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE;
@@ -370,7 +370,7 @@ void test_wm_agent_upgrade_validate_agent_task_status_err(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_DISCONNECTED;
     wm_upgrade_task *upgrade_task = NULL;
 
@@ -381,7 +381,7 @@ void test_wm_agent_upgrade_validate_agent_task_status_err(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_task = wm_agent_upgrade_init_upgrade_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE;
@@ -411,7 +411,7 @@ void test_wm_agent_upgrade_validate_agent_task_agent_id_err(void **state)
     char *os_major = "18";
     char *os_minor = "04";
     char *arch = "x64_86";
-    char *wazuh_version = "v3.13.1";
+    char *verprotect_version = "v3.13.1";
     char *status = AGENT_CS_NEVER_CONNECTED;
     wm_upgrade_task *upgrade_task = NULL;
 
@@ -422,7 +422,7 @@ void test_wm_agent_upgrade_validate_agent_task_agent_id_err(void **state)
     os_strdup(os_major, agent_task->agent_info->major_version);
     os_strdup(os_minor, agent_task->agent_info->minor_version);
     os_strdup(arch, agent_task->agent_info->architecture);
-    os_strdup(wazuh_version, agent_task->agent_info->wazuh_version);
+    os_strdup(verprotect_version, agent_task->agent_info->verprotect_version);
     os_strdup(status, agent_task->agent_info->connection_status);
     upgrade_task = wm_agent_upgrade_init_upgrade_task();
     agent_task->task_info->command = WM_UPGRADE_UPGRADE;
@@ -494,7 +494,7 @@ void test_wm_agent_upgrade_analyze_agent_ok(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, "v4.1.0");
@@ -512,7 +512,7 @@ void test_wm_agent_upgrade_analyze_agent_ok(void **state)
     assert_string_equal(agent_task->agent_info->major_version, major);
     assert_string_equal(agent_task->agent_info->minor_version, minor);
     assert_string_equal(agent_task->agent_info->architecture, arch);
-    assert_string_equal(agent_task->agent_info->wazuh_version, version);
+    assert_string_equal(agent_task->agent_info->verprotect_version, version);
     assert_string_equal(agent_task->agent_info->connection_status, connection_status);
 }
 
@@ -572,7 +572,7 @@ void test_wm_agent_upgrade_analyze_agent_duplicated_err(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, "v4.1.0");
@@ -590,7 +590,7 @@ void test_wm_agent_upgrade_analyze_agent_duplicated_err(void **state)
     assert_string_equal(agent_task->agent_info->major_version, major);
     assert_string_equal(agent_task->agent_info->minor_version, minor);
     assert_string_equal(agent_task->agent_info->architecture, arch);
-    assert_string_equal(agent_task->agent_info->wazuh_version, version);
+    assert_string_equal(agent_task->agent_info->verprotect_version, version);
     assert_string_equal(agent_task->agent_info->connection_status, connection_status);
 }
 
@@ -650,7 +650,7 @@ void test_wm_agent_upgrade_analyze_agent_unknown_err(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, version);
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, version);
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, platform);
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, agent_task->task_info->command);
     will_return(__wrap_wm_agent_upgrade_validate_version, "v4.1.0");
@@ -668,7 +668,7 @@ void test_wm_agent_upgrade_analyze_agent_unknown_err(void **state)
     assert_string_equal(agent_task->agent_info->major_version, major);
     assert_string_equal(agent_task->agent_info->minor_version, minor);
     assert_string_equal(agent_task->agent_info->architecture, arch);
-    assert_string_equal(agent_task->agent_info->wazuh_version, version);
+    assert_string_equal(agent_task->agent_info->verprotect_version, version);
     assert_string_equal(agent_task->agent_info->connection_status, connection_status);
 }
 
@@ -720,7 +720,7 @@ void test_wm_agent_upgrade_analyze_agent_validate_err(void **state)
     assert_string_equal(agent_task->agent_info->major_version, major);
     assert_string_equal(agent_task->agent_info->minor_version, minor);
     assert_string_equal(agent_task->agent_info->architecture, arch);
-    assert_string_equal(agent_task->agent_info->wazuh_version, version);
+    assert_string_equal(agent_task->agent_info->verprotect_version, version);
     assert_string_equal(agent_task->agent_info->connection_status, connection_status);
 }
 
@@ -751,7 +751,7 @@ void test_wm_agent_upgrade_analyze_agent_global_db_err(void **state)
     assert_null(agent_task->agent_info->major_version);
     assert_null(agent_task->agent_info->minor_version);
     assert_null(agent_task->agent_info->architecture);
-    assert_null(agent_task->agent_info->wazuh_version);
+    assert_null(agent_task->agent_info->verprotect_version);
 }
 
 void test_wm_agent_upgrade_create_upgrade_tasks_ok(void **state)
@@ -1141,7 +1141,7 @@ void test_wm_agent_upgrade_process_agent_result_command_done(void **state)
     cJSON_AddNumberToObject(response_json, "error", WM_UPGRADE_SUCCESS);
     cJSON_AddStringToObject(response_json, "message", upgrade_error_codes[WM_UPGRADE_SUCCESS]);
 
-    expect_string(__wrap__mtinfo, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtinfo, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtinfo, formatted_msg, "(8164): Received upgrade notification from agent '25'. Error code: '0', message: 'Success'");
 
     // wm_agent_upgrade_parse_task_module_request
@@ -1212,7 +1212,7 @@ void test_wm_agent_upgrade_process_agent_result_command_failed(void **state)
     cJSON_AddNumberToObject(response_json, "error", WM_UPGRADE_SUCCESS);
     cJSON_AddStringToObject(response_json, "message", upgrade_error_codes[WM_UPGRADE_SUCCESS]);
 
-    expect_string(__wrap__mtinfo, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtinfo, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtinfo, formatted_msg, "(8164): Received upgrade notification from agent '25'. Error code: '2', message: 'Error message'");
 
     // wm_agent_upgrade_parse_task_module_request
@@ -1347,7 +1347,7 @@ void test_wm_agent_upgrade_process_upgrade_custom_command(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, "v3.13.1");
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, "v3.13.1");
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, "ubuntu");
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, WM_UPGRADE_UPGRADE_CUSTOM);
     will_return(__wrap_wm_agent_upgrade_validate_version, WM_UPGRADE_SUCCESS);
@@ -1480,7 +1480,7 @@ void test_wm_agent_upgrade_process_upgrade_custom_command_no_agents(void **state
 
     will_return(__wrap_wm_agent_upgrade_get_agent_ids, NULL);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtwarn, formatted_msg, "(8160): There are no valid agents to upgrade.");
 
     // wm_agent_upgrade_parse_response
@@ -1597,7 +1597,7 @@ void test_wm_agent_upgrade_process_upgrade_command(void **state)
 
     // wm_agent_upgrade_validate_version
 
-    expect_string(__wrap_wm_agent_upgrade_validate_version, wazuh_version, "v3.13.1");
+    expect_string(__wrap_wm_agent_upgrade_validate_version, verprotect_version, "v3.13.1");
     expect_string(__wrap_wm_agent_upgrade_validate_version, platform, "ubuntu");
     expect_value(__wrap_wm_agent_upgrade_validate_version, command, WM_UPGRADE_UPGRADE);
     will_return(__wrap_wm_agent_upgrade_validate_version, "v4.1.0");
@@ -1726,7 +1726,7 @@ void test_wm_agent_upgrade_process_upgrade_command_no_agents(void **state)
 
     will_return(__wrap_wm_agent_upgrade_get_agent_ids, NULL);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:agent-upgrade");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:agent-upgrade");
     expect_string(__wrap__mtwarn, formatted_msg, "(8160): There are no valid agents to upgrade.");
 
     // wm_agent_upgrade_parse_response

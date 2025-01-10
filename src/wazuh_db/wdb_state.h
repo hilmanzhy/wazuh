@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  * May 03, 2022
  *
  * This program is free software; you can redistribute it
@@ -1299,7 +1299,7 @@ void w_inc_mitre_sql();
 void w_inc_mitre_sql_time(struct timeval time);
 
 /**
- * @brief Create a JSON object with all the wazuh-db state information
+ * @brief Create a JSON object with all the verprotect-db state information
  * @return JSON object
  */
 cJSON* wdb_create_state_json();

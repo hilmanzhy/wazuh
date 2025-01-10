@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for file downloads
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for file downloads
+ * Copyright (C) 2015, Verprotect Inc.
  * April 25, 2018.
  *
  * This program is free software; you can redistribute it
@@ -276,7 +276,7 @@ wmodule * wm_download_read() {
 
     os_calloc(1, sizeof(wmodule), module);
     os_malloc(sizeof(wm_download_t), data);
-    data->enabled = getDefine_Int("wazuh_download", "enabled", 0, 1);
+    data->enabled = getDefine_Int("verprotect_download", "enabled", 0, 1);
     module->context = &WM_DOWNLOAD_CONTEXT;
     module->data = data;
     module->tag = strdup(module->context->name);
@@ -289,7 +289,7 @@ cJSON *wm_download_dump() {
     cJSON *root = cJSON_CreateObject();
     cJSON *wm_wd = cJSON_CreateObject();
     cJSON_AddStringToObject(wm_wd,"enabled","yes");
-    cJSON_AddItemToObject(root,"wazuh_download",wm_wd);
+    cJSON_AddItemToObject(root,"verprotect_download",wm_wd);
     return root;
 }
 #endif

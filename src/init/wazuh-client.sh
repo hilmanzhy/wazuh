@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
-# wazuh-control        This shell script takes care of starting
+# Copyright (C) 2015, Verprotect Inc.
+# verprotect-control        This shell script takes care of starting
 #                      or stopping ossec-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
@@ -16,8 +16,8 @@ REVISION="41008"
 TYPE="agent"
 
 ###  Do not modify below here ###
-AUTHOR="Wazuh Inc."
-DAEMONS="wazuh-modulesd wazuh-logcollector wazuh-syscheckd wazuh-agentd wazuh-execd"
+AUTHOR="Verprotect Inc."
+DAEMONS="verprotect-modulesd verprotect-logcollector verprotect-syscheckd verprotect-agentd verprotect-execd"
 
 # Reverse order of daemons
 SDAEMONS=$(echo $DAEMONS | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }')
@@ -146,7 +146,7 @@ check_folders()
 # Start function
 start_service()
 {
-    echo "Starting Wazuh $VERSION..."
+    echo "Starting Verprotect $VERSION..."
     checkpid;
 
     # Delete all files in temporary folder
@@ -206,7 +206,7 @@ pstatus()
         for pid in `cat ${DIR}/var/run/${pfile}-*.pid 2>/dev/null`; do
             ps -p ${pid} > /dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process ${pid} not used by Wazuh, removing .."
+                echo "${pfile}: Process ${pid} not used by Verprotect, removing .."
                 rm -f ${DIR}/var/run/${pfile}-${pid}.pid
                 continue;
             fi
@@ -263,15 +263,15 @@ stop_service()
         rm -f ${DIR}/var/run/${i}-*.pid
      done
 
-    echo "Wazuh $VERSION Stopped"
+    echo "Verprotect $VERSION Stopped"
 }
 
 info()
 {
      if [ "X${1}" = "X" ]; then
-        echo "WAZUH_VERSION=\"${VERSION}\""
-        echo "WAZUH_REVISION=\"${REVISION}\""
-        echo "WAZUH_TYPE=\"${TYPE}\""
+        echo "VERPROTECT_VERSION=\"${VERSION}\""
+        echo "VERPROTECT_REVISION=\"${REVISION}\""
+        echo "VERPROTECT_TYPE=\"${TYPE}\""
     else
         case "${1}" in
             -v) echo "${VERSION}" ;;
@@ -313,7 +313,7 @@ restart)
     restart_service
     ;;
 reload)
-    DAEMONS=$(echo $DAEMONS | sed 's/wazuh-execd//')
+    DAEMONS=$(echo $DAEMONS | sed 's/verprotect-execd//')
     restart_service
     ;;
 status)

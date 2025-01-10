@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -31,11 +31,11 @@ static void test_w_generate_random_pass_success(void **state) {
 
     will_return(__wrap_os_random, 146557);
     will_return(__wrap_os_random, 314159);
-    will_return(__wrap_GetRandomNoise, strdup("Wazuh"));
+    will_return(__wrap_GetRandomNoise, strdup("Verprotect"));
     will_return(__wrap_GetRandomNoise, strdup("The Open Source Security Platform"));
     will_return(__wrap_time, 1655254875);
     will_return_always(__wrap_getuname, "Linux |ubuntu-focal |5.4.0-92-generic |#103-Ubuntu SMP Fri Nov 26 16:13:00 UTC 2021 "
-                                        "|x86_64 [Ubuntu|ubuntu: 20.04.2 LTS (Focal Fossa)] - Wazuh v4.3.4");
+                                        "|x86_64 [Ubuntu|ubuntu: 20.04.2 LTS (Focal Fossa)] - Verprotect v4.3.4");
 
     result = w_generate_random_pass();
 

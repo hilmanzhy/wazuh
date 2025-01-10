@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, Wazuh Inc.
+ * Copyright (C) 2015, Verprotect Inc.
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 #include "shared.h"
-#include "../../../wazuh_modules/wmodules.h"
+#include "../../../verprotect_modules/wmodules.h"
 #include "../scheduling/wmodules_scheduling_helpers.h"
 
 #include "../../wrappers/common.h"
@@ -28,8 +28,8 @@
 #include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
 #include "../../wrappers/wazuh/shared/pthreads_op_wrappers.h"
 #include "../../wrappers/wazuh/shared/validate_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wmodules_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_exec_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
 
 #define TEST_MAX_DATES 3
 

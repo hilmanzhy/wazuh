@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -16,7 +16,7 @@
 #include "db/include/db.h"
 #include "registry/registry.h"
 
-#ifdef WAZUH_UNIT_TESTING
+#ifdef VERPROTECT_UNIT_TESTING
 #ifdef WIN32
 #include "../unit_tests/wrappers/windows/stat64_wrappers.h"
 #endif

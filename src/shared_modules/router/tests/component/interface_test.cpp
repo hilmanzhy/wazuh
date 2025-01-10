@@ -1,6 +1,6 @@
 /*
- * Wazuh router - Interface tests
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect router - Interface tests
+ * Copyright (C) 2015, Verprotect Inc.
  * Apr 29, 2022.
  *
  * This program is free software; you can redistribute it

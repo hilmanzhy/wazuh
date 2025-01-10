@@ -18,7 +18,7 @@ set_target_properties(
     LINKER_LANGUAGE C
 )
 
-target_link_libraries(EXECD_O ${WAZUHLIB} ${WAZUHEXT} -lpthread)
+target_link_libraries(EXECD_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 if(${TARGET} STREQUAL "winagent")
     link_directories(${SRC_FOLDER}/syscheckd/build/bin)
@@ -63,8 +63,8 @@ foreach(counter RANGE ${count})
 
     target_link_libraries(
         ${execd_test_name}
-        ${WAZUHLIB}
-        ${WAZUHEXT}
+        ${VERPROTECTLIB}
+        ${VERPROTECTEXT}
         EXECD_O
         ${TEST_DEPS}
     )

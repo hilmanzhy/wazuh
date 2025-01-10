@@ -15,7 +15,7 @@ def init_opensearch():
     env_vars = {
         'discovery.type': 'single-node',
         'plugins.security.disabled': 'true',
-        'OPENSEARCH_INITIAL_ADMIN_PASSWORD': 'WazuhTest99$',
+        'OPENSEARCH_INITIAL_ADMIN_PASSWORD': 'VerprotectTest99$',
     }
     client.containers.run("opensearchproject/opensearch", detach=True, ports={'9200/tcp': 9200},
                           environment=env_vars, name='opensearch', stdout=True, stderr=True)
@@ -50,11 +50,11 @@ def test_initialize_indexer_connector(opensearch):
     os.chdir(Path(__file__).parent.parent.parent.parent)
     LOGGER.debug(f"Current directory: {os.getcwd()}")
 
-    ## Remove folder queue/indexer/db/wazuh-states-vulnerabilities-cluster
-    if Path("queue/indexer/db/wazuh-states-vulnerabilities-default").exists():
-        for file in Path("queue/indexer/db/wazuh-states-vulnerabilities-default").glob("*"):
+    ## Remove folder queue/indexer/db/verprotect-states-vulnerabilities-cluster
+    if Path("queue/indexer/db/verprotect-states-vulnerabilities-default").exists():
+        for file in Path("queue/indexer/db/verprotect-states-vulnerabilities-default").glob("*"):
             file.unlink()
-        Path("queue/indexer/db/wazuh-states-vulnerabilities-default").rmdir()
+        Path("queue/indexer/db/verprotect-states-vulnerabilities-default").rmdir()
 
     # Run indexer connector testtool out of the container
     cmd = Path("build/shared_modules/indexer_connector/testtool/", "indexer_connector_tool")
@@ -89,7 +89,7 @@ def test_initialize_indexer_connector(opensearch):
     while counter < 10:
         url = 'http://localhost:9200/_cat/indices'
         response = requests.get(url)
-        if response.status_code == 200 and 'wazuh-states-vulnerabilities-default' in response.text:
+        if response.status_code == 200 and 'verprotect-states-vulnerabilities-default' in response.text:
             LOGGER.debug(f"Index created {response.text}")
             break
         time.sleep(1)
@@ -102,11 +102,11 @@ def test_add_bulk_indexer_connector(opensearch):
     os.chdir(Path(__file__).parent.parent.parent.parent)
     LOGGER.debug(f"Current directory: {os.getcwd()}")
 
-    ## Remove folder queue/indexer/db/wazuh-states-vulnerabilities-cluster
-    if Path("queue/indexer/db/wazuh-states-vulnerabilities-default").exists():
-        for file in Path("queue/indexer/db/wazuh-states-vulnerabilities-default").glob("*"):
+    ## Remove folder queue/indexer/db/verprotect-states-vulnerabilities-cluster
+    if Path("queue/indexer/db/verprotect-states-vulnerabilities-default").exists():
+        for file in Path("queue/indexer/db/verprotect-states-vulnerabilities-default").glob("*"):
             file.unlink()
-        Path("queue/indexer/db/wazuh-states-vulnerabilities-default").rmdir()
+        Path("queue/indexer/db/verprotect-states-vulnerabilities-default").rmdir()
 
     # Run indexer connector testtool out of the container
     cmd = Path("build/shared_modules/indexer_connector/testtool/", "indexer_connector_tool")
@@ -139,7 +139,7 @@ def test_add_bulk_indexer_connector(opensearch):
     # Query to check if the index is created and template is applied
     counter = 0
     while counter < 10:
-        url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_search'
+        url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_search'
         query = {
             "query": {
                 "match_all": {}
@@ -156,7 +156,7 @@ def test_add_bulk_indexer_connector(opensearch):
     process.terminate()
 
     # Delete the document to test the resync.
-    url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_delete_by_query?refresh=true'
+    url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_delete_by_query?refresh=true'
     query = {
         "query": {
             "match_all": {}
@@ -165,7 +165,7 @@ def test_add_bulk_indexer_connector(opensearch):
     response = requests.post(url, json=query)
     assert response.status_code == 200
 
-    url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_search'
+    url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_search'
     query = {
         "query": {
             "match_all": {}
@@ -184,7 +184,7 @@ def test_add_bulk_indexer_connector(opensearch):
     # Query to check if the element is resynced
     counter = 0
     while counter < 10:
-        url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_search'
+        url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_search'
         query = {
             "query": {
                 "match_all": {}
@@ -217,7 +217,7 @@ def test_add_bulk_indexer_connector(opensearch):
     # Query to check if the element is deleted
     counter = 0
     while counter < 10:
-        url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_search'
+        url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_search'
         query = {
             "query": {
                 "match_all": {}
@@ -236,7 +236,7 @@ def test_add_bulk_indexer_connector(opensearch):
     process.terminate()
 
     # Manual insert and check if resync clean the element.
-    url = 'http://localhost:9200/wazuh-states-vulnerabilities-cluster/_doc/000_pkghash_CVE-2022-123456?refresh=true'
+    url = 'http://localhost:9200/verprotect-states-vulnerabilities-cluster/_doc/000_pkghash_CVE-2022-123456?refresh=true'
     query = """{
       "agent": {
         "build": {
@@ -301,7 +301,7 @@ def test_add_bulk_indexer_connector(opensearch):
     # Query to check if the element is resynced
     counter = 0
     while counter < 10:
-        url = 'http://localhost:9200/wazuh-states-vulnerabilities-default/_search'
+        url = 'http://localhost:9200/verprotect-states-vulnerabilities-default/_search'
         query = {
             "query": {
                 "match_all": {}

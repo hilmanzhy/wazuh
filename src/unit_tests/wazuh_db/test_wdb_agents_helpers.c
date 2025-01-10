@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * February 23, 2021.
  *
  * This program is free software; you can redistribute it
@@ -16,11 +16,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../wazuh_db/helpers/wdb_agents_helpers.h"
+#include "../verprotect_db/helpers/wdb_agents_helpers.h"
 #include "wazuhdb_op.h"
 
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
 
 extern int test_mode;
 
@@ -45,7 +45,7 @@ void test_wdb_get_sys_osinfo_error_sql_execution(void ** state)
     cJSON *ret = NULL;
     int id = 1;
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, NULL);
 
@@ -66,7 +66,7 @@ void test_wdb_get_sys_osinfo_success(void ** state)
     cJSON *row = __real_cJSON_CreateObject();
     __real_cJSON_AddItemToArray(root, row);
 
-    // Calling Wazuh DB
+    // Calling Verprotect DB
     will_return(__wrap_wdbc_query_parse_json, 0);
     will_return(__wrap_wdbc_query_parse_json, root);
 

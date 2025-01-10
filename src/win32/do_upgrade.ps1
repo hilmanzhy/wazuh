@@ -20,77 +20,77 @@ if (Test-Path "$env:windir\sysnative") {
 
 function remove_upgrade_files {
     Remove-Item -Path ".\upgrade\*"  -Exclude "*.log", "upgrade_result" -ErrorAction SilentlyContinue
-    Remove-Item -Path ".\wazuh-agent*.msi" -ErrorAction SilentlyContinue
+    Remove-Item -Path ".\verprotect-agent*.msi" -ErrorAction SilentlyContinue
     Remove-Item -Path ".\do_upgrade.ps1" -ErrorAction SilentlyContinue
 }
 
 
-function get_wazuh_installation_directory {
+function get_verprotect_installation_directory {
     Start-NativePowerShell {
-        $path1 = "HKLM:\SOFTWARE\WOW6432Node\Wazuh, Inc.\Wazuh Agent"
-        $key1 = "WazuhInstallDir"
+        $path1 = "HKLM:\SOFTWARE\WOW6432Node\Verprotect, Inc.\Verprotect Agent"
+        $key1 = "VerprotectInstallDir"
 
         $path2 = "HKLM:\SOFTWARE\WOW6432Node\ossec"
         $key2 = "Install_Dir"
 
-        $WazuhInstallDir = $null
+        $VerprotectInstallDir = $null
 
         try {
-            $WazuhInstallDir = (Get-ItemProperty -Path $path1 -ErrorAction SilentlyContinue).$key1
+            $VerprotectInstallDir = (Get-ItemProperty -Path $path1 -ErrorAction SilentlyContinue).$key1
         }
         catch {
-            $WazuhInstallDir = $null
+            $VerprotectInstallDir = $null
         }
 
-        if ($null -eq $WazuhInstallDir) {
+        if ($null -eq $VerprotectInstallDir) {
             try {
-                $WazuhInstallDir = (Get-ItemProperty -Path $path2 -ErrorAction SilentlyContinue).$key2
+                $VerprotectInstallDir = (Get-ItemProperty -Path $path2 -ErrorAction SilentlyContinue).$key2
             }
             catch {
-                $WazuhInstallDir = $null
+                $VerprotectInstallDir = $null
             }
         }
 
-        if ($null -eq $WazuhInstallDir) {
-            Write-output "$(Get-Date -format u) - Couldn't find Wazuh in the registry. Upgrade will assume current path is correct" >> .\upgrade\upgrade.log
-            $WazuhInstallDir = (Get-Location).Path.TrimEnd('\')
+        if ($null -eq $VerprotectInstallDir) {
+            Write-output "$(Get-Date -format u) - Couldn't find Verprotect in the registry. Upgrade will assume current path is correct" >> .\upgrade\upgrade.log
+            $VerprotectInstallDir = (Get-Location).Path.TrimEnd('\')
         }
 
-        return $WazuhInstallDir
+        return $VerprotectInstallDir
     }
 }
 
 # Check process status
 function check-process {
-    $process_id = (Get-Process wazuh-agent).id
+    $process_id = (Get-Process verprotect-agent).id
     $counter = 10
     while($process_id -eq $null -And $counter -gt 0) {
         $counter--
-        Start-Service -Name "Wazuh"
+        Start-Service -Name "Verprotect"
         Start-Sleep 2
-        $process_id = (Get-Process wazuh-agent).id
+        $process_id = (Get-Process verprotect-agent).id
     }
     write-output "$(Get-Date -format u) - Process ID: $($process_id)." >> .\upgrade\upgrade.log
 }
 
-# Check new version and restart the Wazuh service
+# Check new version and restart the Verprotect service
 function check-installation {
 
     $actual_version = (Get-Content VERSION)
     $counter = 5
     while($actual_version -eq $current_version -And $counter -gt 0) {
-        write-output "$(Get-Date -format u) - Waiting for the Wazuh-Agent installation to end." >> .\upgrade\upgrade.log
+        write-output "$(Get-Date -format u) - Waiting for the Verprotect-Agent installation to end." >> .\upgrade\upgrade.log
         $counter--
         Start-Sleep 2
         $actual_version = (Get-Content VERSION)
     }
-    write-output "$(Get-Date -format u) - Starting Wazuh-Agent service." >> .\upgrade\upgrade.log
-    Start-Service -Name "Wazuh"
+    write-output "$(Get-Date -format u) - Starting Verprotect-Agent service." >> .\upgrade\upgrade.log
+    Start-Service -Name "Verprotect"
 }
 
 # Function to extract the version from the MSI using msiexec
 function get_msi_version {
-    $msiPath = (Get-Item ".\wazuh-agent*.msi").FullName
+    $msiPath = (Get-Item ".\verprotect-agent*.msi").FullName
     write-output "$(Get-Date -format u) - Extracting the version from MSI file." >> .\upgrade\upgrade.log
     try {
         # Extracting the version using msiexec and waiting for it to complete
@@ -143,12 +143,12 @@ function Get-MSIProductVersion {
 # Stop UI and launch the MSI installer
 function install {
     kill -processname win32ui -ErrorAction SilentlyContinue -Force
-    Stop-Service -Name "Wazuh"
+    Stop-Service -Name "Verprotect"
     Remove-Item .\upgrade\upgrade_result -ErrorAction SilentlyContinue
     write-output "$(Get-Date -format u) - Starting upgrade process." >> .\upgrade\upgrade.log
 
     try {
-        $msiPath = (Get-Item ".\wazuh-agent*.msi").Name
+        $msiPath = (Get-Item ".\verprotect-agent*.msi").Name
 
         if ($msi_new_version -ne $null -and $msi_new_version -eq $current_version) {
             write-output "$(Get-Date -format u) - Reinstalling the same version." >> .\upgrade\upgrade.log
@@ -164,13 +164,13 @@ function install {
     return $true
 }
 
-# Check that the Wazuh installation runs on the expected path
-$wazuhDir = get_wazuh_installation_directory
-$normalizedWazuhDir = $wazuhDir.TrimEnd('\')
+# Check that the Verprotect installation runs on the expected path
+$wazuhDir = get_verprotect_installation_directory
+$normalizedVerprotectDir = $wazuhDir.TrimEnd('\')
 $currentDir = (Get-Location).Path.TrimEnd('\')
 
-if ($normalizedWazuhDir -ne $currentDir) {
-    Write-Output "$(Get-Date -format u) - Current working directory is not the Wazuh installation directory. Aborting." >> .\upgrade\upgrade.log
+if ($normalizedVerprotectDir -ne $currentDir) {
+    Write-Output "$(Get-Date -format u) - Current working directory is not the Verprotect installation directory. Aborting." >> .\upgrade\upgrade.log
     Write-output "2" | out-file ".\upgrade\upgrade_result" -encoding ascii
     remove_upgrade_files
     exit 1
@@ -205,7 +205,7 @@ Start-Sleep 10
 
 # Check status file
 function Get-AgentStatus {
-    Select-String -Path '.\wazuh-agent.state' -Pattern "^status='(.+)'" | %{$_.Matches[0].Groups[1].value}
+    Select-String -Path '.\verprotect-agent.state' -Pattern "^status='(.+)'" | %{$_.Matches[0].Groups[1].value}
 }
 
 $status = Get-AgentStatus

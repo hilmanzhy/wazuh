@@ -1,6 +1,6 @@
 /*
- * Wazuh Database Daemon
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Database Daemon
+ * Copyright (C) 2015, Verprotect Inc.
  * January 16, 2018.
  *
  * This program is free software; you can redistribute it

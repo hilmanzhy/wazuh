@@ -1,6 +1,6 @@
 /*
- * Wazuh Module for custom command execution
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect Module for custom command execution
+ * Copyright (C) 2015, Verprotect Inc.
  * October 26, 2017.
  *
  * This program is free software; you can redistribute it
@@ -55,7 +55,7 @@ void * wm_command_main(wm_command_t * command) {
     }
 
 #ifdef CLIENT
-    if (!getDefine_Int("wazuh_command", "remote_commands", 0, 1) && command->agent_cfg) {
+    if (!getDefine_Int("verprotect_command", "remote_commands", 0, 1) && command->agent_cfg) {
         mtwarn(WM_COMMAND_LOGTAG, "Remote commands are disabled. Ignoring '%s'.", command->tag);
         pthread_exit(0);
     }

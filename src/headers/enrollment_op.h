@@ -1,4 +1,4 @@
-/* Copyright (C) 2015, Wazuh Inc.
+/* Copyright (C) 2015, Verprotect Inc.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it
@@ -12,7 +12,7 @@
  * @date 4 April 2020
  * @brief Library that handles the enrollment process of an agent
  *
- * Wazuh agents need to register to a manager before being able to start sending messages
+ * Verprotect agents need to register to a manager before being able to start sending messages
  * There are several way of registering according to manager's configuration
  * This library receives a enrollment configuration and target especification and registers to the
  * manager or shows several messages in case of failure

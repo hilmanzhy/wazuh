@@ -1,6 +1,6 @@
 /*
- * Wazuh SQLite integration
- * Copyright (C) 2015, Wazuh Inc.
+ * Verprotect SQLite integration
+ * Copyright (C) 2015, Verprotect Inc.
  * July 4, 2022.
  *
  * This program is free software; you can redistribute it
@@ -17,13 +17,13 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "../wazuh_db/wdb.h"
+#include "../verprotect_db/wdb.h"
 #include "../external/sqlite/sqlite3.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
 #include "../wrappers/wazuh/shared/debug_op_wrappers.h"
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/wazuh_db/wdb_agents_wrappers.h"
+#include "../wrappers/wazuh/verprotect_db/wdb_agents_wrappers.h"
 #include "../headers/os_err.h"
 
 static int test_setup(void **state) {

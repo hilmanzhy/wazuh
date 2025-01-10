@@ -18,21 +18,21 @@
 #include <stdlib.h>
 
 #include "shared.h"
-#include "../../wazuh_modules/wmodules.h"
-#include "../../wazuh_modules/wm_ms_graph.h"
-#include "../../wazuh_modules/wm_ms_graph.c"
+#include "../../verprotect_modules/wmodules.h"
+#include "../../verprotect_modules/wm_ms_graph.h"
+#include "../../verprotect_modules/wm_ms_graph.c"
 
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
 #include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wmodules_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
 #include "../../wrappers/wazuh/shared/time_op_wrappers.h"
 #include "../../wrappers/wazuh/shared/url_wrappers.h"
 #include "../../wrappers/wazuh/shared/schedule_scan_wrappers.h"
 #include "../../wrappers/libc/time_wrappers.h"
 #include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/wazuh_modules/wm_exec_wrappers.h"
+#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
 
 #define TEST_MAX_DATES 5
 #define TEST_MAX_TENANT 3
@@ -1316,7 +1316,7 @@ void test_main_token(void **state) {
     expect_string(__wrap__mtinfo, tag, WM_MS_GRAPH_LOGTAG);
     expect_string(__wrap__mtinfo, formatted_msg, "Obtaining access token.");
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1409,7 +1409,7 @@ void test_main_relationships(void **state) {
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:24:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run first scan.");
 
     will_return(__wrap_FOREVER, 0);
@@ -1624,7 +1624,7 @@ void test_wm_ms_graph_get_access_token_no_response(void **state) {
     module_data->resources[0].num_relationships = 1;
     size_t max_size = OS_SIZE_8192;
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1636,7 +1636,7 @@ void test_wm_ms_graph_get_access_token_no_response(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, NULL);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "No response received when attempting to obtain access token.");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -1689,7 +1689,7 @@ void test_wm_ms_graph_get_access_token_unsuccessful_status_code(void **state) {
     os_strdup("{\"error\":\"bad_request\"}", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1701,7 +1701,7 @@ void test_wm_ms_graph_get_access_token_unsuccessful_status_code(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Received unsuccessful status code when attempting to obtain access token: Status code was '400' & response was '{\"error\":\"bad_request\"}'");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -1755,7 +1755,7 @@ void test_wm_ms_graph_get_access_token_curl_max_size(void **state) {
     os_strdup("{\"error\":\"bad_request\"}", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1766,7 +1766,7 @@ void test_wm_ms_graph_get_access_token_curl_max_size(void **state) {
     expect_value(__wrap_wurl_http_request, timeout, WM_MS_GRAPH_DEFAULT_TIMEOUT);
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Reached maximum CURL size when attempting to obtain access token. Consider increasing the value of 'curl_max_size'.");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -1820,7 +1820,7 @@ void test_wm_ms_graph_get_access_token_parse_json_fail(void **state) {
     os_strdup("no json", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1831,7 +1831,7 @@ void test_wm_ms_graph_get_access_token_parse_json_fail(void **state) {
     expect_value(__wrap_wurl_http_request, timeout, WM_MS_GRAPH_DEFAULT_TIMEOUT);
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Failed to parse access token JSON body.");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -1886,7 +1886,7 @@ void test_wm_ms_graph_get_access_token_success(void **state) {
     os_strdup("{\"access_token\":\"token_value\",\"expires_in\":123}", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1954,7 +1954,7 @@ void test_wm_ms_graph_get_access_token_no_access_token(void **state) {
     os_strdup("{\"no_access_token\":\"token_value\",\"expires_in\":123}", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -1966,7 +1966,7 @@ void test_wm_ms_graph_get_access_token_no_access_token(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Incomplete access token response, value or expiration time not present.");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -2018,7 +2018,7 @@ void test_wm_ms_graph_get_access_token_no_expire_time(void **state) {
     os_strdup("{\"access_token\":\"token_value\",\"no_expires_in\":123}", response->body);
     os_strdup("test", response->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Access Token URL: 'https://login.microsoftonline.com/example_tenant/oauth2/v2.0/token'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2030,7 +2030,7 @@ void test_wm_ms_graph_get_access_token_no_expire_time(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Incomplete access token response, value or expiration time not present.");
 
     wm_ms_graph_get_access_token(module_data->auth_config[0], max_size);
@@ -2103,7 +2103,7 @@ void test_wm_ms_graph_scan_relationships_single_initial_only_no(void **state) {
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:24:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run first scan.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2243,7 +2243,7 @@ void test_wm_ms_graph_scan_relationships_single_initial_only_no_next_time_no_res
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2255,7 +2255,7 @@ void test_wm_ms_graph_scan_relationships_single_initial_only_no_next_time_no_res
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, NULL);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "No response received when attempting to get relationship 'alerts_v2' from resource 'security' on API version 'v1.0'.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2330,7 +2330,7 @@ void test_wm_ms_graph_scan_relationships_single_no_initial_no_timestamp(void **s
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:24:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run first scan.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2410,7 +2410,7 @@ void test_wm_ms_graph_scan_relationships_single_unsuccessful_status_code(void **
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2422,7 +2422,7 @@ void test_wm_ms_graph_scan_relationships_single_unsuccessful_status_code(void **
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Received unsuccessful status code when attempting to get relationship 'alerts_v2' logs: Status code was '400' & response was '{\"error\":\"bad_request\"}'");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2503,7 +2503,7 @@ void test_wm_ms_graph_scan_relationships_single_reached_curl_size(void **state) 
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2515,7 +2515,7 @@ void test_wm_ms_graph_scan_relationships_single_reached_curl_size(void **state) 
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Reached maximum CURL size when attempting to get relationship 'alerts_v2' logs. Consider increasing the value of 'curl_max_size'.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2596,7 +2596,7 @@ void test_wm_ms_graph_scan_relationships_single_failed_parse(void **state) {
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2608,7 +2608,7 @@ void test_wm_ms_graph_scan_relationships_single_failed_parse(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtwarn, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtwarn, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtwarn, formatted_msg, "Failed to parse relationship 'alerts_v2' JSON body.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2689,7 +2689,7 @@ void test_wm_ms_graph_scan_relationships_single_no_logs(void **state) {
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2701,7 +2701,7 @@ void test_wm_ms_graph_scan_relationships_single_no_logs(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug2, formatted_msg, "No new logs received.");
 
     expect_string(__wrap_wm_state_io, tag, "ms-graph-example_tenant-security-alerts_v2");
@@ -2710,7 +2710,7 @@ void test_wm_ms_graph_scan_relationships_single_no_logs(void **state) {
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:25:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run next scan.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2792,7 +2792,7 @@ void test_wm_ms_graph_scan_relationships_single_success_one_log(void **state) {
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2804,7 +2804,7 @@ void test_wm_ms_graph_scan_relationships_single_success_one_log(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log1\",\"resource\":\"security\",\"relationship\":\"alerts_v2\"}}'");
 
     int result = 1;
@@ -2822,7 +2822,7 @@ void test_wm_ms_graph_scan_relationships_single_success_one_log(void **state) {
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:25:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run next scan.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);
@@ -2897,7 +2897,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_logs(void **state) {
     will_return(__wrap_os_random, 12345);
 #endif
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/deviceManagement/detectedApps?$top=100'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2909,7 +2909,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_logs(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
 #ifdef TEST_WINAGENT
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"scan_id\":1234512345,\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log1\",\"managedDevices\":[],\"resource\":\"deviceManagement\",\"relationship\":\"detectedApps\"}}'");
 #else
@@ -2933,7 +2933,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_logs(void **state) {
     expect_string(__wrap__mterror, tag, WM_MS_GRAPH_LOGTAG);
     expect_string(__wrap__mterror, formatted_msg, "(1210): Queue 'queue/sockets/queue' not accessible: 'Error'");
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/deviceManagement/detectedApps/12345/managedDevices?$top=100&$select=id,deviceName'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2945,7 +2945,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_logs(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response2);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'next_page_url'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -2957,7 +2957,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_logs(void **state) {
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response3);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
 #ifdef TEST_WINAGENT
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"scan_id\":1234512345,\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log2\",\"id\":\"12345\",\"managedDevices\":[{\"id\":\"2345\"},{\"name\":\"test\"},{\"id\":\"3456\"}],\"resource\":\"deviceManagement\",\"relationship\":\"detectedApps\"}}'");
 #else
@@ -3040,7 +3040,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_pages(void **state) 
     os_strdup("{\"value\":[{\"full_log\":\"log3\"}]}", response2->body);
     os_strdup("test2", response2->header);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/deviceManagement/managedDevices?$top=100'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -3052,7 +3052,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_pages(void **state) 
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
 #ifdef TEST_WINAGENT
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"scan_id\":1234512345,\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log1\",\"resource\":\"deviceManagement\",\"relationship\":\"managedDevices\"}}'");
 #else
@@ -3076,7 +3076,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_pages(void **state) 
     expect_string(__wrap__mterror, tag, WM_MS_GRAPH_LOGTAG);
     expect_string(__wrap__mterror, formatted_msg, "(1210): Queue 'queue/sockets/queue' not accessible: 'Error'");
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
 #ifdef TEST_WINAGENT
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"scan_id\":1234512345,\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log2\",\"resource\":\"deviceManagement\",\"relationship\":\"managedDevices\"}}'");
 #else
@@ -3094,7 +3094,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_pages(void **state) 
     expect_value(__wrap_wm_sendmsg, loc, LOCALFILE_MQ);
     will_return(__wrap_wm_sendmsg, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'next_page_url'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -3106,7 +3106,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_pages(void **state) 
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response2);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
 #ifdef TEST_WINAGENT
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"scan_id\":1234512345,\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log3\",\"resource\":\"deviceManagement\",\"relationship\":\"managedDevices\"}}'");
 #else
@@ -3214,7 +3214,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/security/alerts_v2?$top=100&$filter=createdDateTime+ge+2023-02-08T12:24:56Z+and+createdDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -3226,7 +3226,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log1\",\"resource\":\"security\",\"relationship\":\"alerts_v2\"}}'");
 
     queue_fd = 0;
@@ -3243,7 +3243,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, 1);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Bookmark updated to '2023-02-08T12:25:56Z' for tenant 'example_tenant' resource 'security' and relationship 'alerts_v2', waiting '60' seconds to run next scan.");
 
     // resource auditlogs
@@ -3272,7 +3272,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     will_return(__wrap_strftime,"2023-02-08T12:25:56Z");
     will_return(__wrap_strftime, 20);
 
-    expect_string(__wrap__mtdebug1, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug1, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug1, formatted_msg, "Microsoft Graph API Log URL: 'https://graph.microsoft.com/v1.0/deviceManagement/auditEvents?$top=100&$filter=activityDateTime+ge+2023-02-08T12:24:56Z+and+activityDateTime+lt+2023-02-08T12:25:56Z'");
 
     expect_any(__wrap_wurl_http_request, method);
@@ -3284,7 +3284,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     expect_any(__wrap_wurl_http_request, ssl_verify);
     will_return(__wrap_wurl_http_request, response);
 
-    expect_string(__wrap__mtdebug2, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mtdebug2, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mtdebug2, formatted_msg, "Sending log: '{\"integration\":\"ms-graph\",\"ms-graph\":{\"full_log\":\"log1_resource_2\",\"resource\":\"deviceManagement\",\"relationship\":\"auditEvents\"}}'");
 
     queue_fd = 0;
@@ -3301,7 +3301,7 @@ void test_wm_ms_graph_scan_relationships_single_success_two_resources(void **sta
     expect_any(__wrap_wm_state_io, size);
     will_return(__wrap_wm_state_io, -1);
 
-    expect_string(__wrap__mterror, tag, "wazuh-modulesd:ms-graph");
+    expect_string(__wrap__mterror, tag, "verprotect-modulesd:ms-graph");
     expect_string(__wrap__mterror, formatted_msg, "Couldn't save running state.");
 
     wm_ms_graph_scan_relationships(module_data, module_data->auth_config[0], initial);

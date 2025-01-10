@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Verprotect Inc.
 # All rights reserved.
-# Wazuh.com
+# Verprotect.com
 
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public

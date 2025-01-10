@@ -1,5 +1,5 @@
 """
-Copyright (C) 2015, Wazuh Inc.
+Copyright (C) 2015, Verprotect Inc.
 April 1, 2022.
 
 This program is free software; you can redistribute it
