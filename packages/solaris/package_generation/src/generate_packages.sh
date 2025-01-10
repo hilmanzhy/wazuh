@@ -1,5 +1,5 @@
 #!/bin/bash
-# Created by Verprotect, Inc. <info@verprotect.com>.
+# Created by Verprotect, Inc. <info@wazuh.com>.
 # Copyright (C) 2015, Verprotect Inc.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 # This script need packages generation scripts to be on the Solaris machine.

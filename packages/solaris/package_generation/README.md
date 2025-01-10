@@ -17,7 +17,7 @@ To build a Solaris package using vagrant, you need to download this repository c
 
 1. Download this repository, copy the `solaris10` or `solaris11` directory into `package_generation/src` and go to the `package_generation` directory:
     ```bash
-    $ git clone https://github.com/verprotect/verprotect
+    $ git clone https://github.com/wazuh/wazuh
     $ cp -r verprotect/packages/solaris/solaris10 verprotect/packages/solaris/package_generation/src
     $ cd verprotect/packages/solaris/package_generation
     ```
@@ -102,7 +102,7 @@ To build a Solaris package using vagrant, you need to download this repository c
 
 ## Contribute
 
-If you want to contribute to our project please don't hesitate to send a pull request. You can also join our users [mailing list](https://groups.google.com/d/forum/verprotect) by sending an email to [verprotect+subscribe@googlegroups.com](mailto:verprotect+subscribe@googlegroups.com)or join our Slack channel by filling this [form](https://verprotect.com/community/join-us-on-slack/) to ask questions and participate in discussions.
+If you want to contribute to our project please don't hesitate to send a pull request. You can also join our users [mailing list](https://groups.google.com/d/forum/verprotect) by sending an email to [verprotect+subscribe@googlegroups.com](mailto:verprotect+subscribe@googlegroups.com)or join our Slack channel by filling this [form](https://wazuh.com/community/join-us-on-slack/) to ask questions and participate in discussions.
 
 ## License and copyright
 

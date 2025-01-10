@@ -30,7 +30,7 @@ https://github.com/BigAl/solaris-packer
 
 ## Contribute
 
-If you want to contribute to our project please don't hesitate to send a pull request. You can also join our users [mailing list](https://groups.google.com/d/forum/verprotect) by sending an email to [verprotect+subscribe@googlegroups.com](mailto:verprotect+subscribe@googlegroups.com)or join our Slack channel by filling this [form](https://verprotect.com/community/join-us-on-slack/) to ask questions and participate in discussions.
+If you want to contribute to our project please don't hesitate to send a pull request. You can also join our users [mailing list](https://groups.google.com/d/forum/verprotect) by sending an email to [verprotect+subscribe@googlegroups.com](mailto:verprotect+subscribe@googlegroups.com)or join our Slack channel by filling this [form](https://wazuh.com/community/join-us-on-slack/) to ask questions and participate in discussions.
 
 ## License and copyright
 

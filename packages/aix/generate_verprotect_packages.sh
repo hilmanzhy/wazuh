@@ -76,7 +76,7 @@ build_cmake() {
   mv ${socket_lib} ${socket_lib}.bkp
   mkdir -p /home/aix
   cd /home/aix
-  curl -LO http://packages-dev.verprotect.com/deps/aix/precompiled-aix-cmake-3.12.4.tar.gz -k -s
+  curl -LO http://packages-dev.wazuh.com/deps/aix/precompiled-aix-cmake-3.12.4.tar.gz -k -s
   ln -s /usr/bin/make /usr/bin/gmake
   gunzip precompiled-aix-cmake-3.12.4.tar.gz
   tar -xf precompiled-aix-cmake-3.12.4.tar && cd cmake-3.12.4
@@ -102,86 +102,86 @@ build_environment() {
 
   rpm="rpm -Uvh --nodeps"
 
-  $rpm http://packages-dev.verprotect.com/deps/aix/libiconv-1.14-22.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/autoconf-2.71-1.aix6.1.noarch.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/automake-1.16.2-1.aix6.1.noarch.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/bash-4.4-4.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/bzip2-1.0.6-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/coreutils-8.25-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/expat-2.2.6-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/expat-devel-2.2.6-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/gettext-0.17-1.aix5.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/glib2-2.33.2-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/glib2-devel-2.33.2-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/gmp-6.1.1-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/gmp-devel-6.1.1-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/grep-3.0-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/gzip-1.8-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/info-6.4-1.aix5.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/libffi-3.2.1-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/libidn-1.33-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/libsigsegv-2.10-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/libtool-2.4.6-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/m4-1.4.18-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/make-4.3-1.aix5.3.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/openldap-2.4.44-6.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/openssl-1.0.2g-3.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/openssl-devel-1.0.2g-3.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/pcre-8.42-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/pkg-config-0.29.1-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/readline-7.0-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/sed-4.7-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/wget-1.19-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/zlib-1.2.11-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/popt-1.16-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/rsync-3.1.2-3.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/tar-1.32-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/curl-7.72.0-1.aix5.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/readline-devel-7.0-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/guile-1.8.8-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/unixODBC-2.3.1-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/db-4.8.24-4.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/gdbm-1.10-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/ncurses-6.2-2.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/sqlite-3.33.0-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/sqlite-libs-3.33.0-1.aix6.1.ppc.rpm || true
-  $rpm http://packages-dev.verprotect.com/deps/aix/python-2.7.15-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/libiconv-1.14-22.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/autoconf-2.71-1.aix6.1.noarch.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/automake-1.16.2-1.aix6.1.noarch.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/bash-4.4-4.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/bzip2-1.0.6-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/coreutils-8.25-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/expat-2.2.6-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/expat-devel-2.2.6-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/gettext-0.17-1.aix5.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/glib2-2.33.2-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/glib2-devel-2.33.2-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/gmp-6.1.1-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/gmp-devel-6.1.1-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/grep-3.0-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/gzip-1.8-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/info-6.4-1.aix5.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/libffi-3.2.1-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/libidn-1.33-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/libsigsegv-2.10-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/libtool-2.4.6-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/m4-1.4.18-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/make-4.3-1.aix5.3.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/openldap-2.4.44-6.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/openssl-1.0.2g-3.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/openssl-devel-1.0.2g-3.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/pcre-8.42-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/pkg-config-0.29.1-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/readline-7.0-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/sed-4.7-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/wget-1.19-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/zlib-1.2.11-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/popt-1.16-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/rsync-3.1.2-3.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/tar-1.32-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/curl-7.72.0-1.aix5.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/readline-devel-7.0-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/guile-1.8.8-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/unixODBC-2.3.1-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/db-4.8.24-4.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/gdbm-1.10-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/ncurses-6.2-2.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/sqlite-3.33.0-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/sqlite-libs-3.33.0-1.aix6.1.ppc.rpm || true
+  $rpm http://packages-dev.wazuh.com/deps/aix/python-2.7.15-1.aix6.1.ppc.rpm || true
 
 
 
   if [[ "${aix_major}" = "6" ]] || [[ "${aix_major}" = "7" ]]; then
-    $rpm http://packages-dev.verprotect.com/deps/aix/mpfr-3.1.4-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libmpc-1.0.3-2.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/file-5.32-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/file-libs-5.32-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/perl-5.30.3-2.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/mpfr-3.1.4-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libmpc-1.0.3-2.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/file-5.32-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/file-libs-5.32-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/perl-5.30.3-2.aix6.1.ppc.rpm || true
   fi
 
   if [[ "${aix_major}" = "6" ]]; then
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-6.3.0-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-cpp-6.3.0-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libgcc-6.3.0-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix6.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-cpp-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libgcc-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix6.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix6.1.ppc.rpm || true
   fi
 
   if [[ "${aix_major}" = "7" ]] && [[ "${aix_minor}" = "1" ]]; then
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-6.3.0-1.aix7.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-cpp-6.3.0-1.aix7.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libgcc-6.3.0-1.aix7.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix7.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix7.1.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-cpp-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libgcc-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix7.1.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix7.1.ppc.rpm || true
   fi
 
   if [[ "${aix_major}" = "7" ]] && [[ "${aix_minor}" = "2" ]]; then
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-6.3.0-1.aix7.2.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-cpp-6.3.0-1.aix7.2.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libgcc-6.3.0-1.aix7.2.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix7.2.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix7.2.ppc.rpm || true
-    $rpm http://packages-dev.verprotect.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-cpp-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libgcc-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/libstdc%2B%2B-devel-6.3.0-1.aix7.2.ppc.rpm || true
+    $rpm http://packages-dev.wazuh.com/deps/aix/gcc-c%2B%2B-6.3.0-1.aix7.2.ppc.rpm || true
   fi
 
   build_perl

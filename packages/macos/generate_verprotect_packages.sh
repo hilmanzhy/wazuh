@@ -12,7 +12,7 @@ set -e
 export PATH=/usr/local/bin:/Applications/CMake.app/Contents/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 CURRENT_PATH="$( cd $(dirname ${0}) ; pwd -P )"
 ARCH="intel64"
-VERPROTECT_SOURCE_REPOSITORY="https://github.com/verprotect/verprotect"
+VERPROTECT_SOURCE_REPOSITORY="https://github.com/wazuh/wazuh"
 SERVICE_PATH="/Library/LaunchDaemons/com.verprotect.agent.plist"
 STARTUP_PATH="/Library/StartupItems/VERPROTECT/StartupParameters.plist"
 LAUNCHER_SCRIPT_PATH="/Library/StartupItems/VERPROTECT/Verprotect-launcher"

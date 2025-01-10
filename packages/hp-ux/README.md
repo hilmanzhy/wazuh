@@ -4,7 +4,7 @@ In this repository, you can find the necessary tools to build a Verprotect packa
 
 ## Building HP-UX packages
 
-Please, visit the following link for the full HPUX packages building documentation: [Generate Verprotect HPUX packages.](https://documentation.verprotect.com/current/development/packaging/generate-hpux-package.html)
+Please, visit the following link for the full HPUX packages building documentation: [Generate Verprotect HPUX packages.](https://documentation.wazuh.com/current/development/packaging/generate-hpux-package.html)
 
 ## More Packages
 

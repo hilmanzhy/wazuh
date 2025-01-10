@@ -1,5 +1,5 @@
 #!/bin/sh
-# Created by Verprotect, Inc. <info@verprotect.com>.
+# Created by Verprotect, Inc. <info@wazuh.com>.
 # Copyright (C) 2018 Verprotect Inc.
 # This program is a free software; you can redistribute
 # it and/or modify it under the terms of GPLv2
@@ -102,7 +102,7 @@ compute_version_revision() {
 
 download_source() {
     echo " Downloading source"
-    /usr/local/bin/curl -k -L -o "/verprotect.zip" "https://github.com/verprotect/verprotect/archive/${verprotect_branch}.zip"
+    /usr/local/bin/curl -k -L -o "/verprotect.zip" "https://github.com/wazuh/wazuh/archive/${verprotect_branch}.zip"
     /usr/local/bin/unzip /verprotect.zip
     mv verprotect-* ${source_directory}
     compute_version_revision

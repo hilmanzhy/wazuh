@@ -19,7 +19,7 @@ if [ -z "${BRANCH}"]; then
     mkdir /verprotect-local-src
     cp -r /local-src/* /verprotect-local-src
 else
-    URL_REPO=https://github.com/verprotect/verprotect/archive/${BRANCH}.zip
+    URL_REPO=https://github.com/wazuh/wazuh/archive/${BRANCH}.zip
 
     # Download the verprotect repository
     wget -O verprotect.zip ${URL_REPO} && unzip verprotect.zip

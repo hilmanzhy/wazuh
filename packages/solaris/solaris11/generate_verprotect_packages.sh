@@ -1,10 +1,10 @@
 #!/bin/bash
-# Created by Verprotect, Inc. <info@verprotect.com>.
+# Created by Verprotect, Inc. <info@wazuh.com>.
 # Copyright (C) 2015, Verprotect Inc.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 # Verprotect Solaris 11 Package builder.
 
-REPOSITORY="https://github.com/verprotect/verprotect"
+REPOSITORY="https://github.com/wazuh/wazuh"
 verprotect_branch="master"
 install_path="/var/ossec"
 THREADS="4"
@@ -74,7 +74,7 @@ build_environment() {
     /opt/csw/bin/pkgutil -y -i gcc5g++
 
     # Install precompiled gcc-5.5
-    curl -LO http://packages-dev.verprotect.com/deps/solaris/precompiled-solaris-gcc-5.5.0.tar.gz
+    curl -LO http://packages-dev.wazuh.com/deps/solaris/precompiled-solaris-gcc-5.5.0.tar.gz
     gtar -xzvf precompiled-solaris-gcc-5.5.0.tar.gz > /dev/null
     cd gcc-5.5.0
     gmake install > /dev/null
@@ -83,7 +83,7 @@ build_environment() {
     ln -sf /usr/local/gcc-5.5.0/bin/g++ /usr/bin/g++
 
     # Install precompiled cmake-3.18.3
-    curl -LO http://packages-dev.verprotect.com/deps/solaris/precompiled-solaris-cmake-3.18.3.tar.gz
+    curl -LO http://packages-dev.wazuh.com/deps/solaris/precompiled-solaris-cmake-3.18.3.tar.gz
     gtar -xzvf precompiled-solaris-cmake-3.18.3.tar.gz > /dev/null
     cd cmake-3.18.3
     gmake install > /dev/null

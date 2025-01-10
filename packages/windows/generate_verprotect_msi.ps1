@@ -1,4 +1,4 @@
-# Created by Verprotect, Inc. <info@verprotect.com>.
+# Created by Verprotect, Inc. <info@wazuh.com>.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 
 param (

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Created by Verprotect, Inc. <info@verprotect.com>.
+# Created by Verprotect, Inc. <info@wazuh.com>.
 # Copyright (C) 2015, Verprotect Inc.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 # Verprotect Solaris 10 Package builder.
@@ -10,7 +10,7 @@ verprotect_branch="$(echo "$2" | cut -d "/" -f2)"
 PATH=$PATH:/opt/csw/bin:/usr/sfw/bin
 VERSION=""
 CURRENT_PATH="$( cd $(dirname $0) ; pwd -P )"
-REPOSITORY="https://github.com/verprotect/verprotect"
+REPOSITORY="https://github.com/wazuh/wazuh"
 ARCH=`uname -p`
 install_path="/var/ossec"
 THREADS=4
@@ -91,7 +91,7 @@ build_environment(){
     pkgadd -a ${CURRENT_PATH}/noaskfile -d gmake-4.2.1%2cREV%3d2016.08.04-SunOS5.10-sparc-CSW.pkg -n all
 
     # Install precompiled gcc-5.5
-    curl -LO http://packages-dev.verprotect.com/deps/solaris/precompiled-solaris-gcc-5.5.0.tar.gz
+    curl -LO http://packages-dev.wazuh.com/deps/solaris/precompiled-solaris-gcc-5.5.0.tar.gz
     gtar -xzvf precompiled-solaris-gcc-5.5.0.tar.gz > /dev/null
     cd gcc-5.5.0
     gmake install > /dev/null
@@ -100,7 +100,7 @@ build_environment(){
     ln -sf /usr/local/gcc-5.5.0/bin/g++ /usr/bin/g++
 
     # Install precompiled cmake-3.18.3
-    curl -LO http://packages-dev.verprotect.com/deps/solaris/precompiled-solaris-cmake-3.18.3.tar.gz
+    curl -LO http://packages-dev.wazuh.com/deps/solaris/precompiled-solaris-cmake-3.18.3.tar.gz
     gtar -xzvf precompiled-solaris-cmake-3.18.3.tar.gz > /dev/null
     cd cmake-3.18.3
     gmake install > /dev/null

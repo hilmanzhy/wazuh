@@ -1,10 +1,10 @@
 Source: verprotect-manager
 Section: admin
 Priority: extra
-Maintainer: Verprotect, Inc <info@verprotect.com>
+Maintainer: Verprotect, Inc <info@wazuh.com>
 Build-Depends: debhelper (>= 7.0.50~), libssl-dev, linux-libc-dev, gawk, libaudit-dev, selinux-basics
 Standards-Version: 3.8.4
-Homepage: http://www.verprotect.com
+Homepage: http://www.wazuh.com
 
 Package: verprotect-manager
 Architecture: any

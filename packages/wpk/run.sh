@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 DIRECTORY="verprotect*"
-REPOSITORY="https://github.com/verprotect/verprotect"
+REPOSITORY="https://github.com/wazuh/wazuh"
 REFERENCE=""
 OUT_NAME=""
 CHECKSUM="no"
