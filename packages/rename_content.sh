@@ -89,3 +89,5 @@ replace_content "$start_dir"
 
 echo "Renaming and content replacement completed!"
 
+# find . -type f -name '*wazuh*' -exec bash -c 'mv "$0" "${0//wazuh/verprotect}"' {} \;
+# find . -type d -name '*wazuh*' -exec bash -c 'mv "$0" "${0//wazuh/verprotect}"' {} \;
