@@ -21,10 +21,10 @@
 #include "wrappers/libc/stdio_wrappers.h"
 #include "wrappers/libc/stdlib_wrappers.h"
 #include "wrappers/posix/unistd_wrappers.h"
-#include "wrappers/wazuh/shared/audit_op_wrappers.h"
-#include "wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "wrappers/wazuh/shared/file_op_wrappers.h"
-#include "wrappers/wazuh/syscheckd/audit_rule_handling_wrappers.h"
+#include "wrappers/verprotect/shared/audit_op_wrappers.h"
+#include "wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "wrappers/verprotect/shared/file_op_wrappers.h"
+#include "wrappers/verprotect/syscheckd/audit_rule_handling_wrappers.h"
 
 
 #define PERMS (AUDIT_PERM_WRITE | AUDIT_PERM_ATTR)

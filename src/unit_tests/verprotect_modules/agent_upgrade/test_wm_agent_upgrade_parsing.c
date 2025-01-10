@@ -13,8 +13,8 @@
 #include <cmocka.h>
 #include <stdio.h>
 
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_agent_upgrade_wrappers.h"
 
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/agent_upgrade/manager/wm_agent_upgrade_parsing.h"

@@ -206,15 +206,15 @@ Section "Verprotect Agent (required)" MainSec
     File /oname=help.txt help_win.txt
     File vista_sec.txt
     File /oname=active-response\bin\route-null.exe route-null.exe
-    File /oname=active-response\bin\restart-wazuh.exe restart-wazuh.exe
+    File /oname=active-response\bin\restart-verprotect.exe restart-verprotect.exe
     File /oname=active-response\bin\netsh.exe netsh.exe
     File /oname=libwinpthread-1.dll libwinpthread-1.dll
     File /oname=libgcc_s_dw2-1.dll libgcc_s_dw2-1.dll
     File /oname=libstdc++-6.dll libstdc++-6.dll
     File agent-auth.exe
     File /oname=wpk_root.pem ..\..\etc\wpk_root.pem
-    File /oname=libwazuhext.dll ..\libwazuhext.dll
-    File /oname=libwazuhshared.dll ..\libwazuhshared.dll
+    File /oname=libverprotectext.dll ..\libverprotectext.dll
+    File /oname=libverprotectshared.dll ..\libverprotectshared.dll
     File /oname=dbsync.dll ..\shared_modules\dbsync\build\bin\dbsync.dll
     File /oname=rsync.dll ..\shared_modules\rsync\build\bin\rsync.dll
     File /oname=sysinfo.dll ..\data_provider\build\bin\sysinfo.dll

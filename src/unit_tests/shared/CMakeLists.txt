@@ -1,5 +1,5 @@
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 if(${TARGET} STREQUAL "winagent")
     link_directories(${SRC_FOLDER}/syscheckd/build/bin)
@@ -221,7 +221,7 @@ endif()
 list(APPEND shared_tests_names "test_fs_op")
 list(APPEND shared_tests_flags " ")
 
-list(APPEND shared_tests_names "test_wazuhdb_op")
+list(APPEND shared_tests_names "test_verprotectdb_op")
 list(APPEND shared_tests_flags "-Wl,--wrap,OS_ConnectUnixDomain -Wl,--wrap,OS_SendSecureTCP -Wl,--wrap,OS_RecvSecureTCP")
 endif()
 

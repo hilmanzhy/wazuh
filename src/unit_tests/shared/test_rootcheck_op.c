@@ -14,7 +14,7 @@
 
 #include "shared.h"
 
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 #include "../wrappers/posix/unistd_wrappers.h"
 
 /* setup/teardown */

@@ -24,9 +24,9 @@ include_directories(${SRC_FOLDER}/shared_modules/router/include/)
 add_definitions(-DVERPROTECT_UNIT_TESTING)
 
 # Verprotect libraries
-find_library(VERPROTECTLIB NAMES libwazuh.a HINTS "${SRC_FOLDER}")
+find_library(VERPROTECTLIB NAMES libverprotect.a HINTS "${SRC_FOLDER}")
 if(NOT VERPROTECTLIB)
-  message(FATAL_ERROR "libwazuh.a not found in ${SRC_FOLDER} Aborting...")
+  message(FATAL_ERROR "libverprotect.a not found in ${SRC_FOLDER} Aborting...")
 endif()
 
 # Enable testing
@@ -54,7 +54,7 @@ else()
 endif()
 
 if(NOT VERPROTECTEXT)
-  message(FATAL_ERROR "libwazuhext not found! Aborting...")
+  message(FATAL_ERROR "libverprotectext not found! Aborting...")
 endif()
 
 if((${uname} STREQUAL "Linux") OR (${uname} STREQUAL "Win32"))

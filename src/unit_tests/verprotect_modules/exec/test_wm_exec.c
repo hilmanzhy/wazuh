@@ -16,7 +16,7 @@
 #include "shared.h"
 #include "../../../verprotect_modules/wmodules.h"
 
-#include "../../wrappers/wazuh/shared/list_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/list_op_wrappers.h"
 #include "../../wrappers/posix/signal_wrappers.h"
 
 #define COMMAND u8"Powershell -c \"@{ winCounter = (Get-Counter '\\mémoire\\mégaoctets disponibles').CounterSamples[0] } | ConvertTo-Json -compress\""

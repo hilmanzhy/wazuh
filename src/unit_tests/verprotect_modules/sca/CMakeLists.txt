@@ -16,7 +16,7 @@ list(APPEND use_shared_libs 1)
 list(APPEND shared_libs "../scheduling/wmodules_scheduling_helpers.h")
 list(APPEND shared_libs "../scheduling/wmodules_scheduling_helpers.c")
 
-# Generate wazuh modules library
+# Generate verprotect modules library
 file(GLOB sca ../../../verprotect_modules/*.o)
 list(REMOVE_ITEM sca ../../../verprotect_modules/main.o)
 

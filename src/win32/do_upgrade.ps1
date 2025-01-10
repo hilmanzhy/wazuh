@@ -165,8 +165,8 @@ function install {
 }
 
 # Check that the Verprotect installation runs on the expected path
-$wazuhDir = get_verprotect_installation_directory
-$normalizedVerprotectDir = $wazuhDir.TrimEnd('\')
+$verprotectDir = get_verprotect_installation_directory
+$normalizedVerprotectDir = $verprotectDir.TrimEnd('\')
 $currentDir = (Get-Location).Path.TrimEnd('\')
 
 if ($normalizedVerprotectDir -ne $currentDir) {

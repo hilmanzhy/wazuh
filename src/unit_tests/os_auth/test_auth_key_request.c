@@ -20,17 +20,17 @@
 #include "../../addagent/manage_agents.h"
 #include "../../headers/sec.h"
 
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/exec_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/exec_op_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
-#include "../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
+#include "../wrappers/verprotect/verprotect_modules/wm_exec_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
 #include "../wrappers/posix/pthread_wrappers.h"
 #include "../wrappers/linux/socket_wrappers.h"
 #include "../wrappers/posix/unistd_wrappers.h"
-#include "../wrappers/wazuh/os_auth/os_auth_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/os_auth/os_auth_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
 
 #define BUFFERSIZE 1024
 #define QUEUE_SIZE 5

@@ -40,7 +40,7 @@ link_directories(${SRC_FOLDER}/external/rocksdb/build)
 
 add_library(keystore STATIC ${KEYSTORE_SRC})
 
-target_link_libraries(keystore rocksdb wazuhext)
+target_link_libraries(keystore rocksdb verprotectext)
 
 add_executable(verprotect-keystore src/main.cpp)
 

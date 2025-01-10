@@ -22,17 +22,17 @@
 #include "../headers/read-alert.h"
 #include "../../os_csyslogd/csyslogd.h"
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/json_queue_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/json_queue_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
 #include "../wrappers/linux/socket_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
 #include "../wrappers/posix/time_wrappers.h"
 #include "../wrappers/externals/pcre2/pcre2_wrappers.h"
-#include "../wrappers/wazuh/shared/validate_op_wrappers.h"
+#include "../wrappers/verprotect/shared/validate_op_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
-#include "../wrappers/wazuh/shared/file_op_wrappers.h"
+#include "../wrappers/verprotect/shared/file_op_wrappers.h"
 
 #define MAX_FOREVER_ITS (10)
 

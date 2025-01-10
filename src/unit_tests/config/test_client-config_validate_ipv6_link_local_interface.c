@@ -14,8 +14,8 @@
 #include <stdio.h>
 
 #include "../../config/client-config.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
 
 /* tests */
 

@@ -6,7 +6,7 @@
 # Foundation.
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Tests list and flags
 list(APPEND tests_names "test_wm_github")
@@ -28,7 +28,7 @@ list(APPEND use_shared_libs 1)
 list(APPEND shared_libs "../scheduling/wmodules_scheduling_helpers.h")
 list(APPEND shared_libs "../scheduling/wmodules_scheduling_helpers.c")
 
-# Generate wazuh modules library
+# Generate verprotect modules library
 file(GLOB github ../../../verprotect_modules/*.o)
 list(REMOVE_ITEM github ../../../verprotect_modules/main.o)
 

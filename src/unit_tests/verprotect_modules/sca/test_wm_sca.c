@@ -23,13 +23,13 @@
 
 #include "../../wrappers/common.h"
 #include "../../wrappers/posix/dirent_wrappers.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/file_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/pthreads_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/validate_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/file_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/mq_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/pthreads_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/validate_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wmodules_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_exec_wrappers.h"
 
 #define TEST_MAX_DATES 3
 

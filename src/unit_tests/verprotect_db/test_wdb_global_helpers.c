@@ -17,16 +17,16 @@
 #include <stdlib.h>
 
 #include "../verprotect_db/helpers/wdb_global_helpers.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 #include "../wrappers/posix/dirent_wrappers.h"
-#include "../wrappers/wazuh/shared/file_op_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/rbtree_op_wrappers.h"
+#include "../wrappers/verprotect/shared/file_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/rbtree_op_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
 #include "../wrappers/libc/string_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 #include "../wrappers/posix/stat_wrappers.h"
 
 extern int test_mode;

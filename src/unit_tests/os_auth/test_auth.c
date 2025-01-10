@@ -20,9 +20,9 @@
 #include "../../headers/sec.h"
 #include "../../addagent/manage_agents.h"
 
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/os_auth/os_auth_wrappers.h"
-#include "../wrappers/wazuh/shared/randombytes_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/os_auth/os_auth_wrappers.h"
+#include "../wrappers/verprotect/shared/randombytes_wrappers.h"
 
 /* tests */
 

@@ -15,14 +15,14 @@
 #include <string.h>
 
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/client-agent/start_agent.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/validate_op_wrappers.h"
-#include "../wrappers/wazuh/monitord/monitord_wrappers.h"
+#include "../wrappers/verprotect/client-agent/start_agent.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/validate_op_wrappers.h"
+#include "../wrappers/verprotect/monitord/monitord_wrappers.h"
 
 #ifdef TEST_WINAGENT
-#include "../wrappers/wazuh/shared/randombytes_wrappers.h"
+#include "../wrappers/verprotect/shared/randombytes_wrappers.h"
 #endif
 
 #include "../client-agent/agentd.h"

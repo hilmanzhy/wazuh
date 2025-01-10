@@ -245,7 +245,7 @@
             }
           }
         },
-        "wazuh": {
+        "verprotect": {
           "properties": {
             "cluster": {
               "properties": {

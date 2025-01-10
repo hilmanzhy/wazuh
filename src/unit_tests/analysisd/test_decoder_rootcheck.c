@@ -15,8 +15,8 @@
 #include "../../config/global-config.h"
 #include "../../analysisd/eventinfo.h"
 #include "../../verprotect_db/wdb.h"
-#include "../wrappers/wazuh/shared/rootcheck_op_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/rootcheck_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 
 #define TEST_AGENT_ID "005"
 #define TEST_TIME     10005

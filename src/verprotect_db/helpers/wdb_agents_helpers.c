@@ -10,7 +10,7 @@
  */
 
 #include "wdb_agents_helpers.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 static const char *agents_db_commands[] = {
     [WDB_AGENTS_SYS_OSINFO_GET] = "agent %d osinfo get",

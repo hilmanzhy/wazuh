@@ -28,7 +28,7 @@ set_target_properties(
 target_link_libraries(WMODULES_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate wmodules tests
 list(APPEND wmodules_names "test_wmodules")

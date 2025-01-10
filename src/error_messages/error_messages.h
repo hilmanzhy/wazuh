@@ -594,10 +594,10 @@
 #define OS_AG_DISCON    "ossec: Agent disconnected: '%s'."
 #define OS_AG_REMOVED   "ossec: Agent removed: '%s'."
 
-#define OS_NORMAL_BUFFER  "wazuh: Agent buffer: 'normal'."
-#define OS_WARN_BUFFER  "wazuh: Agent buffer: '%d%%'."
-#define OS_FULL_BUFFER  "wazuh: Agent buffer: 'full'."
-#define OS_FLOOD_BUFFER "wazuh: Agent buffer: 'flooded'."
+#define OS_NORMAL_BUFFER  "verprotect: Agent buffer: 'normal'."
+#define OS_WARN_BUFFER  "verprotect: Agent buffer: '%d%%'."
+#define OS_FULL_BUFFER  "verprotect: Agent buffer: 'full'."
+#define OS_FLOOD_BUFFER "verprotect: Agent buffer: 'flooded'."
 
 /* WIN32 errors */
 #define CONF_ERROR      "Could not read (%s) (Make sure config exists and executable is running with Administrative privileges)."

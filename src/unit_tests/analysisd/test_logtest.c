@@ -15,8 +15,8 @@
 
 #include "../../headers/shared.h"
 #include "../../analysisd/logtest.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/os_xml/os_xml_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/os_xml/os_xml_wrappers.h"
 
 int w_logtest_init_parameters();
 void * w_logtest_init();

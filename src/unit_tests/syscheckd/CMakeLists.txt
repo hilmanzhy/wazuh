@@ -28,13 +28,13 @@ if(${TARGET} STREQUAL "winagent")
        ${SRC_FOLDER}/unit_tests/wrappers/linux/*.o
        ${SRC_FOLDER}/unit_tests/wrappers/posix/*.o
        ${SRC_FOLDER}/unit_tests/wrappers/wazuh/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/os_crypto/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/os_net/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/os_regex/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/syscheckd/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/verprotect_db/*.o
-       ${SRC_FOLDER}/unit_tests/wrappers/wazuh/verprotect_modules/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/os_crypto/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/os_net/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/os_regex/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/syscheckd/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/verprotect_db/*.o
+       ${SRC_FOLDER}/unit_tests/wrappers/verprotect/verprotect_modules/*.o
        ${SRC_FOLDER}/unit_tests/wrappers/windows/*.o
        ${SRC_FOLDER}/unit_tests/wrappers/windows/libc/*.o
        )
@@ -80,7 +80,7 @@ set_target_properties(fim_shared PROPERTIES LINKER_LANGUAGE C )
 
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate syscheckd-event library
 if(${TARGET} STREQUAL "winagent")

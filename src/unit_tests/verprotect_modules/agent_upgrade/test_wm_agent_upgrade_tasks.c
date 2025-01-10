@@ -15,12 +15,12 @@
 
 #include "../../wrappers/common.h"
 #include "../../wrappers/posix/unistd_wrappers.h"
-#include "../../wrappers/wazuh/shared/agent_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/cluster_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../../wrappers/wazuh/os_net/os_net_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/verprotect/shared/agent_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/cluster_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../../wrappers/verprotect/os_net/os_net_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_agent_upgrade_wrappers.h"
 
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/agent_upgrade/manager/wm_agent_upgrade_tasks.h"

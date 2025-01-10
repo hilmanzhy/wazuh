@@ -4,7 +4,7 @@
   - [Index](#index)
   - [Purpose](#purpose)
   - [Dependencies](#dependencies)
-  - [Compile Verprotect](#compile-wazuh)
+  - [Compile Verprotect](#compile-verprotect)
   - [How to use the tool](#how-to-use-the-tool)
     - [Optional arguments:](#optional-arguments)
 
@@ -21,7 +21,7 @@ There are several modules needed in order to the tool to work correctly.
   - scan-build-12
 
 ## Compile Verprotect
-In order to run unit tests on a specific wazuh target, the project needs to be built with the `DEBUG` and `TEST` options as shown below:
+In order to run unit tests on a specific verprotect target, the project needs to be built with the `DEBUG` and `TEST` options as shown below:
 ```
 make TARGET=server|agent DEBUG=1 TEST=1
 ```
@@ -96,7 +96,7 @@ shared_modules/dbsync > [make: PASSED]
 <shared_modules/dbsync>=================== Running Coverage    ===================<shared_modules/dbsync>
 [lcov info: GENERATED]
 [genhtml info: GENERATED]
-Report: /root/repos/wazuh/src/shared_modules/dbsync/coverage_report/index.html
+Report: /root/repos/verprotect/src/shared_modules/dbsync/coverage_report/index.html
 [Lines Coverage 95.1%: PASSED]
 [Functions Coverage 98.0%: PASSED]
 <shared_modules/dbsync>=================== Running AStyle      ===================<shared_modules/dbsync>
@@ -112,22 +112,22 @@ Report: /root/repos/wazuh/src/shared_modules/dbsync/coverage_report/index.html
 shared_modules/dbsync > [make: PASSED]
 [Cleanfolder : PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a snapshotsUpdate/insertData.json,snapshotsUpdate/updateWithSnapshot.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a snapshotsUpdate/insertData.json,snapshotsUpdate/updateWithSnapshot.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a InsertionUpdateDeleteSelect/inputSyncRowInsert.json,InsertionUpdateDeleteSelect/inputSyncRowModified.json,InsertionUpdateDeleteSelect/deleteRows.json,InsertionUpdateDeleteSelect/inputSelectRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a InsertionUpdateDeleteSelect/inputSyncRowInsert.json,InsertionUpdateDeleteSelect/inputSyncRowModified.json,InsertionUpdateDeleteSelect/deleteRows.json,InsertionUpdateDeleteSelect/inputSelectRows.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/pksGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/pksGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/fullyGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/fullyGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
 [TestTool: PASSED]
 <shared_modules/dbsync>[ASAN: PASSED]<shared_modules/dbsync>
 <shared_modules/dbsync>[RTR: PASSED]<shared_modules/dbsync>
@@ -176,9 +176,9 @@ Output Example executing the RTR tool with `syscheck` module and target `winagen
  [make: PASSED]
  [Cleanfolder : PASSED]
  <TESTTOOL>=============== Running TEST TOOL   ===============<TESTTOOL>
- /home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src/syscheckd/build/bin/fimdb_test_tool -c config.json -a FimDBTransaction/StartTransaction.json,FimDBTransaction/SyncTxnRows_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/CountFiles.json,FimDBTransaction/StartTransaction.json,FimDBTransaction/SyncTxnRows_2.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/CountFiles.json -o ./output/fileTransaction
+ /home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src/syscheckd/build/bin/fimdb_test_tool -c config.json -a FimDBTransaction/StartTransaction.json,FimDBTransaction/SyncTxnRows_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/CountFiles.json,FimDBTransaction/StartTransaction.json,FimDBTransaction/SyncTxnRows_2.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/CountFiles.json -o ./output/fileTransaction
  <TESTTOOL>=============== Running TEST TOOL   ===============<TESTTOOL>
- /home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src/syscheckd/build/bin/fimdb_test_tool -c config.json -a atomicFileOperations/SyncRow_1.json,atomicFileOperations/SyncRow_2.json,atomicFileOperations/CountFiles.json,atomicFileOperations/SyncRow_3.json,atomicFileOperations/DeleteFile.json,atomicFileOperations/CountFiles.json,atomicFileOperations/GetFile.json -o ./output/AtomicOperations
+ /home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src/syscheckd/build/bin/fimdb_test_tool -c config.json -a atomicFileOperations/SyncRow_1.json,atomicFileOperations/SyncRow_2.json,atomicFileOperations/CountFiles.json,atomicFileOperations/SyncRow_3.json,atomicFileOperations/DeleteFile.json,atomicFileOperations/CountFiles.json,atomicFileOperations/GetFile.json -o ./output/AtomicOperations
  [ASAN: PASSED]
  <syscheckd>=============== Running TEST TOOL for Windows =====<syscheckd>
  [CleanAll: PASSED]
@@ -188,9 +188,9 @@ Output Example executing the RTR tool with `syscheck` module and target `winagen
  <winagent>=============== Running Make project ==============<winagent>
  [MakeTarget: PASSED]
  <TESTTOOL>=============== Running TEST TOOL   ===============<TESTTOOL>
- WINEPATH="/usr/i686-w64-mingw32/lib;/home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src"                            WINEARCH=win64 /usr/bin/wine /home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src/syscheckd/build/bin/fimdb_test_tool.exe -c configWindows.json -a FimDBTransaction/StartTransactionRegistryKey.json,FimDBTransaction/SyncTxnRowsRegistryKey_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/StartTransactionRegistryKey.json,FimDBTransaction/SyncTxnRowsRegistryKey_2.json,FimDBTransaction/GetDeletedRows.json -o ./output/registryKeyTransaction
+ WINEPATH="/usr/i686-w64-mingw32/lib;/home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src"                            WINEARCH=win64 /usr/bin/wine /home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src/syscheckd/build/bin/fimdb_test_tool.exe -c configWindows.json -a FimDBTransaction/StartTransactionRegistryKey.json,FimDBTransaction/SyncTxnRowsRegistryKey_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/StartTransactionRegistryKey.json,FimDBTransaction/SyncTxnRowsRegistryKey_2.json,FimDBTransaction/GetDeletedRows.json -o ./output/registryKeyTransaction
  <TESTTOOL>=============== Running TEST TOOL   ===============<TESTTOOL>
- WINEPATH="/usr/i686-w64-mingw32/lib;/home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src"                            WINEARCH=win64 /usr/bin/wine /home/francorivero/Desktop/Verprotect_repositories/vagrant/wazuh/src/syscheckd/build/bin/fimdb_test_tool.exe -c configWindows.json -a FimDBTransaction/StartTransactionRegistryData.json,FimDBTransaction/SyncTxnRowsRegistryData_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/StartTransactionRegistryData.json,FimDBTransaction/SyncTxnRowsRegistryData_2.json,FimDBTransaction/GetDeletedRows.json -o ./output/registryDataTransaction
+ WINEPATH="/usr/i686-w64-mingw32/lib;/home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src"                            WINEARCH=win64 /usr/bin/wine /home/francorivero/Desktop/Verprotect_repositories/vagrant/verprotect/src/syscheckd/build/bin/fimdb_test_tool.exe -c configWindows.json -a FimDBTransaction/StartTransactionRegistryData.json,FimDBTransaction/SyncTxnRowsRegistryData_1.json,FimDBTransaction/GetDeletedRows.json,FimDBTransaction/StartTransactionRegistryData.json,FimDBTransaction/SyncTxnRowsRegistryData_2.json,FimDBTransaction/GetDeletedRows.json -o ./output/registryDataTransaction
  [TEST TOOL for Windows: PASSED]
  [TestTool check: PASSED]
  <syscheckd>[RTR: PASSED]<syscheckd>
@@ -216,22 +216,22 @@ Output Example executing the ASAN tests with `dbsync` module:
 shared_modules/dbsync > [make: PASSED]
 [Cleanfolder : PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a snapshotsUpdate/insertData.json,snapshotsUpdate/updateWithSnapshot.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a snapshotsUpdate/insertData.json,snapshotsUpdate/updateWithSnapshot.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a InsertionUpdateDeleteSelect/inputSyncRowInsert.json,InsertionUpdateDeleteSelect/inputSyncRowModified.json,InsertionUpdateDeleteSelect/deleteRows.json,InsertionUpdateDeleteSelect/inputSelectRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a InsertionUpdateDeleteSelect/inputSyncRowInsert.json,InsertionUpdateDeleteSelect/inputSyncRowModified.json,InsertionUpdateDeleteSelect/deleteRows.json,InsertionUpdateDeleteSelect/inputSelectRows.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/pksGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/pksGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/fullyGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a txnOperation/createTxn.json,txnOperation/inputSyncRowInsertTxn.json,txnOperation/fullyGetDeletedRows.json,txnOperation/inputSyncRowModifiedTxn.json,txnOperation/closeTxn.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
 [TestTool: PASSED]
 <TESTTOOL>=================== Running TEST TOOL   ===================<TESTTOOL>
-/root/repos/wazuh/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
+/root/repos/verprotect/src/shared_modules/dbsync/build/bin/dbsync_test_tool -c config.json -a triggerActions/insertDataProcesses.json,triggerActions/insertDataSocket.json,triggerActions/addTableRelationship.json,triggerActions/deleteRows.json -o ./output
 [TestTool: PASSED]
 <shared_modules/dbsync>[ASAN: PASSED]<shared_modules/dbsync>
 ```

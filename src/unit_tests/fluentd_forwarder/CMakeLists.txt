@@ -20,7 +20,7 @@ set_target_properties(
 target_link_libraries(FLUENTD_FORWARDER_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate fluentd_forwarder tests
 list(APPEND fluentd_forwarder_names "test_fluentd_forwarder")

@@ -8,7 +8,7 @@
  */
 
 #include "wmodules_scheduling_helpers.h"
-#include "../../wrappers/wazuh/shared/time_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/time_op_wrappers.h"
 #include <time.h>
 
 extern time_t __real_time(time_t *_time);

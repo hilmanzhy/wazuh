@@ -8,7 +8,7 @@
  * Foundation.
  */
 
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 #ifndef WIN32
 

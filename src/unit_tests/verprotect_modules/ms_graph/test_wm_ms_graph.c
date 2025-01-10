@@ -25,14 +25,14 @@
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
-#include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
-#include "../../wrappers/wazuh/shared/time_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/url_wrappers.h"
-#include "../../wrappers/wazuh/shared/schedule_scan_wrappers.h"
+#include "../../wrappers/verprotect/shared/mq_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wmodules_wrappers.h"
+#include "../../wrappers/verprotect/shared/time_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/url_wrappers.h"
+#include "../../wrappers/verprotect/shared/schedule_scan_wrappers.h"
 #include "../../wrappers/libc/time_wrappers.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_exec_wrappers.h"
 
 #define TEST_MAX_DATES 5
 #define TEST_MAX_TENANT 3

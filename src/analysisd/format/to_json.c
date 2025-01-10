@@ -69,7 +69,7 @@ char* Eventinfo_to_jsonstr(const Eventinfo* lf, bool force_full_log, OSList * li
         if(Config.cluster_name)
             cJSON_AddStringToObject(cluster, "name", Config.cluster_name);
         else
-            cJSON_AddStringToObject(cluster, "name", "wazuh");
+            cJSON_AddStringToObject(cluster, "name", "verprotect");
 
         if(Config.node_name)
             cJSON_AddStringToObject(cluster, "node", Config.node_name);

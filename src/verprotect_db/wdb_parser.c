@@ -9,7 +9,7 @@
  * Foundation.
  */
 
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 #include "wdb.h"
 #include "wdb_agents.h"
 #include "external/cJSON/cJSON.h"
@@ -761,10 +761,10 @@ int wdb_parse(char * input, char * output, int peer) {
         }
         wdb_pool_leave(wdb);
         return result;
-    } else if (strcmp(actor, "wazuhdb") == 0) {
+    } else if (strcmp(actor, "verprotectdb") == 0) {
         query = next;
 
-        w_inc_wazuhdb();
+        w_inc_verprotectdb();
 
         if (next = wstr_chr(query, ' '), !next) {
             mdebug1("Invalid DB query syntax.");
@@ -775,12 +775,12 @@ int wdb_parse(char * input, char * output, int peer) {
         *next++ = '\0';
 
         if (strcmp(query, "remove") == 0) {
-            w_inc_wazuhdb_remove();
+            w_inc_verprotectdb_remove();
             gettimeofday(&begin, 0);
             data = wdb_remove_multiple_agents(next);
             gettimeofday(&end, 0);
             timersub(&end, &begin, &diff);
-            w_inc_wazuhdb_remove_time(diff);
+            w_inc_verprotectdb_remove_time(diff);
             out = cJSON_PrintUnformatted(data);
             snprintf(output, OS_MAXSTR + 1, "ok %s", out);
             os_free(out);

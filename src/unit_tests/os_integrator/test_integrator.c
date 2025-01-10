@@ -16,7 +16,7 @@
 #include "../headers/shared.h"
 #include "../os_integrator/integrator.h"
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
 
 static int test_setup(void **state) {

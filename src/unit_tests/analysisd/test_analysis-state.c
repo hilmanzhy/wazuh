@@ -20,9 +20,9 @@
 
 #include "../wrappers/common.h"
 #include "../wrappers/posix/time_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../wrappers/wazuh/shared/cluster_utils_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_global_helpers_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/shared/cluster_utils_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_global_helpers_wrappers.h"
 
 typedef struct test_struct {
     analysisd_agent_state_t *agent_state;

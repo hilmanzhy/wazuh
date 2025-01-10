@@ -17,7 +17,7 @@
 #include "shared.h"
 #include "../wrappers/common.h"
 #include "../wrappers/libc/stdio_wrappers.h"
-#include "../wrappers/wazuh/shared/binaries_op_wrappers.h"
+#include "../wrappers/verprotect/shared/binaries_op_wrappers.h"
 #include "../headers/version_op.h"
 
 /* setup/teardowns */

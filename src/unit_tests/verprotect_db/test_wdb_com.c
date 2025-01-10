@@ -12,8 +12,8 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-#include "../wrappers/wazuh/verprotect_db/wdb_state_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_state_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 
 #include "../verprotect_db/wdb.h"
 
@@ -32,14 +32,14 @@ void test_wdbcom_output_builder(void ** state) {
 
     cJSON* data_json = cJSON_CreateObject();
     cJSON_AddNumberToObject(data_json, "test1", 18);
-    cJSON_AddStringToObject(data_json, "test2", "wazuhdb");
+    cJSON_AddStringToObject(data_json, "test2", "verprotectdb");
 
     char* msg = wdbcom_output_builder(error_code, message, data_json);
 
     *state = msg;
 
     assert_non_null(msg);
-    assert_string_equal(msg, "{\"error\":5,\"message\":\"test msg\",\"data\":{\"test1\":18,\"test2\":\"wazuhdb\"}}");
+    assert_string_equal(msg, "{\"error\":5,\"message\":\"test msg\",\"data\":{\"test1\":18,\"test2\":\"verprotectdb\"}}");
 }
 
 void test_wdbcom_dispatch_getstats(void ** state) {
@@ -49,14 +49,14 @@ void test_wdbcom_dispatch_getstats(void ** state) {
 
     cJSON* data_json = cJSON_CreateObject();
     cJSON_AddNumberToObject(data_json, "test1", 18);
-    cJSON_AddStringToObject(data_json, "test2", "wazuhdb");
+    cJSON_AddStringToObject(data_json, "test2", "verprotectdb");
 
     will_return(__wrap_wdb_create_state_json, data_json);
 
     wdbcom_dispatch(request, response);
 
     assert_non_null(response);
-    assert_string_equal(response, "{\"error\":0,\"message\":\"ok\",\"data\":{\"test1\":18,\"test2\":\"wazuhdb\"}}");
+    assert_string_equal(response, "{\"error\":0,\"message\":\"ok\",\"data\":{\"test1\":18,\"test2\":\"verprotectdb\"}}");
 }
 
 void test_wdbcom_dispatch_getconfig(void ** state) {
@@ -66,14 +66,14 @@ void test_wdbcom_dispatch_getconfig(void ** state) {
 
     cJSON* data_json = cJSON_CreateObject();
     cJSON_AddNumberToObject(data_json, "test1", 12);
-    cJSON_AddStringToObject(data_json, "test2", "wazuhdb");
+    cJSON_AddStringToObject(data_json, "test2", "verprotectdb");
 
     will_return(__wrap_wdb_get_internal_config, data_json);
 
     wdbcom_dispatch(request, response);
 
     assert_non_null(response);
-    assert_string_equal(response, "{\"error\":0,\"message\":\"ok\",\"data\":{\"test1\":12,\"test2\":\"wazuhdb\"}}");
+    assert_string_equal(response, "{\"error\":0,\"message\":\"ok\",\"data\":{\"test1\":12,\"test2\":\"verprotectdb\"}}");
 }
 
 void test_wdbcom_dispatch_getconfig_unknown_section(void ** state) {

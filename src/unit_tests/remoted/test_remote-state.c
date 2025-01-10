@@ -18,12 +18,12 @@
 #include "../../remoted/state.h"
 
 #include "../wrappers/posix/time_wrappers.h"
-#include "../wrappers/wazuh/remoted/queue_wrappers.h"
+#include "../wrappers/verprotect/remoted/queue_wrappers.h"
 
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../wrappers/wazuh/shared/cluster_utils_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_global_helpers_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/shared/cluster_utils_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_global_helpers_wrappers.h"
 
 typedef struct test_struct {
     remoted_agent_state_t *agent_state;

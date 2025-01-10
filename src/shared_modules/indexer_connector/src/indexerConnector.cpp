@@ -21,7 +21,7 @@
 #include <pwd.h>
 #include <unistd.h>
 
-constexpr auto USER_GROUP {"wazuh"};
+constexpr auto USER_GROUP {"verprotect"};
 constexpr auto DEFAULT_PATH {"tmp/root-ca-merged.pem"};
 constexpr auto NOT_USED {-1};
 constexpr auto INDEXER_COLUMN {"indexer"};

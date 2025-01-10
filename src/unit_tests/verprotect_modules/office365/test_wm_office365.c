@@ -24,13 +24,13 @@
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
-#include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
-#include "../../wrappers/wazuh/shared/time_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/url_wrappers.h"
+#include "../../wrappers/verprotect/shared/mq_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wmodules_wrappers.h"
+#include "../../wrappers/verprotect/shared/time_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/url_wrappers.h"
 #include "../../wrappers/libc/time_wrappers.h"
 #ifdef WIN32
-#include "../../wrappers/wazuh/shared/file_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/file_op_wrappers.h"
 #endif
 
 int __wrap_access(const char *__name, int __type) {
@@ -1548,7 +1548,7 @@ void test_wm_office365_get_access_token_with_auth_secret_response_200(void **sta
 
     access_token = wm_office365_get_access_token(data->office365_config->auth, max_size, &error_msg);
 
-    assert_string_equal(access_token, "wazuh");
+    assert_string_equal(access_token, "verprotect");
     assert_null(error_msg);
 
     os_free(data->response->body);
@@ -2642,7 +2642,7 @@ void test_wm_office365_execute_scan_all(void **state) {
     expect_string(__wrap_wurl_http_request, header, "Content-Type: application/json");
 
     char expHeader[OS_SIZE_8192];
-    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer wazuh");
+    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer verprotect");
 
     expect_string(__wrap_wurl_http_request, header, expHeader);
     expect_any(__wrap_wurl_http_request, url);
@@ -2671,7 +2671,7 @@ void test_wm_office365_execute_scan_all(void **state) {
     expect_any(__wrap_wurl_http_request, method);
     expect_string(__wrap_wurl_http_request, header, "Content-Type: application/json");
 
-    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer wazuh");
+    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer verprotect");
 
     expect_string(__wrap_wurl_http_request, header, expHeader);
     expect_any(__wrap_wurl_http_request, url);
@@ -2695,7 +2695,7 @@ void test_wm_office365_execute_scan_all(void **state) {
     expect_string(__wrap_wurl_http_request, header, "Content-Type: application/json");
     expect_any(__wrap_wurl_http_request, method);
 
-    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer wazuh");
+    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer verprotect");
 
     expect_string(__wrap_wurl_http_request, header, expHeader);
     expect_any(__wrap_wurl_http_request, url);
@@ -2877,7 +2877,7 @@ void test_wm_office365_execute_scan_manage_subscription_error(void **state) {
     expect_any(__wrap_wurl_http_request, method);
 
     char expHeader[OS_SIZE_8192];
-    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer %s", "wazuh");
+    snprintf(expHeader, OS_SIZE_8192 -1, "Authorization: Bearer %s", "verprotect");
 
     expect_string(__wrap_wurl_http_request, header, expHeader);
     expect_any(__wrap_wurl_http_request, url);
@@ -3175,7 +3175,7 @@ void test_wm_office365_execute_scan_get_logs_from_blob_response_null(void **stat
     expect_string(__wrap__mtdebug1, formatted_msg, "Office 365 API content URI: 'https://contentUri1.com'");
 
     expect_string(__wrap_wurl_http_request, header, "Content-Type: application/json");
-    expect_string(__wrap_wurl_http_request, header, "Authorization: Bearer wazuh");
+    expect_string(__wrap_wurl_http_request, header, "Authorization: Bearer verprotect");
     expect_any(__wrap_wurl_http_request, header);
     expect_any(__wrap_wurl_http_request, method);
     expect_any(__wrap_wurl_http_request, header);

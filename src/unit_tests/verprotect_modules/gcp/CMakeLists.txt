@@ -6,7 +6,7 @@
 # Foundation.
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Tests list and flags
 list(APPEND tests_names "test_wm_gcp")
@@ -20,7 +20,7 @@ list(APPEND tests_names "test_wmodules_gcp")
 list(APPEND tests_flags "-Wl,--wrap,sched_scan_read,--wrap,realpath,--wrap,IsFile,--wrap,atexit -Wl,--wrap,wfopen ${DEBUG_OP_WRAPPERS}")
 list(APPEND use_shared_libs 0)
 
-# Generate wazuh modules library
+# Generate verprotect modules library
 file(GLOB gcp ../../../verprotect_modules/*.o ../../../config/*.o)
 list(REMOVE_ITEM gcp ../../../verprotect_modules/main.o)
 

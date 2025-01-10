@@ -19,11 +19,11 @@
 
 #include "../verprotect_db/wdb.h"
 #include "../external/sqlite/sqlite3.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_agents_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_agents_wrappers.h"
 #include "../headers/os_err.h"
 
 static int test_setup(void **state) {

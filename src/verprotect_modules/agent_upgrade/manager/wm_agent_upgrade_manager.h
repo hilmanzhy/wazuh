@@ -113,7 +113,7 @@ typedef struct _wm_agent_info {
     char *major_version;         ///> OS major version of the agent
     char *minor_version;         ///> OS minor version of the agent
     char *architecture;          ///> architecture of the agent
-    char *verprotect_version;         ///> wazuh version of the agent
+    char *verprotect_version;         ///> verprotect version of the agent
     char *connection_status;     ///> connection_status of the agent
     char *package_type;          ///> package type of the agent (DEB, RPM, etc.)
 } wm_agent_info;

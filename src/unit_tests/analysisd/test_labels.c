@@ -13,7 +13,7 @@
 #include <cmocka.h>
 #include <stdio.h>
 
-#include "../wrappers/wazuh/verprotect_db/wdb_global_helpers_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_global_helpers_wrappers.h"
 
 #include "../analysisd/config.h"
 #include "../analysisd/labels.h"

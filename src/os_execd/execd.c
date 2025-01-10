@@ -238,7 +238,7 @@ void ExecdRun(char *exec_msg, int *childcount)
     }
 
 #ifndef WIN32
-    if (!strcmp(name, "restart-wazuh")) {
+    if (!strcmp(name, "restart-verprotect")) {
         char *cmd_api[MAX_ARGS] = {0};
 
         cJSON_Delete(json_root);

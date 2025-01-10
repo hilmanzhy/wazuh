@@ -16,7 +16,7 @@
 #include <stdlib.h>
 
 #include "../verprotect_db/wdb.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 #include "hash_op.h"
 
 #include "../wrappers/common.h"
@@ -25,11 +25,11 @@
 #include "../wrappers/posix/pthread_wrappers.h"
 #include "../wrappers/posix/time_wrappers.h"
 #include "../wrappers/posix/stat_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
 
 int wdb_execute_non_select_query(wdb_t * wdb, const char *query);
 int wdb_select_from_temp_table(wdb_t * wdb);

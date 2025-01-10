@@ -16,7 +16,7 @@
 #include <time.h>
 #ifndef CLIENT
 #include "verprotect_db/helpers/wdb_global_helpers.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 #endif
 
 #define str_startwith(x, y) strncmp(x, y, strlen(y))
@@ -174,7 +174,7 @@ int OS_RemoveAgent(const char *u_id) {
     // Remove DB from verprotect-db
     int sock = -1;
     int error;
-    snprintf(wdbquery, OS_SIZE_128, "wazuhdb remove %s", u_id);
+    snprintf(wdbquery, OS_SIZE_128, "verprotectdb remove %s", u_id);
     os_calloc(OS_SIZE_6144, sizeof(char), wdboutput);
     if (error = wdbc_query_ex(&sock, wdbquery, wdboutput, OS_SIZE_6144), !error) {
         mdebug1("DB from agent %s was deleted '%s'", u_id, wdboutput);

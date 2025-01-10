@@ -26,7 +26,7 @@ static void * run_backup(void * args);
 
 extern wdb_state_t wdb_state;
 
-//int wazuhdb_fdsock;
+//int verprotectdb_fdsock;
 wnotify_t * notify_queue;
 //static w_queue_t * sock_queue;
 static pthread_mutex_t queue_mutex = PTHREAD_MUTEX_INITIALIZER;

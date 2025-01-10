@@ -304,7 +304,7 @@ main () {
         if [ ! -f "${INSTALLDIR}/logs/ossec.log" ]; then
             touch -f "${INSTALLDIR}/logs/ossec.log"
             chmod 660 "${INSTALLDIR}/logs/ossec.log"
-            chown root:wazuh "${INSTALLDIR}/logs/ossec.log"
+            chown root:verprotect "${INSTALLDIR}/logs/ossec.log"
         fi
 
         # Check if multiples IPs are defined in variable VERPROTECT_MANAGER
@@ -339,7 +339,7 @@ main () {
     if [ -n "${VERPROTECT_REGISTRATION_PASSWORD}" ]; then
         echo "${VERPROTECT_REGISTRATION_PASSWORD}" > "${INSTALLDIR}/${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
         chmod 640 "${INSTALLDIR}"/"${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
-        chown root:wazuh "${INSTALLDIR}"/"${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
+        chown root:verprotect "${INSTALLDIR}"/"${VERPROTECT_REGISTRATION_PASSWORD_PATH}"
     fi
 
     # Options to be modified in ossec.conf

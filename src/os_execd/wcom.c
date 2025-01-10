@@ -62,7 +62,7 @@ size_t wcom_dispatch(char *command, char ** output) {
             return strlen(*output);
         }
 
-    } else if (strcmp(rcv_comm, "restart") == 0 || strcmp(rcv_comm, "restart-wazuh") == 0) {
+    } else if (strcmp(rcv_comm, "restart") == 0 || strcmp(rcv_comm, "restart-verprotect") == 0) {
         return wcom_restart(output);
     } else if (strcmp(rcv_comm, "lock_restart") == 0) {
         max_restart_lock = 0;
@@ -220,9 +220,9 @@ size_t wcom_restart(char ** output) {
         }
 #else
         static char command[OS_FLSIZE];
-        snprintf(command, sizeof(command), "%s/%s", AR_BINDIR, "restart-wazuh.exe");
+        snprintf(command, sizeof(command), "%s/%s", AR_BINDIR, "restart-verprotect.exe");
         char *cmd[2] = { command, NULL };
-        char *cmd_parameters = "{\"version\":1,\"origin\":{\"name\":\"\",\"module\":\"verprotect-execd\"},\"command\":\"add\",\"parameters\":{\"extra_args\":[],\"alert\":{},\"program\":\"restart-wazuh.exe\"}}";
+        char *cmd_parameters = "{\"version\":1,\"origin\":{\"name\":\"\",\"module\":\"verprotect-execd\"},\"command\":\"add\",\"parameters\":{\"extra_args\":[],\"alert\":{},\"program\":\"restart-verprotect.exe\"}}";
         wfd_t *wfd = wpopenv(cmd[0], cmd, W_BIND_STDIN);
         if (wfd) {
             /* Send alert to AR script */

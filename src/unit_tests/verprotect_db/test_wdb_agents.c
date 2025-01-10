@@ -17,11 +17,11 @@
 
 #include "os_err.h"
 #include "../verprotect_db/wdb.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
-#include "wazuhdb_op.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
+#include "verprotectdb_op.h"
 #include "../verprotect_db/wdb_agents.h"
 
 /* setup/teardown */

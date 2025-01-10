@@ -791,31 +791,31 @@ InstallCommon()
 
     if [ ${NUNAME} = 'Darwin' ]
     then
-        if [ -f libwazuhext.dylib ]
+        if [ -f libverprotectext.dylib ]
         then
-            ${INSTALL} -m 0750 -o root -g 0 libwazuhext.dylib ${INSTALLDIR}/lib
+            ${INSTALL} -m 0750 -o root -g 0 libverprotectext.dylib ${INSTALLDIR}/lib
         fi
-    elif [ -f libwazuhext.so ]
+    elif [ -f libverprotectext.so ]
     then
-        ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} libwazuhext.so ${INSTALLDIR}/lib
+        ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} libverprotectext.so ${INSTALLDIR}/lib
 
         if ([ "X${DIST_NAME}" = "Xrhel" ] || [ "X${DIST_NAME}" = "Xcentos" ] || [ "X${DIST_NAME}" = "XCentOS" ]) && [ ${DIST_VER} -le 5 ]; then
-            chcon -t textrel_shlib_t ${INSTALLDIR}/lib/libwazuhext.so
+            chcon -t textrel_shlib_t ${INSTALLDIR}/lib/libverprotectext.so
         fi
     fi
 
     if [ ${NUNAME} = 'Darwin' ]
     then
-        if [ -f libwazuhshared.dylib ]
+        if [ -f libverprotectshared.dylib ]
         then
-            ${INSTALL} -m 0750 -o root -g 0 libwazuhshared.dylib ${INSTALLDIR}/lib
+            ${INSTALL} -m 0750 -o root -g 0 libverprotectshared.dylib ${INSTALLDIR}/lib
         fi
-    elif [ -f libwazuhshared.so ]
+    elif [ -f libverprotectshared.so ]
     then
-        ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} libwazuhshared.so ${INSTALLDIR}/lib
+        ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} libverprotectshared.so ${INSTALLDIR}/lib
 
         if ([ "X${DIST_NAME}" = "Xrhel" ] || [ "X${DIST_NAME}" = "Xcentos" ] || [ "X${DIST_NAME}" = "XCentOS" ]) && [ ${DIST_VER} -le 5 ]; then
-            chcon -t textrel_shlib_t ${INSTALLDIR}/lib/libwazuhshared.so
+            chcon -t textrel_shlib_t ${INSTALLDIR}/lib/libverprotectshared.so
         fi
     fi
 
@@ -989,7 +989,7 @@ InstallCommon()
         if [ ${INSTYPE} = 'agent' ]; then
             ${INSTALL} -m 0640 -o root -g ${VERPROTECT_GROUP} /dev/null ${INSTALLDIR}/etc/client.keys
         else
-            ${INSTALL} -m 0640 -o wazuh -g ${VERPROTECT_GROUP} /dev/null ${INSTALLDIR}/etc/client.keys
+            ${INSTALL} -m 0640 -o verprotect -g ${VERPROTECT_GROUP} /dev/null ${INSTALLDIR}/etc/client.keys
         fi
     fi
 
@@ -1022,7 +1022,7 @@ InstallCommon()
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} disable-account ${INSTALLDIR}/active-response/bin/
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} host-deny ${INSTALLDIR}/active-response/bin/
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} ip-customblock ${INSTALLDIR}/active-response/bin/
-  ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} restart-wazuh ${INSTALLDIR}/active-response/bin/
+  ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} restart-verprotect ${INSTALLDIR}/active-response/bin/
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} route-null ${INSTALLDIR}/active-response/bin/
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} kaspersky ${INSTALLDIR}/active-response/bin/
   ${INSTALL} -m 0750 -o root -g ${VERPROTECT_GROUP} verprotect-slack ${INSTALLDIR}/active-response/bin/
@@ -1032,9 +1032,9 @@ InstallCommon()
   ${INSTALL} -d -m 0770 -o root -g ${VERPROTECT_GROUP} ${INSTALLDIR}/var/upgrade
   ${INSTALL} -d -m 0770 -o root -g ${VERPROTECT_GROUP} ${INSTALLDIR}/var/selinux
 
-  if [ -f selinux/wazuh.pp ]
+  if [ -f selinux/verprotect.pp ]
   then
-    ${INSTALL} -m 0640 -o root -g ${VERPROTECT_GROUP} selinux/wazuh.pp ${INSTALLDIR}/var/selinux/
+    ${INSTALL} -m 0640 -o root -g ${VERPROTECT_GROUP} selinux/verprotect.pp ${INSTALLDIR}/var/selinux/
     InstallSELinuxPolicyPackage
   fi
 

@@ -21,7 +21,7 @@
 #include "../wmodules.h"
 #include "wm_task_manager_parsing.h"
 #include "defs.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 /**
  * Analyze an upgrade or upgrade_custom command. Update the tasks DB when necessary.

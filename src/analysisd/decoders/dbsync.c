@@ -14,7 +14,7 @@
  */
 
 #include "../eventinfo.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 #ifdef VERPROTECT_UNIT_TESTING
 /* Remove static qualifier when unit testing */

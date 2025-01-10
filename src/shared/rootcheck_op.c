@@ -84,16 +84,16 @@ char* rk_get_file(const char *log) {
 }
 
 int send_rootcheck_log(const char* agent_id, long int date, const char* log, char* response) {
-    char wazuhdb_query[OS_SIZE_6144];
+    char verprotectdb_query[OS_SIZE_6144];
     int db_result;
     int socket = -1;
 
-    snprintf(wazuhdb_query, OS_SIZE_6144, "agent %s rootcheck save %li %s", agent_id, date, log);
-    db_result = wdbc_query_ex(&socket, wazuhdb_query, response, OS_SIZE_6144);
+    snprintf(verprotectdb_query, OS_SIZE_6144, "agent %s rootcheck save %li %s", agent_id, date, log);
+    db_result = wdbc_query_ex(&socket, verprotectdb_query, response, OS_SIZE_6144);
     close(socket);
 
     if (db_result == -2) {
-        merror("Bad load query: '%s'.", wazuhdb_query);
+        merror("Bad load query: '%s'.", verprotectdb_query);
     }
 
     return db_result;

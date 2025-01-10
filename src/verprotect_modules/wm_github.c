@@ -14,7 +14,7 @@
 // Remove static qualifier when unit testing
 #define STATIC
 #ifdef WIN32
-    #include "../unit_tests/wrappers/wazuh/shared/url_wrappers.h"
+    #include "../unit_tests/wrappers/verprotect/shared/url_wrappers.h"
 #endif
 #else
 #define STATIC static
@@ -454,7 +454,7 @@ STATIC void wm_github_scan_failure_action(wm_github_fail **current_fails, char *
             cJSON *fail_object = cJSON_CreateObject();
             cJSON *fail_github = cJSON_CreateObject();
 
-            cJSON_AddStringToObject(fail_object, "actor", "wazuh");
+            cJSON_AddStringToObject(fail_object, "actor", "verprotect");
             cJSON_AddStringToObject(fail_object, "organization", org_name);
             if (event_type) {
                 cJSON_AddStringToObject(fail_object, "event_type", event_type);

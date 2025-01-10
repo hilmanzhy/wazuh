@@ -222,10 +222,10 @@ elseif(APPLE)
   target_link_libraries(sysinfo cjson ${SRC_FOLDER}/external/libplist/bin/lib/libplist-2.0.a ${iokit_lib} ${corefoundation_lib})
 endif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-target_link_libraries(sysinfo wazuhext)
+target_link_libraries(sysinfo verprotectext)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(CURL_DEP "wazuhext")
+  set(CURL_DEP "verprotectext")
   target_link_libraries(sysinfo urlrequest db)
   if(CMAKE_CHECK_CENTOS5)
       set(USE_HTTP 1)

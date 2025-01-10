@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 #include "../../headers/shared.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 #include "../../config/verprotect_db-config.h"
 #include "../../verprotect_db/wdb.h"
 

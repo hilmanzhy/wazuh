@@ -237,22 +237,22 @@ typedef struct _task_breakdown_t {
     task_tasks_t tasks;
 } task_breakdown_t;
 
-typedef struct _wazuhdb_breakdown_t {
+typedef struct _verprotectdb_breakdown_t {
     uint64_t remove_queries;
     struct timeval remove_time;
-} wazuhdb_breakdown_t;
+} verprotectdb_breakdown_t;
 
 typedef struct _queries_breakdown_t {
     uint64_t agent_queries;
     uint64_t global_queries;
     uint64_t mitre_queries;
     uint64_t task_queries;
-    uint64_t wazuhdb_queries;
+    uint64_t verprotectdb_queries;
     agent_breakdown_t agent_breakdown;
     global_breakdown_t global_breakdown;
     mitre_breakdown_t mitre_breakdown;
     task_breakdown_t task_breakdown;
-    wazuhdb_breakdown_t wazuhdb_breakdown;
+    verprotectdb_breakdown_t verprotectdb_breakdown;
 } queries_breakdown_t;
 
 typedef struct _db_stats_t {
@@ -270,23 +270,23 @@ typedef struct _db_stats_t {
 void w_inc_queries_total();
 
 /**
- * @brief Increment total wazuhdb queries counter
+ * @brief Increment total verprotectdb queries counter
  *
  */
-void w_inc_wazuhdb();
+void w_inc_verprotectdb();
 
 /**
- * @brief Increment remove wazuhdb queries counter
+ * @brief Increment remove verprotectdb queries counter
  *
  */
-void w_inc_wazuhdb_remove();
+void w_inc_verprotectdb_remove();
 
 /**
- * @brief Increment remove wazuhdb time counter
+ * @brief Increment remove verprotectdb time counter
  *
  * @param time Value to increment the counter.
  */
-void w_inc_wazuhdb_remove_time(struct timeval time);
+void w_inc_verprotectdb_remove_time(struct timeval time);
 
 /**
  * @brief Increment total agent queries counter

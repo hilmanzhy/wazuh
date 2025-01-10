@@ -16,8 +16,8 @@
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/wm_fluent.h"
 #include "../../verprotect_modules/wm_fluent.c"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
 
 typedef struct test_struct {
     wm_fluent_t *fluent;

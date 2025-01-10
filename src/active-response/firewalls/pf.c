@@ -124,7 +124,7 @@ int main (int argc, char **argv) {
                 os_free(pfctl_path);
                 return OS_SUCCESS;
             } else {
-                // Checking if wazuh table is configured in pf.conf
+                // Checking if verprotect table is configured in pf.conf
                 if (checking_if_its_configured(argv[0], PFCTL_RULES, PFCTL_TABLE) != 0) {
                     memset(log_msg, '\0', OS_MAXSTR);
                     snprintf(log_msg, OS_MAXSTR - 1, "Table '%s' does not exist", PFCTL_TABLE);

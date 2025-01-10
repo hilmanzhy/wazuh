@@ -7,12 +7,12 @@
 # This program is free software; you can redistribute it and/or modify it under the terms of GPLv2
 
 INSTALLATION_PATH=${1}
-SERVICE=/Library/LaunchDaemons/com.wazuh.agent.plist
+SERVICE=/Library/LaunchDaemons/com.verprotect.agent.plist
 STARTUP=/Library/StartupItems/VERPROTECT/StartupParameters.plist
 LAUNCHER_SCRIPT=/Library/StartupItems/VERPROTECT/Verprotect-launcher
 STARTUP_SCRIPT=/Library/StartupItems/VERPROTECT/VERPROTECT
 
-launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist 2> /dev/null
+launchctl unload /Library/LaunchDaemons/com.verprotect.agent.plist 2> /dev/null
 mkdir -p /Library/StartupItems/VERPROTECT
 chown root:wheel /Library/StartupItems/VERPROTECT
 rm -f $STARTUP $STARTUP_SCRIPT $SERVICE
@@ -25,7 +25,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
  <plist version="1.0">
      <dict>
          <key>Label</key>
-         <string>com.wazuh.agent</string>
+         <string>com.verprotect.agent</string>
          <key>ProgramArguments</key>
          <array>
              <string>'$LAUNCHER_SCRIPT'</string>

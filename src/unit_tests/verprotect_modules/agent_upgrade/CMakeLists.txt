@@ -24,7 +24,7 @@ set_target_properties(
 target_link_libraries(UPGRADE_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate agent upgrade tests
 list(APPEND upgrade_names "test_wm_agent_upgrade")

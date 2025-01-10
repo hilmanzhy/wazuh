@@ -16,7 +16,7 @@
 
 #include "../analysisd/cleanevent.h"
 
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 
 static int test_setup(void **state) {
     Eventinfo *lf = NULL;

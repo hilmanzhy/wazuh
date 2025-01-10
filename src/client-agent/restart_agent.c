@@ -19,7 +19,7 @@
 #include "verprotect_modules/wmodules.h"
 #include "agentd.h"
 
-static const char AG_IN_RCON[] = "wazuh: Invalid remote configuration";
+static const char AG_IN_RCON[] = "verprotect: Invalid remote configuration";
 
 void * restartAgent() {
 

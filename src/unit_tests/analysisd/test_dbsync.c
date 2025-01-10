@@ -12,14 +12,14 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/read-agents_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/read-agents_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 
 #include "../analysisd/eventinfo.h"
 #include "../analysisd/decoders/decoder.h"
-#include "../headers/wazuhdb_op.h"
+#include "../headers/verprotectdb_op.h"
 
 /* setup/teardown redefinitions */
 #define setup_dispatch_check setup_dispatch_answer

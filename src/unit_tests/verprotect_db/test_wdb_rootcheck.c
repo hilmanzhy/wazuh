@@ -10,8 +10,8 @@
 #include "../headers/shared.h"
 
 #include "../wrappers/externals/sqlite/sqlite3_wrappers.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 
 
 /********** setup/teardown *********************/

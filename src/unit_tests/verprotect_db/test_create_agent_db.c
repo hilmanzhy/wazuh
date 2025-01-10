@@ -17,8 +17,8 @@
 
 #include "../verprotect_db/wdb.h"
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/file_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/file_op_wrappers.h"
 #include "../wrappers/libc/stdio_wrappers.h"
 
 int setup(__attribute__((unused)) void ** state) {

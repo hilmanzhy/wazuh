@@ -87,7 +87,7 @@ else()
     add_executable(verprotect-syscheckd ${SYSCHECKD_SRC})
 endif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
-target_link_libraries(verprotect-syscheckd fimdb wazuhext pthread wazuh rootcheck)
+target_link_libraries(verprotect-syscheckd fimdb verprotectext pthread verprotect rootcheck)
 
 if (UNIX)
     target_link_libraries(verprotect-syscheckd dl)

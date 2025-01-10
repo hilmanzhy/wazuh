@@ -8,16 +8,16 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 # Setup the compiling toolchain
-# Find the wazuh shared library
-find_library(VERPROTECTEXT NAMES wazuhext HINTS "${SRC_FOLDER}")
+# Find the verprotect shared library
+find_library(VERPROTECTEXT NAMES verprotectext HINTS "${SRC_FOLDER}")
 set(uname "Win32")
 
 if(NOT VERPROTECTEXT)
-  message(FATAL_ERROR "VERPROTECTEXT is set to '${VERPROTECTEXT}', but did not find any file matching ${SRC_FOLDER}/${CMAKE_FIND_LIBRARY_PREFIXES}wazuhext${CMAKE_FIND_LIBRARY_SUFFIXES}")
-  message(FATAL_ERROR "libwazuhext not found in ${SRC_FOLDER} Aborting...")
+  message(FATAL_ERROR "VERPROTECTEXT is set to '${VERPROTECTEXT}', but did not find any file matching ${SRC_FOLDER}/${CMAKE_FIND_LIBRARY_PREFIXES}verprotectext${CMAKE_FIND_LIBRARY_SUFFIXES}")
+  message(FATAL_ERROR "libverprotectext not found in ${SRC_FOLDER} Aborting...")
 endif()
 
-# Find the wazuh sysinfo library
+# Find the verprotect sysinfo library
 find_library(SYSINFO NAMES sysinfo HINTS "${SRC_FOLDER}/data_provider/build/bin")
 set(uname "Win32")
 

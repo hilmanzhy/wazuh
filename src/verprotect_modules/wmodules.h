@@ -110,7 +110,7 @@ void wm_add(wmodule *module);
 gid_t wm_getGroupID(void);
 
 /*
- * @brief Set ID group of wazuh modules
+ * @brief Set ID group of verprotect modules
  *
  * @param[in] gid ID group.
  */

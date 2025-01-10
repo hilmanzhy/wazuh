@@ -20,8 +20,8 @@
 #include "../../../verprotect_modules/wmodules.h"
 #include "wmodules_scheduling_helpers.h"
 
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/time_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/time_op_wrappers.h"
 
 static const int TEST_INTERVAL = 5 * 60;
 static const int TEST_DELAY    = 5;

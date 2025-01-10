@@ -20,9 +20,9 @@
 #include "../../verprotect_modules/agent_upgrade/agent/wm_agent_upgrade_agent.h"
 
 #include "../../wrappers/common.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/file_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/validate_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/file_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/validate_op_wrappers.h"
 #include "../../wrappers/libc/string_wrappers.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
 #include "../../wrappers/libc/stdio_wrappers.h"

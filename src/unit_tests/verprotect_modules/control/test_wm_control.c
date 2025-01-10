@@ -12,7 +12,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <stdio.h>
-#include "../../wrappers/wazuh/data_provider/sysInfo_wrappers.h"
+#include "../../wrappers/verprotect/data_provider/sysInfo_wrappers.h"
 #include "../../../data_provider/include/sysInfo.h"
 #include "../../../verprotect_modules/wm_control.h"
 

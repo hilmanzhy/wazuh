@@ -47,7 +47,7 @@ int wm_agent_upgrade_validate_system(const char *platform, const char *os_major,
 
 /**
  * Check if agent is valid to upgrade
- * @param verprotect_version wazuh version of agent
+ * @param verprotect_version verprotect version of agent
  * @param platform platform of agent to validate
  * @param command wm_upgrade_command with the selected upgrade type
  * @param task pointer to task with the params

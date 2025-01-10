@@ -90,12 +90,12 @@ endif
 PG_CONFIG?=pg_config
 MY_CONFIG?=mysql_config
 PRELUDE_CONFIG?=libprelude-config
-VERPROTECT_GROUP?=wazuh
-VERPROTECT_USER?=wazuh
+VERPROTECT_GROUP?=verprotect
+VERPROTECT_USER?=verprotect
 SHARED=so
-SELINUX_MODULE=selinux/wazuh.mod
-SELINUX_ENFORCEMENT=selinux/wazuh.te
-SELINUX_POLICY=selinux/wazuh.pp
+SELINUX_MODULE=selinux/verprotect.mod
+SELINUX_ENFORCEMENT=selinux/verprotect.te
+SELINUX_POLICY=selinux/verprotect.pp
 SHARED_MODULES=shared_modules/
 VERPROTECT_MODULES=verprotect_modules/
 DBSYNC=${SHARED_MODULES}dbsync/
@@ -302,8 +302,8 @@ ifeq (${uname_S},HP-UX)
 		DEFINES+=-DHIGHFIRST
 		DEFINES+=-DOS_BIG_ENDIAN
 		OSSEC_CFLAGS+=-pthread
-		OSSEC_LDFLAGS+=-lrt -pthread -L. -lwazuhext
-		AR_LDFLAGS+=-lrt -pthread -L. -lwazuhext -lwazuhshared
+		OSSEC_LDFLAGS+=-lrt -pthread -L. -lverprotectext
+		AR_LDFLAGS+=-lrt -pthread -L. -lverprotectext -lverprotectshared
 ifeq ($(INSTALLDIR),)
 	INSTALLDIR = /var/ossec
 endif
@@ -726,8 +726,8 @@ help: failtarget
 	@echo "   make USE_GEOIP=yes           Build with GeoIP support. Allowed values are auto 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo
 	@echo "User options: "
-	@echo "   make VERPROTECT_GROUP=wazuh       Set wazuh group"
-	@echo "   make VERPROTECT_USER=wazuh        Set wazuh user"
+	@echo "   make VERPROTECT_GROUP=verprotect       Set verprotect group"
+	@echo "   make VERPROTECT_USER=verprotect        Set verprotect user"
 	@echo
 	@echo "Examples: Client with debugging enabled"
 	@echo "   make TARGET=agent DEBUG=yes"
@@ -876,7 +876,7 @@ $(SELINUX_MODULE): $(SELINUX_ENFORCEMENT)
 
 WINDOWS_LIBS:=win32/syscollector win32/syscheck
 WINDOWS_BINS:=win32/verprotect-agent.exe win32/verprotect-agent-eventchannel.exe win32/manage_agents.exe win32/setup-windows.exe win32/setup-syscheck.exe win32/setup-iis.exe win32/os_win32ui.exe win32/agent-auth.exe
-WINDOWS_ACTIVE_RESPONSES:=win32/restart-wazuh.exe win32/route-null.exe win32/netsh.exe
+WINDOWS_ACTIVE_RESPONSES:=win32/restart-verprotect.exe win32/route-null.exe win32/netsh.exe
 
 ifeq (${MAKECMDGOALS},winagent)
 $(error Do not use 'winagent' directly, use 'TARGET=winagent')
@@ -1555,19 +1555,19 @@ shared_modules/http-request.tar.gz:
 #### OSSEC Libs ####
 ####################
 ifeq (${TARGET}, winagent)
-# libwazuhext
-VERPROTECTEXT_DLL = libwazuhext.$(SHARED)
-VERPROTECTEXT_LIB = libwazuhext.lib
-VERPROTECTEXT_LIB_DEF = libwazuhext.def
-# libwazuhshared
-VERPROTECT_DLL = libwazuhshared.$(SHARED)
-VERPROTECT_LIB = libwazuhshared.lib
-VERPROTECT_DEF = libwazuhshared.def
+# libverprotectext
+VERPROTECTEXT_DLL = libverprotectext.$(SHARED)
+VERPROTECTEXT_LIB = libverprotectext.lib
+VERPROTECTEXT_LIB_DEF = libverprotectext.def
+# libverprotectshared
+VERPROTECT_DLL = libverprotectshared.$(SHARED)
+VERPROTECT_LIB = libverprotectshared.lib
+VERPROTECT_DEF = libverprotectshared.def
 else
-VERPROTECTEXT_LIB = libwazuhext.$(SHARED)
-VERPROTECT_LIB = libwazuhshared.$(SHARED)
+VERPROTECTEXT_LIB = libverprotectext.$(SHARED)
+VERPROTECT_LIB = libverprotectshared.$(SHARED)
 endif
-BUILD_LIBS = libwazuh.a $(VERPROTECTEXT_LIB)
+BUILD_LIBS = libverprotect.a $(VERPROTECTEXT_LIB)
 
 $(BUILD_SERVER) $(BUILD_AGENT) $(WINDOWS_BINS) $(WINDOWS_BINS): $(BUILD_LIBS)
 
@@ -1646,55 +1646,55 @@ wrappers_macos_posix_o := $(wrappers_macos_posix_c:.c=.o)
 wrappers_posix_c := $(wildcard unit_tests/wrappers/posix/*.c)
 wrappers_posix_o := $(wrappers_posix_c:.c=.o)
 
-wrappers_verprotect_c := $(wildcard unit_tests/wrappers/wazuh/*.c)
+wrappers_verprotect_c := $(wildcard unit_tests/wrappers/verprotect/*.c)
 wrappers_verprotect_o := $(wrappers_verprotect_c:.c=.o)
 
-wrappers_verprotect_os_crypto_c := $(wildcard unit_tests/wrappers/wazuh/os_crypto/*.c)
+wrappers_verprotect_os_crypto_c := $(wildcard unit_tests/wrappers/verprotect/os_crypto/*.c)
 wrappers_verprotect_os_crypto_o := $(wrappers_verprotect_os_crypto_c:.c=.o)
 
-wrappers_verprotect_os_execd_c := $(wildcard unit_tests/wrappers/wazuh/os_execd/*.c)
+wrappers_verprotect_os_execd_c := $(wildcard unit_tests/wrappers/verprotect/os_execd/*.c)
 wrappers_verprotect_os_execd_o := $(wrappers_verprotect_os_execd_c:.c=.o)
 
-wrappers_verprotect_os_net_c := $(wildcard unit_tests/wrappers/wazuh/os_net/*.c)
+wrappers_verprotect_os_net_c := $(wildcard unit_tests/wrappers/verprotect/os_net/*.c)
 wrappers_verprotect_os_net_o := $(wrappers_verprotect_os_net_c:.c=.o)
 
-wrappers_verprotect_os_regex_c := $(wildcard unit_tests/wrappers/wazuh/os_regex/*.c)
+wrappers_verprotect_os_regex_c := $(wildcard unit_tests/wrappers/verprotect/os_regex/*.c)
 wrappers_verprotect_os_regex_o := $(wrappers_verprotect_os_regex_c:.c=.o)
 
-wrappers_verprotect_os_xml_c := $(wildcard unit_tests/wrappers/wazuh/os_xml/*.c)
+wrappers_verprotect_os_xml_c := $(wildcard unit_tests/wrappers/verprotect/os_xml/*.c)
 wrappers_verprotect_os_xml_o := $(wrappers_verprotect_os_xml_c:.c=.o)
 
-wrappers_verprotect_shared_c := $(wildcard unit_tests/wrappers/wazuh/shared/*.c)
+wrappers_verprotect_shared_c := $(wildcard unit_tests/wrappers/verprotect/shared/*.c)
 wrappers_verprotect_shared_o := $(wrappers_verprotect_shared_c:.c=.o)
 
-wrappers_verprotect_syscheckd_c := $(wildcard unit_tests/wrappers/wazuh/syscheckd/*.c)
+wrappers_verprotect_syscheckd_c := $(wildcard unit_tests/wrappers/verprotect/syscheckd/*.c)
 wrappers_verprotect_syscheckd_o := $(wrappers_verprotect_syscheckd_c:.c=.o)
 
-wrappers_verprotect_verprotect_db_c := $(wildcard unit_tests/wrappers/wazuh/verprotect_db/*.c)
+wrappers_verprotect_verprotect_db_c := $(wildcard unit_tests/wrappers/verprotect/verprotect_db/*.c)
 wrappers_verprotect_verprotect_db_o := $(wrappers_verprotect_verprotect_db_c:.c=.o)
 
-wrappers_verprotect_verprotect_modules_c := $(wildcard unit_tests/wrappers/wazuh/verprotect_modules/*.c)
+wrappers_verprotect_verprotect_modules_c := $(wildcard unit_tests/wrappers/verprotect/verprotect_modules/*.c)
 wrappers_verprotect_verprotect_modules_o := $(wrappers_verprotect_verprotect_modules_c:.c=.o)
 
-wrappers_verprotect_monitord_c := $(wildcard unit_tests/wrappers/wazuh/monitord/*.c)
+wrappers_verprotect_monitord_c := $(wildcard unit_tests/wrappers/verprotect/monitord/*.c)
 wrappers_verprotect_monitord_o := $(wrappers_verprotect_monitord_c:.c=.o)
 
-wrappers_verprotect_os_auth_c := $(wildcard unit_tests/wrappers/wazuh/os_auth/*.c)
+wrappers_verprotect_os_auth_c := $(wildcard unit_tests/wrappers/verprotect/os_auth/*.c)
 wrappers_verprotect_os_auth_o := $(wrappers_verprotect_os_auth_c:.c=.o)
 
-wrappers_verprotect_addagent_c := $(wildcard unit_tests/wrappers/wazuh/addagent/*.c)
+wrappers_verprotect_addagent_c := $(wildcard unit_tests/wrappers/verprotect/addagent/*.c)
 wrappers_verprotect_addagent_o := $(wrappers_verprotect_addagent_c:.c=.o)
 
-wrappers_client_agent_c := $(wildcard unit_tests/wrappers/wazuh/client-agent/*.c)
+wrappers_client_agent_c := $(wildcard unit_tests/wrappers/verprotect/client-agent/*.c)
 wrappers_client_agent_o := $(wrappers_client_agent_c:.c=.o)
 
-wrappers_verprotect_config_c := $(wildcard unit_tests/wrappers/wazuh/config/*.c)
+wrappers_verprotect_config_c := $(wildcard unit_tests/wrappers/verprotect/config/*.c)
 wrappers_verprotect_config_o := $(wrappers_verprotect_config_c:.c=.o)
 
-wrappers_data_provider_c := $(wildcard unit_tests/wrappers/wazuh/data_provider/*.c)
+wrappers_data_provider_c := $(wildcard unit_tests/wrappers/verprotect/data_provider/*.c)
 wrappers_data_provider_o := $(wrappers_data_provider_c:.c=.o)
 
-wrappers_logcollector_c := $(wildcard unit_tests/wrappers/wazuh/logcollector/*.c)
+wrappers_logcollector_c := $(wildcard unit_tests/wrappers/verprotect/logcollector/*.c)
 wrappers_logcollector_o := $(wrappers_logcollector_c:.c=.o)
 
 wrappers_windows_c := $(wildcard unit_tests/wrappers/windows/*.c)
@@ -1706,13 +1706,13 @@ wrappers_windows_lib_o := $(wrappers_windows_lib_c:.c=.o)
 wrappers_windows_posix_c := $(wildcard unit_tests/wrappers/windows/posix/*.c)
 wrappers_windows_posix_o := $(wrappers_windows_posix_c:.c=.o)
 
-wrappers_verprotect_remoted_c := $(wildcard unit_tests/wrappers/wazuh/remoted/*.c)
+wrappers_verprotect_remoted_c := $(wildcard unit_tests/wrappers/verprotect/remoted/*.c)
 wrappers_verprotect_remoted_o := $(wrappers_verprotect_remoted_c:.c=.o)
 
-wrappers_verprotect_analysisd_c := $(wildcard unit_tests/wrappers/wazuh/analysisd/*.c)
+wrappers_verprotect_analysisd_c := $(wildcard unit_tests/wrappers/verprotect/analysisd/*.c)
 wrappers_verprotect_analysisd_o := $(wrappers_verprotect_analysisd_c:.c=.o)
 
-wrappers_verprotect_shared_modules_c := $(wildcard unit_tests/wrappers/wazuh/shared_modules/*.c)
+wrappers_verprotect_shared_modules_c := $(wildcard unit_tests/wrappers/verprotect/shared_modules/*.c)
 wrappers_verprotect_shared_modules_o := $(wrappers_verprotect_shared_modules_c:.c=.o)
 
 ifneq (,$(filter ${TEST},YES yes y Y 1))
@@ -1933,16 +1933,16 @@ crypto_o := ${crypto_blowfish_o} \
 					 ${crypto_hmac_o} \
 					 ${crypto_signature_o}
 
-#### libwazuh #########
+#### libverprotect #########
 
-libwazuh.a: ${config_o} ${wmodules_dep} ${crypto_o} ${shared_o} ${os_net_o} ${os_regex_o} ${os_xml_o} ${os_zlib_o} ${UNIT_TEST_WRAPPERS} os_auth/ssl.o os_auth/check_cert.o addagent/validate.o ${manage_agents} analysisd/logmsg.o
+libverprotect.a: ${config_o} ${wmodules_dep} ${crypto_o} ${shared_o} ${os_net_o} ${os_regex_o} ${os_xml_o} ${os_zlib_o} ${UNIT_TEST_WRAPPERS} os_auth/ssl.o os_auth/check_cert.o addagent/validate.o ${manage_agents} analysisd/logmsg.o
 	${OSSEC_LINK} $@ $^
 	${OSSEC_RANLIB} $@
 
-### libwazuhext #########
+### libverprotectext #########
 
 ifeq (${uname_S},Darwin)
-VERPROTECT_SHFLAGS=-install_name @rpath/libwazuhext.$(SHARED)
+VERPROTECT_SHFLAGS=-install_name @rpath/libverprotectext.$(SHARED)
 
 $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(VERPROTECT_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
@@ -1972,23 +1972,23 @@ endif
 else
 ifeq (${uname_S},AIX)
 $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
-	mkdir -p libwazuhext;
-	find external/ -name \*.a -exec cp {} libwazuhext/ \;
+	mkdir -p libverprotectext;
+	find external/ -name \*.a -exec cp {} libverprotectext/ \;
 	for lib in libcjson.a libz.a libmsgpack.a libssl.a libcrypto.a libsqlite3.a libyaml.a libpcre2-8.a ; do \
-		ar -x libwazuhext/$$lib; \
-		mv *.o libwazuhext/; \
+		ar -x libverprotectext/$$lib; \
+		mv *.o libverprotectext/; \
 	done
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libwazuhext/*.o -o $@ -static-libgcc -latomic
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc -latomic
 else
 ifeq (${uname_S},HP-UX)
 $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
-	mkdir -p libwazuhext;
-	find external/ -name \*.a -exec cp {} libwazuhext/ \;
+	mkdir -p libverprotectext;
+	find external/ -name \*.a -exec cp {} libverprotectext/ \;
 	for lib in libcjson.a libz.a libmsgpack.a libssl.a libcrypto.a libsqlite3.a libyaml.a libpcre2-8.a ; do \
-		ar -x libwazuhext/$$lib; \
-		mv *.o libwazuhext/; \
+		ar -x libverprotectext/$$lib; \
+		mv *.o libverprotectext/; \
 	done
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libwazuhext/*.o -o $@ -static-libgcc
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc
 else
 $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $@ -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
@@ -2107,7 +2107,7 @@ manage_agents: ${addagent_o}
 
 #### Active Response ####
 
-active_response_programs = default-firewall-drop pf npf ipfw firewalld-drop disable-account host-deny ip-customblock restart-wazuh route-null kaspersky verprotect-slack
+active_response_programs = default-firewall-drop pf npf ipfw firewalld-drop disable-account host-deny ip-customblock restart-verprotect route-null kaspersky verprotect-slack
 
 $(active_response_programs): ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
 
@@ -2158,7 +2158,7 @@ host-deny: active-response/host-deny.o active-response/active_responses.o
 ip-customblock: active-response/ip-customblock.o active-response/active_responses.o
 	${OSSEC_CCBIN} ${AR_LDFLAGS} $^ ${OSSEC_LIBS} -o $@
 
-restart-wazuh: active-response/restart-wazuh.o active-response/active_responses.o
+restart-verprotect: active-response/restart-verprotect.o active-response/active_responses.o
 	${OSSEC_CCBIN} ${AR_LDFLAGS} $^ ${OSSEC_LIBS} -o $@
 
 route-null: active-response/route-null.o active-response/active_responses.o
@@ -2171,10 +2171,10 @@ verprotect-slack: active-response/verprotect-slack.o active-response/active_resp
 	${OSSEC_CCBIN} ${AR_LDFLAGS} $^ ${OSSEC_LIBS} -o $@
 
 
-### libwazuhshared.so #########
+### libverprotectshared.so #########
 
 ifeq (${uname_S},Darwin)
-VERPROTECT_SHARED_SHFLAGS=-install_name @rpath/libwazuhshared.$(SHARED)
+VERPROTECT_SHARED_SHFLAGS=-install_name @rpath/libverprotectshared.$(SHARED)
 
 $(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(VERPROTECT_SHARED_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
@@ -2262,7 +2262,7 @@ librootcheck.a: ${rootcheck_o_lib}
 
 #### FIM ######
 
-verprotect-syscheckd: librootcheck.a libwazuh.a ${VERPROTECTEXT_LIB} build_shared_modules
+verprotect-syscheckd: librootcheck.a libverprotect.a ${VERPROTECTEXT_LIB} build_shared_modules
 	cd syscheckd && mkdir -p build && cd build && cmake ${CMAKE_OPTS} -DCMAKE_C_FLAGS="${DEFINES} -pipe -Wall -Wextra -std=gnu99" ${SYSCHECK_TEST} ${SYSCHECK_RELEASE_TYPE} .. && ${MAKE}
 
 #### Monitor #######
@@ -2455,7 +2455,7 @@ ifeq (,${INSTALLDIR})
 endif
 
 ifeq (,$(wildcard ${EXTERNAL_CPYTHON}/python))
-	export WPATH_LIB="'\$$\$$ORIGIN/../../../lib'" && export SOURCE_PATH=${ROUTE_PATH} && export VERPROTECT_FFI_PATH=${EXTERNAL_LIBFFI} && export LD_LIBRARY_PATH=${ROUTE_PATH} && cd ${EXTERNAL_CPYTHON} && ./configure --prefix="${WPYTHON_DIR}" --libdir="${WPYTHON_DIR}/lib" --enable-shared --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LDFLAGS="${ARCH_FLAGS} -L${ROUTE_PATH} -lwazuhext -Wl,-rpath,'\$$\$$ORIGIN/../../../lib',--disable-new-dtags" CPPFLAGS="-I${ROUTE_PATH}/${EXTERNAL_OPENSSL}" $(CPYTHON_FLAGS) && ${MAKE}
+	export WPATH_LIB="'\$$\$$ORIGIN/../../../lib'" && export SOURCE_PATH=${ROUTE_PATH} && export VERPROTECT_FFI_PATH=${EXTERNAL_LIBFFI} && export LD_LIBRARY_PATH=${ROUTE_PATH} && cd ${EXTERNAL_CPYTHON} && ./configure --prefix="${WPYTHON_DIR}" --libdir="${WPYTHON_DIR}/lib" --enable-shared --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LDFLAGS="${ARCH_FLAGS} -L${ROUTE_PATH} -lverprotectext -Wl,-rpath,'\$$\$$ORIGIN/../../../lib',--disable-new-dtags" CPPFLAGS="-I${ROUTE_PATH}/${EXTERNAL_OPENSSL}" $(CPYTHON_FLAGS) && ${MAKE}
 endif
 
 build_python: $(VERPROTECTEXT_LIB)
@@ -2540,43 +2540,43 @@ unit_tests/wrappers/macos/libc/%.o: unit_tests/wrappers/macos/libc/%.c
 unit_tests/wrappers/posix/%.o: unit_tests/wrappers/posix/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/%.o: unit_tests/wrappers/wazuh/%.c
+unit_tests/wrappers/verprotect/%.o: unit_tests/wrappers/verprotect/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/os_crypto/%.o: unit_tests/wrappers/wazuh/os_crypto/%.c
+unit_tests/wrappers/verprotect/os_crypto/%.o: unit_tests/wrappers/verprotect/os_crypto/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/os_execd/%.o: unit_tests/wrappers/wazuh/os_execd/%.c
+unit_tests/wrappers/verprotect/os_execd/%.o: unit_tests/wrappers/verprotect/os_execd/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/os_net/%.o: unit_tests/wrappers/wazuh/os_net/%.c
+unit_tests/wrappers/verprotect/os_net/%.o: unit_tests/wrappers/verprotect/os_net/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/os_regex/%.o: unit_tests/wrappers/wazuh/os_regex/%.c
+unit_tests/wrappers/verprotect/os_regex/%.o: unit_tests/wrappers/verprotect/os_regex/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/shared/%.o: unit_tests/wrappers/wazuh/shared/%.c
+unit_tests/wrappers/verprotect/shared/%.o: unit_tests/wrappers/verprotect/shared/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/syscheckd/%.o: unit_tests/wrappers/wazuh/syscheckd/%.c
+unit_tests/wrappers/verprotect/syscheckd/%.o: unit_tests/wrappers/verprotect/syscheckd/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/verprotect_db/%.o: unit_tests/wrappers/wazuh/verprotect_db/%.c
+unit_tests/wrappers/verprotect/verprotect_db/%.o: unit_tests/wrappers/verprotect/verprotect_db/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/verprotect_modules/%.o: unit_tests/wrappers/wazuh/verprotect_modules/%.c
+unit_tests/wrappers/verprotect/verprotect_modules/%.o: unit_tests/wrappers/verprotect/verprotect_modules/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/monitord/%.o: unit_tests/wrappers/wazuh/monitord/%.c
+unit_tests/wrappers/verprotect/monitord/%.o: unit_tests/wrappers/verprotect/monitord/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/os_auth/%.o: unit_tests/wrappers/wazuh/os_auth/%.c
+unit_tests/wrappers/verprotect/os_auth/%.o: unit_tests/wrappers/verprotect/os_auth/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/addagent/%.o: unit_tests/wrappers/wazuh/addagent/%.c
+unit_tests/wrappers/verprotect/addagent/%.o: unit_tests/wrappers/verprotect/addagent/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/config/%.o: unit_tests/wrappers/wazuh/config/%.c
+unit_tests/wrappers/verprotect/config/%.o: unit_tests/wrappers/verprotect/config/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
 unit_tests/wrappers/windows/%.o: unit_tests/wrappers/windows/%.c
@@ -2585,10 +2585,10 @@ unit_tests/wrappers/windows/%.o: unit_tests/wrappers/windows/%.c
 unit_tests/wrappers/windows/libc/%.o: unit_tests/wrappers/windows/libc/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/remoted/%.o: unit_tests/wrappers/wazuh/remoted/%.c
+unit_tests/wrappers/verprotect/remoted/%.o: unit_tests/wrappers/verprotect/remoted/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
-unit_tests/wrappers/wazuh/analysisd/%.o: unit_tests/wrappers/wazuh/analysisd/%.c
+unit_tests/wrappers/verprotect/analysisd/%.o: unit_tests/wrappers/verprotect/analysisd/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} ${DEFINES_EVENTCHANNEL} -c $^ -o $@
 
 .PHONY: test
@@ -2625,7 +2625,7 @@ win32/verprotect_agent_resource.o: win32/verprotect-agent.rc
 win32/manage_agents_resource.o: win32/manage_agents.rc
 	${OSSEC_WINDRES} -i $< -o $@
 
-win32/restart_verprotect_resource.o: win32/restart-wazuh.rc
+win32/restart_verprotect_resource.o: win32/restart-verprotect.rc
 	${OSSEC_WINDRES} -i $< -o $@
 
 win32/route_null_resource.o: win32/route-null.rc
@@ -2656,10 +2656,10 @@ win32/ui/%.o: win32/ui/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} -UOSSECHIDS -DARGV0=\"verprotect-win32ui\" -c $^ -o $@
 
 win32/verprotect-agent.exe: win32/verprotect_agent_resource.o win32/version-app.o win32/icon.o win32/win_agent.o win32/win_service.o win32/win_utils.o os_crypto/md5_sha1_sha256/md5_sha1_sha256_op.o ${rootcheck_o} $(filter-out verprotect_modules/main.o, ${wmodulesd_o}) $(filter-out client-agent/main.o, $(filter-out client-agent/agentd.o, $(filter-out client-agent/event-forward.o, ${client_agent_o}))) $(filter-out logcollector/main.o, ${os_logcollector_o}) $(filter-out os_execd/main.o, ${os_execd_o}) active-response/active_responses.o monitord/rotate_log.o monitord/compress_log.o
-	${OSSEC_CCBIN} -DARGV0=\"verprotect-agent\" -DOSSECHIDS ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} ${DBSYNC_LIB} ${RSYNC_LIB} -lverprotect-syscheckd -l:libfimdb.lib libwazuh.a -o $@
+	${OSSEC_CCBIN} -DARGV0=\"verprotect-agent\" -DOSSECHIDS ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} ${DBSYNC_LIB} ${RSYNC_LIB} -lverprotect-syscheckd -l:libfimdb.lib libverprotect.a -o $@
 
 win32/verprotect-agent-eventchannel.exe: win32/verprotect_agent_eventchannel_resource.o win32/version-app.o win32/icon.o win32/win_agent.o win32/win_service.o win32/win_utils.o os_crypto/md5_sha1_sha256/md5_sha1_sha256_op.o ${rootcheck_o} $(filter-out verprotect_modules/main.o, ${wmodulesd_o}) $(filter-out client-agent/main.o, $(filter-out client-agent/agentd.o, $(filter-out client-agent/event-forward.o, ${client_agent_o}))) $(filter-out logcollector/main-event.o, ${os_logcollector_eventchannel_o}) $(filter-out os_execd/main.o, ${os_execd_o}) active-response/active_responses.o monitord/rotate_log.o monitord/compress_log.o
-	${OSSEC_CCBIN} -DARGV0=\"verprotect-agent\" -DOSSECHIDS -DEVENTCHANNEL_SUPPORT ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} ${DBSYNC_LIB} ${RSYNC_LIB} -lverprotect-syscheckd-event -l:libfimdb.lib libwazuh.a -lwevtapi -o $@
+	${OSSEC_CCBIN} -DARGV0=\"verprotect-agent\" -DOSSECHIDS -DEVENTCHANNEL_SUPPORT ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} ${DBSYNC_LIB} ${RSYNC_LIB} -lverprotect-syscheckd-event -l:libfimdb.lib libverprotect.a -lwevtapi -o $@
 
 win32/manage_agents.exe: win32/manage_agents_resource.o win32/version-app.o win32/win_service_rk.o ${addagent_o}
 	${OSSEC_CCBIN} -DARGV0=\"manage-agents\" -DMA ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} -o $@
@@ -2685,8 +2685,8 @@ win32/os_win32ui.exe: win32/ui_resource.o win32/version-app.o win32/win_service_
 win32/agent-auth.exe: win32/auth_resource.o win32/version-app.o win32/win_service_rk.o os_auth/main-client.o os_auth/ssl.o os_auth/check_cert.o addagent/validate.o
 	${OSSEC_CCBIN} -DARGV0=\"agent-auth\" -DOSSECHIDS ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} -lshlwapi -lwsock32 -lsecur32 -lws2_32 -flto -o $@
 
-win32/restart-wazuh.exe: win32/restart_verprotect_resource.o win32/version-app.o active-response/active_responses.o active-response/restart-wazuh.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
-	${OSSEC_CCBIN} -DARGV0=\"restart-wazuh\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
+win32/restart-verprotect.exe: win32/restart_verprotect_resource.o win32/version-app.o active-response/active_responses.o active-response/restart-verprotect.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
+	${OSSEC_CCBIN} -DARGV0=\"restart-verprotect\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
 
 win32/route-null.exe: win32/route_null_resource.o win32/version-app.o active-response/active_responses.o active-response/route-null.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
 	${OSSEC_CCBIN} -DARGV0=\"route-null\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
@@ -2803,10 +2803,10 @@ clean-internals: clean-unit-tests
 	rm -rf $(SYSCHECK)build
 	rm -rf ${SHARED_MODULES}http-request/build
 	rm -rf build
-	rm -rf libwazuhext
+	rm -rf libverprotectext
 	rm -rf libstdc++.so.6
 	rm -rf libgcc_s.so.1
-	rm -f libwazuh.a
+	rm -f libverprotect.a
 	rm -f shared/*.o
 
 
@@ -2857,9 +2857,9 @@ clean-framework:
 	${MAKE} -C ../framework clean
 
 clean-windows:
-	rm -f libwazuh.a
-	rm -f libwazuhshared.*
-	rm -f libwazuhext.*
+	rm -f libverprotect.a
+	rm -f libverprotectshared.*
+	rm -f libverprotectext.*
 	rm -f verprotect_modules/syscollector/*.o verprotect_modules/syscollector/*.obj
 	rm -f win32/LICENSE.txt
 	rm -f win32/help_win.txt
@@ -2872,7 +2872,7 @@ clean-windows:
 	rm -f win32/netsh.cmd
 	rm -f win32/netsh-win-2016.cmd
 	rm -f win32/default-ossec-pre6.conf
-	rm -f win32/restart-wazuh.exe
+	rm -f win32/restart-verprotect.exe
 	rm -f win32/route-null.exe
 	rm -f win32/netsh.exe
 	rm -f ${win32_o} ${win32_ui_o} win32/win_service_rk.o

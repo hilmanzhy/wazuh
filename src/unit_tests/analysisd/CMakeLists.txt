@@ -32,7 +32,7 @@ set_target_properties(
 target_link_libraries(ANALYSISD_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread)
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate Analysisd tests
 list(APPEND analysisd_names "test_analysisd_syscheck")

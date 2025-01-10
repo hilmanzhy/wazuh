@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "../headers/shared.h"
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/file_op_wrappers.h"
+#include "../wrappers/verprotect/shared/file_op_wrappers.h"
 
 /* setup/teardown */
 static int group_setup(void ** state) {
@@ -612,7 +612,7 @@ void test_wurl_http_request_success(void **state)
     char *pheaders = NULL;
     char *url = "http://test.com";
     const char *payload = "payload test";
-    const char *userpass = "wazuh:wazuh";
+    const char *userpass = "verprotect:verprotect";
     size_t max_size = 1;
 
     #ifdef TEST_WINAGENT

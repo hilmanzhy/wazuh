@@ -14,9 +14,9 @@
 #include <stdio.h>
 
 #include "../../wrappers/posix/pthread_wrappers.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_agent_upgrade_agent_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_agent_upgrade_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_agent_upgrade_agent_wrappers.h"
 
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/agent_upgrade/wm_agent_upgrade.h"

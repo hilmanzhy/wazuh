@@ -22,9 +22,9 @@
 
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wm_exec_wrappers.h"
-#include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wm_exec_wrappers.h"
+#include "../../wrappers/verprotect/shared/mq_op_wrappers.h"
 
 #define TEST_MAX_DATES 5
 

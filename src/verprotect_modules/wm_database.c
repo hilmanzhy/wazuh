@@ -369,7 +369,7 @@ void wm_clean_agent_artifacts(int agent_id, const char* agent_name) {
     // Removing verprotect-db database
     char wdbquery[OS_SIZE_128 + 1];
     char wdboutput[OS_SIZE_1024];
-    snprintf(wdbquery, OS_SIZE_128, "wazuhdb remove %d", agent_id);
+    snprintf(wdbquery, OS_SIZE_128, "verprotectdb remove %d", agent_id);
     if (result = wdbc_query_ex(&wdb_wmdb_sock, wdbquery, wdboutput, sizeof(wdboutput)), result) {
         mtdebug1(WM_DATABASE_LOGTAG, "Could not remove the verprotect-db DB of the agent %d.", agent_id);
     }

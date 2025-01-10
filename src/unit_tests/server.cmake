@@ -1,9 +1,9 @@
-# Find the wazuh shared library
-find_library(VERPROTECTEXT NAMES libwazuhext.so HINTS "${SRC_FOLDER}")
+# Find the verprotect shared library
+find_library(VERPROTECTEXT NAMES libverprotectext.so HINTS "${SRC_FOLDER}")
 set(uname "Linux")
 
 if(NOT VERPROTECTEXT)
-    message(FATAL_ERROR "libwazuhext not found! Aborting...")
+    message(FATAL_ERROR "libverprotectext not found! Aborting...")
 endif()
 
 # Add compiling flags

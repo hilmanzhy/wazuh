@@ -24,10 +24,10 @@
 #include "../scheduling/wmodules_scheduling_helpers.h"
 #include "../../wrappers/common.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
-#include "../../wrappers/wazuh/os_regex/os_regex_wrappers.c"
-#include "../../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../../wrappers/wazuh/verprotect_modules/wmodules_wrappers.h"
-#include "../../wrappers/wazuh/shared/url_wrappers.h"
+#include "../../wrappers/verprotect/os_regex/os_regex_wrappers.c"
+#include "../../wrappers/verprotect/shared/mq_op_wrappers.h"
+#include "../../wrappers/verprotect/verprotect_modules/wmodules_wrappers.h"
+#include "../../wrappers/verprotect/shared/url_wrappers.h"
 #include "../../wrappers/libc/time_wrappers.h"
 
 unsigned int __wrap_sleep(unsigned int __seconds) {

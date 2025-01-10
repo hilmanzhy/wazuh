@@ -6,7 +6,7 @@
 # Foundation.
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Tests list and flags
 list(APPEND tests_names "test_wm_control")
@@ -14,7 +14,7 @@ list(APPEND tests_flags "-Wl,--wrap,sysinfo_networks -Wl,--wrap,sysinfo_free_res
 list(APPEND use_shared_libs 1)
 
 
-# Generate wazuh modules library
+# Generate verprotect modules library
 file(GLOB control ../../../verprotect_modules/*.o)
 list(REMOVE_ITEM control ../../../verprotect_modules/main.o)
 

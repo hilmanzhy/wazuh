@@ -20,7 +20,7 @@
 #include "string_op.h"
 #include "buffer_op.h"
 #include <time.h>
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 #include "verprotect_db/wdb.h"
 
 #ifdef VERPROTECT_UNIT_TESTING

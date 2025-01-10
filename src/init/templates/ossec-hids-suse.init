@@ -44,7 +44,7 @@ rc_reset
 # with force-reload (in case signalling is not supported) are
 # considered a success.
 
-# Just to make sure wazuh is installed ...
+# Just to make sure verprotect is installed ...
 VERPROTECT_HOME=VERPROTECT_HOME_TMP
 VERPROTECT_CONTROL="$VERPROTECT_HOME/bin/verprotect-control"
 

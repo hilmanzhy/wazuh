@@ -9,8 +9,8 @@
  * Foundation.
  */
 
-#include "wazuhDBQueryBuilder_test.hpp"
-#include "wazuhDBQueryBuilder.hpp"
+#include "verprotectDBQueryBuilder_test.hpp"
+#include "verprotectDBQueryBuilder.hpp"
 #include <string>
 
 TEST_F(VerprotectDBQueryBuilderTest, GlobalTest)

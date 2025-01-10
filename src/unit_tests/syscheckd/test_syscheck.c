@@ -14,11 +14,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/fs_op_wrappers.h"
-#include "../wrappers/wazuh/shared/validate_op_wrappers.h"
-#include "../wrappers/wazuh/syscheckd/create_db_wrappers.h"
-#include "../wrappers/wazuh/syscheckd/fim_db_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/fs_op_wrappers.h"
+#include "../wrappers/verprotect/shared/validate_op_wrappers.h"
+#include "../wrappers/verprotect/syscheckd/create_db_wrappers.h"
+#include "../wrappers/verprotect/syscheckd/fim_db_wrappers.h"
 
 #include "syscheck.h"
 

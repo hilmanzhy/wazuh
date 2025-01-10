@@ -24,7 +24,7 @@ include_directories(${SRC_FOLDER}/shared_modules/router/include)
 target_link_libraries(REMOTED_O ${VERPROTECTLIB} ${VERPROTECTEXT} -lpthread -lrouter)
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Generate remoted tests
 list(APPEND remoted_names "test_manager")

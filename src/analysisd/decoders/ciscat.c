@@ -16,7 +16,7 @@
 #include "plugin_decoders.h"
 #include "verprotect_modules/wmodules.h"
 #include "string_op.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 static OSDecoderInfo *ciscat_decoder = NULL;
 

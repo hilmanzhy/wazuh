@@ -14,9 +14,9 @@
 #include <stdio.h>
 
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../wrappers/wazuh/verprotect_db/wdb_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/verprotect_db/wdb_wrappers.h"
 
 
 #include "../analysisd/mitre.h"

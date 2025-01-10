@@ -128,7 +128,7 @@ add_subdirectory(shared_modules/utils)
 add_subdirectory(shared_modules/router)
 add_subdirectory(shared_modules/content_manager)
 
-set(CURL_DEP wazuhext)
+set(CURL_DEP verprotectext)
 add_subdirectory(shared_modules/http-request)
 add_subdirectory(shared_modules/indexer_connector)
 add_subdirectory(verprotect_modules/vulnerability_scanner)

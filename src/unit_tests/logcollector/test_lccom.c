@@ -20,7 +20,7 @@
 #include "../../os_net/os_net.h"
 
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
 
 #include "json_data.h"

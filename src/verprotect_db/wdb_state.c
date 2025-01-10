@@ -1,4 +1,4 @@
-/* wazuhdb state management functions
+/* verprotectdb state management functions
  * May 27, 2022
  *
  * Copyright (C) 2015, Verprotect Inc.
@@ -43,21 +43,21 @@ void w_inc_queries_total() {
     w_mutex_unlock(&db_state_t_mutex);
 }
 
-void w_inc_wazuhdb() {
+void w_inc_verprotectdb() {
     w_mutex_lock(&db_state_t_mutex);
-    wdb_state.queries_breakdown.wazuhdb_queries++;
+    wdb_state.queries_breakdown.verprotectdb_queries++;
     w_mutex_unlock(&db_state_t_mutex);
 }
 
-void w_inc_wazuhdb_remove() {
+void w_inc_verprotectdb_remove() {
     w_mutex_lock(&db_state_t_mutex);
-    wdb_state.queries_breakdown.wazuhdb_breakdown.remove_queries++;
+    wdb_state.queries_breakdown.verprotectdb_breakdown.remove_queries++;
     w_mutex_unlock(&db_state_t_mutex);
 }
 
-void w_inc_wazuhdb_remove_time(struct timeval time) {
+void w_inc_verprotectdb_remove_time(struct timeval time) {
     w_mutex_lock(&db_state_t_mutex);
-    timeradd(&wdb_state.queries_breakdown.wazuhdb_breakdown.remove_time, &time, &wdb_state.queries_breakdown.wazuhdb_breakdown.remove_time);
+    timeradd(&wdb_state.queries_breakdown.verprotectdb_breakdown.remove_time, &time, &wdb_state.queries_breakdown.verprotectdb_breakdown.remove_time);
     w_mutex_unlock(&db_state_t_mutex);
 }
 
@@ -1229,15 +1229,15 @@ cJSON* wdb_create_state_json() {
     cJSON_AddNumberToObject(_task_tables_tasks, "upgrade_result", wdb_state_cpy.queries_breakdown.task_breakdown.tasks.upgrade_result_queries);
     cJSON_AddNumberToObject(_task_tables_tasks, "upgrade_update_status", wdb_state_cpy.queries_breakdown.task_breakdown.tasks.upgrade_update_status_queries);
 
-    cJSON_AddNumberToObject(_received_breakdown, "wazuhdb", wdb_state_cpy.queries_breakdown.wazuhdb_queries);
+    cJSON_AddNumberToObject(_received_breakdown, "verprotectdb", wdb_state_cpy.queries_breakdown.verprotectdb_queries);
 
-    cJSON *_wazuhdb_breakdown = cJSON_CreateObject();
-    cJSON_AddItemToObject(_received_breakdown, "wazuhdb_breakdown", _wazuhdb_breakdown);
+    cJSON *_verprotectdb_breakdown = cJSON_CreateObject();
+    cJSON_AddItemToObject(_received_breakdown, "verprotectdb_breakdown", _verprotectdb_breakdown);
 
-    cJSON *_wazuhdb_db = cJSON_CreateObject();
-    cJSON_AddItemToObject(_wazuhdb_breakdown, "db", _wazuhdb_db);
+    cJSON *_verprotectdb_db = cJSON_CreateObject();
+    cJSON_AddItemToObject(_verprotectdb_breakdown, "db", _verprotectdb_db);
 
-    cJSON_AddNumberToObject(_wazuhdb_db, "remove", wdb_state_cpy.queries_breakdown.wazuhdb_breakdown.remove_queries);
+    cJSON_AddNumberToObject(_verprotectdb_db, "remove", wdb_state_cpy.queries_breakdown.verprotectdb_breakdown.remove_queries);
 
     cJSON *_time = cJSON_CreateObject();
     cJSON_AddItemToObject(_metrics, "time", _time);
@@ -1421,15 +1421,15 @@ cJSON* wdb_create_state_json() {
     cJSON_AddNumberToObject(_task_tables_tasks_t, "upgrade_result", timeval_to_milis(wdb_state_cpy.queries_breakdown.task_breakdown.tasks.upgrade_result_time));
     cJSON_AddNumberToObject(_task_tables_tasks_t, "upgrade_update_status", timeval_to_milis(wdb_state_cpy.queries_breakdown.task_breakdown.tasks.upgrade_update_status_time));
 
-    cJSON_AddNumberToObject(_execution_breakdown, "wazuhdb", timeval_to_milis(wdb_state_cpy.queries_breakdown.wazuhdb_breakdown.remove_time));
+    cJSON_AddNumberToObject(_execution_breakdown, "verprotectdb", timeval_to_milis(wdb_state_cpy.queries_breakdown.verprotectdb_breakdown.remove_time));
 
-    cJSON *_wazuhdb_breakdown_t = cJSON_CreateObject();
-    cJSON_AddItemToObject(_execution_breakdown, "wazuhdb_breakdown", _wazuhdb_breakdown_t);
+    cJSON *_verprotectdb_breakdown_t = cJSON_CreateObject();
+    cJSON_AddItemToObject(_execution_breakdown, "verprotectdb_breakdown", _verprotectdb_breakdown_t);
 
-    cJSON *_wazuhdb_db_t = cJSON_CreateObject();
-    cJSON_AddItemToObject(_wazuhdb_breakdown_t, "db", _wazuhdb_db_t);
+    cJSON *_verprotectdb_db_t = cJSON_CreateObject();
+    cJSON_AddItemToObject(_verprotectdb_breakdown_t, "db", _verprotectdb_db_t);
 
-    cJSON_AddNumberToObject(_wazuhdb_db_t, "remove", timeval_to_milis(wdb_state_cpy.queries_breakdown.wazuhdb_breakdown.remove_time));
+    cJSON_AddNumberToObject(_verprotectdb_db_t, "remove", timeval_to_milis(wdb_state_cpy.queries_breakdown.verprotectdb_breakdown.remove_time));
 
     return wdb_state_json;
 }
@@ -1533,5 +1533,5 @@ STATIC uint64_t get_task_time(wdb_state_t *state){
 }
 
 STATIC uint64_t get_time_total(wdb_state_t *state){
-    return get_task_time(state) + get_global_time(state) + get_agent_time(state) + timeval_to_milis(state->queries_breakdown.wazuhdb_breakdown.remove_time) + timeval_to_milis(state->queries_breakdown.mitre_breakdown.sql_time);
+    return get_task_time(state) + get_global_time(state) + get_agent_time(state) + timeval_to_milis(state->queries_breakdown.verprotectdb_breakdown.remove_time) + timeval_to_milis(state->queries_breakdown.mitre_breakdown.sql_time);
 }

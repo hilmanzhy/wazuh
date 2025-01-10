@@ -5,7 +5,7 @@
 # License (version 2) as published by the FSF - Free Software
 # Foundation.
 
-# Generate wazuh modules library
+# Generate verprotect modules library
 file(GLOB wm_exec ../../../verprotect_modules/wm_exec.o)
 
 add_library(WM_EXEC_O STATIC ${wm_exec})
@@ -30,7 +30,7 @@ if(${TARGET} STREQUAL "winagent")
 endif(${TARGET} STREQUAL "winagent")
 
 #include wrappers
-include(${SRC_FOLDER}/unit_tests/wrappers/wazuh/shared/shared.cmake)
+include(${SRC_FOLDER}/unit_tests/wrappers/verprotect/shared/shared.cmake)
 
 # Tests list and flags
 list(APPEND tests_names "test_wm_exec")

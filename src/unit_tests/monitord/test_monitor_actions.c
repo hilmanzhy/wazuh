@@ -17,14 +17,14 @@
 #include <stdio.h>
 
 #include "../wrappers/common.h"
-#include "../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../wrappers/wazuh/shared/mq_op_wrappers.h"
-#include "../wrappers/wazuh/shared/hash_op_wrappers.h"
-#include "../wrappers/wazuh/os_net/os_net_wrappers.h"
+#include "../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../wrappers/verprotect/shared/mq_op_wrappers.h"
+#include "../wrappers/verprotect/shared/hash_op_wrappers.h"
+#include "../wrappers/verprotect/os_net/os_net_wrappers.h"
 #include "../wrappers/wazuh//monitord/monitord_wrappers.h"
 #include "../wrappers/posix/stat_wrappers.h"
-#include "../wrappers/wazuh/shared/auth_client_wrappers.h"
-#include "../wrappers/wazuh/shared/agent_op_wrappers.h"
+#include "../wrappers/verprotect/shared/auth_client_wrappers.h"
+#include "../wrappers/verprotect/shared/agent_op_wrappers.h"
 
 #include "../config/client-config.h"
 #include "../headers/store_op.h"

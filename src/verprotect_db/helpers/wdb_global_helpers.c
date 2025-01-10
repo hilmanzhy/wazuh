@@ -11,7 +11,7 @@
 
 #include "wdb_global_helpers.h"
 #include "defs.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 #ifdef WIN32
 #define chown(x, y, z) 0

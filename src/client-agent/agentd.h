@@ -206,6 +206,6 @@ extern keystore keys;
 extern agent *agt;
 extern anti_tampering *atc;
 
-static const char AG_IN_UNMERGE[] = "wazuh: Could not unmerge shared file.";
+static const char AG_IN_UNMERGE[] = "verprotect: Could not unmerge shared file.";
 
 #endif /* AGENTD_H */

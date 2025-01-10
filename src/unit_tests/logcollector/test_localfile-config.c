@@ -16,7 +16,7 @@
 #include "shared.h"
 #include "../config/localfile-config.h"
 #include "../config/config.h"
-#include "../wrappers/wazuh/os_xml/os_xml_wrappers.h"
+#include "../wrappers/verprotect/os_xml/os_xml_wrappers.h"
 #include "../wrappers/externals/pcre2/pcre2_wrappers.h"
 #include "../wrappers/externals/cJSON/cJSON_wrappers.h"
 

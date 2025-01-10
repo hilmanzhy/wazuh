@@ -19,9 +19,9 @@
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/wm_gcp.h"
 #include "../../wrappers/libc/stdlib_wrappers.h"
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/file_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/schedule_scan_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/file_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/schedule_scan_wrappers.h"
 
 static const char *XML_ENABLED = "enabled";
 static const char *XML_PROJECT_ID = "project_id";

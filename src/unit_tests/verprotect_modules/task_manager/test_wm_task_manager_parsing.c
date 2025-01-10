@@ -13,8 +13,8 @@
 #include <cmocka.h>
 #include <stdio.h>
 
-#include "../../wrappers/wazuh/shared/debug_op_wrappers.h"
-#include "../../wrappers/wazuh/shared/time_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/debug_op_wrappers.h"
+#include "../../wrappers/verprotect/shared/time_op_wrappers.h"
 
 #include "../../verprotect_modules/wmodules.h"
 #include "../../verprotect_modules/task_manager/wm_task_manager_parsing.h"

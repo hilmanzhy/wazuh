@@ -11,7 +11,7 @@
 
 #include "wdb.h"
 #include "verprotect_modules/wmodules.h"
-#include "wazuhdb_op.h"
+#include "verprotectdb_op.h"
 
 #ifdef VERPROTECT_UNIT_TESTING
 // Remove STATIC qualifier from tests

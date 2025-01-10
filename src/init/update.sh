@@ -262,7 +262,7 @@ isVerprotectInstalled()
 ##########
 getPreinstalledDir()
 {
-    # Checking ossec-init.conf for old wazuh versions
+    # Checking ossec-init.conf for old verprotect versions
     if [ -f "${OSSEC_INIT}" ]; then
         . ${OSSEC_INIT}
         if [ -d "$DIRECTORY" ]; then
@@ -296,7 +296,7 @@ getPreinstalledDir()
 
 getPreinstalledType()
 {
-    # Checking ossec-init.conf for old wazuh versions
+    # Checking ossec-init.conf for old verprotect versions
     if [ -f "${OSSEC_INIT}" ]; then
         . ${OSSEC_INIT}
     else
@@ -313,7 +313,7 @@ getPreinstalledType()
 
 getPreinstalledVersion()
 {
-    # Checking ossec-init.conf for old wazuh versions
+    # Checking ossec-init.conf for old verprotect versions
     if [ -f "${OSSEC_INIT}" ]; then
         . ${OSSEC_INIT}
     else
@@ -330,7 +330,7 @@ getPreinstalledVersion()
 getPreinstalledName()
 {
     NAME=""
-    # Checking ossec-init.conf for old wazuh versions. New versions
+    # Checking ossec-init.conf for old verprotect versions. New versions
     # do not provide this information at all.
     if [ -f "${OSSEC_INIT}" ]; then
         . ${OSSEC_INIT}
@@ -428,7 +428,7 @@ UpdateOldVersions()
     if [ "$INSTYPE" = "server" ]; then
         # Delete deprecated rules & decoders
         echo "Searching for deprecated rules and decoders..."
-        DEPRECATED=`cat ./src/init/wazuh/deprecated_ruleset.txt`
+        DEPRECATED=`cat ./src/init/verprotect/deprecated_ruleset.txt`
         for i in $DEPRECATED; do
             DEL_FILE="$INSTALLDIR/ruleset/$i"
             if [ -f ${DEL_FILE} ]; then
@@ -487,7 +487,7 @@ UpdateOldVersions()
         BACKUP_RULESET="$PREINSTALLEDDIR/etc/backup_ruleset"
         mkdir $BACKUP_RULESET > /dev/null 2>&1
         chmod 750 $BACKUP_RULESET > /dev/null 2>&1
-        chown root:wazuh $BACKUP_RULESET > /dev/null 2>&1
+        chown root:verprotect $BACKUP_RULESET > /dev/null 2>&1
 
         # Backup decoders: Verprotect v1.0.1 to v1.1.1
         old_decoders="ossec_decoders verprotect_decoders"
