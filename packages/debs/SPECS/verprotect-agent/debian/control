@@ -1,0 +1,26 @@
+Source: verprotect-agent
+Section: admin
+Priority: extra
+Maintainer: Verprotect, Inc <info@verprotect.com>
+Build-Depends: debhelper (>= 7.0.50~), make, gcc, linux-libc-dev, gawk, libaudit-dev, selinux-basics
+Standards-Version: 3.8.4
+Homepage: https://www.verprotect.com
+
+Package: verprotect-agent
+Architecture: any
+Depends: ${shlibs:Depends}, libc6 (>= 2.7), lsb-release, debconf, adduser
+Conflicts: ossec-hids-agent, verprotect-manager, ossec-hids, verprotect-api
+Breaks: ossec-hids-agent, verprotect-manager, ossec-hids
+Description: Verprotect agent
+ Verprotect helps you to gain security visibility into your infrastructure by
+ monitoring hosts at an operating system and application level. It provides
+ the following capabilities: log analysis, file integrity monitoring,
+ intrusions detection and policy and compliance monitoring.
+
+Package: verprotect-agent-dbg
+Section: debug
+Priority: optional
+Architecture: any
+Depends: verprotect-agent
+Description: Debug symbols for verprotect-agent.
+  This package contains debug symbols for debugging verprotect-agent.

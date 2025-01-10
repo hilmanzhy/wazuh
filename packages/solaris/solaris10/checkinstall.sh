@@ -1,6 +1,6 @@
 #!/bin/sh
-# checkinstall script for wazuh-agent
-# Wazuh, Inc 2015
+# checkinstall script for verprotect-agent
+# Verprotect, Inc 2015
 
 expected_platform="ARCH"
 platform=`uname -p`

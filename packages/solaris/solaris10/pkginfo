@@ -1,12 +1,12 @@
-NAME=Wazuh - Wazuh unifies historically separate functions into a single agent and platform architecture. Providing protection for public clouds, private clouds, and on-premise data centers.
-PKG="wazuh-agent"
+NAME=Verprotect - Verprotect unifies historically separate functions into a single agent and platform architecture. Providing protection for public clouds, private clouds, and on-premise data centers.
+PKG="verprotect-agent"
 VERSION="4.10.0"
 ARCH="i386"
 CLASSES="none"
 CATEGORY="system"
-VENDOR="Wazuh, Inc <info@wazuh.com>"
+VENDOR="Verprotect, Inc <info@verprotect.com>"
 PSTAMP="09Jan2025"
-EMAIL="info@wazuh.com"
+EMAIL="info@verprotect.com"
 ISTATES="S s 1 2 3"
 RSTATES="S s 1 2 3"
 BASEDIR="/var/ossec/"

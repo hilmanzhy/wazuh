@@ -1,6 +1,6 @@
 #! /bin/bash
 # By Spransy, Derek" <DSPRANS () emory ! edu> and Charlie Scott
-# Modified by Wazuh, Inc. <info@wazuh.com>.
+# Modified by Verprotect, Inc. <info@verprotect.com>.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 
 #####
@@ -39,21 +39,21 @@ function check_arch
 check_arch
 
 if [ -d "${DIR}" ]; then
-    echo "A Wazuh agent installation was found in ${DIR}. Will perform an upgrade."
+    echo "A Verprotect agent installation was found in ${DIR}. Will perform an upgrade."
     upgrade="true"
-    touch "${DIR}/WAZUH_PKG_UPGRADE"
+    touch "${DIR}/VERPROTECT_PKG_UPGRADE"
 
-    if [ -f "${DIR}/WAZUH_RESTART" ]; then
-        rm -f "${DIR}/WAZUH_RESTART"
+    if [ -f "${DIR}/VERPROTECT_RESTART" ]; then
+        rm -f "${DIR}/VERPROTECT_RESTART"
     fi
 
     # Stops the agent before upgrading it
-    if ${DIR}/bin/wazuh-control status | grep "is running" > /dev/null 2>&1; then
-        touch "${DIR}/WAZUH_RESTART"
-        ${DIR}/bin/wazuh-control stop
+    if ${DIR}/bin/verprotect-control status | grep "is running" > /dev/null 2>&1; then
+        touch "${DIR}/VERPROTECT_RESTART"
+        ${DIR}/bin/verprotect-control stop
         restart="true"
     elif ${DIR}/bin/ossec-control status | grep "is running" > /dev/null 2>&1; then
-        touch "${DIR}/WAZUH_RESTART"
+        touch "${DIR}/VERPROTECT_RESTART"
         ${DIR}/bin/ossec-control stop
         restart="true"
     fi
@@ -63,8 +63,8 @@ if [ -d "${DIR}" ]; then
     cp -r ${DIR}/etc/{ossec.conf,client.keys,local_internal_options.conf,shared} ${DIR}/config_files/
 
     if [ -d ${DIR}/logs/ossec ]; then
-        echo "Renaming ${DIR}/logs/ossec to ${DIR}/logs/wazuh"
-        mv ${DIR}/logs/ossec ${DIR}/logs/wazuh
+        echo "Renaming ${DIR}/logs/ossec to ${DIR}/logs/verprotect"
+        mv ${DIR}/logs/ossec ${DIR}/logs/verprotect
     fi
 
     if [ -d ${DIR}/queue/ossec ]; then
@@ -72,9 +72,9 @@ if [ -d "${DIR}" ]; then
         mv ${DIR}/queue/ossec ${DIR}/queue/sockets
     fi
 
-    if pkgutil --pkgs | grep -i wazuh-agent-etc > /dev/null 2>&1 ; then
-        echo "Removing previous package receipt for wazuh-agent-etc"
-        pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
+    if pkgutil --pkgs | grep -i verprotect-agent-etc > /dev/null 2>&1 ; then
+        echo "Removing previous package receipt for verprotect-agent-etc"
+        pkgutil --forget com.verprotect.pkg.verprotect-agent-etc
     fi
 fi
 
@@ -101,7 +101,7 @@ while [[ $idvar -eq 0 ]]; do
    fi
 done
 
-echo "UID available for wazuh user is:";
+echo "UID available for verprotect user is:";
 echo ${new_uid}
 
 # Verify that the uid and gid exist and match
@@ -118,37 +118,37 @@ fi
 
 # Creating the group
 echo "Checking group..."
-if [[ $(dscl . -read /Groups/wazuh) ]]
+if [[ $(dscl . -read /Groups/verprotect) ]]
     then
-    echo "wazuh group already exists.";
+    echo "verprotect group already exists.";
 else
-    sudo ${DSCL} localhost -create /Local/Default/Groups/wazuh
-    check_errm "Error creating group wazuh" "67"
-    sudo ${DSCL} localhost -createprop /Local/Default/Groups/wazuh PrimaryGroupID ${new_gid}
-    sudo ${DSCL} localhost -createprop /Local/Default/Groups/wazuh RealName wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Groups/wazuh RecordName wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Groups/wazuh RecordType: dsRecTypeStandard:Groups
-    sudo ${DSCL} localhost -createprop /Local/Default/Groups/wazuh Password "*"
+    sudo ${DSCL} localhost -create /Local/Default/Groups/verprotect
+    check_errm "Error creating group verprotect" "67"
+    sudo ${DSCL} localhost -createprop /Local/Default/Groups/verprotect PrimaryGroupID ${new_gid}
+    sudo ${DSCL} localhost -createprop /Local/Default/Groups/verprotect RealName verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Groups/verprotect RecordName verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Groups/verprotect RecordType: dsRecTypeStandard:Groups
+    sudo ${DSCL} localhost -createprop /Local/Default/Groups/verprotect Password "*"
 fi
 
 # Creating the user
 echo "Checking user..."
-if [[ $(dscl . -read /Users/wazuh) ]]
+if [[ $(dscl . -read /Users/verprotect) ]]
     then
-    echo "wazuh user already exists.";
+    echo "verprotect user already exists.";
 else
-    sudo ${DSCL} localhost -create /Local/Default/Users/wazuh
-    check_errm "Error creating user wazuh" "77"
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh RecordName wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh RealName wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh UserShell /usr/bin/false
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh NFSHomeDirectory /var/wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh UniqueID ${new_uid}
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh PrimaryGroupID ${new_gid}
-    sudo ${DSCL} localhost -append /Local/Default/Groups/wazuh GroupMembership wazuh
-    sudo ${DSCL} localhost -createprop /Local/Default/Users/wazuh Password "*"
+    sudo ${DSCL} localhost -create /Local/Default/Users/verprotect
+    check_errm "Error creating user verprotect" "77"
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect RecordName verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect RealName verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect UserShell /usr/bin/false
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect NFSHomeDirectory /var/verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect UniqueID ${new_uid}
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect PrimaryGroupID ${new_gid}
+    sudo ${DSCL} localhost -append /Local/Default/Groups/verprotect GroupMembership verprotect
+    sudo ${DSCL} localhost -createprop /Local/Default/Users/verprotect Password "*"
 fi
 
 #Hide the fixed users
-echo "Hiding the fixed wazuh user"
-dscl . create /Users/wazuh IsHidden 1
+echo "Hiding the fixed verprotect user"
+dscl . create /Users/verprotect IsHidden 1

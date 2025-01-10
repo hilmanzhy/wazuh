@@ -1,6 +1,6 @@
 #!/bin/bash
-# Created by Wazuh, Inc. <info@wazuh.com>.
-# Copyright (C) 2015, Wazuh Inc.
+# Created by Verprotect, Inc. <info@verprotect.com>.
+# Copyright (C) 2015, Verprotect Inc.
 # This program is a free software; you can redistribute it and/or modify it under the terms of GPLv2
 # This script need packages generation scripts to be on the Solaris machine.
 
@@ -27,7 +27,7 @@ chmod +x ${SOLARIS_VERSION}/*.sh
 
 cd ${SOLARIS_VERSION}
 
-echo "Generating Wazuh package"
-./generate_wazuh_packages.sh -b ${BRANCH_TAG} -s /tmp/shared -c /tmp/shared
+echo "Generating Verprotect package"
+./generate_verprotect_packages.sh -b ${BRANCH_TAG} -s /tmp/shared -c /tmp/shared
 
 exit 0
