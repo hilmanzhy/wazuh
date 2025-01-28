@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        these files are modified. Specifically, these tests will verify that FIM does not limit
        the size of the 'queue/diff/local' folder where Wazuh stores the compressed files used
        to perform the 'diff' operation when the 'disk_quota' option is enabled with specific values.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -106,7 +106,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_WINDOWS_DEBUG: 2, FILE_MAX_S
 def test_disk_quota_values(test_configuration, test_metadata, configure_local_internal_options,
                            truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, file_to_monitor, daemons_handler, detect_end_scan):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon limits the size of the diff folder to generate
+    description: Check if the 'verprotect-syscheckd' daemon limits the size of the diff folder to generate
                  'diff' information from a specific value of the 'disk_quota' option. For this purpose,
                  the test will monitor a directory, create a testing file smaller than the configured quota,
                  and check if the compressed file has been created. Then, it will increase the size of

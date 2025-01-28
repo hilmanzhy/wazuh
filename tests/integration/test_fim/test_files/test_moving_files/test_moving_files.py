@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        when these files are modified. Specifically, these tests will check if FIM detects
        moving files from one directory using the 'whodata' monitoring mode to another using
        the 'realtime' monitoring mode and vice versa.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -91,7 +91,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2}
 def test_moving_file_to_whodata(test_configuration, test_metadata, set_wazuh_configuration, truncate_monitored_files,
                                 configure_local_internal_options, create_paths_files, daemons_handler, start_monitoring):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects events when moving files from a directory
+    description: Check if the 'verprotect-syscheckd' daemon detects events when moving files from a directory
                  monitored by 'whodata' to another monitored by 'realtime' and vice versa. For this purpose,
                  the test will monitor two folders using both FIM monitoring modes and create a testing file
                  inside each one. Then, it will rename the testing file of the target folder using the name
@@ -135,7 +135,7 @@ def test_moving_file_to_whodata(test_configuration, test_metadata, set_wazuh_con
           in the target folder of moved files.
 
     input_description: A test case is contained in external YAML files (configuration_moving_files.yaml, cases_moving_files.yaml)
-                       which includes configuration settings for the 'wazuh-syscheckd' daemon and, these are
+                       which includes configuration settings for the 'verprotect-syscheckd' daemon and, these are
                        combined with the testing directories to be monitored defined in the module.
 
     expected_output:

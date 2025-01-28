@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        these files are modified. Specifically, these tests will check if FIM manages properly
        the 'diff' folder created in the 'queue/diff/local' directory when removing a monitored
        folder or the 'report_changes' option is disabled.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -104,7 +104,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_WINDOWS_DEBUG: 2}
 def test_report_when_deleted_directories(test_configuration, test_metadata, configure_local_internal_options,
                         truncate_monitored_files, set_wazuh_configuration, create_paths_files, daemons_handler, detect_end_scan):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon deletes the 'diff' folder created in the 'queue/diff/local'
+    description: Check if the 'verprotect-syscheckd' daemon deletes the 'diff' folder created in the 'queue/diff/local'
                  directory when removing a monitored folder and the 'report_changes' option is enabled.
                  For this purpose, the test will monitor a directory and add a testing file inside it. Then,
                  it will check if a 'diff' file is created for the modified testing file. Finally, the test
@@ -149,7 +149,7 @@ def test_report_when_deleted_directories(test_configuration, test_metadata, conf
           when removing the corresponding monitored folder.
 
     input_description: Different test cases are contained in external YAML file (configuration_report_deleted_diff.yaml) which
-                       includes configuration settings for the 'wazuh-syscheckd' daemon and, these
+                       includes configuration settings for the 'verprotect-syscheckd' daemon and, these
                        are combined with the testing directory to be monitored defined in the module.
 
     expected_output:

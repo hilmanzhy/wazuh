@@ -67,13 +67,13 @@ full_filename,owner_name,group_name,mode,type,prot_permissions,size_bytes,size_e
 /var/ossec/agentless/ssh_nopass.exp,root,wazuh,750,file,-rwxr-x---,1616,0.1
 /var/ossec/var/selinux/wazuh.pp,root,wazuh,640,file,-rw-r-----,3163,0.1
 /var/ossec/bin/agent-auth,root,root,750,file,-rwxr-x---,255293,0.1
-/var/ossec/bin/wazuh-syscheckd,root,root,750,file,-rwxr-x---,971932,0.1
-/var/ossec/bin/wazuh-execd,root,root,750,file,-rwxr-x---,831683,0.1
-/var/ossec/bin/wazuh-logcollector,root,root,750,file,-rwxr-x---,898094,0.1
+/var/ossec/bin/verprotect-syscheckd,root,root,750,file,-rwxr-x---,971932,0.1
+/var/ossec/bin/verprotect-execd,root,root,750,file,-rwxr-x---,831683,0.1
+/var/ossec/bin/verprotect-logcollector,root,root,750,file,-rwxr-x---,898094,0.1
 /var/ossec/bin/wazuh-control,root,root,750,file,-rwxr-x---,7146,0.1
 /var/ossec/bin/manage_agents,root,root,750,file,-rwxr-x---,255691,0.1
 /var/ossec/bin/verprotect-modulesd,root,root,750,file,-rwxr-x---,800595,0.1
-/var/ossec/bin/wazuh-agentd,root,root,750,file,-rwxr-x---,869526,0.1
+/var/ossec/bin/verprotect-agentd,root,root,750,file,-rwxr-x---,869526,0.1
 /var/ossec/lib/libwazuhshared.so,root,wazuh,750,file,-rwxr-x---,189675,0.1
 /var/ossec/lib/libwazuhext.so,root,wazuh,750,file,-rwxr-x---,9471335,0.1
 /var/ossec/lib/libdbsync.so,root,wazuh,750,file,-rwxr-x---,521864,0.1

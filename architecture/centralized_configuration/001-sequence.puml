@@ -14,7 +14,7 @@ box "**Wazuh Worker Node**"
 participant "wazuh-clusterd" as wclusterd
 participant "wazuh-remoted" as workerremote
 end box
-participant "**Wazuh Agent**\nwazuh-agentd" as agent
+participant "**Wazuh Agent**\nverprotect-agentd" as agent
 
 masterremote++
 mclusterd++

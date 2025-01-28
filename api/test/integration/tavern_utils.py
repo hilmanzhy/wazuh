@@ -462,7 +462,7 @@ def check_agentd_started(response, agents_list):
             tries += 1
             time.sleep(1)
         else:
-            raise ProcessLookupError("The wazuh-agentd daemon was not started after requesting the restart")
+            raise ProcessLookupError("The verprotect-agentd daemon was not started after requesting the restart")
 
 
 def check_agent_active_status(agents_list):

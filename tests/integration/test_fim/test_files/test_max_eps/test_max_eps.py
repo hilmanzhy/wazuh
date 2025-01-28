@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts
        when these files are modified. Specifically, these tests will verify that FIM limits
        the maximum events per second that it generates, set in the 'max_eps' tag.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -100,7 +100,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_max_eps(test_configuration, test_metadata, configure_local_internal_options,
                              truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon applies the limit set in the 'max_eps' tag when
+    description: Check if the 'verprotect-syscheckd' daemon applies the limit set in the 'max_eps' tag when
                  a lot of 'syscheck' events are generated. For this purpose, the test will monitor a folder,
                  and once FIM is started, it will create multiple testing files in it. Then, the test
                  will collect FIM 'added' events generated and check if the number of events matches
@@ -140,7 +140,7 @@ def test_max_eps(test_configuration, test_metadata, configure_local_internal_opt
         - Verify that the eps limit set in the 'max_eps' tag has not been exceeded at generating FIM events.
 
     input_description: A test case (max_eps) is contained in external YAML file (cases_max_eps.yaml) which
-                       includes configuration settings for the 'wazuh-syscheckd' daemon and, these are
+                       includes configuration settings for the 'verprotect-syscheckd' daemon and, these are
                        combined with the testing directory to be monitored defined in the module.
 
     expected_output:

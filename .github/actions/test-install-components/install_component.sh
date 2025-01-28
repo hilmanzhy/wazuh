@@ -26,7 +26,7 @@ if [ "${ARCH}" = "i386" ] || [ "${ARCH}" = "armhf" ]; then
     linux="linux32"
     if [ "${ARCH}" = "armhf" ] && [ "${SYSTEM}" = "rpm" ]; then
         install="rpm -ivh --force --ignorearch"
-        WAZUH_MANAGER="10.0.0.2" $linux $install "/packages/$package_name"| tee /packages/status.log
+        VERPROTECT_MANAGER="10.0.0.2" $linux $install "/packages/$package_name"| tee /packages/status.log
         if [ "$(rpm -qa | grep wazuh-agent)" ]; then
             echo " installed wazuh-agent" >> /packages/status.log
             exit 0
@@ -37,7 +37,7 @@ if [ "${ARCH}" = "i386" ] || [ "${ARCH}" = "armhf" ]; then
     fi
 fi
 
-WAZUH_MANAGER="10.0.0.2" $linux $install "/packages/$package_name"| tee /packages/status.log
+VERPROTECT_MANAGER="10.0.0.2" $linux $install "/packages/$package_name"| tee /packages/status.log
 grep -i " installed.*wazuh-$target" $installed_log| tee -a /packages/status.log
 
 # Retrieve wazuh gid and uid

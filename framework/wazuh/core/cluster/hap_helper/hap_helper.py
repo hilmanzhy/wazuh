@@ -390,10 +390,10 @@ class HAPHelper:
                     self.logger.info('Attempting to update proxy backend')
 
                     for node_to_remove in nodes_to_remove:
-                        await self.proxy.remove_wazuh_manager(manager_name=node_to_remove)
+                        await self.proxy.remove_VERPROTECT_MANAGER(manager_name=node_to_remove)
 
                     for node_to_add in nodes_to_add:
-                        await self.proxy.add_wazuh_manager(
+                        await self.proxy.add_VERPROTECT_MANAGER(
                             manager_name=node_to_add,
                             manager_address=current_wazuh_cluster[node_to_add],
                             resolver=self.proxy.resolver,

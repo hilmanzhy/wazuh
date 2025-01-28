@@ -10,7 +10,7 @@ participant config
 entity main_thread
 participant request_thread
 participant dump_thread
-control wazuh_manager
+control VERPROTECT_MANAGER
 
 main_thread -> config : Get config
 config --> main_thread : Config
@@ -35,7 +35,7 @@ loop Forever
 end
 
 loop Forever
-    dump_thread -> wazuh_manager: Dumps information in DB
+    dump_thread -> VERPROTECT_MANAGER: Dumps information in DB
 end
 
 loop Forever
@@ -49,7 +49,7 @@ loop Forever
                  - Execute checks
             end note
         end
-    main_thread -> wazuh_manager: Send scanned policies for database purge
+    main_thread -> VERPROTECT_MANAGER: Send scanned policies for database purge
 end
 
 @enduml

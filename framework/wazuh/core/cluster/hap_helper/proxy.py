@@ -760,7 +760,7 @@ class Proxy:
         self.logger.debug2('Obtained proxy servers')
         return {server['name']: server['address'] for server in api_response['data']}
 
-    async def add_wazuh_manager(self, manager_name: str, manager_address: str, resolver: Optional[str] = None) -> dict:
+    async def add_VERPROTECT_MANAGER(self, manager_name: str, manager_address: str, resolver: Optional[str] = None) -> dict:
         """Add a new Wazuh manager to the Proxy.
 
         Parameters
@@ -790,7 +790,7 @@ class Proxy:
         )
         return api_response
 
-    async def remove_wazuh_manager(self, manager_name: str) -> dict:
+    async def remove_VERPROTECT_MANAGER(self, manager_name: str) -> dict:
         """Delete the given Wazuh manager from the Proxy.
 
         Parameters

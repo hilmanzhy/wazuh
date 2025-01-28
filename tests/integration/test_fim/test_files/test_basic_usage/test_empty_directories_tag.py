@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -92,7 +92,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_empty_directories_tag(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options,
                                truncate_monitored_files, daemons_handler):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon shows a debug message when an empty 'directories' tag is found.
+    description: Check if the 'verprotect-syscheckd' daemon shows a debug message when an empty 'directories' tag is found.
                  For this purpose, the test uses a configuration without specifying the directory to monitor.
                  It will then verify that the appropriate debug message is generated.
 
@@ -121,11 +121,11 @@ def test_empty_directories_tag(test_configuration, test_metadata, set_wazuh_conf
             brief: Handler of Wazuh daemons.
 
     assertions:
-        - Verify that the 'wazuh-syscheckd' daemon generates a debug log when
+        - Verify that the 'verprotect-syscheckd' daemon generates a debug log when
           the 'directories' configuration tag is empty.
 
     input_description: The test cases are contained in external YAML file (cases_empty_directories_tag.yaml)
-                       which includes configuration parameters for the 'wazuh-syscheckd' daemon and testing
+                       which includes configuration parameters for the 'verprotect-syscheckd' daemon and testing
                        directories to monitor. The configuration template is contained in another external YAML
                        file (configuration_empty_directories_tag.yaml).
 

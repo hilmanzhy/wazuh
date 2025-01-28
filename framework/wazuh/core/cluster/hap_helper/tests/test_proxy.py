@@ -743,14 +743,14 @@ class TestProxy:
         proxy_api_mock.get_backend_servers.assert_called_once_with(backend=proxy.wazuh_backend)
         assert ret_val == {server['name']: server['address'] for server in servers}
 
-    async def test_add_wazuh_manager(self, proxy_api_mock: mock.MagicMock, proxy: Proxy):
-        """Check that `add_wazuh_manager` method makes the correct callback."""
+    async def test_add_VERPROTECT_MANAGER(self, proxy_api_mock: mock.MagicMock, proxy: Proxy):
+        """Check that `add_VERPROTECT_MANAGER` method makes the correct callback."""
 
         manager_name = 'foo'
         manager_address = '192.168.0.1'
         resolver = 'test-resolver'
 
-        await proxy.add_wazuh_manager(manager_name, manager_address, resolver)
+        await proxy.add_VERPROTECT_MANAGER(manager_name, manager_address, resolver)
 
         proxy_api_mock.add_server_to_backend.assert_called_once_with(
             backend=proxy.wazuh_backend,
@@ -760,12 +760,12 @@ class TestProxy:
             resolver=resolver,
         )
 
-    async def test_remove_wazuh_manager(self, proxy_api_mock: mock.MagicMock, proxy: Proxy):
-        """Check that `remove_wazuh_manager` method makes the correct callback."""
+    async def test_remove_VERPROTECT_MANAGER(self, proxy_api_mock: mock.MagicMock, proxy: Proxy):
+        """Check that `remove_VERPROTECT_MANAGER` method makes the correct callback."""
 
         manager_name = 'foo'
 
-        await proxy.remove_wazuh_manager(manager_name)
+        await proxy.remove_VERPROTECT_MANAGER(manager_name)
 
         proxy_api_mock.remove_server_from_backend.assert_called_with(
             backend=proxy.wazuh_backend, server_name=manager_name

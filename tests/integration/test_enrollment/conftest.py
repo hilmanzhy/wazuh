@@ -18,7 +18,7 @@ MANAGER_ADDRESS = '127.0.0.1'
 
 @pytest.fixture(scope='module')
 def shutdown_agentd(request):
-    """Stop wazuh-agentd process."""
+    """Stop verprotect-agentd process."""
     control_service('stop', daemon=AGENT_DAEMON)
 
 

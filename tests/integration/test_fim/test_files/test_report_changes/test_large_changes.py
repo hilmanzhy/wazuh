@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        these files are modified. Specifically, these tests will verify that FIM events include
        the 'content_changes' field with the tag 'More changes' when it exceeds the maximum size
        allowed, and the 'report_changes' option is enabled.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -113,7 +113,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_WINDOWS_DEBUG: 2}
 def test_large_changes(test_configuration, test_metadata, configure_local_internal_options,
                         truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler, detect_end_scan):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects the character limit in the file changes is reached
+    description: Check if the 'verprotect-syscheckd' daemon detects the character limit in the file changes is reached
                  showing the 'More changes' tag in the 'content_changes' field of the generated events. For this
                  purpose, the test will monitor a directory, add a testing file and modify it, adding more characters
                  than the allowed limit. Then, it will unzip the 'diff' and get the size of the changes. Finally,

@@ -7,13 +7,13 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: These tests will check if the 'wazuh-syscheckd' and 'auditd' daemons work together properly.
+brief: These tests will check if the 'verprotect-syscheckd' and 'auditd' daemons work together properly.
        In particular, it will be verified that when there is no 'auditd' package installed on
        the system, the directories monitored with 'who-data' mode are monitored with 'realtime'.
        The 'who-data' feature of the of the File Integrity Monitoring (FIM) system uses
        the Linux Audit subsystem to get the information about who made the changes in a monitored directory.
        These changes produce audit events that are processed by 'syscheck' and reported to the manager.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -25,7 +25,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -146,7 +146,7 @@ def test_remove_audit(test_configuration, test_metadata, set_wazuh_configuration
           if the 'authd' package is not installed.
 
     input_description: A test case is contained in external YAML file (configuration_remove_audit.yaml)
-                       which includes configuration settings for the 'wazuh-syscheckd' daemon
+                       which includes configuration settings for the 'verprotect-syscheckd' daemon
                        and, it is combined with the testing directories to be monitored
                        defined in this module.
 

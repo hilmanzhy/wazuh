@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if the Wazuh component (agent or manager) starts when
        the 'location' tag is set in the configuration, and the Wazuh API returns the same values for
        the configured 'localfile' section.
@@ -25,7 +25,7 @@ components:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
     - wazuh-apid
 
 os_platform:
@@ -134,7 +134,7 @@ local_internal_options = {daemon_debug: '1'}
 def test_configuration_location(test_configuration, test_metadata, truncate_monitored_files, configure_local_internal_options,
                                 set_wazuh_configuration, daemons_handler, wait_for_logcollector_start):
     '''
-    description: Check if the 'wazuh-logcollector' daemon starts properly when the 'location' tag is used.
+    description: Check if the 'verprotect-logcollector' daemon starts properly when the 'location' tag is used.
                  For this purpose, the test will configure the logcollector to monitor a 'syslog' directory
                  and use a pathname with special characteristics. Finally, the test will verify that the
                  Wazuh component is started by checking its process, and the Wazuh API returns the same
@@ -170,7 +170,7 @@ def test_configuration_location(test_configuration, test_metadata, truncate_moni
     input_description: A configuration template (test_basic_configuration_location) is contained in an external
                        YAML file (wazuh_basic_configuration.yaml). That template is combined with different
                        test cases defined in the module. Those include configuration settings for
-                       the 'wazuh-logcollector' daemon.
+                       the 'verprotect-logcollector' daemon.
 
     expected_output:
         - Boolean values to indicate the state of the Wazuh component.

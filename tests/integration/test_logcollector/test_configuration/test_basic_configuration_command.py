@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if monitored commands that use several parameters are
        correctly executed by the logcollector, and the Wazuh API returns the same values for
        the configured 'localfile' section.
@@ -25,7 +25,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
     - wazuh-apid
 
 os_platform:
@@ -95,7 +95,7 @@ daemons_handler_configuration = {'all_daemons': True}
 def test_configuration_command(test_configuration, test_metadata, configure_local_internal_options, truncate_monitored_files,
                             set_wazuh_configuration, daemons_handler):
     '''
-    description: Check if the 'wazuh-logcollector' daemon can monitor commands that use multiple parameters.
+    description: Check if the 'verprotect-logcollector' daemon can monitor commands that use multiple parameters.
                  For this purpose, the test will configure the logcollector to monitor a command, setting it
                  in the 'command' tag. Once the logcollector has started, it will check if the 'monitoring'
                  event, indicating that the command is being monitored, has been generated. Finally, the test
@@ -133,7 +133,7 @@ def test_configuration_command(test_configuration, test_metadata, configure_loca
     input_description: A configuration template (test_basic_configuration_location) is contained in an external
                        YAML file (wazuh_basic_configuration.yaml). That template is combined with different
                        test cases defined in the module. Those include configuration settings for
-                       the 'wazuh-logcollector' daemon.
+                       the 'verprotect-logcollector' daemon.
 
     expected_output:
         - r'INFO: Monitoring .* of command.*'

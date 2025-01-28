@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if the logcollector detects that a custom socket is
        undefined if the 'target' attribute of the 'out_format' tag has the name of an unexistent
        socket (invalid value). Log data collection is the real-time process of making sense out
@@ -24,7 +24,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
 
 os_platform:
     - linux
@@ -88,7 +88,7 @@ daemons_handler_configuration = {'all_daemons': True}
 @pytest.mark.parametrize('test_configuration, test_metadata', zip(test_configuration, test_metadata), ids=test_cases_ids)
 def test_configuration_target(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options, daemons_handler_module, stop_logcollector):
     '''
-    description: Check if the 'wazuh-logcollector' daemon detects invalid configurations for the 'target' attribute
+    description: Check if the 'verprotect-logcollector' daemon detects invalid configurations for the 'target' attribute
                  of the 'out_format' tag. For this purpose, the test will set a 'socket' section to specify a custom
                  socket, and a 'localfile' section using valid/invalid values for that attribute. Then, it will check
                  if an event indicating that the socket is not defined when using an invalid value, or if an event
@@ -127,7 +127,7 @@ def test_configuration_target(test_configuration, test_metadata, set_wazuh_confi
     input_description: A configuration template (test_basic_configuration_target) is contained in an external
                        YAML file (wazuh_basic_configuration.yaml). That template is combined with different
                        test cases defined in the module. Those include configuration settings
-                       for the 'wazuh-logcollector' daemon.
+                       for the 'verprotect-logcollector' daemon.
 
     expected_output:
         - r'Socket target for .* -> .*'

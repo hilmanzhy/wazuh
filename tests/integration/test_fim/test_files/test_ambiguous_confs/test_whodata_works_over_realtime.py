@@ -11,7 +11,7 @@ brief: These tests will check if the 'who-data' feature of the File Integrity Mo
        works properly. 'who-data' information contains the user who made the changes on the monitored
        files and also the program name or process used to carry them out. In particular, it will be
        verified that the value of the 'whodata' attribute prevails over the 'realtime' one.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux

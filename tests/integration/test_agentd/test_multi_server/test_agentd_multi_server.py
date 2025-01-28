@@ -18,7 +18,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-agentd
+    - verprotect-agentd
     - wazuh-authd
     - wazuh-remoted
 

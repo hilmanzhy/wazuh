@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-agentd' program is the client-side daemon that communicates with the server.
+brief: The 'verprotect-agentd' program is the client-side daemon that communicates with the server.
        The objective is to check that, with different states in the 'clients.keys' file,
        the agent successfully enrolls after losing connection with the 'wazuh-remoted' daemon.
        The wazuh-remoted program is the server side daemon that communicates with the agents.
@@ -19,7 +19,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-agentd
+    - verprotect-agentd
     - wazuh-authd
     - wazuh-remoted
 

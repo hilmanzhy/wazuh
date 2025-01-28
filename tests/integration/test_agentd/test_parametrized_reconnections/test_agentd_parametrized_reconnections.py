@@ -7,8 +7,8 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-agentd' program is the client-side daemon that communicates with the server.
-       The objective is to check how the 'wazuh-agentd' daemon behaves when there are delays
+brief: The 'verprotect-agentd' program is the client-side daemon that communicates with the server.
+       The objective is to check how the 'verprotect-agentd' daemon behaves when there are delays
        between connection attempts to the 'wazuh-remoted' daemon using TCP and UDP protocols.
        The 'wazuh-remoted' program is the server side daemon that communicates with the agents.
 
@@ -19,7 +19,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-agentd
+    - verprotect-agentd
     - wazuh-authd
     - wazuh-remoted
 
@@ -136,7 +136,7 @@ def test_agentd_parametrized_reconnections(test_metadata, set_wazuh_configuratio
             brief: Handler of Wazuh daemons.
 
     assertions:
-        - Verify that when the 'wazuh-agentd' daemon initializes, it connects to
+        - Verify that when the 'verprotect-agentd' daemon initializes, it connects to
           the 'wazuh-remoted' daemon of the manager before reaching the maximum number of attempts.
         - Verify the successful enrollment of the agent if the auto-enrollment option is enabled.
         - Verify that the rollback feature of the server works correctly.

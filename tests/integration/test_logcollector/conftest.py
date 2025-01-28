@@ -22,7 +22,7 @@ LOGCOLLECTOR_OFE_PATH = path_join(WAZUH_PATH, 'queue', 'logcollector', 'file_sta
 
 @pytest.fixture()
 def stop_logcollector(request):
-    """Stop wazuh-logcollector and truncate logs file."""
+    """Stop verprotect-logcollector and truncate logs file."""
     control_service('stop', daemon=LOGCOLLECTOR_DAEMON)
     truncate_file(WAZUH_LOG_PATH)
 

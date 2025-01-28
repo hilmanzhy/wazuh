@@ -2421,7 +2421,7 @@ stages:
           total_affected_items: 1
           total_failed_items: 0
 
-  - name: Get wazuh-agentd stats from agent 000 (manager, not allowed)
+  - name: Get verprotect-agentd stats from agent 000 (manager, not allowed)
     request:
       verify: False
       url: "{protocol:s}://{host:s}:{port:d}/agents/000/stats/agent"
@@ -2460,7 +2460,7 @@ stages:
           total_affected_items: 1
           total_failed_items: 0
 
-  - name: Get wazuh-agentd stats from agent 001
+  - name: Get verprotect-agentd stats from agent 001
     request:
       verify: False
       url: "{protocol:s}://{host:s}:{port:d}/agents/001/stats/agent"

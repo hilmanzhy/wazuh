@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if the logcollector detects invalid values for
        the 'log_format' tag and the Wazuh API returns the same values for the configured
        'localfile' section. They also check some special aspects when macOS is used.
@@ -25,7 +25,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
     - wazuh-apid
 
 os_platform:
@@ -243,7 +243,7 @@ def check_log_file_duplicated():
 def test_log_format(test_configuration, test_metadata, configure_local_internal_options, truncate_monitored_files,
                     set_wazuh_configuration, daemons_handler_module, stop_logcollector):
     '''
-    description: Check if the 'wazuh-logcollector' daemon detects invalid configurations for the 'log_format' tag.
+    description: Check if the 'verprotect-logcollector' daemon detects invalid configurations for the 'log_format' tag.
                  It also checks some special aspects when using macOS. For this purpose, the test will set a
                  'localfile' section using valid/invalid values for the 'log_format' tag. Then, it will check if
                  an error event is generated when using an invalid value. If macOS is the host system, the test
@@ -290,7 +290,7 @@ def test_log_format(test_configuration, test_metadata, configure_local_internal_
                        YAML files (wazuh_basic_configuration.yaml, wazuh_duplicated_macos_configuration.yaml, and
                        wazuh_no_defined_location_macos_configuration.yaml). Those templates are combined with
                        different test cases defined in the module. Those include configuration settings for
-                       the 'wazuh-logcollector' daemon.
+                       the 'verprotect-logcollector' daemon.
 
     expected_output:
         - r'Analyzing file.*'

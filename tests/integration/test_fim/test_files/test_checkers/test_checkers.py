@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -96,7 +96,7 @@ base_checks = [configuration.ATTR_CHECKSUM, configuration.ATTR_TYPE]
 def test_checkers(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options,
                   truncate_monitored_files, folder_to_monitor, file_to_monitor, daemons_handler, start_monitoring):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon adds in the generated events the 'check_' specified in
+    description: Check if the 'verprotect-syscheckd' daemon adds in the generated events the 'check_' specified in
                  the configuration. These checks are attributes indicating that a monitored directory entry has
                  been modified. For example, if 'check_all=yes' and 'check_perm=no' are set for the same entry,
                  'syscheck' must send an event containing every possible 'check_' except the perms.
@@ -143,7 +143,7 @@ def test_checkers(test_configuration, test_metadata, set_wazuh_configuration, co
         - Verify that the FIM events generated contains the 'check_' fields specified in the configuration.
 
     input_description: The test cases are contained in external YAML file (cases_checkers.yaml) which includes
-                       configuration parameters for the 'wazuh-syscheckd' daemon and testing directories to monitor.
+                       configuration parameters for the 'verprotect-syscheckd' daemon and testing directories to monitor.
                        The configuration template is contained in another external YAML file
                        (configuration_basic.yaml).
 

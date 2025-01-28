@@ -10,7 +10,7 @@ type: integration
 brief: These tests will check if the 'who-data' feature of the File Integrity Monitoring (FIM)
        system works properly. 'who-data' information contains the user who made the changes
        on the monitored files and also the program name or process used to carry them out.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks
        configured files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -97,7 +97,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_whodata_ambiguous_thread(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options,
                                   truncate_monitored_files, daemons_handler):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon starts the 'whodata' thread when the configuration
+    description: Check if the 'verprotect-syscheckd' daemon starts the 'whodata' thread when the configuration
                  is ambiguous. For example, when using 'whodata' on the same directory using conflicting
                  values ('yes' and 'no'). For this purpose, the configuration is applied and it checks
                  that the last value detected for 'whodata' in the 'ossec.conf' file is the one used.
@@ -142,7 +142,7 @@ def test_whodata_ambiguous_thread(test_configuration, test_metadata, set_wazuh_c
         - Verify that 'whodata' thread is not started when the last 'whodata' value detected is set to 'no'.
 
     input_description: Two test cases are contained in external YAML file (cases_whodata_ambiguous_thread.yaml)
-                       which includes configuration settings for the 'wazuh-syscheckd' daemon and testing
+                       which includes configuration settings for the 'verprotect-syscheckd' daemon and testing
                        directories to monitor.
 
     expected_output:

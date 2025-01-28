@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        these files are modified. Specifically, these tests will verify that FIM generates events
        only for registry entry operations in monitored keys that do not match the 'restrict_key'
        or the 'restrict_value' attributes.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - windows
@@ -96,7 +96,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2}
 def test_restrict_key(test_configuration, test_metadata,configure_local_internal_options,
                             truncate_monitored_files, set_wazuh_configuration, daemons_handler, detect_end_scan, create_registry_key):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects or ignores events in monitored registry entries
+    description: Check if the 'verprotect-syscheckd' daemon detects or ignores events in monitored registry entries
                  depending on the value set in the 'restrict_key' attribute. This attribute limit checks to
                  keys that match the entered string or regex and its name. For this purpose, the test will
                  monitor a key, create testing subkeys inside it, and make operations on those subkeys. Finally,

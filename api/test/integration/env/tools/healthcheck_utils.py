@@ -62,7 +62,7 @@ def get_response(request_method, url, headers):
 def get_agent_health_base():
     # Get agent health. The agent will be healthy if it has been connected to the manager after been
     # restarted due to shared configuration changes.
-    # Using agentd when using grep as the module name can vary between ossec-agentd and wazuh-agentd,
+    # Using agentd when using grep as the module name can vary between ossec-agentd and verprotect-agentd,
     # depending on the agent version.
 
     shared_conf_restart = os.system(

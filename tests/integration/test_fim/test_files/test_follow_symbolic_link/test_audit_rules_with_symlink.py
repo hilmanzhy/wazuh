@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -94,7 +94,7 @@ def test_audit_rules_with_symlink(test_configuration, test_metadata, set_wazuh_c
                                   configure_local_internal_options, folder_to_monitor, symlink, symlink_new_target,
                                   daemons_handler, start_monitoring):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon removes the 'audit' rules when the target of
+    description: Check if the 'verprotect-syscheckd' daemon removes the 'audit' rules when the target of
                  a monitored symlink is changed. For this purpose, the test will monitor a 'symbolic link'
                  pointing to a directory. Once FIM starts, it will create and expect events inside the
                  pointed folder. After the events are processed, the test will change the target of the
@@ -143,7 +143,7 @@ def test_audit_rules_with_symlink(test_configuration, test_metadata, set_wazuh_c
           when the target of that link is replaced.
 
     input_description: The test cases are contained in external YAML file (cases_delete_hardlink_symlink.yaml)
-                       which includes configuration parameters for the 'wazuh-syscheckd' daemon and testing
+                       which includes configuration parameters for the 'verprotect-syscheckd' daemon and testing
                        directories to monitor. The configuration template is contained in another external YAML
                        file (configuration_basic.yaml).
 

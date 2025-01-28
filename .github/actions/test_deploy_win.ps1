@@ -12,8 +12,8 @@ $MINOR=$VERSION.Minor
 $SHA= git rev-parse --short $args[0]
 
 $TEST_ARRAY=@( 
-              @("WAZUH_MANAGER ", "1.1.1.1", "<address>", "</address>"), 
-              @("WAZUH_MANAGER_PORT ", "7777", "<port>", "</port>"),
+              @("VERPROTECT_MANAGER ", "1.1.1.1", "<address>", "</address>"), 
+              @("VERPROTECT_MANAGER_PORT ", "7777", "<port>", "</port>"),
               @("WAZUH_PROTOCOL ", "udp", "<protocol>", "</protocol>"),
               @("WAZUH_REGISTRATION_SERVER ", "2.2.2.2", "<manager_address>", "</manager_address>"),
               @("WAZUH_REGISTRATION_PORT ", "8888", "<port>", "</port>"),
@@ -48,7 +48,7 @@ function test($vars)
 
   For ($i=0; $i -lt $TEST_ARRAY.Length; $i++) {
     if($vars.Contains($TEST_ARRAY[$i][0])) {
-      if ( ($TEST_ARRAY[$i][0] -eq "WAZUH_MANAGER ") -OR ($TEST_ARRAY[$i][0] -eq "WAZUH_PROTOCOL ") ) {
+      if ( ($TEST_ARRAY[$i][0] -eq "VERPROTECT_MANAGER ") -OR ($TEST_ARRAY[$i][0] -eq "WAZUH_PROTOCOL ") ) {
         $LIST = $TEST_ARRAY[$i][1].split(",")
         For ($j=0; $j -lt $LIST.Length; $j++) {
           $SEL = Select-String -Path 'C:\Program Files (x86)\ossec-agent\ossec.conf' -Pattern "$($TEST_ARRAY[$i][2])$($LIST[$j])$($TEST_ARRAY[$i][3])"
@@ -96,16 +96,16 @@ function test($vars)
 Write-Output "Download package: https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/warehouse/pullrequests/$MAJOR.$MINOR/windows/wazuh-agent-$VERSION-0.commit$SHA.msi"
 Invoke-WebRequest -Uri "https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/warehouse/pullrequests/$MAJOR.$MINOR/windows/wazuh-agent-$VERSION-0.commit$SHA.msi" -OutFile "wazuh-agent-$VERSION-0.commit$SHA.msi"
 
-install_wazuh "WAZUH_MANAGER=1.1.1.1 WAZUH_MANAGER_PORT=7777 WAZUH_PROTOCOL=udp WAZUH_REGISTRATION_SERVER=2.2.2.2 WAZUH_REGISTRATION_PORT=8888 WAZUH_REGISTRATION_PASSWORD=password WAZUH_KEEP_ALIVE_INTERVAL=10 WAZUH_TIME_RECONNECT=10 WAZUH_REGISTRATION_CA=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_CERTIFICATE=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_KEY=/var/ossec/etc/testsslmanager.key WAZUH_AGENT_NAME=test-agent WAZUH_AGENT_GROUP=test-group ENROLLMENT_DELAY=10" 
-test "WAZUH_MANAGER WAZUH_MANAGER_PORT WAZUH_PROTOCOL WAZUH_REGISTRATION_SERVER WAZUH_REGISTRATION_PORT WAZUH_REGISTRATION_PASSWORD WAZUH_KEEP_ALIVE_INTERVAL WAZUH_TIME_RECONNECT WAZUH_REGISTRATION_CA WAZUH_REGISTRATION_CERTIFICATE WAZUH_REGISTRATION_KEY WAZUH_AGENT_NAME WAZUH_AGENT_GROUP ENROLLMENT_DELAY " 
+install_wazuh "VERPROTECT_MANAGER=1.1.1.1 VERPROTECT_MANAGER_PORT=7777 WAZUH_PROTOCOL=udp WAZUH_REGISTRATION_SERVER=2.2.2.2 WAZUH_REGISTRATION_PORT=8888 WAZUH_REGISTRATION_PASSWORD=password WAZUH_KEEP_ALIVE_INTERVAL=10 WAZUH_TIME_RECONNECT=10 WAZUH_REGISTRATION_CA=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_CERTIFICATE=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_KEY=/var/ossec/etc/testsslmanager.key WAZUH_AGENT_NAME=test-agent WAZUH_AGENT_GROUP=test-group ENROLLMENT_DELAY=10" 
+test "VERPROTECT_MANAGER VERPROTECT_MANAGER_PORT WAZUH_PROTOCOL WAZUH_REGISTRATION_SERVER WAZUH_REGISTRATION_PORT WAZUH_REGISTRATION_PASSWORD WAZUH_KEEP_ALIVE_INTERVAL WAZUH_TIME_RECONNECT WAZUH_REGISTRATION_CA WAZUH_REGISTRATION_CERTIFICATE WAZUH_REGISTRATION_KEY WAZUH_AGENT_NAME WAZUH_AGENT_GROUP ENROLLMENT_DELAY " 
 remove_wazuh
 
-install_wazuh "WAZUH_MANAGER=1.1.1.1"
-test "WAZUH_MANAGER "
+install_wazuh "VERPROTECT_MANAGER=1.1.1.1"
+test "VERPROTECT_MANAGER "
 remove_wazuh
 
-install_wazuh "WAZUH_MANAGER_PORT=7777"
-test "WAZUH_MANAGER_PORT "
+install_wazuh "VERPROTECT_MANAGER_PORT=7777"
+test "VERPROTECT_MANAGER_PORT "
 remove_wazuh
 
 install_wazuh "WAZUH_PROTOCOL=udp"

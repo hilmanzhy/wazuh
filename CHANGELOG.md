@@ -858,7 +858,7 @@ All notable changes to this project will be documented in this file.
 
 - Fixed a bug in the memory handle at the agent's data provider helper. ([#18773](https://github.com/wazuh/wazuh/pull/18773))
 - Fixed a data mismatch in the OS name between the global and agents' databases. ([#18903](https://github.com/wazuh/wazuh/pull/18903))
-- Fixed an array limit check in wazuh-logcollector. ([#19069](https://github.com/wazuh/wazuh/pull/19069))
+- Fixed an array limit check in verprotect-logcollector. ([#19069](https://github.com/wazuh/wazuh/pull/19069))
 - Fixed wrong Windows agent binaries metadata. ([#19286](https://github.com/wazuh/wazuh/pull/19286))
 - Fixed error during the windows agent upgrade. ([#19397](https://github.com/wazuh/wazuh/pull/19397))
 
@@ -1614,7 +1614,7 @@ All notable changes to this project will be documented in this file.
 - The upgrade module's response message has been fixed not to include null values. ([#13662](https://github.com/wazuh/wazuh/pull/13662))
 - Fixed a string truncation warning log in wazuh-authd when enabling password authentication. ([#13863](https://github.com/wazuh/wazuh/pull/13863))
 - Fixed a memory leak in wazuh-analysisd when overwriting a rule multiple times. ([#13587](https://github.com/wazuh/wazuh/pull/13587))
-- Prevented wazuh-agentd and client-auth from performing enrollment if the agent fails to validate the manager's certificate. ([#13907](https://github.com/wazuh/wazuh/pull/13907))
+- Prevented verprotect-agentd and client-auth from performing enrollment if the agent fails to validate the manager's certificate. ([#13907](https://github.com/wazuh/wazuh/pull/13907))
 - Fixed manager's compilation when enabling GeoIP support. ([#13694](https://github.com/wazuh/wazuh/pull/13694))
 - Fixed a crash in verprotect-modulesd when getting stopped while downloading a Vulnerability Detector feed. ([#13883](https://github.com/wazuh/wazuh/pull/13883))
 

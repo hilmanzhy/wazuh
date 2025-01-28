@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -93,7 +93,7 @@ def test_fim_disabled(test_configuration, test_metadata, set_wazuh_configuration
                       configure_local_internal_options, folder_to_monitor, daemons_handler):
 
     '''
-    description: Check if the 'wazuh-syscheckd' daemon generates FIM events when it is disabled
+    description: Check if the 'verprotect-syscheckd' daemon generates FIM events when it is disabled
                  in the main configuration file. For this purpose, the test will monitor a testing
                  folder and finally verifies that no FIM events have been generated.
 
@@ -125,10 +125,10 @@ def test_fim_disabled(test_configuration, test_metadata, set_wazuh_configuration
             brief: Handler of Wazuh daemons.
 
     assertions:
-        - Verify that when the 'wazuh-syscheckd' daemon is disabled, no FIM events are generated.
+        - Verify that when the 'verprotect-syscheckd' daemon is disabled, no FIM events are generated.
 
     input_description: The test cases are contained in external YAML file (cases_fim_disabled.yaml)
-                       which includes configuration parameters for the 'wazuh-syscheckd' daemon and testing
+                       which includes configuration parameters for the 'verprotect-syscheckd' daemon and testing
                        directories to monitor. The configuration template is contained in another external YAML
                        file (configuration_basic.yaml).
 

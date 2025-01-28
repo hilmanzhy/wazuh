@@ -20,7 +20,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - Linux
@@ -100,7 +100,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_nonUTF8(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options,
                   truncate_monitored_files, folder_to_monitor, daemons_handler, start_monitoring):
     '''
-    description: Check if the 'wazuh-syscheckd' is able to correctly detect a pathname containing an invalid
+    description: Check if the 'verprotect-syscheckd' is able to correctly detect a pathname containing an invalid
                  character, preventing its processing and writing a log warning.
 
     wazuh_min_version: 4.9.0
@@ -137,7 +137,7 @@ def test_nonUTF8(test_configuration, test_metadata, set_wazuh_configuration, con
         - Verify that the FIM output a warning indicating that the file cannot be processed because it contains nonUTF8 characters.
 
     input_description: The test cases are contained in external YAML file (cases_nonUTF8.yaml) which includes
-                       configuration parameters for the 'wazuh-syscheckd' daemon and testing directories to monitor.
+                       configuration parameters for the 'verprotect-syscheckd' daemon and testing directories to monitor.
                        The configuration template is contained in another external YAML file
                        (configuration_basic.yaml).
 
@@ -177,7 +177,7 @@ if sys.platform == WINDOWS:
     def test_invalid_registry(test_configuration, test_metadata, configure_local_internal_options, truncate_monitored_files,
                               set_wazuh_configuration, daemons_handler, detect_end_scan):
         '''
-        description: Check if the 'wazuh-syscheckd' is able to correctly process a registry key name containing an invalid
+        description: Check if the 'verprotect-syscheckd' is able to correctly process a registry key name containing an invalid
                      character.
 
         wazuh_min_version: 4.9.0
@@ -211,7 +211,7 @@ if sys.platform == WINDOWS:
             - Verify that the FIM generate correctly an events with a new registry key.
 
         input_description: The test cases are contained in external YAML file (cases_registries.yaml) which includes
-                           configuration parameters for the 'wazuh-syscheckd' daemon and testing directories to monitor.
+                           configuration parameters for the 'verprotect-syscheckd' daemon and testing directories to monitor.
                            The configuration template is contained in another external YAML file
                            (configuration_registries.yaml).
 

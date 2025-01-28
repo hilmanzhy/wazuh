@@ -15,7 +15,7 @@ SHA="$(git rev-parse --short=7 "$1")"
 
 conf_path="/var/ossec/etc/ossec.conf"
 
-VARS=( "WAZUH_MANAGER" "WAZUH_MANAGER_PORT" "WAZUH_PROTOCOL" "WAZUH_REGISTRATION_SERVER" "WAZUH_REGISTRATION_PORT" "WAZUH_REGISTRATION_PASSWORD" "WAZUH_KEEP_ALIVE_INTERVAL" "WAZUH_TIME_RECONNECT" "WAZUH_REGISTRATION_CA" "WAZUH_REGISTRATION_CERTIFICATE" "WAZUH_REGISTRATION_KEY" "WAZUH_AGENT_NAME" "WAZUH_AGENT_GROUP" "ENROLLMENT_DELAY" )
+VARS=( "VERPROTECT_MANAGER" "VERPROTECT_MANAGER_PORT" "WAZUH_PROTOCOL" "WAZUH_REGISTRATION_SERVER" "WAZUH_REGISTRATION_PORT" "WAZUH_REGISTRATION_PASSWORD" "WAZUH_KEEP_ALIVE_INTERVAL" "WAZUH_TIME_RECONNECT" "WAZUH_REGISTRATION_CA" "WAZUH_REGISTRATION_CERTIFICATE" "WAZUH_REGISTRATION_KEY" "WAZUH_AGENT_NAME" "WAZUH_AGENT_GROUP" "ENROLLMENT_DELAY" )
 VALUES=( "1.1.1.1" "7777" "udp" "2.2.2.2" "8888" "password" "10" "10" "/var/ossec/etc/testsslmanager.cert" "/var/ossec/etc/testsslmanager.cert" "/var/ossec/etc/testsslmanager.key" "test-agent" "test-group" "10" )
 TAGS1=( "<address>" "<port>" "<protocol>" "<manager_address>" "<port>" "<password>" "<notify_time>" "<time-reconnect>" "<server_ca_path>" "<agent_certificate_path>" "<agent_key_path>" "<agent_name>" "<groups>" "<delay_after_enrollment>" )
 TAGS2=( "</address>" "</port>" "</protocol>" "</manager_address>" "</port>" "</password>" "</notify_time>" "</time-reconnect>" "</server_ca_path>" "</agent_certificate_path>" "</agent_key_path>" "</agent_name>" "</groups>" "</delay_after_enrollment>" )
@@ -38,7 +38,7 @@ function test() {
 
   for i in "${!VARS[@]}"; do
     if ( echo "${@}" | grep -q -w "${VARS[i]}" ); then
-      if [ "${VARS[i]}" == "WAZUH_MANAGER" ] || [ "${VARS[i]}" == "WAZUH_PROTOCOL" ]; then
+      if [ "${VARS[i]}" == "VERPROTECT_MANAGER" ] || [ "${VARS[i]}" == "WAZUH_PROTOCOL" ]; then
         LIST=( "${VALUES[i]//,/ }" )
         for j in "${!LIST[@]}"; do
           if ( grep -q "${TAGS1[i]}${LIST[j]}${TAGS2[i]}" "${conf_path}" ); then
@@ -71,16 +71,16 @@ function test() {
 echo "Download package: https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/warehouse/pullrequests/${MAJOR}.${MINOR}/deb/var/wazuh-agent_${VERSION}-0.commit${SHA}_amd64.deb"
 wget "https://s3.us-west-1.amazonaws.com/packages-dev.wazuh.com/warehouse/pullrequests/${MAJOR}.${MINOR}/deb/var/wazuh-agent_${VERSION}-0.commit${SHA}_amd64.deb" > /dev/null 2>&1
 
-install_wazuh "WAZUH_MANAGER=1.1.1.1 WAZUH_MANAGER_PORT=7777 WAZUH_PROTOCOL=udp WAZUH_REGISTRATION_SERVER=2.2.2.2 WAZUH_REGISTRATION_PORT=8888 WAZUH_REGISTRATION_PASSWORD=password WAZUH_KEEP_ALIVE_INTERVAL=10 WAZUH_TIME_RECONNECT=10 WAZUH_REGISTRATION_CA=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_CERTIFICATE=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_KEY=/var/ossec/etc/testsslmanager.key WAZUH_AGENT_NAME=test-agent WAZUH_AGENT_GROUP=test-group ENROLLMENT_DELAY=10" 
-test "WAZUH_MANAGER WAZUH_MANAGER_PORT WAZUH_PROTOCOL WAZUH_REGISTRATION_SERVER WAZUH_REGISTRATION_PORT WAZUH_REGISTRATION_PASSWORD WAZUH_KEEP_ALIVE_INTERVAL WAZUH_TIME_RECONNECT WAZUH_REGISTRATION_CA WAZUH_REGISTRATION_CERTIFICATE WAZUH_REGISTRATION_KEY WAZUH_AGENT_NAME WAZUH_AGENT_GROUP ENROLLMENT_DELAY" 
+install_wazuh "VERPROTECT_MANAGER=1.1.1.1 VERPROTECT_MANAGER_PORT=7777 WAZUH_PROTOCOL=udp WAZUH_REGISTRATION_SERVER=2.2.2.2 WAZUH_REGISTRATION_PORT=8888 WAZUH_REGISTRATION_PASSWORD=password WAZUH_KEEP_ALIVE_INTERVAL=10 WAZUH_TIME_RECONNECT=10 WAZUH_REGISTRATION_CA=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_CERTIFICATE=/var/ossec/etc/testsslmanager.cert WAZUH_REGISTRATION_KEY=/var/ossec/etc/testsslmanager.key WAZUH_AGENT_NAME=test-agent WAZUH_AGENT_GROUP=test-group ENROLLMENT_DELAY=10" 
+test "VERPROTECT_MANAGER VERPROTECT_MANAGER_PORT WAZUH_PROTOCOL WAZUH_REGISTRATION_SERVER WAZUH_REGISTRATION_PORT WAZUH_REGISTRATION_PASSWORD WAZUH_KEEP_ALIVE_INTERVAL WAZUH_TIME_RECONNECT WAZUH_REGISTRATION_CA WAZUH_REGISTRATION_CERTIFICATE WAZUH_REGISTRATION_KEY WAZUH_AGENT_NAME WAZUH_AGENT_GROUP ENROLLMENT_DELAY" 
 remove_wazuh
 
-install_wazuh "WAZUH_MANAGER=1.1.1.1"
-test "WAZUH_MANAGER"
+install_wazuh "VERPROTECT_MANAGER=1.1.1.1"
+test "VERPROTECT_MANAGER"
 remove_wazuh
 
-install_wazuh "WAZUH_MANAGER_PORT=7777"
-test "WAZUH_MANAGER_PORT"
+install_wazuh "VERPROTECT_MANAGER_PORT=7777"
+test "VERPROTECT_MANAGER_PORT"
 remove_wazuh
 
 install_wazuh "WAZUH_PROTOCOL=udp"

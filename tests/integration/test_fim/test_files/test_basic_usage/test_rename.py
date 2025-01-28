@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -98,7 +98,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_rename(test_configuration, test_metadata, set_wazuh_configuration, configure_local_internal_options,
                 truncate_monitored_files, folder_to_monitor, daemons_handler, start_monitoring, path_to_edit):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects 'added' and 'deleted' events when renaming a
+    description: Check if the 'verprotect-syscheckd' daemon detects 'added' and 'deleted' events when renaming a
                  subdirectory or a file. For this purpose, the test will rename a testing subfolder or file
                  then, it verifies that the expected FIM events have been generated.
 
@@ -140,7 +140,7 @@ def test_rename(test_configuration, test_metadata, set_wazuh_configuration, conf
           when subfolders or files are renamed.
 
     input_description: The test cases are contained in external YAML file (cases_rename.yaml) which includes
-                       configuration parameters for the 'wazuh-syscheckd' daemon and testing directories
+                       configuration parameters for the 'verprotect-syscheckd' daemon and testing directories
                        to monitor. The configuration template is contained in another external YAML file
                        (configuration_basic.yaml).
 

@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if the Wazuh component (agent or manager) starts when
        the 'localfile' with 'journal' as 'log_format' is set in the configuration, and the Wazuh API returns the 
        correct values for the configured 'localfile' section.
@@ -25,7 +25,7 @@ components:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
     - wazuh-apid
 
 os_platform:
@@ -84,7 +84,7 @@ local_internal_options = {daemon_debug: '1'}
 def test_configuration_location(test_configuration, test_metadata, truncate_monitored_files, configure_local_internal_options,
                                 remove_all_localfiles_wazuh_config, set_wazuh_configuration, daemons_handler, wait_for_logcollector_start):
     '''
-    description: Check if the 'wazuh-logcollector' daemon starts properly when the 'journald' tag is used as log_format.
+    description: Check if the 'verprotect-logcollector' daemon starts properly when the 'journald' tag is used as log_format.
                  For this purpose, the test will configure the logcollector to monitor a 'journald'.
                  Finally, the test will verify that the Wazuh component is started by checking its process, and the Wazuh API returns the correct values
                  for the 'localfile' section.
@@ -123,7 +123,7 @@ def test_configuration_location(test_configuration, test_metadata, truncate_moni
         - Verify the correct messages are generated in the log file in the correct order.
 
     input_description: A configuration file with journal block settings and the expected output for each test case.
-                       Those include configuration settings for `journal` configuration in 'wazuh-logcollector'.
+                       Those include configuration settings for `journal` configuration in 'verprotect-logcollector'.
 
     expected_output:
         - Boolean values to indicate the state of the Wazuh component.

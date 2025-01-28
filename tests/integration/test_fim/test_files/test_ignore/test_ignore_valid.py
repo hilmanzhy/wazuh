@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when
        these files are modified. Specifically, these tests will verify that FIM ignores the elements
        set in the 'ignore' option using both regex and regular names for specifying them.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks
        configured files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -92,7 +92,7 @@ def test_ignore_subdirectory(test_configuration, test_metadata, configure_local_
                              truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler,
                              file_to_monitor):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon ignores the files that are in a monitored subdirectory
+    description: Check if the 'verprotect-syscheckd' daemon ignores the files that are in a monitored subdirectory
                  when using the 'ignore' option. It also ensures that events for files tha are not being ignored
                  are still detected. For this purpose, the test will monitor folders containing files to be ignored
                  using names or regular expressions. Then it will create these files and check if FIM events should
@@ -136,7 +136,7 @@ def test_ignore_subdirectory(test_configuration, test_metadata, configure_local_
 
     input_description: Different test cases are contained in external YAML files
                        (cases_ignore_linux.yaml) which includes configuration settings
-                       for the 'wazuh-syscheckd' daemon and testing directories to monitor.
+                       for the 'verprotect-syscheckd' daemon and testing directories to monitor.
 
     inputs:
         - 288 test cases including multiple regular expressions and names for testing files and directories.

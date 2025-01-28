@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        files are modified. All these tests will be performed using ambiguous directory configurations,
        such as directories and subdirectories with opposite monitoring settings. In particular, it
        will be verified that the value of the 'ignore' attribute prevails over the 'restrict' one.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,8 +23,8 @@ targets:
     - agent
 
 daemons:
-    - wazuh-agentd
-    - wazuh-syscheckd
+    - verprotect-agentd
+    - verprotect-syscheckd
 
 os_platform:
     - linux

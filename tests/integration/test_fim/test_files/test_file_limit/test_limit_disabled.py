@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when these
        files are modified. In particular, these tests will check if FIM events are still generated when
        a monitored directory is deleted and created again.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured files
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured files
        for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -96,7 +96,7 @@ if sys.platform == WINDOWS: local_internal_options.update({AGENTD_WINDOWS_DEBUG:
 def test_limit_disabled(test_configuration, test_metadata, set_wazuh_configuration, truncate_monitored_files,
                         configure_local_internal_options, folder_to_monitor, daemons_handler, start_monitoring):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects that the 'file_limit' feature of FIM is disabled.
+    description: Check if the 'verprotect-syscheckd' daemon detects that the 'file_limit' feature of FIM is disabled.
                  For this purpose, the test will monitor a testing directory, and finally, it will verify
                  that the FIM event 'no limit' is generated.
 
@@ -134,7 +134,7 @@ def test_limit_disabled(test_configuration, test_metadata, set_wazuh_configurati
         - Verify the FIM event 'no limit' is generated when the 'file_limit' feature is disabled.
 
     input_description: The test cases are contained in external YAML file (cases_limit_disabled.yaml)
-                       which includes configuration parameters for the 'wazuh-syscheckd' daemon and testing
+                       which includes configuration parameters for the 'verprotect-syscheckd' daemon and testing
                        directories to monitor. The configuration template is contained in another external YAML
                        file (configuration_basic.yaml).
 

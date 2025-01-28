@@ -10,7 +10,7 @@ type: integration
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts
        when these files are modified. Specifically, these tests will verify that FIM detects
        the correct 'inotify watches' number when renaming and deleting a monitored directory.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -92,7 +92,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2 }
 def test_num_watches(test_configuration, test_metadata, configure_local_internal_options,
                              truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon detects the correct number of 'inotify watches' when
+    description: Check if the 'verprotect-syscheckd' daemon detects the correct number of 'inotify watches' when
                  renaming and deleting a monitored directory. For this purpose, the test will create and monitor
                  a folder with two subdirectories. Once FIM is started, it will verify that three watches have
                  been detected. If these 'inotify watches' are correct, the test will make file operations on
@@ -133,7 +133,7 @@ def test_num_watches(test_configuration, test_metadata, configure_local_internal
           they are restored.
 
     input_description: A test case (num_watches_conf) is contained in external YAML file (cases_num_watches.yaml)
-                       which includes configuration settings for the 'wazuh-syscheckd' daemon and, these are
+                       which includes configuration settings for the 'verprotect-syscheckd' daemon and, these are
                        combined with the testing directories to be monitored defined in the module.
 
     expected_output:

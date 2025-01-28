@@ -21,7 +21,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - windows
@@ -81,7 +81,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_WINDOWS_DEBUG: 2 }
 def test_windows_system_monitoring(test_configuration, test_metadata, configure_local_internal_options,
                              truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler):
     '''
-    description: Check if the 'wazuh-syscheckd' monitors the windows system folders (System32 and SysWOW64) properly,
+    description: Check if the 'verprotect-syscheckd' monitors the windows system folders (System32 and SysWOW64) properly,
     and that monitoring for Sysnative folder is redirected to System32 and works properly.
 
     test_phases:

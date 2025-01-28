@@ -12,7 +12,7 @@ from typing import List
 from wazuh_testing import session_parameters
 from wazuh_testing.constants import platforms
 from wazuh_testing.constants.platforms import WINDOWS
-from wazuh_testing.constants.daemons import WAZUH_MANAGER, API_DAEMONS_REQUIREMENTS
+from wazuh_testing.constants.daemons import VERPROTECT_MANAGER, API_DAEMONS_REQUIREMENTS
 from wazuh_testing.constants.paths import ROOT_PREFIX
 from wazuh_testing.constants.paths.api import RBAC_DATABASE_PATH
 from wazuh_testing.constants.paths.logs import ACTIVE_RESPONSE_LOG_PATH, WAZUH_LOG_PATH, ALERTS_JSON_PATH, \
@@ -270,7 +270,7 @@ def file_monitoring(request):
 
 def truncate_monitored_files_implementation() -> None:
     """Truncate all the log files and json alerts files before and after the test execution"""
-    if services.get_service() == WAZUH_MANAGER:
+    if services.get_service() == VERPROTECT_MANAGER:
         log_files = [WAZUH_LOG_PATH, ALERTS_JSON_PATH, WAZUH_API_LOG_FILE_PATH,
                      WAZUH_API_JSON_LOG_FILE_PATH, WAZUH_CLIENT_KEYS_PATH]
     else:
@@ -725,7 +725,7 @@ def autostart_simulators(request: pytest.FixtureRequest) -> None:
     Fixture for starting simulators in wazuh-agent executions.
 
     This fixture starts both Authd and Remoted simulators only in the cases where the service is not
-    WAZUH_MANAGER, and when the test function is not already using the simulator fixture, if it does
+    VERPROTECT_MANAGER, and when the test function is not already using the simulator fixture, if it does
     use one of them, only start the remaining simulator.
 
     This is required so all wazuh-agent instances are being tested with the wazuh-manager connection
@@ -734,7 +734,7 @@ def autostart_simulators(request: pytest.FixtureRequest) -> None:
     create_authd = 'authd_simulator' not in request.fixturenames
     create_remoted = 'remoted_simulator' not in request.fixturenames
 
-    if services.get_service() is not WAZUH_MANAGER:
+    if services.get_service() is not VERPROTECT_MANAGER:
         authd = AuthdSimulator() if create_authd else None
         remoted = RemotedSimulator() if create_remoted else None
 
@@ -743,7 +743,7 @@ def autostart_simulators(request: pytest.FixtureRequest) -> None:
 
     yield
 
-    if services.get_service() is not WAZUH_MANAGER:
+    if services.get_service() is not VERPROTECT_MANAGER:
         authd.shutdown() if create_authd else None
         remoted.shutdown() if create_remoted else None
 

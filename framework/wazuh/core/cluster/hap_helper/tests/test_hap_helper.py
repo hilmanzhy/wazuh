@@ -448,10 +448,10 @@ class TestHAPHelper:
 
                                 if nodes_to_add or nodes_to_remove:
                                     for node_to_remove in nodes_to_remove:
-                                        proxy_mock.remove_wazuh_manager.assert_any_call(manager_name=node_to_remove)
+                                        proxy_mock.remove_VERPROTECT_MANAGER.assert_any_call(manager_name=node_to_remove)
 
                                     for node_to_add in nodes_to_add:
-                                        proxy_mock.add_wazuh_manager.assert_any_call(
+                                        proxy_mock.add_VERPROTECT_MANAGER.assert_any_call(
                                             manager_name=node_to_add,
                                             manager_address=nodes[node_to_add],
                                             resolver=proxy_mock.resolver,

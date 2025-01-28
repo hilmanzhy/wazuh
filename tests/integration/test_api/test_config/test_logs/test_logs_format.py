@@ -19,7 +19,7 @@ daemons:
     - wazuh-apid
     - verprotect-modulesd
     - wazuh-analysisd
-    - wazuh-execd
+    - verprotect-execd
     - wazuh-db
     - wazuh-remoted
 

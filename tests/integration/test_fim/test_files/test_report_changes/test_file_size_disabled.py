@@ -11,7 +11,7 @@ brief: File Integrity Monitoring (FIM) system watches selected files and trigger
        files are modified. Specifically, these tests will verify that FIM does not limit the size of
        the file monitored to generate 'diff' information when disabling the 'file_size' tag and
        the 'report_changes' option is enabled.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks configured
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks configured
        files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -23,7 +23,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -102,7 +102,7 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_WINDOWS_DEBUG: '2'}
 def test_file_size_disabled(test_configuration, test_metadata, configure_local_internal_options, truncate_monitored_files,
                             set_wazuh_configuration, folder_to_monitor, file_to_monitor, daemons_handler, detect_end_scan):
     '''
-    description: Check if the 'wazuh-syscheckd' daemon limits the size of the monitored file to generate
+    description: Check if the 'verprotect-syscheckd' daemon limits the size of the monitored file to generate
                  'diff' information when the 'file_size' option is disabled. For this purpose, the test
                  will monitor a directory and create a testing file larger than the limit set in the
                  'file_size' tag. Finally, the test will verify that the FIM event related to the

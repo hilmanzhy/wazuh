@@ -7,7 +7,7 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-logcollector' daemon monitors configured files and commands for new log messages.
+brief: The 'verprotect-logcollector' daemon monitors configured files and commands for new log messages.
        Specifically, these tests will check if the log collector generates events using the alias
        specified in the 'alias' tag when monitoring a command, and the Wazuh API returns the same
        values for the configured 'localfile' section.
@@ -25,7 +25,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-logcollector
+    - verprotect-logcollector
     - wazuh-apid
 
 os_platform:
@@ -107,7 +107,7 @@ daemons_handler_configuration = {'all_daemons': True}
 def test_configuration_alias(test_configuration, test_metadata, configure_local_internal_options, truncate_monitored_files,
                             set_wazuh_configuration, daemons_handler):
     '''
-    description: Check if the 'wazuh-logcollector' daemon changes a command name in the log messages by
+    description: Check if the 'verprotect-logcollector' daemon changes a command name in the log messages by
                  the one defined in the 'alias' tag. For this purpose, the test will monitor a command
                  using an alias. Then, it will verify that the 'reading command' event is generated.
                  This event includes the output of the command executed and its alias. Finally, the test
@@ -144,7 +144,7 @@ def test_configuration_alias(test_configuration, test_metadata, configure_local_
 
     input_description: A configuration template (test_basic_configuration_alias) is contained in an external YAML file
                        (wazuh_basic_configuration.yaml). That template is combined with two test cases defined
-                       in the module. Those include configuration settings for the 'wazuh-logcollector' daemon.
+                       in the module. Those include configuration settings for the 'verprotect-logcollector' daemon.
 
     expected_output:
         - r'Reading command message.*'

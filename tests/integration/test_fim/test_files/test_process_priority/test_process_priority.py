@@ -9,8 +9,8 @@ type: integration
 
 brief: File Integrity Monitoring (FIM) system watches selected files and triggering alerts when
        these files are modified. Specifically, these tests will check if the process priority of
-       the 'wazuh-syscheckd' daemon set in the 'process_priority' tag is applied successfully.
-       The FIM capability is managed by the 'wazuh-syscheckd' daemon, which checks
+       the 'verprotect-syscheckd' daemon set in the 'process_priority' tag is applied successfully.
+       The FIM capability is managed by the 'verprotect-syscheckd' daemon, which checks
        configured files for changes to the checksums, permissions, and ownership.
 
 components:
@@ -22,7 +22,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-syscheckd
+    - verprotect-syscheckd
 
 os_platform:
     - linux
@@ -95,10 +95,10 @@ local_internal_options = {SYSCHECK_DEBUG: 2, AGENTD_DEBUG: 2 }
 def test_process_priority(test_configuration, test_metadata, configure_local_internal_options,
                              truncate_monitored_files, set_wazuh_configuration, folder_to_monitor, daemons_handler):
     '''
-    description: Check if the process priority of the 'wazuh-syscheckd' daemon set in the 'process_priority' tag
+    description: Check if the process priority of the 'verprotect-syscheckd' daemon set in the 'process_priority' tag
                  is updated correctly. For this purpose, the test will monitor a testing folder and, once FIM starts,
                  it will get the priority value from the 'process_priority' tag and the system information of
-                 the 'wazuh-syscheckd' process. Finally, the test will compare the current process priority
+                 the 'verprotect-syscheckd' process. Finally, the test will compare the current process priority
                  with the target priority to verify that they match.
 
     wazuh_min_version: 4.2.0
@@ -129,11 +129,11 @@ def test_process_priority(test_configuration, test_metadata, configure_local_int
             brief: Handler of Wazuh daemons.
 
     assertions:
-        - Verify that the 'wazuh-syscheckd' daemon is running.
-        - Verify that the process priority of the 'wazuh-syscheckd' daemon matches the 'process_priority' tag.
+        - Verify that the 'verprotect-syscheckd' daemon is running.
+        - Verify that the process priority of the 'verprotect-syscheckd' daemon matches the 'process_priority' tag.
 
     input_description: A test case (ossec_conf) is contained in external YAML file (cases_process_priority.yaml)
-                       which includes configuration settings for the 'wazuh-syscheckd' daemon and,
+                       which includes configuration settings for the 'verprotect-syscheckd' daemon and,
                        these are combined with the testing directory to be monitored defined in the module.
 
     expected_output:

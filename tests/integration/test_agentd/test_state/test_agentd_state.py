@@ -7,8 +7,8 @@ copyright: Copyright (C) 2015-2024, Wazuh Inc.
 
 type: integration
 
-brief: The 'wazuh-agentd' program is the client-side daemon that communicates with the server.
-       These tests will check if the content of the 'wazuh-agentd' daemon statistics file is valid.
+brief: The 'verprotect-agentd' program is the client-side daemon that communicates with the server.
+       These tests will check if the content of the 'verprotect-agentd' daemon statistics file is valid.
        The statistics files are documents that show real-time information about the Wazuh environment.
 
 components:
@@ -18,7 +18,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-agentd
+    - verprotect-agentd
     - wazuh-remoted
 
 os_platform:
@@ -40,7 +40,7 @@ os_version:
     - Windows Server 2016
 
 references:
-    - https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-agentd-state.html
+    - https://documentation.wazuh.com/current/user-manual/reference/statistics-files/verprotect-agentd-state.html
 
 tags:
     - stats_file
@@ -94,7 +94,7 @@ def start_remoted_server(test_metadata) -> None:
 def test_agentd_state(test_configuration, test_metadata, set_wazuh_configuration, remove_state_file, configure_local_internal_options,
                       truncate_monitored_files, clean_keys, add_keys, daemons_handler):
     '''
-    description: Check that the statistics file 'wazuh-agentd.state' is created automatically
+    description: Check that the statistics file 'verprotect-agentd.state' is created automatically
                  and verify that the content of its fields is correct.
 
     wazuh_min_version: 4.2.0
@@ -113,7 +113,7 @@ def test_agentd_state(test_configuration, test_metadata, set_wazuh_configuration
             brief: Configure a custom environment for testing.
         - remove_state_file:
             type: fixture
-            brief: Removes the wazuh-agentd.state file
+            brief: Removes the verprotect-agentd.state file
         - configure_local_internal_options:
             type: fixture
             brief: Set internal configuration for testing.
@@ -131,8 +131,8 @@ def test_agentd_state(test_configuration, test_metadata, set_wazuh_configuration
             brief: Handler of Wazuh daemons.
 
     assertions:
-        - Verify that the 'wazuh-agentd.state' statistics file has been created.
-        - Verify that the information stored in the 'wazuh-agentd.state' statistics file
+        - Verify that the 'verprotect-agentd.state' statistics file has been created.
+        - Verify that the information stored in the 'verprotect-agentd.state' statistics file
           is consistent with the connection status to the 'wazuh-remoted' daemon.
 
     input_description: An external YAML file (wazuh_conf.yaml) includes configuration settings for the agent.
