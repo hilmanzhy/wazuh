@@ -19,7 +19,7 @@ targets:
 
 daemons:
     - wazuh-apid
-    - wazuh-modulesd
+    - verprotect-modulesd
     - wazuh-analysisd
     - wazuh-execd
     - wazuh-db

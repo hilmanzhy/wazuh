@@ -1,0 +1,11 @@
+{
+    "ownership": "recommended",
+    "suppress_bundle_relocation": true,
+    "postinstall_action": "none",
+    "preserve_xattr": true,
+    "name": "verprotect-agent_4.10.0-1_arm64_2654658d0c.pkg",
+    "identifier": "com.verprotect.pkg.verprotect-agent",
+    "install_location": "/",
+    "version": "4.10.0",
+    "distribution_style": false
+}

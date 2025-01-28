@@ -206,7 +206,7 @@ All notable changes to this project will be documented in this file.
 - Fixed Wazuh deb uninstallation to remove non-config files. ([#2195](https://github.com/wazuh/wazuh-packages/issues/2195))
 - Fixed improper Windows agent ACL on non-default installation directory. ([#23273](https://github.com/wazuh/wazuh/pull/23273))
 - Fixed socket configuration of an agent is displayed. ([#17664](https://github.com/wazuh/wazuh/pull/17664))
-- Fixed wazuh-modulesd printing child process not found error. ([#18494](https://github.com/wazuh/wazuh/pull/18494))
+- Fixed verprotect-modulesd printing child process not found error. ([#18494](https://github.com/wazuh/wazuh/pull/18494))
 - Fixed issue with an agent starting automatically without reason. ([#23848](https://github.com/wazuh/wazuh/pull/23848))
 - Fixed GET /syscheck to properly report size for files larger than 2GB. ([#17415](https://github.com/wazuh/wazuh/pull/17415))
 - Fixed error in packages generation centos 7. ([#24412](https://github.com/wazuh/wazuh/pull/24412))
@@ -913,7 +913,7 @@ All notable changes to this project will be documented in this file.
 - Fixed a bug in wazuh-analysisd that could exceed the maximum number of fields when loading a rule. ([#17490](https://github.com/wazuh/wazuh/pull/17490))
 - Fixed a race condition in wazuh-analysisd FTS list. ([#17126](https://github.com/wazuh/wazuh/pull/17126))
 - Fixed a crash in Analysisd when parsing an invalid decoder. ([#17143](https://github.com/wazuh/wazuh/pull/17143))
-- Fixed a segmentation fault in wazuh-modulesd due to duplicate Vulnerability Detector configuration. ([#17701](https://github.com/wazuh/wazuh/pull/17701))
+- Fixed a segmentation fault in verprotect-modulesd due to duplicate Vulnerability Detector configuration. ([#17701](https://github.com/wazuh/wazuh/pull/17701))
 - Fixed Vulnerability Detector configuration for unsupported SUSE systems. ([#16978](https://github.com/wazuh/wazuh/pull/16978))
 
 ### Agent
@@ -1254,7 +1254,7 @@ All notable changes to this project will be documented in this file.
 - Improved the reparse setting performance by removing unnecessary queries from external integrations. ([#12404](https://github.com/wazuh/wazuh/pull/12404))
 - Updated and expanded Azure module logging functionality to use the ossec.log file. ([#12478](https://github.com/wazuh/wazuh/pull/12478))
 - Improved the error management of the Google Cloud integration. ([#12647](https://github.com/wazuh/wazuh/pull/12647))
-- Deprecated `logging` tag in GCloud integration. It now uses `wazuh_modules` debug value to set the verbosity level. ([#12769](https://github.com/wazuh/wazuh/pull/12769))
+- Deprecated `logging` tag in GCloud integration. It now uses `verprotect_modules` debug value to set the verbosity level. ([#12769](https://github.com/wazuh/wazuh/pull/12769))
 - The last_dates.json file of the Azure module has been deprecated in favour of a new ORM and database. ([12849](https://github.com/wazuh/wazuh/pull/12849/))
 - Improved the error handling in AWS integration's `decompress_file` method. ([#12929](https://github.com/wazuh/wazuh/pull/12929))
 - Use zlib for zip compression in cluster synchronization. ([#11190](https://github.com/wazuh/wazuh/pull/11190))
@@ -1304,7 +1304,7 @@ All notable changes to this project will be documented in this file.
 #### Added
 
 - Added new API integration tests for a Wazuh environment without a cluster configuration. ([#10620](https://github.com/wazuh/wazuh/pull/10620))
-- Added wazuh-modulesd tags to `GET /manager/logs` and `GET /cluster/{node_id}/logs` endpoints. ([#11731](https://github.com/wazuh/wazuh/pull/11731))
+- Added verprotect-modulesd tags to `GET /manager/logs` and `GET /cluster/{node_id}/logs` endpoints. ([#11731](https://github.com/wazuh/wazuh/pull/11731))
 - Added Python decorator to soft deprecate API endpoints adding deprecation headers to their responses. ([#12438](https://github.com/wazuh/wazuh/pull/12438))
 - Added new exception to inform that /proc directory is not found or permissions to see its status are not granted. ([#12486](https://github.com/wazuh/wazuh/pull/12486))
 - Added new field and filter to `GET /agents` response to retrieve agent groups configuration synchronization status. ([#12362](https://github.com/wazuh/wazuh/pull/12483))
@@ -1616,7 +1616,7 @@ All notable changes to this project will be documented in this file.
 - Fixed a memory leak in wazuh-analysisd when overwriting a rule multiple times. ([#13587](https://github.com/wazuh/wazuh/pull/13587))
 - Prevented wazuh-agentd and client-auth from performing enrollment if the agent fails to validate the manager's certificate. ([#13907](https://github.com/wazuh/wazuh/pull/13907))
 - Fixed manager's compilation when enabling GeoIP support. ([#13694](https://github.com/wazuh/wazuh/pull/13694))
-- Fixed a crash in wazuh-modulesd when getting stopped while downloading a Vulnerability Detector feed. ([#13883](https://github.com/wazuh/wazuh/pull/13883))
+- Fixed a crash in verprotect-modulesd when getting stopped while downloading a Vulnerability Detector feed. ([#13883](https://github.com/wazuh/wazuh/pull/13883))
 
 ### Agent
 
@@ -2927,7 +2927,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Fixed a bug in Vulnerability Detector that made wazuh-modulesd crash when parsing the version of a package from a RHEL feed. ([#4885](https://github.com/wazuh/wazuh/pull/4885))
+- Fixed a bug in Vulnerability Detector that made verprotect-modulesd crash when parsing the version of a package from a RHEL feed. ([#4885](https://github.com/wazuh/wazuh/pull/4885))
 
 
 ## [v3.12.1] - 2020-04-08
@@ -3061,7 +3061,7 @@ All notable changes to this project will be documented in this file.
 - Fix bugs reported by Clang analyzer. ([#3887](https://github.com/wazuh/wazuh/pull/3887))
 - Fix compilation errors on OpenBSD platform. ([#3105](https://github.com/wazuh/wazuh/pull/3105))
 - Fix on-demand configuration labels section to obtain labels attributes. ([#3490](https://github.com/wazuh/wazuh/pull/3490))
-- Fixed race condition between `wazuh-clusterd` and `wazuh-modulesd` showing a 'No such file or directory' in `cluster.log` when synchronizing agent-info files in a cluster environment ([#4007](https://github.com/wazuh/wazuh/issues/4007))
+- Fixed race condition between `wazuh-clusterd` and `verprotect-modulesd` showing a 'No such file or directory' in `cluster.log` when synchronizing agent-info files in a cluster environment ([#4007](https://github.com/wazuh/wazuh/issues/4007))
 - Fixed 'ConnectionError object has no attribute code' error when package repository is not available ([#3441](https://github.com/wazuh/wazuh/issues/3441))
 - Fix the blocking of files monitored by Who-data in Windows agents. ([#3872](https://github.com/wazuh/wazuh/pull/3872))
 - Fix the processing of EventChannel logs with unexpected characters. ([#3320](https://github.com/wazuh/wazuh/pull/3320))
@@ -4028,7 +4028,7 @@ All notable changes to this project will be documented in this file.
 - Improved cluster control to give more information. ([#421](https://github.com/wazuh/wazuh/pull/421))
 - Updated rules for CIS-CAT.
 - Removed unnecessary compilation of vulnerability-detector in agents.
-- Increased wazuh-modulesd's subprocess pool.
+- Increased verprotect-modulesd's subprocess pool.
 - Improved the agent software recollection by Syscollector.
 
 ### Fixed

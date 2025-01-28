@@ -21,7 +21,7 @@ targets:
 daemons:
     - wazuh-authd
     - wazuh-db
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux

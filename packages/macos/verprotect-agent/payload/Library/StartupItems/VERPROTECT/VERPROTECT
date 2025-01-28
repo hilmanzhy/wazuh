@@ -1,0 +1,18 @@
+
+#!/bin/sh
+. /etc/rc.common
+
+StartService ()
+{
+        /Library/Ossec/bin/verprotect-control start
+}
+StopService ()
+{
+        /Library/Ossec/bin/verprotect-control stop
+}
+RestartService ()
+{
+        /Library/Ossec/bin/verprotect-control restart
+}
+RunService "$1"
+

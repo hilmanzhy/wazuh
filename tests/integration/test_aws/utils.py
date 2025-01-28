@@ -14,7 +14,7 @@ from os.path import join, dirname, realpath
 # CONSTANTS
 TEMPLATE_DIR = 'configuration_template'
 TEST_CASES_DIR = 'test_cases'
-WAZUH_MODULES_DEBUG = 'wazuh_modules.debug'
+verprotect_modules_DEBUG = 'verprotect_modules.debug'
 
 # DICTS
 ERROR_MESSAGE = {
@@ -65,5 +65,5 @@ ALL_REGIONS = (
 TEST_DATA_PATH = join(dirname(realpath(__file__)), 'data')
 
 # Set local internal options
-local_internal_options = {WAZUH_MODULES_DEBUG: '2',
+local_internal_options = {verprotect_modules_DEBUG: '2',
                           monitord_config.MONITORD_ROTATE_LOG: '0'}

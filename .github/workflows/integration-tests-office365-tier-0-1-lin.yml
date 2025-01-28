@@ -11,8 +11,8 @@ on:
     paths:
         - ".github/workflows/integration-tests-office365-tier-0-1-lin.yml"
         - "src/config/wmodules-office365.c"
-        - "src/wazuh_modules/wm_office365.h"
-        - "src/wazuh_modules/wm_office365.c"
+        - "src/verprotect_modules/wm_office365.h"
+        - "src/verprotect_modules/wm_office365.c"
         - "src/Makefile"
         - "tests/integration/conftest.py"
         - "tests/integration/test_office365/**"

@@ -7,7 +7,7 @@ on:
       - ".github/workflows/windows-syscollector-tests.yml"
       - "src/data_provider/**"
       - "src/shared_modules/**"
-      - "src/wazuh_modules/syscollector/**"
+      - "src/verprotect_modules/syscollector/**"
       - "src/Makefile"
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: syscollector
-          path: src/wazuh_modules/syscollector/build/bin
+          path: src/verprotect_modules/syscollector/build/bin
   run-on-windows:
     needs: build
     runs-on: windows-latest

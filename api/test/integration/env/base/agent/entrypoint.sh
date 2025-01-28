@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Enable debug mode for the modulesd daemon
-echo 'wazuh_modules.debug=2' >> /var/ossec/etc/local_internal_options.conf
+echo 'verprotect_modules.debug=2' >> /var/ossec/etc/local_internal_options.conf
 
 # Apply test.keys
 cp /tmp_volume/configuration_files/test.keys /var/ossec/etc/test.keys

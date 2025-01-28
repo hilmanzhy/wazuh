@@ -62,7 +62,7 @@ manager_status = {'wazuh-agentlessd': 'running', 'wazuh-analysisd': 'running', '
  'wazuh-csyslogd': 'running', 'wazuh-dbd': 'running', 'wazuh-monitord': 'running',
  'wazuh-execd': 'running', 'wazuh-integratord': 'running', 'wazuh-logcollector': 'running',
  'wazuh-maild': 'running', 'wazuh-remoted': 'running', 'wazuh-reportd': 'running',
- 'wazuh-syscheckd': 'running', 'wazuh-clusterd': 'running', 'wazuh-modulesd': 'running',
+ 'wazuh-syscheckd': 'running', 'wazuh-clusterd': 'running', 'verprotect-modulesd': 'running',
  'wazuh-db': 'running', 'wazuh-apid': 'running'}
 
 
@@ -78,10 +78,10 @@ def test_get_status(mock_status):
 
 @pytest.mark.parametrize('tag, level, total_items, sort_by, sort_ascending', [
     (None, None, 13, None, None),
-    ('wazuh-modulesd:database', None, 2, None, None),
-    ('wazuh-modulesd:syscollector', None, 2, None, None),
-    ('wazuh-modulesd:syscollector', None, 2, None, None),
-    ('wazuh-modulesd:aws-s3', None, 5, None, None),
+    ('verprotect-modulesd:database', None, 2, None, None),
+    ('verprotect-modulesd:syscollector', None, 2, None, None),
+    ('verprotect-modulesd:syscollector', None, 2, None, None),
+    ('verprotect-modulesd:aws-s3', None, 5, None, None),
     ('wazuh-execd', None, 1, None, None),
     ('wazuh-csyslogd', None, 2, None, None),
     ('random', None, 0, ['timestamp'], True),
@@ -121,7 +121,7 @@ def test_ossec_log(mock_exists, mock_active_logging_format, tag, level, total_it
         assert isinstance(result, AffectedItemsWazuhResult), 'No expected result type'
         assert result.render()['data']['total_affected_items'] == total_items
         assert all(log['description'][-1] != '\n' for log in result.render()['data']['affected_items'])
-        if tag is not None and level != 'wazuh-modulesd:syscollector':
+        if tag is not None and level != 'verprotect-modulesd:syscollector':
             assert all('\n' not in log['description'] for log in result.render()['data']['affected_items'])
         if sort_by:
             reversed_result = ossec_log(level=level, tag=tag, sort_by=sort_by, sort_ascending=not sort_ascending)
@@ -171,9 +171,9 @@ def test_ossec_log_summary(mock_exists, mock_active_logging_format):
     expected_result = {
         'wazuh-csyslogd': {'all': 2, 'info': 2, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 0},
         'wazuh-execd': {'all': 1, 'info': 0, 'error': 1, 'critical': 0, 'warning': 0, 'debug': 0},
-        'wazuh-modulesd:aws-s3': {'all': 5, 'info': 2, 'error': 1, 'critical': 0, 'warning': 2, 'debug': 0},
-        'wazuh-modulesd:database': {'all': 2, 'info': 0, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 2},
-        'wazuh-modulesd:syscollector': {'all': 2, 'info': 2, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 0},
+        'verprotect-modulesd:aws-s3': {'all': 5, 'info': 2, 'error': 1, 'critical': 0, 'warning': 2, 'debug': 0},
+        'verprotect-modulesd:database': {'all': 2, 'info': 0, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 2},
+        'verprotect-modulesd:syscollector': {'all': 2, 'info': 2, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 0},
         'wazuh-rootcheck': {'all': 1, 'info': 1, 'error': 0, 'critical': 0, 'warning': 0, 'debug': 0}
     }
 

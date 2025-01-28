@@ -51,7 +51,7 @@ src/rootcheck_control
 src/syscheck_control
 src/syscheck_update
 src/verify-agent-conf
-src/wazuh-modulesd
+src/verprotect-modulesd
 src/wazuh-auth
 src/wazuh-db
 src/wazuh-agentd
@@ -133,7 +133,7 @@ src/shared_modules/dbsync/smokeTests/temp.db
 src/shared_modules/rsync/coverage_report/
 src/shared_modules/utils/coverage_report/
 src/shared_modules/utils/tests/coverage_report
-src/wazuh_modules/syscollector/coverage_report/
+src/verprotect_modules/syscollector/coverage_report/
 src/ossec.test
 src/tap_*
 etc/preloaded-vars.conf
@@ -157,9 +157,9 @@ doxygen_errors.txt
 
 # Flatbuffers generated headers.
 src/shared_modules/utils/flatbuffers/include/
-src/wazuh_modules/syscollector/include/*_generated.h
-src/wazuh_modules/vulnerability_scanner/include/*_schema.h
-src/wazuh_modules/vulnerability_scanner/include/*_generated.h
+src/verprotect_modules/syscollector/include/*_generated.h
+src/verprotect_modules/vulnerability_scanner/include/*_schema.h
+src/verprotect_modules/vulnerability_scanner/include/*_generated.h
 
 # Test files
-src/wazuh_modules/vulnerability_scanner/qa/test_data/*/input_*.bin
+src/verprotect_modules/vulnerability_scanner/qa/test_data/*/input_*.bin

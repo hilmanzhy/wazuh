@@ -6,7 +6,7 @@
 
 actor user
 actor "wazuh-manager" as manager
-participant "wazuh-modulesd\nmain" as main
+participant "verprotect-modulesd\nmain" as main
 participant "wm_comm\n<<thread>>" as comm
 participant "wm_syscollector\n<<thread>>" as wm_syscollector
 

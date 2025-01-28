@@ -1,0 +1,16 @@
+#!/bin/sh
+
+capture_sigterm() {
+    /Library/Ossec/bin/verprotect-control stop
+    exit $?
+}
+
+if ! /Library/Ossec/bin/verprotect-control start; then
+    /Library/Ossec/bin/verprotect-control stop
+fi
+
+while : ; do
+    trap capture_sigterm SIGTERM
+    sleep 3
+done
+

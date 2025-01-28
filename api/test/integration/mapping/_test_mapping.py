@@ -20,7 +20,7 @@ integration_tests = path.join(base, 'api', 'test', 'integration')
 file_path = path.join(integration_tests, 'mapping', 'integration_test_api_endpoints.json')
 
 # Wazuh modules
-wazuh_modules = [
+verprotect_modules = [
     api,  # API
     framework,  # SDK, CORE and RBAC (recursive call)
     integration_tests  # Integration tests
@@ -55,8 +55,8 @@ def extract_module_from_path(file_path):
     """Extracts the module from the file path."""
     parts = file_path.split('/')
     # Assuming the module is the last part of the path
-    wazuh_modules = parts[-1]
-    return wazuh_modules
+    verprotect_modules = parts[-1]
+    return verprotect_modules
 
 def get_file_and_test_info(test_name, test_mapping, module_name):
     try:
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         test_tags = calculate_test_mappings()
 
         mapping_list = list()
-        for module in wazuh_modules:
+        for module in verprotect_modules:
             chdir(module)
             for root, dirs, files in sorted(walk('.')):
                 mappings = dict()

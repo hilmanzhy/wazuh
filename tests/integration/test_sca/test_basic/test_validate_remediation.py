@@ -16,7 +16,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux
@@ -127,7 +127,7 @@ def test_validate_remediation_results(test_configuration, test_metadata, prepare
             brief: Truncate all the log files and json alerts files before and after the test execution.
         - restart_modulesd_function:
             type: fixture
-            brief: Restart the wazuh-modulesd daemon.
+            brief: Restart the verprotect-modulesd daemon.
         - wait_for_sca_enabled:
             type: fixture
             brief: Wait for the sca Module to start before starting the test.

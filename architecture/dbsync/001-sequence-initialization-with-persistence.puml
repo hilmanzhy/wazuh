@@ -5,7 +5,7 @@
 
 @startuml 001-sequence-initialization-with-persistence
 
-actor "wazuh-modules" as module
+actor "verprotect-modules" as module
 participant "dbsync" as dbsync
 database "file.db" as db
 

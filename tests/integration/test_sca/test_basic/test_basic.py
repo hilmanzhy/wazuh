@@ -16,7 +16,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux

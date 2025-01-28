@@ -26,7 +26,7 @@ daemons:
     - wazuh-execd
     - wazuh-analysisd
     - wazuh-remoted
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux

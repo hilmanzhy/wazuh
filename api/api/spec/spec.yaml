@@ -3782,7 +3782,7 @@ components:
           $ref: '#/components/schemas/DaemonStatus'
         wazuh-db:
           $ref: '#/components/schemas/DaemonStatus'
-        wazuh-modulesd:
+        verprotect-modulesd:
           $ref: '#/components/schemas/DaemonStatus'
 
     WazuhInfo:
@@ -4262,37 +4262,37 @@ components:
             $ref: '#/components/schemas/LogSummary'
           wazuh-db:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:
+          verprotect-modulesd:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:agent-upgrade:
+          verprotect-modulesd:agent-upgrade:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:aws-s3:
+          verprotect-modulesd:aws-s3:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:azure-logs:
+          verprotect-modulesd:azure-logs:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:ciscat:
+          verprotect-modulesd:ciscat:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:control:
+          verprotect-modulesd:control:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:command:
+          verprotect-modulesd:command:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:content_manager:
+          verprotect-modulesd:content_manager:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:database:
+          verprotect-modulesd:database:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:docker-listener:
+          verprotect-modulesd:docker-listener:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:download:
+          verprotect-modulesd:download:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:oscap:
+          verprotect-modulesd:oscap:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:osquery:
+          verprotect-modulesd:osquery:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:syscollector:
+          verprotect-modulesd:syscollector:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:vulnerability-scanner:
+          verprotect-modulesd:vulnerability-scanner:
             $ref: '#/components/schemas/LogSummary'
-          wazuh-modulesd:task-manager:
+          verprotect-modulesd:task-manager:
             $ref: '#/components/schemas/LogSummary'
 
     ConfirmationMessage:
@@ -10246,7 +10246,7 @@ paths:
                       wazuh-apid: running
                       wazuh-clusterd: running
                       wazuh-db: running
-                      wazuh-modulesd: running
+                      verprotect-modulesd: running
                   total_affected_items: 1
                   total_failed_items: 0
                   failed_items: []
@@ -11332,14 +11332,14 @@ paths:
                         debug: 0
                         error: 3
                         warning: 0
-                    - wazuh-modulesd:content_manager:
+                    - verprotect-modulesd:content_manager:
                         info: 1
                         all: 1
                         critical: 0
                         debug: 0
                         error: 0
                         warning: 0
-                    - wazuh-modulesd:router:
+                    - verprotect-modulesd:router:
                         info: 1
                         all: 1
                         critical: 0
@@ -11953,7 +11953,7 @@ paths:
                       wazuh-reportd: "stopped"
                       wazuh-syscheckd: "running"
                       wazuh-clusterd: "running"
-                      wazuh-modulesd: "running"
+                      verprotect-modulesd: "running"
                       wazuh-db: "running"
                       wazuh-apid: "running"
                   total_affected_items: 1
@@ -12772,11 +12772,11 @@ paths:
                 data:
                   affected_items:
                     - timestamp: '2020-04-15T14:47:54Z'
-                      tag: wazuh-modulesd:syscollector
+                      tag: verprotect-modulesd:syscollector
                       level: info
                       description: "Start syscheck scan"
                     - timestamp: '2020-04-15T14:47:51Z'
-                      tag: wazuh-modulesd:syscollector
+                      tag: verprotect-modulesd:syscollector
                       level: info
                       description: "Starting evaluation"
                     - timestamp: '2020-04-15T13:50:24Z'
@@ -12840,14 +12840,14 @@ paths:
                         debug: 0
                         error: 3
                         warning: 0
-                    - wazuh-modulesd:content_manager:
+                    - verprotect-modulesd:content_manager:
                         info: 1
                         all: 1
                         critical: 0
                         debug: 0
                         error: 0
                         warning: 0
-                    - wazuh-modulesd:router:
+                    - verprotect-modulesd:router:
                         info: 1
                         all: 1
                         critical: 0

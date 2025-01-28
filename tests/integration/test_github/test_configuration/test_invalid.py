@@ -24,7 +24,7 @@ targets:
 daemons:
     - wazuh-analysisd
     - wazuh-monitord
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux

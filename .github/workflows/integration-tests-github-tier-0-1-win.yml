@@ -11,8 +11,8 @@ on:
     paths:
         - ".github/workflows/integration-tests-github-tier-0-1-win.yml"
         - "src/config/wmodules-github.c"
-        - "src/wazuh_modules/wm_github.h"
-        - "src/wazuh_modules/wm_github.c"
+        - "src/verprotect_modules/wm_github.h"
+        - "src/verprotect_modules/wm_github.c"
         - "src/win32/**"
         - "src/Makefile"
         - "tests/integration/conftest.py"

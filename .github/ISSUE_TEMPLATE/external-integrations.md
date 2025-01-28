@@ -28,7 +28,7 @@ In case of a feature request of a new service please provide example logs of tha
 In case of a bug report:
 - Indicate the Wazuh version.
 - Tell if it has failed on a manager, an agent, or both.
-- Attach logs that illustrate the bug inside the <detail> tag below -you may want to set debug options `wazuh_modules.debug=2` and restart Wazuh (see https://documentation.wazuh.com/current/user-manual/reference/internal-options.html) to get verbose logs. This may help investigate the issue-.
+- Attach logs that illustrate the bug inside the <detail> tag below -you may want to set debug options `verprotect_modules.debug=2` and restart Wazuh (see https://documentation.wazuh.com/current/user-manual/reference/internal-options.html) to get verbose logs. This may help investigate the issue-.
 
 <details><summary><SERVICE> logs</summary>
 

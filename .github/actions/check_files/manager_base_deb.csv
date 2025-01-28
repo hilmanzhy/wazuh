@@ -52,7 +52,7 @@ full_filename,owner_name,group_name,mode,type,prot_permissions,size_bytes,size_e
 /var/ossec/bin/wazuh-logtest,root,wazuh,750,file,-rwxr-x---,,
 /var/ossec/bin/wazuh-logtest-legacy,root,root,750,file,-rwxr-x---,,
 /var/ossec/bin/wazuh-maild,root,root,750,file,-rwxr-x---,,
-/var/ossec/bin/wazuh-modulesd,root,root,750,file,-rwxr-x---,,
+/var/ossec/bin/verprotect-modulesd,root,root,750,file,-rwxr-x---,,
 /var/ossec/bin/wazuh-monitord,root,root,750,file,-rwxr-x---,,
 /var/ossec/bin/wazuh-regex,root,root,750,file,-rwxr-x---,,
 /var/ossec/bin/wazuh-remoted,root,root,750,file,-rwxr-x---,,

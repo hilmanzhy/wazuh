@@ -11,8 +11,8 @@ on:
     paths:
         - ".github/workflows/integration-tests-sca-tier-0-1-win.yml"
         - "src/config/wmodules-sca.c"
-        - "src/wazuh_modules/wm_sca.c"
-        - "src/wazuh_modules/wm_sca.h"
+        - "src/verprotect_modules/wm_sca.c"
+        - "src/verprotect_modules/wm_sca.h"
         - "src/win32/**"
         - "src/Makefile"
         - "tests/integration/conftest.py"

@@ -28,7 +28,7 @@ jobs:
           ctest -V
           cd ../../rsync/build
           ctest -V
-          cd ../../../wazuh_modules/syscollector/build
+          cd ../../../verprotect_modules/syscollector/build
           ctest -V
   build-sonoma:
     runs-on: macos-14
@@ -50,5 +50,5 @@ jobs:
           ctest -V
           cd ../../rsync/build
           ctest -V
-          cd ../../../wazuh_modules/syscollector/build
+          cd ../../../verprotect_modules/syscollector/build
           ctest -V

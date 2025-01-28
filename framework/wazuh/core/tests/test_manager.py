@@ -147,7 +147,7 @@ def test_get_logs_summary(mock_exists, mock_active_logging_format):
         result = get_logs_summary()
         assert all(key in log for key in ('all', 'info', 'error', 'critical', 'warning', 'debug')
                    for log in result.values())
-        assert result['wazuh-modulesd:database'] == {'all': 2, 'info': 0, 'error': 0, 'critical': 0, 'warning': 0,
+        assert result['verprotect-modulesd:database'] == {'all': 2, 'info': 0, 'error': 0, 'critical': 0, 'warning': 0,
                                                      'debug': 2}
 
 

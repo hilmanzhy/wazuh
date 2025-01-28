@@ -23,7 +23,7 @@ targets:
 daemons:
     - wazuh-analysisd
     - wazuh-monitord
-    - wazuh-modulesd
+    - verprotect-modulesd
 
 os_platform:
     - linux
@@ -121,15 +121,15 @@ def test_enabled(test_configuration, test_metadata, set_wazuh_configuration, con
                        the module. Those include configuration settings for the 'ms-graph' module.
 
     expected_output:
-        - r'.*wazuh-modulesd:ms-graph.*INFO: Started module'
+        - r'.*verprotect-modulesd:ms-graph.*INFO: Started module'
     '''
 
     wazuh_log_monitor = FileMonitor(WAZUH_LOG_PATH)
 
-    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*wazuh-modulesd:ms-graph.*INFO: Started module"))
+    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*verprotect-modulesd:ms-graph.*INFO: Started module"))
     assert (wazuh_log_monitor.callback_result != None), f'Error module enabled event not detected'
 
-    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*wazuh-modulesd:ms-graph.*{msg}", {
+    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*verprotect-modulesd:ms-graph.*{msg}", {
                               'msg': str(test_metadata['msg'])}))
     assert (wazuh_log_monitor.callback_result != None), f'Error module started or delayed event not detected'
 
@@ -174,10 +174,10 @@ def test_disabled(test_configuration, test_metadata, set_wazuh_configuration, co
                        the module. This include configuration settings for the 'ms-graph' module.
 
     expected_output:
-        - r'.*wazuh-modulesd:ms-graph.*INFO: (Module disabled). Exiting.'
+        - r'.*verprotect-modulesd:ms-graph.*INFO: (Module disabled). Exiting.'
     '''
 
     wazuh_log_monitor = FileMonitor(WAZUH_LOG_PATH)
-    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*wazuh-modulesd:ms-graph.*INFO: (Module disabled). Exiting."))
+    wazuh_log_monitor.start(callback=callbacks.generate_callback(r".*verprotect-modulesd:ms-graph.*INFO: (Module disabled). Exiting."))
 
     assert (wazuh_log_monitor.callback_result != None), f'Error module disabled event not detected'

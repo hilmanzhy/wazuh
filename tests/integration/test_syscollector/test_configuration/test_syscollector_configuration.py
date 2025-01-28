@@ -20,7 +20,7 @@ targets:
     - agent
 
 daemons:
-    - wazuh-modulesd
+    - verprotect-modulesd
     - wazuh-analysisd
     - wazuh-db
 
