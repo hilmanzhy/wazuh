@@ -214,7 +214,11 @@ ifeq ($(INSTALLDIR),)
 	INSTALLDIR = /var/ossec
 endif
 		CMAKE_OPTS+=-DINSTALL_PREFIX=${INSTALLDIR}
+ifeq (${uname_S},AIX)
+		OSSEC_LDFLAGS+='-Wl,-blibpath:${INSTALLDIR}/lib:/opt/freeware/lib:/usr/lib:/lib'
+else
 		OSSEC_LDFLAGS+='-Wl,-blibpath:${INSTALLDIR}/lib:/usr/lib:/lib'
+endif
 		AR_LDFLAGS+=-pthread
 		AR_LDFLAGS+='-Wl,-blibpath:${INSTALLDIR}/lib:/usr/lib:/lib'
 		PATH:=${PATH}:/usr/vac/bin
@@ -359,14 +363,37 @@ ifneq (,$(filter ${DEBUGAD},YES yes y Y 1))
 	DEFINES+=-DDEBUGAD
 endif
 
-ifneq (,$(filter ${DEBUG},YES yes y Y 1))
+# Check if symbol table should be included in release
+ifeq (${uname_S},Linux)
+	ifneq ($(CHECK_CENTOS5),YES)
+		SYMBOLS_IN_RELEASE = YES
+	endif
+else ifeq (${uname_S},Darwin)
+	SYMBOLS_IN_RELEASE = YES
+else ifeq (${TARGET},winagent)
+	SYMBOLS_IN_RELEASE = YES
+endif
+
+
+ifneq (,$(SYMBOLS_IN_RELEASE))
 	OSSEC_CFLAGS+=-g
 	AR_LDFLAGS+=-g
+	CMAKE_OPTS+=-DCMAKE_SYMBOLS_IN_RELEASE=ON
+	ifeq (,$(filter ${DEBUG},YES yes y Y 1))
+		OSSEC_CFLAGS+=-DNDEBUG
+		OFLAGS+=-O2
+		AR_LDFLAGS+=-s
+	endif
 else
-	OSSEC_CFLAGS+=-DNDEBUG
-	OFLAGS+=-O2
-	AR_LDFLAGS+=-s
-endif #DEBUG
+	ifneq (,$(filter ${DEBUG},YES yes y Y 1))
+		OSSEC_CFLAGS+=-g
+		AR_LDFLAGS+=-g
+	else
+		OSSEC_CFLAGS+=-DNDEBUG
+		OFLAGS+=-O2
+		AR_LDFLAGS+=-s
+	endif
+endif
 
 OSSEC_CFLAGS+=${OFLAGS}
 OSSEC_LDFLAGS+=${OFLAGS}
@@ -1145,7 +1172,7 @@ else
 	cd $(EXTERNAL_CURL) && CPPFLAGS="-fPIC -I${ROUTE_PATH}/${EXTERNAL_OPENSSL}include" LDFLAGS="-L${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LIBS="-ldl -lpthread" ./configure --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" --disable-ldap --without-libidn2 --without-libpsl --without-brotli --without-nghttp2 --without-zstd
 endif
 else
-	cd $(EXTERNAL_CURL) && CPPFLAGS="-fPIC -I${ROUTE_PATH}/${EXTERNAL_OPENSSL}include" LDFLAGS="-L${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LIBS="-lpthread" ./configure --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" --disable-ldap --without-libidn2 --without-brotli --without-nghttp2 --without-librtmp --without-zstd
+	cd $(EXTERNAL_CURL) && CPPFLAGS="-fPIC -I${ROUTE_PATH}/${EXTERNAL_OPENSSL}include" LDFLAGS="-L${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LIBS="-lpthread" ./configure --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" --disable-ldap --without-libidn2 --without-brotli --without-nghttp2 --without-librtmp --without-zstd --without-libpsl
 endif
 endif
 
@@ -1341,7 +1368,7 @@ TAR := tar -xf
 GUNZIP := gunzip
 GZIP := gzip
 CURL := curl -so
-DEPS_VERSION = 30
+DEPS_VERSION = 35
 RESOURCES_URL_BASE := https://packages.wazuh.com/deps/
 RESOURCES_URL := $(RESOURCES_URL_BASE)$(DEPS_VERSION)
 CPYTHON := cpython
@@ -1951,7 +1978,7 @@ $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
 		ar -x libverprotectext/$$lib; \
 		mv *.o libverprotectext/; \
 	done
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc -Wl,-blibpath:/opt/freeware/lib:/usr/lib:/lib -latomic
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc -latomic
 else
 ifeq (${uname_S},HP-UX)
 $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
