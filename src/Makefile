@@ -1,7 +1,7 @@
-# Copyright (C) 2015, Verprotect Inc.
+# Copyright (C) 2015, Wazuh Inc.
 # TODO: mysql and postgresql?
 #
-# Copyright (C) 2015, Verprotect Inc.
+# Copyright (C) 2015, Wazuh Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@ uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
 
 
 ifeq (${TARGET}, winagent)
-VERPROTECT_LIB_OUTPUT_PATH := win32/
+WAZUH_LIB_OUTPUT_PATH := win32/
 STRIP_TOOL := i686-w64-mingw32-strip
 DLLTOOL := i686-w64-mingw32-dlltool
 libstdc++_path := $(shell sh -c 'i686-w64-mingw32-g++-posix --print-file-name=libstdc++-6.dll 2>/dev/null || echo not')
@@ -90,14 +90,14 @@ endif
 PG_CONFIG?=pg_config
 MY_CONFIG?=mysql_config
 PRELUDE_CONFIG?=libprelude-config
-VERPROTECT_GROUP?=verprotect
-VERPROTECT_USER?=verprotect
+WAZUH_GROUP?=verprotect
+WAZUH_USER?=verprotect
 SHARED=so
 SELINUX_MODULE=selinux/verprotect.mod
 SELINUX_ENFORCEMENT=selinux/verprotect.te
 SELINUX_POLICY=selinux/verprotect.pp
 SHARED_MODULES=shared_modules/
-VERPROTECT_MODULES=verprotect_modules/
+WAZUH_MODULES=verprotect_modules/
 DBSYNC=${SHARED_MODULES}dbsync/
 RSYNC=${SHARED_MODULES}rsync/
 SYSCOLLECTOR=verprotect_modules/syscollector/
@@ -141,7 +141,7 @@ DBSYNC_TEST=-DUNIT_TEST=ON #--coverage
 RSYNC_TEST=-DUNIT_TEST=ON #--coverage
 SYSCOLLECTOR_TEST=-DUNIT_TEST=ON #--coverage
 SYSINFO_TEST=-DUNIT_TEST=ON #--coverage
-VERPROTECT_TEST=-DUNIT_TEST=ON #--coverage
+WAZUH_TEST=-DUNIT_TEST=ON #--coverage
 endif
 ifneq (,$(filter ${DEBUG},YES yes y Y 1))
 SHARED_MODULES_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
@@ -149,7 +149,7 @@ GTEST_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
 SYSCOLLECTOR_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
 SYSINFO_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
 SYSCHECK_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
-VERPROTECT_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
+WAZUH_RELEASE_TYPE=-DCMAKE_BUILD_TYPE=Debug
 endif
 
 ifeq (${COVERITY}, YES)
@@ -171,8 +171,8 @@ ONEWAY?=no
 CLEANFULL?=no
 
 DEFINES=-DOSSECHIDS
-DEFINES+=-DUSER=\"${VERPROTECT_USER}\"
-DEFINES+=-DGROUPGLOBAL=\"${VERPROTECT_GROUP}\"
+DEFINES+=-DUSER=\"${WAZUH_USER}\"
+DEFINES+=-DGROUPGLOBAL=\"${WAZUH_GROUP}\"
 
 ifneq (${TARGET},winagent)
 		DEFINES+=-D${uname_S}
@@ -411,8 +411,8 @@ else
 endif
 
 ifeq (${TARGET},server)
-	VERPROTECT_LIBS+=-lrouter
-	VERPROTECT_LDFLAGS+=-Lbuild/shared_modules/router
+	WAZUH_LIBS+=-lrouter
+	WAZUH_LDFLAGS+=-Lbuild/shared_modules/router
 endif
 
 ifneq (,$(filter ${CLEANFULL},YES yes y Y 1))
@@ -694,11 +694,11 @@ help: failtarget
 	@echo "   make V=yes                   						Display full compiler messages. Allowed values are 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo "   make DEBUG=yes               						Build with symbols and without optimization. Allowed values are 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo "   make DEBUGAD=yes             						Enables extra debugging logging in verprotect-analysisd. Allowed values are 1, yes, YES, y and Y, otherwise, the flag is ignored"
-	@echo "   make INSTALLDIR=/path        						Verprotect's installation path. Mandatory when compiling the python interpreter from sources using PYTHON_SOURCE."
+	@echo "   make INSTALLDIR=/path        						Wazuh's installation path. Mandatory when compiling the python interpreter from sources using PYTHON_SOURCE."
 	@echo "   make ONEWAY=yes              						Disables manager's ACK towards agent. It allows connecting agents without backward connection from manager. Allowed values are 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo "   make CLEANFULL=yes           						Makes the alert mailing subject clear in the format: '<location> - <level> - <description>'. Allowed values are 1, yes, YES, y and Y, otherwise, the flag is ignored"
-	@echo "   make RESOURCES_URL           						Set the Verprotect resources URL"
-	@echo "   make EXTERNAL_SRC_ONLY=yes   						Combined with 'deps', it downloads only the external source code to be compiled as part of Verprotect building."
+	@echo "   make RESOURCES_URL           						Set the Wazuh resources URL"
+	@echo "   make EXTERNAL_SRC_ONLY=yes   						Combined with 'deps', it downloads only the external source code to be compiled as part of Wazuh building."
 	@echo "   make USE_ZEROMQ=yes          						Build with zeromq support. Allowed values are auto, 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo "   make USE_PRELUDE=yes         						Build with prelude support. Allowed values are auto, 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo "   make USE_INOTIFY=yes         						Build with inotify support. Allowed values are auto, 1, yes, YES, y and Y, otherwise, the flag is ignored"
@@ -726,8 +726,8 @@ help: failtarget
 	@echo "   make USE_GEOIP=yes           Build with GeoIP support. Allowed values are auto 1, yes, YES, y and Y, otherwise, the flag is ignored"
 	@echo
 	@echo "User options: "
-	@echo "   make VERPROTECT_GROUP=verprotect       Set verprotect group"
-	@echo "   make VERPROTECT_USER=verprotect        Set verprotect user"
+	@echo "   make WAZUH_GROUP=verprotect       Set verprotect group"
+	@echo "   make WAZUH_USER=verprotect        Set verprotect user"
 	@echo
 	@echo "Examples: Client with debugging enabled"
 	@echo "   make TARGET=agent DEBUG=yes"
@@ -748,8 +748,8 @@ settings:
 	@echo "    EXTERNAL_SRC_ONLY:  ${EXTERNAL_SRC_ONLY}"
 	@echo "    HTTP_REQUEST_BRANCH:${HTTP_REQUEST_BRANCH}"
 	@echo "User settings:"
-	@echo "    VERPROTECT_GROUP:        ${VERPROTECT_GROUP}"
-	@echo "    VERPROTECT_USER:         ${VERPROTECT_USER}"
+	@echo "    WAZUH_GROUP:        ${WAZUH_GROUP}"
+	@echo "    WAZUH_USER:         ${WAZUH_USER}"
 	@echo "USE settings:"
 	@echo "    USE_ZEROMQ:         ${USE_ZEROMQ}"
 	@echo "    USE_GEOIP:          ${USE_GEOIP}"
@@ -819,13 +819,13 @@ BUILD_CMAKE_PROJECTS+=build_syscollector
 endif
 endif
 
-${VERPROTECT_LIB_OUTPUT_PATH}${LIBSTDCPP_NAME}: ${libstdc++_path}
+${WAZUH_LIB_OUTPUT_PATH}${LIBSTDCPP_NAME}: ${libstdc++_path}
 	cp $< $@
 ifneq (${uname_S},AIX)
 	${STRIP_TOOL} -x $@
 endif
 
-${VERPROTECT_LIB_OUTPUT_PATH}${LIBGCC_S_NAME}: ${libgcc_s_path}
+${WAZUH_LIB_OUTPUT_PATH}${LIBGCC_S_NAME}: ${libgcc_s_path}
 	cp $< $@
 ifneq (${uname_S},AIX)
 	${STRIP_TOOL} -x $@
@@ -882,8 +882,8 @@ ifeq (${MAKECMDGOALS},winagent)
 $(error Do not use 'winagent' directly, use 'TARGET=winagent')
 endif
 .PHONY: winagent
-winagent: external win32/libwinpthread-1.dll win32/libwinpthreadpatched.a ${VERPROTECT_LIB_OUTPUT_PATH}${LIBGCC_S_NAME} ${VERPROTECT_LIB_OUTPUT_PATH}${LIBSTDCPP_NAME} win32/version-dll.o win32/version-app.o
-	${MAKE} ${VERPROTECTEXT_LIB} CFLAGS="-DCLIENT -D_POSIX_C_SOURCE -DWIN32 -DPSAPI_VERSION=1" LIBS="-lwsock32 -lws2_32 -lcrypt32"
+winagent: external win32/libwinpthread-1.dll win32/libwinpthreadpatched.a ${WAZUH_LIB_OUTPUT_PATH}${LIBGCC_S_NAME} ${WAZUH_LIB_OUTPUT_PATH}${LIBSTDCPP_NAME} win32/version-dll.o win32/version-app.o
+	${MAKE} ${WAZUHEXT_LIB} CFLAGS="-DCLIENT -D_POSIX_C_SOURCE -DWIN32 -DPSAPI_VERSION=1" LIBS="-lwsock32 -lws2_32 -lcrypt32"
 	${MAKE} ${WINDOWS_LIBS} CFLAGS="-DCLIENT -D_POSIX_C_SOURCE -DWIN32 -DPSAPI_VERSION=1"
 	${MAKE} ${WINDOWS_BINS} CFLAGS="-DCLIENT -D_POSIX_C_SOURCE -DWIN32 -DPSAPI_VERSION=1" LIBS="-lwsock32 -lwevtapi -lshlwapi -lcomctl32 -ladvapi32 -lkernel32 -lpsapi -lgdi32 -liphlpapi -lws2_32 -lcrypt32 -lwintrust"
 	${MAKE} ${WINDOWS_ACTIVE_RESPONSES} CFLAGS="-DCLIENT -D_POSIX_C_SOURCE -DWIN32 -DPSAPI_VERSION=1" LIBS="-lwsock32 -lwevtapi -lshlwapi -lcomctl32 -ladvapi32 -lkernel32 -lpsapi -lgdi32 -liphlpapi -lws2_32 -lcrypt32 -lwintrust"
@@ -896,20 +896,20 @@ winagent: external win32/libwinpthread-1.dll win32/libwinpthreadpatched.a ${VERP
 	cd win32/ && ./unix2dos.pl ../REVISION > REVISION
 	cd win32/ && makensis verprotect-installer.nsi
 
-win32/shared_modules: $(VERPROTECTEXT_LIB)
+win32/shared_modules: $(WAZUHEXT_LIB)
 	cd ${DBSYNC} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${DBSYNC_TEST} ${SHARED_MODULES_RELEASE_TYPE} ${WIN_RESOURCE_OBJ} .. && ${MAKE}
 	cd ${RSYNC} &&  mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${RSYNC_TEST} ${SHARED_MODULES_RELEASE_TYPE} ${WIN_RESOURCE_OBJ} .. && ${MAKE}
 
 #### Sysinfo ##
 
-win32/sysinfo: $(VERPROTECTEXT_LIB) win32/version-dll.o
+win32/sysinfo: $(WAZUHEXT_LIB) win32/version-dll.o
 	cd ${SYSINFO} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${SYSINFO_OS} ${SYSINFO_TEST} ${SYSINFO_RELEASE_TYPE} ${WIN_RESOURCE_OBJ} .. && ${MAKE}
 
 #### Syscollector ##
 win32/syscollector: win32/shared_modules win32/sysinfo win32/version-dll.o
 	cd ${SYSCOLLECTOR} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${SYSCOLLECTOR_TEST} ${SYSCOLLECTOR_RELEASE_TYPE} ${WIN_RESOURCE_OBJ} .. && ${MAKE}
 
-win32/syscheck: win32/shared_modules $(VERPROTECTEXT_LIB)
+win32/syscheck: win32/shared_modules $(WAZUHEXT_LIB)
 	cd ${SYSCHECK} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${SYSCHECK_TEST} ${SYSCHECK_RELEASE_TYPE} ${WIN_RESOURCE_OBJ} .. && ${MAKE}
 
 win32/libwinpthread-1.dll: ${WIN_PTHREAD_LIB}
@@ -1556,18 +1556,18 @@ shared_modules/http-request.tar.gz:
 ####################
 ifeq (${TARGET}, winagent)
 # libverprotectext
-VERPROTECTEXT_DLL = libverprotectext.$(SHARED)
-VERPROTECTEXT_LIB = libverprotectext.lib
-VERPROTECTEXT_LIB_DEF = libverprotectext.def
+WAZUHEXT_DLL = libverprotectext.$(SHARED)
+WAZUHEXT_LIB = libverprotectext.lib
+WAZUHEXT_LIB_DEF = libverprotectext.def
 # libverprotectshared
-VERPROTECT_DLL = libverprotectshared.$(SHARED)
-VERPROTECT_LIB = libverprotectshared.lib
-VERPROTECT_DEF = libverprotectshared.def
+WAZUH_DLL = libverprotectshared.$(SHARED)
+WAZUH_LIB = libverprotectshared.lib
+WAZUH_DEF = libverprotectshared.def
 else
-VERPROTECTEXT_LIB = libverprotectext.$(SHARED)
-VERPROTECT_LIB = libverprotectshared.$(SHARED)
+WAZUHEXT_LIB = libverprotectext.$(SHARED)
+WAZUH_LIB = libverprotectshared.$(SHARED)
 endif
-BUILD_LIBS = libverprotect.a $(VERPROTECTEXT_LIB)
+BUILD_LIBS = libverprotect.a $(WAZUHEXT_LIB)
 
 $(BUILD_SERVER) $(BUILD_AGENT) $(WINDOWS_BINS) $(WINDOWS_BINS): $(BUILD_LIBS)
 
@@ -1782,7 +1782,7 @@ shared/debug_op_proc.o: shared/debug_op.c
 shared/file_op_proc.o: shared/file_op.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} -fPIC -DCLIENT -DARGV0=\"verprotect-remoted\" -c $^ -o $@
 
-#### Verprotect DB ####
+#### Wazuh DB ####
 
 wdb_sql := $(wildcard verprotect_db/*.sql)
 wdblib_c := $(wildcard verprotect_db/wdb*.c)
@@ -1798,7 +1798,7 @@ verprotect_db/%.o: verprotect_db/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} -DARGV0=\"verprotect-db\" -c $^ -o $@
 
 verprotect-db: ${wdb_o}
-	${OSSEC_CCBIN} ${OSSEC_LDFLAGS} ${VERPROTECT_LDFLAGS} $^ ${OSSEC_LIBS} ${VERPROTECT_LIBS} -o $@
+	${OSSEC_CCBIN} ${OSSEC_LDFLAGS} ${WAZUH_LDFLAGS} $^ ${OSSEC_LIBS} ${WAZUH_LIBS} -o $@
 
 #### Config ##########
 
@@ -1808,12 +1808,12 @@ config_o := $(config_c:.c=.o)
 config/%.o: config/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS} -c $^ -o $@
 
-build_shared_modules: $(VERPROTECTEXT_LIB)
+build_shared_modules: $(WAZUHEXT_LIB)
 	cd ${DBSYNC} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${DBSYNC_TEST} ${SHARED_MODULES_RELEASE_TYPE} .. && ${MAKE}
 	cd ${RSYNC} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${RSYNC_TEST} ${SOLARIS_CMAKE_OPTS} ${SHARED_MODULES_RELEASE_TYPE} .. && ${MAKE}
 
 #### Sysinfo ##
-build_sysinfo: $(VERPROTECTEXT_LIB)
+build_sysinfo: $(WAZUHEXT_LIB)
 	cd ${SYSINFO} && mkdir -p build && cd build && cmake ${CMAKE_OPTS} ${SYSINFO_OS} ${SYSINFO_TEST} ${SYSINFO_RELEASE_TYPE} .. && ${MAKE}
 
 #### Syscollector ##
@@ -1822,11 +1822,11 @@ build_syscollector: build_shared_modules build_sysinfo
 	cd ${SYSCOLLECTOR} && mkdir -p build && cd build && cmake -DTARGET=${TARGET} ${CMAKE_OPTS} ${SOLARIS_CMAKE_OPTS} ${SYSCOLLECTOR_TEST} ${SYSCOLLECTOR_RELEASE_TYPE} .. && ${MAKE}
 endif
 
-#### Verprotect cmake ###
-build_verprotect_cmake: $(VERPROTECTEXT_LIB) $(EXTERNAL_LIBS_NO_WHOLE) build_syscollector
-	mkdir -p build && cd build && cmake .. -DTARGET=${TARGET} ${CMAKE_OPTS} ${VERPROTECT_RELEASE_TYPE} ${VERPROTECT_TEST} && ${MAKE}
+#### Wazuh cmake ###
+build_verprotect_cmake: $(WAZUHEXT_LIB) $(EXTERNAL_LIBS_NO_WHOLE) build_syscollector
+	mkdir -p build && cd build && cmake .. -DTARGET=${TARGET} ${CMAKE_OPTS} ${WAZUH_RELEASE_TYPE} ${WAZUH_TEST} && ${MAKE}
 
-#### Verprotect modules ##
+#### Wazuh modules ##
 wmodules_c := $(wildcard verprotect_modules/wm*.c) $(wildcard verprotect_modules/agent_upgrade/*.c)
 
 ifeq (${TARGET},agent)
@@ -1942,17 +1942,17 @@ libverprotect.a: ${config_o} ${wmodules_dep} ${crypto_o} ${shared_o} ${os_net_o}
 ### libverprotectext #########
 
 ifeq (${uname_S},Darwin)
-VERPROTECT_SHFLAGS=-install_name @rpath/libverprotectext.$(SHARED)
+WAZUH_SHFLAGS=-install_name @rpath/libverprotectext.$(SHARED)
 
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(VERPROTECT_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(WAZUH_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
 else
 ifeq (${TARGET}, winagent)
-$(VERPROTECTEXT_LIB): $(VERPROTECTEXT_DLL) $(VERPROTECTEXT_LIB_DEF)
-	$(DLLTOOL) -D $(VERPROTECTEXT_DLL) --def $(VERPROTECTEXT_LIB_DEF) --output-delaylib $@
+$(WAZUHEXT_LIB): $(WAZUHEXT_DLL) $(WAZUHEXT_LIB_DEF)
+	$(DLLTOOL) -D $(WAZUHEXT_DLL) --def $(WAZUHEXT_LIB_DEF) --output-delaylib $@
 
-$(VERPROTECTEXT_DLL) $(VERPROTECTEXT_LIB_DEF): $(EXTERNAL_LIBS) win32/version-dll.o
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $(VERPROTECTEXT_DLL) -static-libgcc -Wl,--export-all-symbols -Wl,--add-stdcall-alias -Wl,--whole-archive $^ -Wl,--no-whole-archive -Wl,--output-def,$(VERPROTECTEXT_LIB_DEF) ${OSSEC_LIBS}
+$(WAZUHEXT_DLL) $(WAZUHEXT_LIB_DEF): $(EXTERNAL_LIBS) win32/version-dll.o
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $(WAZUHEXT_DLL) -static-libgcc -Wl,--export-all-symbols -Wl,--add-stdcall-alias -Wl,--whole-archive $^ -Wl,--no-whole-archive -Wl,--output-def,$(WAZUHEXT_LIB_DEF) ${OSSEC_LIBS}
 
 
 else
@@ -1963,15 +1963,15 @@ else
 LIBGCC_FLAGS := -Wl,-rpath,\$$ORIGIN
 endif
 ifeq (${uname_P},sparc)
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -mimpure-text -o $@ $(LIBGCC_FLAGS) -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 else
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $@ $(LIBGCC_FLAGS) -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 endif
 else
 ifeq (${uname_S},AIX)
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
 	mkdir -p libverprotectext;
 	find external/ -name \*.a -exec cp {} libverprotectext/ \;
 	for lib in libcjson.a libz.a libmsgpack.a libssl.a libcrypto.a libsqlite3.a libyaml.a libpcre2-8.a ; do \
@@ -1981,7 +1981,7 @@ $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc -latomic
 else
 ifeq (${uname_S},HP-UX)
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
 	mkdir -p libverprotectext;
 	find external/ -name \*.a -exec cp {} libverprotectext/ \;
 	for lib in libcjson.a libz.a libmsgpack.a libssl.a libcrypto.a libsqlite3.a libyaml.a libpcre2-8.a ; do \
@@ -1990,7 +1990,7 @@ $(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
 	done
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) libverprotectext/*.o -o $@ -static-libgcc
 else
-$(VERPROTECTEXT_LIB): $(EXTERNAL_LIBS)
+$(WAZUHEXT_LIB): $(EXTERNAL_LIBS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $@ -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 endif
 endif
@@ -2080,7 +2080,7 @@ remoted/%.o: remoted/%.c
 	${OSSEC_CC} ${OSSEC_CFLAGS}  -DPORTABLE_UNALIGNED_ACCESS=0 -I./remoted -DARGV0=\"verprotect-remoted\" -c $^ -o $@
 
 verprotect-remoted: ${remoted_o}
-	${OSSEC_CCBIN} ${OSSEC_LDFLAGS} ${VERPROTECT_LDFLAGS} $^ ${OSSEC_LIBS} ${VERPROTECT_LIBS} -o $@
+	${OSSEC_CCBIN} ${OSSEC_LDFLAGS} ${WAZUH_LDFLAGS} $^ ${OSSEC_LIBS} ${WAZUH_LIBS} -o $@
 
 #### verprotect-agentd ####
 
@@ -2109,7 +2109,7 @@ manage_agents: ${addagent_o}
 
 active_response_programs = default-firewall-drop pf npf ipfw firewalld-drop disable-account host-deny ip-customblock restart-verprotect route-null kaspersky verprotect-slack
 
-$(active_response_programs): ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
+$(active_response_programs): ${WAZUH_LIB} ${WAZUHEXT_LIB}
 
 # Minimal dependencies for building active responses programs
 AR_PROGRAMS_DEPS = os_regex/os_regex.o os_regex/os_regex_compile.o os_regex/os_match_free_pattern.o os_regex/os_regex_maps.o os_regex/os_regex_execute.o os_regex/os_regex_free_pattern.o os_regex/os_match_execute.o os_regex/os_match_compile.o shared/expression.o shared/randombytes.o shared/validate_op.o shared/regex_op.o shared/string_op.o shared/exec_op.o shared/file_op_proc.o shared/debug_op_proc.o shared/time_op.o shared/privsep_op.o shared/version_op.o shared/binaries_op.o os_xml/os_xml.o os_xml/os_xml_access.o os_regex/os_regex_strbreak.o os_net/os_net.o
@@ -2174,17 +2174,17 @@ verprotect-slack: active-response/verprotect-slack.o active-response/active_resp
 ### libverprotectshared.so #########
 
 ifeq (${uname_S},Darwin)
-VERPROTECT_SHARED_SHFLAGS=-install_name @rpath/libverprotectshared.$(SHARED)
+WAZUH_SHARED_SHFLAGS=-install_name @rpath/libverprotectshared.$(SHARED)
 
-$(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(VERPROTECT_SHARED_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
+$(WAZUH_LIB): $(WAZUHEXT_LIB) $(AR_PROGRAMS_DEPS)
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $(WAZUH_SHARED_SHFLAGS) -o $@ -Wl,-all_load $^ $(OSSEC_LIBS)
 else
 ifeq (${TARGET}, winagent)
-$(VERPROTECT_DLL) $(VERPROTECT_DEF) : $(VERPROTECTEXT_DLL) $(AR_PROGRAMS_DEPS) win32/version-dll.o
-	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -UOSSECHIDS -o $(VERPROTECT_DLL) -static-libgcc -Wl,--export-all-symbols -Wl,--add-stdcall-alias -Wl,--whole-archive $^ -Wl,--no-whole-archive -Wl,--output-def,$(VERPROTECT_DEF) ${OSSEC_LIBS}
+$(WAZUH_DLL) $(WAZUH_DEF) : $(WAZUHEXT_DLL) $(AR_PROGRAMS_DEPS) win32/version-dll.o
+	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -UOSSECHIDS -o $(WAZUH_DLL) -static-libgcc -Wl,--export-all-symbols -Wl,--add-stdcall-alias -Wl,--whole-archive $^ -Wl,--no-whole-archive -Wl,--output-def,$(WAZUH_DEF) ${OSSEC_LIBS}
 
-$(VERPROTECT_LIB): $(VERPROTECT_DLL) $(VERPROTECT_DEF)
-	$(DLLTOOL)  -D $(VERPROTECT_DLL) --def $(VERPROTECT_DEF) --output-delaylib $@
+$(WAZUH_LIB): $(WAZUH_DLL) $(WAZUH_DEF)
+	$(DLLTOOL)  -D $(WAZUH_DLL) --def $(WAZUH_DEF) --output-delaylib $@
 
 
 else
@@ -2195,18 +2195,18 @@ else
 LIBGCC_FLAGS := -Wl,-rpath,\$$ORIGIN
 endif
 ifeq (${uname_P},sparc)
-$(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
+$(WAZUH_LIB): $(WAZUHEXT_LIB) $(AR_PROGRAMS_DEPS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -mimpure-text -o $@ $(LIBGCC_FLAGS) -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 else
-$(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
+$(WAZUH_LIB): $(WAZUHEXT_LIB) $(AR_PROGRAMS_DEPS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $@ $(LIBGCC_FLAGS) -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 endif
 else
 ifneq (,$(filter ${uname_S},AIX HP-UX))
-$(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
+$(WAZUH_LIB): $(WAZUHEXT_LIB) $(AR_PROGRAMS_DEPS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) $^ ${OSSEC_LIBS} -o $@ -static-libgcc
 else
-$(VERPROTECT_LIB): $(VERPROTECTEXT_LIB) $(AR_PROGRAMS_DEPS)
+$(WAZUH_LIB): $(WAZUHEXT_LIB) $(AR_PROGRAMS_DEPS)
 	$(OSSEC_SHARED) $(OSSEC_CFLAGS) -o $@ -Wl,--whole-archive $^ -Wl,--no-whole-archive ${OSSEC_LIBS}
 endif
 endif
@@ -2262,7 +2262,7 @@ librootcheck.a: ${rootcheck_o_lib}
 
 #### FIM ######
 
-verprotect-syscheckd: librootcheck.a libverprotect.a ${VERPROTECTEXT_LIB} build_shared_modules
+verprotect-syscheckd: librootcheck.a libverprotect.a ${WAZUHEXT_LIB} build_shared_modules
 	cd syscheckd && mkdir -p build && cd build && cmake ${CMAKE_OPTS} -DCMAKE_C_FLAGS="${DEFINES} -pipe -Wall -Wextra -std=gnu99" ${SYSCHECK_TEST} ${SYSCHECK_RELEASE_TYPE} .. && ${MAKE}
 
 #### Monitor #######
@@ -2455,14 +2455,14 @@ ifeq (,${INSTALLDIR})
 endif
 
 ifeq (,$(wildcard ${EXTERNAL_CPYTHON}/python))
-	export WPATH_LIB="'\$$\$$ORIGIN/../../../lib'" && export SOURCE_PATH=${ROUTE_PATH} && export VERPROTECT_FFI_PATH=${EXTERNAL_LIBFFI} && export LD_LIBRARY_PATH=${ROUTE_PATH} && cd ${EXTERNAL_CPYTHON} && ./configure --prefix="${WPYTHON_DIR}" --libdir="${WPYTHON_DIR}/lib" --enable-shared --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LDFLAGS="${ARCH_FLAGS} -L${ROUTE_PATH} -lverprotectext -Wl,-rpath,'\$$\$$ORIGIN/../../../lib',--disable-new-dtags" CPPFLAGS="-I${ROUTE_PATH}/${EXTERNAL_OPENSSL}" $(CPYTHON_FLAGS) && ${MAKE}
+	export WPATH_LIB="'\$$\$$ORIGIN/../../../lib'" && export SOURCE_PATH=${ROUTE_PATH} && export WAZUH_FFI_PATH=${EXTERNAL_LIBFFI} && export LD_LIBRARY_PATH=${ROUTE_PATH} && cd ${EXTERNAL_CPYTHON} && ./configure --prefix="${WPYTHON_DIR}" --libdir="${WPYTHON_DIR}/lib" --enable-shared --with-openssl="${ROUTE_PATH}/${EXTERNAL_OPENSSL}" LDFLAGS="${ARCH_FLAGS} -L${ROUTE_PATH} -lverprotectext -Wl,-rpath,'\$$\$$ORIGIN/../../../lib',--disable-new-dtags" CPPFLAGS="-I${ROUTE_PATH}/${EXTERNAL_OPENSSL}" $(CPYTHON_FLAGS) && ${MAKE}
 endif
 
-build_python: $(VERPROTECTEXT_LIB)
+build_python: $(WAZUHEXT_LIB)
 
 install_python:
 ifneq (,$(wildcard ${EXTERNAL_CPYTHON}))
-	cd ${EXTERNAL_CPYTHON} && export WPATH_LIB=${INSTALLDIR}/lib && export SOURCE_PATH=${ROUTE_PATH} && export VERPROTECT_FFI_PATH=${EXTERNAL_LIBFFI} && ${MAKE} install
+	cd ${EXTERNAL_CPYTHON} && export WPATH_LIB=${INSTALLDIR}/lib && export SOURCE_PATH=${ROUTE_PATH} && export WAZUH_FFI_PATH=${EXTERNAL_LIBFFI} && ${MAKE} install
 else
 	mkdir -p ${WPYTHON_DIR}
 	cp external/${WPYTHON_TAR} ${WPYTHON_DIR}/${WPYTHON_TAR} && ${TAR} ${WPYTHON_DIR}/${WPYTHON_TAR} -C ${WPYTHON_DIR} && rm -rf ${WPYTHON_DIR}/${WPYTHON_TAR}
@@ -2479,7 +2479,7 @@ endif
 
 install_framework: install_python
 	cd ../framework && ${WPYTHON_DIR}/bin/python3 -m pip install . --use-pep517 --prefix=${WPYTHON_DIR} && rm -rf build/
-	chown -R root:${VERPROTECT_GROUP} ${WPYTHON_DIR}
+	chown -R root:${WAZUH_GROUP} ${WPYTHON_DIR}
 	chmod -R o=- ${WPYTHON_DIR}
 
 install_api: install_python
@@ -2491,7 +2491,7 @@ install_mitre: install_python
 ####################
 #### test ##########
 ####################
-CFLAGS_TEST=-g -O0 --coverage -DVERPROTECT_UNIT_TESTING
+CFLAGS_TEST=-g -O0 --coverage -DWAZUH_UNIT_TESTING
 # Use sanitizers only on linux
 ifneq (${TARGET},winagent)
 ifeq (${uname_S},Linux)
@@ -2685,13 +2685,13 @@ win32/os_win32ui.exe: win32/ui_resource.o win32/version-app.o win32/win_service_
 win32/agent-auth.exe: win32/auth_resource.o win32/version-app.o win32/win_service_rk.o os_auth/main-client.o os_auth/ssl.o os_auth/check_cert.o addagent/validate.o
 	${OSSEC_CCBIN} -DARGV0=\"agent-auth\" -DOSSECHIDS ${OSSEC_LDFLAGS} $^ ${OSSEC_LIBS} -lshlwapi -lwsock32 -lsecur32 -lws2_32 -flto -o $@
 
-win32/restart-verprotect.exe: win32/restart_verprotect_resource.o win32/version-app.o active-response/active_responses.o active-response/restart-verprotect.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
+win32/restart-verprotect.exe: win32/restart_verprotect_resource.o win32/version-app.o active-response/active_responses.o active-response/restart-verprotect.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${WAZUH_LIB} ${WAZUHEXT_LIB}
 	${OSSEC_CCBIN} -DARGV0=\"restart-verprotect\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
 
-win32/route-null.exe: win32/route_null_resource.o win32/version-app.o active-response/active_responses.o active-response/route-null.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
+win32/route-null.exe: win32/route_null_resource.o win32/version-app.o active-response/active_responses.o active-response/route-null.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${WAZUH_LIB} ${WAZUHEXT_LIB}
 	${OSSEC_CCBIN} -DARGV0=\"route-null\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
 
-win32/netsh.exe: win32/netsh_resource.o win32/version-app.o active-response/active_responses.o active-response/netsh.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${VERPROTECT_LIB} ${VERPROTECTEXT_LIB}
+win32/netsh.exe: win32/netsh_resource.o win32/version-app.o active-response/active_responses.o active-response/netsh.o shared/cryptography.o shared/dll_load_notify.o shared/debug_op_proc.o shared/time_op.o shared/file_op_proc.o ${WAZUH_LIB} ${WAZUHEXT_LIB}
 	${OSSEC_CCBIN} -DARGV0=\"netsh\" ${AR_LDFLAGS} $^ -lwintrust -lpsapi -lcrypt32 -lshlwapi -o $@
 
 
@@ -2793,7 +2793,7 @@ clean-internals: clean-unit-tests
 	rm -f verprotect_db/helpers/*.o
 	rm -f ${SELINUX_MODULE}
 	rm -f ${SELINUX_POLICY}
-	rm -f $(VERPROTECT_LIB)
+	rm -f $(WAZUH_LIB)
 	rm -rf $(DBSYNC)build
 	rm -rf $(RSYNC)build
 	rm -rf $(SYSCOLLECTOR)build
