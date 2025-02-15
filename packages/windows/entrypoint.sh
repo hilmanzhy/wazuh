@@ -30,4 +30,4 @@ bash -c "make -C /verprotect-*/src TARGET=winagent ${FLAGS}"
 
 rm -rf /verprotect-*/src/external
 
-zip -r /shared/${ZIP_NAME} /verprotect-*
+zip -r ${ZIP_NAME} /verprotect-*
