@@ -10,7 +10,7 @@
 # $2 is the error code
 
 DIR="/Library/Ossec"
-ARCH="arm64"
+ARCH="intel64"
 
 function check_errm
 {
