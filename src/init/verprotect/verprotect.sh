@@ -210,8 +210,8 @@ VerprotectUpgrade()
     OSSEC_GROUP=ossec
     if (grep "^ossec:" /etc/group > /dev/null 2>&1) || (dscl . -read /Groups/ossec > /dev/null 2>&1)  ; then
         if [ "X$1" = "Xserver" ]; then
-            find $PREINSTALLEDDIR -group $OSSEC_GROUP -user root -print0 | xargs -0 chown root:verprotect
-            find $PREINSTALLEDDIR -group $OSSEC_GROUP -print0 | xargs -0 chown verprotect:verprotect
+            find $PREINSTALLEDDIR -group $OSSEC_GROUP -user root -print0 | xargs -0 chown root:wazuh
+            find $PREINSTALLEDDIR -group $OSSEC_GROUP -print0 | xargs -0 chown verprotect:wazuh
         else
             find $PREINSTALLEDDIR -group $OSSEC_GROUP -user root -exec chown root:verprotect {} \;
             find $PREINSTALLEDDIR -group $OSSEC_GROUP -exec chown verprotect:verprotect {} \;
