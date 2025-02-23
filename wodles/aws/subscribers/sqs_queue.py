@@ -11,13 +11,13 @@ import s3_log_handler
 import sqs_message_processor
 
 sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 
 sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
 import aws_tools
 
 
-class AWSSQSQueue(wazuh_integration.WazuhIntegration):
+class AWSSQSQueue(verprotect_integration.WazuhIntegration):
     """Class for getting AWS SQS Queue notifications.
 
     Attributes
@@ -46,7 +46,7 @@ class AWSSQSQueue(wazuh_integration.WazuhIntegration):
                  sts_endpoint=None, service_endpoint=None, skip_on_error=False,
                  **kwargs):
         self.sqs_name = name
-        wazuh_integration.WazuhIntegration.__init__(self, access_key=None, secret_key=None,
+        verprotect_integration.WazuhIntegration.__init__(self, access_key=None, secret_key=None,
                                                     iam_role_arn=iam_role_arn,
                                                     profile=profile, external_id=external_id, service_name='sqs',
                                                     sts_endpoint=sts_endpoint, skip_on_error=skip_on_error,

@@ -19,7 +19,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '.'))
 import aws_utils as utils
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 import aws_tools
 
 TEST_METADATA_SCHEMA = "schema_metadata_test.sql"
@@ -35,7 +35,7 @@ def test_wazuh_integration_initializes_properly(mock_version, mock_path, mock_cl
     """Test if the instances of WazuhIntegration are created properly."""
 
     args = utils.get_wazuh_integration_parameters()
-    integration = wazuh_integration.WazuhIntegration(**args)
+    integration = verprotect_integration.WazuhIntegration(**args)
     mock_path.assert_called_once()
     mock_version.assert_called_once()
     assert integration.wazuh_path == utils.TEST_WAZUH_PATH
@@ -82,7 +82,7 @@ def test_default_config(mock_boto_config, file_exists, options, retry_attempts, 
                 mock_config.options(profile).return_value = options
                 profile_config = {option: mock_config.get(profile, option) for option in mock_config.options(profile)}
 
-                config = wazuh_integration.WazuhIntegration.default_config(profile=utils.TEST_AWS_PROFILE)
+                config = verprotect_integration.WazuhIntegration.default_config(profile=utils.TEST_AWS_PROFILE)
 
             if aws_tools.RETRY_ATTEMPTS_KEY in profile_config or aws_tools.RETRY_MODE_CONFIG_KEY in profile_config:
                 retries = {
@@ -90,16 +90,16 @@ def test_default_config(mock_boto_config, file_exists, options, retry_attempts, 
                         aws_tools.RETRY_MODE_BOTO_KEY: retry_mode
                     }
             else:
-                retries = wazuh_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION
+                retries = verprotect_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION
 
             assert config['config'].retries == retries
         else:
-            config = wazuh_integration.WazuhIntegration.default_config(profile=utils.TEST_AWS_PROFILE)
+            config = verprotect_integration.WazuhIntegration.default_config(profile=utils.TEST_AWS_PROFILE)
 
-            mock_boto_config.Config.assert_called_with(retries=wazuh_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION)
+            mock_boto_config.Config.assert_called_with(retries=verprotect_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION)
             assert 'config' in config
             assert config['config'] == mock_boto_config.Config(
-                retries=wazuh_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION)
+                retries=verprotect_integration.WAZUH_DEFAULT_RETRY_CONFIGURATION)
 
 
 @pytest.mark.parametrize('access_key, secret_key, profile', [
@@ -109,8 +109,8 @@ def test_default_config(mock_boto_config, file_exists, options, retry_attempts, 
     (None, None, utils.TEST_AWS_PROFILE),
     (None, None, utils.TEST_AWS_PROFILE),
 ])
-@pytest.mark.parametrize('region', list(wazuh_integration.DEFAULT_GOV_REGIONS) + ['us-east-1', None])
-@pytest.mark.parametrize('service_name', list(wazuh_integration.SERVICES_REQUIRING_REGION) + ['other'])
+@pytest.mark.parametrize('region', list(verprotect_integration.DEFAULT_GOV_REGIONS) + ['us-east-1', None])
+@pytest.mark.parametrize('service_name', list(verprotect_integration.SERVICES_REQUIRING_REGION) + ['other'])
 def test_wazuh_integration_get_client_authentication(access_key, secret_key, profile, region, service_name):
     """Test `get_client` function uses the different authentication parameters properly.
 
@@ -138,15 +138,15 @@ def test_wazuh_integration_get_client_authentication(access_key, secret_key, pro
         expected_conn_args['profile_name'] = profile
     expected_conn_args['region_name'] = None
 
-    if region and service_name in wazuh_integration.SERVICES_REQUIRING_REGION:
+    if region and service_name in verprotect_integration.SERVICES_REQUIRING_REGION:
         expected_conn_args['region_name'] = region
     else:
-        expected_conn_args['region_name'] = region if region in wazuh_integration.DEFAULT_GOV_REGIONS else None
+        expected_conn_args['region_name'] = region if region in verprotect_integration.DEFAULT_GOV_REGIONS else None
 
     with patch('wazuh_integration.utils.find_wazuh_path', return_value=utils.TEST_WAZUH_PATH), \
             patch('wazuh_integration.utils.get_wazuh_version', return_value=utils.WAZUH_VERSION), \
             patch('wazuh_integration.boto3.Session') as mock_boto:
-        wazuh_integration.WazuhIntegration(**kwargs)
+        verprotect_integration.WazuhIntegration(**kwargs)
         mock_boto.assert_called_with(**expected_conn_args)
 
 
@@ -192,7 +192,7 @@ def test_wazuh_integration_get_client(iam_role_arn, service_name, external_id):
     with patch('wazuh_integration.utils.find_wazuh_path', return_value=utils.TEST_WAZUH_PATH), \
             patch('wazuh_integration.utils.get_wazuh_version', return_value=utils.WAZUH_VERSION), \
             patch('wazuh_integration.boto3.Session', side_effect=[mock_boto_session, mock_sts_session]) as mock_session:
-        instance = wazuh_integration.WazuhIntegration(**kwargs)
+        instance = verprotect_integration.WazuhIntegration(**kwargs)
 
         if iam_role_arn:
             mock_session.assert_has_calls([call(**conn_kwargs), call(**sts_kwargs)])
@@ -212,14 +212,14 @@ def test_wazuh_integration_get_client(iam_role_arn, service_name, external_id):
 def test_wazuh_integration_get_client_handles_exceptions_on_botocore_error():
     """Test `get_client` function handles exceptions as expected."""
     mock_boto_session = MagicMock()
-    mock_boto_session.client.side_effect = wazuh_integration.exceptions.ClientError({'Error': {'Code': 1}},
+    mock_boto_session.client.side_effect = verprotect_integration.exceptions.ClientError({'Error': {'Code': 1}},
                                                                                              'operation')
 
     with patch('wazuh_integration.utils.find_wazuh_path', return_value=utils.TEST_WAZUH_PATH), \
             patch('wazuh_integration.utils.get_wazuh_version', return_value=utils.WAZUH_VERSION), \
             patch('wazuh_integration.boto3.Session', return_value=mock_boto_session):
         with pytest.raises(SystemExit) as e:
-            wazuh_integration.WazuhIntegration(**utils.get_wazuh_integration_parameters())
+            verprotect_integration.WazuhIntegration(**utils.get_wazuh_integration_parameters())
         assert e.value.code == utils.INVALID_CREDENTIALS_ERROR_CODE
 
 
@@ -263,7 +263,7 @@ def test_wazuh_integration_get_sts_client(access_key, secret_key, profile):
 def test_wazuh_integration_get_sts_client_handles_exceptions_when_invalid_creds_provided():
     """Test `get_sts_client` function handles invalid credentials exception as expected."""
     mock_boto_session = MagicMock()
-    mock_boto_session.client.side_effect = wazuh_integration.exceptions.ClientError({'Error': {'Code': 1}},
+    mock_boto_session.client.side_effect = verprotect_integration.exceptions.ClientError({'Error': {'Code': 1}},
                                                                                              'operation')
 
     instance = utils.get_mocked_wazuh_integration(access_key=None, secret_key=None, profile=None)
@@ -290,7 +290,7 @@ def test_wazuh_integration_send_msg(dump_json):
         mock_socket.return_value = m
         instance.send_msg(utils.TEST_MESSAGE, dump_json=dump_json)
         mock_socket.assert_called_once()
-        m.send.assert_called_with(f"{wazuh_integration.MESSAGE_HEADER}{msg}".encode())
+        m.send.assert_called_with(f"{verprotect_integration.MESSAGE_HEADER}{msg}".encode())
         m.close.assert_called_once()
 
 
@@ -401,7 +401,7 @@ def test_wazuh_aws_database_initializes_properly(mock_connect, mock_metadata, mo
     """Test if the instances of WazuhAWSDatabase are created properly."""
     mock_connect.return_value = MagicMock()
     args = utils.get_wazuh_aws_database_parameters()
-    wazuh_aws_db = wazuh_integration.WazuhAWSDatabase(**args)
+    wazuh_aws_db = verprotect_integration.WazuhAWSDatabase(**args)
 
     assert wazuh_aws_db.db_path == os.path.join(wazuh_aws_db.wazuh_wodle, f"{utils.TEST_DATABASE}.db")
     mock_connect.assert_called_once()
@@ -544,14 +544,14 @@ def test_wazuh_aws_database_delete_deprecated_tables(custom_database):
     instance.db_connector = custom_database
     instance.db_cursor = instance.db_connector.cursor()
 
-    for table in wazuh_integration.DEPRECATED_TABLES:
+    for table in verprotect_integration.DEPRECATED_TABLES:
         assert instance.db_cursor.execute(instance.sql_find_table, {'name': table}).fetchone()[0]
     assert instance.db_cursor.execute(instance.sql_find_table, {'name': METADATA_TABLE_NAME}).fetchone()[0]
 
     instance.delete_deprecated_tables()
 
     # The deprecated tables were deleted
-    for table in wazuh_integration.DEPRECATED_TABLES:
+    for table in verprotect_integration.DEPRECATED_TABLES:
         assert not instance.db_cursor.execute(instance.sql_find_table, {'name': table}).fetchone()
     # The metadata table is still present
     assert instance.db_cursor.execute(instance.sql_find_table, {'name': METADATA_TABLE_NAME}).fetchone()[0]

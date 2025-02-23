@@ -8,7 +8,7 @@ import copy
 from unittest.mock import patch
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'buckets_s3'))
 import aws_bucket
@@ -387,7 +387,7 @@ def get_mocked_wazuh_integration(**kwargs):
             patch('wazuh_integration.sqlite3.connect'), \
             patch('wazuh_integration.utils.find_wazuh_path', return_value=TEST_WAZUH_PATH), \
             patch('wazuh_integration.utils.get_wazuh_version', return_value=WAZUH_VERSION):
-        return wazuh_integration.WazuhIntegration(**get_wazuh_integration_parameters(**kwargs))
+        return verprotect_integration.WazuhIntegration(**get_wazuh_integration_parameters(**kwargs))
 
 
 def get_mocked_wazuh_aws_database(**kwargs):
@@ -396,7 +396,7 @@ def get_mocked_wazuh_aws_database(**kwargs):
             patch('wazuh_integration.sqlite3.connect'), \
             patch('wazuh_integration.utils.find_wazuh_path', return_value=TEST_WAZUH_PATH), \
             patch('wazuh_integration.utils.get_wazuh_version', return_value=WAZUH_VERSION):
-        return wazuh_integration.WazuhAWSDatabase(**get_wazuh_aws_database_parameters(**kwargs))
+        return verprotect_integration.WazuhAWSDatabase(**get_wazuh_aws_database_parameters(**kwargs))
 
 
 def get_mocked_aws_bucket(**kwargs):

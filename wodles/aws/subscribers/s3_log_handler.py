@@ -22,7 +22,7 @@ sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
 import aws_tools
 
 sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 
 
 class AWSS3LogHandler:
@@ -54,7 +54,7 @@ class AWSS3LogHandler:
         raise NotImplementedError
 
 
-class AWSSubscriberBucket(wazuh_integration.WazuhIntegration, AWSS3LogHandler):
+class AWSSubscriberBucket(verprotect_integration.WazuhIntegration, AWSS3LogHandler):
     """Class for processing events from AWS S3 buckets.
 
     Attributes
@@ -65,7 +65,7 @@ class AWSSubscriberBucket(wazuh_integration.WazuhIntegration, AWSS3LogHandler):
         IAM Role.
     """
     def __init__(self, service_endpoint: str = None, sts_endpoint: str = None, profile: str = None, **kwargs):
-        wazuh_integration.WazuhIntegration.__init__(self, access_key=None,
+        verprotect_integration.WazuhIntegration.__init__(self, access_key=None,
                                                     secret_key=None,
                                                     profile=profile,
                                                     service_name='s3',
@@ -242,7 +242,7 @@ class AWSSubscriberBucket(wazuh_integration.WazuhIntegration, AWSS3LogHandler):
             self.send_msg(msg)
 
 
-class AWSSLSubscriberBucket(wazuh_integration.WazuhIntegration, AWSS3LogHandler):
+class AWSSLSubscriberBucket(verprotect_integration.WazuhIntegration, AWSS3LogHandler):
     """Class for processing AWS Security Lake events from S3.
 
     Attributes
@@ -258,7 +258,7 @@ class AWSSLSubscriberBucket(wazuh_integration.WazuhIntegration, AWSS3LogHandler)
     """
 
     def __init__(self, service_endpoint: str = None, sts_endpoint: str = None, profile: str = None, **kwargs):
-        wazuh_integration.WazuhIntegration.__init__(self, access_key=None,
+        verprotect_integration.WazuhIntegration.__init__(self, access_key=None,
                                                     secret_key=None,
                                                     profile=profile,
                                                     service_name='s3',

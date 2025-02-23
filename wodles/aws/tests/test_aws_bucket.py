@@ -21,7 +21,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '.'))
 import aws_utils as utils
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'buckets_s3'))
 import aws_bucket
@@ -52,7 +52,7 @@ utils.LIST_OBJECT_V2_NO_PREFIXES['Contents'][0]['Key'] = utils.TEST_LOG_FULL_PAT
 @patch('wazuh_integration.WazuhIntegration.get_client')
 @patch('wazuh_integration.utils.find_wazuh_path', return_value=utils.TEST_WAZUH_PATH)
 @patch('wazuh_integration.utils.get_wazuh_version')
-@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=wazuh_integration.WazuhIntegration.__init__)
+@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=verprotect_integration.WazuhIntegration.__init__)
 def test_aws_bucket_initializes_properly(mock_wazuh_integration, mock_version, mock_path, mock_client, mock_connect,
                                          mock_metadata,
                                          only_logs_after: str or None):

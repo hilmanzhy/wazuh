@@ -749,8 +749,8 @@ WriteLocal()
 InstallCommon()
 {
 
-    VERPROTECT_GROUP='wazuh'
-    VERPROTECT_USER='wazuh'
+    VERPROTECT_GROUP='verprotect'
+    VERPROTECT_USER='verprotect'
     INSTALL="install"
 
     if [ ${INSTYPE} = 'server' ]; then

@@ -15,7 +15,7 @@ from typing import Iterator
 from datetime import datetime
 
 sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 import aws_tools
 
 MAX_RECORD_RETENTION = 500
@@ -41,7 +41,7 @@ AWS_BUCKET_MSG_TEMPLATE = {'integration': 'aws',
                            'aws': {'log_info': {'aws_account_alias': '', 'log_file': '', 's3bucket': ''}}}
 
 
-class AWSBucket(wazuh_integration.WazuhAWSDatabase):
+class AWSBucket(verprotect_integration.WazuhAWSDatabase):
     """
     Represents a bucket with events on the inside.
 
@@ -187,7 +187,7 @@ class AWSBucket(wazuh_integration.WazuhAWSDatabase):
         # Table name
         self.db_table_name = db_table_name
 
-        wazuh_integration.WazuhAWSDatabase.__init__(self,
+        verprotect_integration.WazuhAWSDatabase.__init__(self,
                                                     db_name=self.db_name,
                                                     service_name='s3',
                                                     access_key=access_key,

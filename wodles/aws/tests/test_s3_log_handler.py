@@ -14,7 +14,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '.'))
 import aws_utils as utils
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-import wazuh_integration
+import wodles.aws.verprotect_integration as verprotect_integration
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'subscribers'))
 import s3_log_handler
@@ -39,7 +39,7 @@ def test_method_raises_not_implemented():
 
 @patch('wazuh_integration.WazuhIntegration.get_sts_client')
 @patch('wazuh_integration.WazuhIntegration.get_client')
-@patch('wazuh_integration.WazuhIntegration.__init__', side_effet=wazuh_integration.WazuhIntegration.__init__)
+@patch('wazuh_integration.WazuhIntegration.__init__', side_effet=verprotect_integration.WazuhIntegration.__init__)
 def test_aws_sl_subscriber_bucket_initializes_properly(mock_wazuh_integration, mock_client, mock_sts_client):
     """Test if the instances of AWSSLSubscriberBucket are created properly."""
     kwargs = utils.get_aws_s3_log_handler_parameters(iam_role_arn=utils.TEST_IAM_ROLE_ARN,
@@ -60,7 +60,7 @@ def test_aws_sl_subscriber_bucket_initializes_properly(mock_wazuh_integration, m
 
 
 @patch('wazuh_integration.WazuhIntegration.get_sts_client')
-@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=wazuh_integration.WazuhIntegration.__init__)
+@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=verprotect_integration.WazuhIntegration.__init__)
 def test_aws_sl_subscriber_bucket_obtain_logs(mock_wazuh_integration, mock_sts_client):
     """Test 'obtain_information_from_parquet' fetches parquets from a bucket and retrieves the expected list of
     events."""
@@ -75,7 +75,7 @@ def test_aws_sl_subscriber_bucket_obtain_logs(mock_wazuh_integration, mock_sts_c
 
 
 @patch('wazuh_integration.WazuhIntegration.get_sts_client')
-@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=wazuh_integration.WazuhIntegration.__init__)
+@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=verprotect_integration.WazuhIntegration.__init__)
 def test_aws_sl_subscriber_bucket_obtain_logs_handles_exception(mock_wazuh_integration,
                                                                                     mock_sts_client):
     """Test 'obtain_information_from_parquet' handles exceptions raised when failing to process a parquet file."""
@@ -91,7 +91,7 @@ def test_aws_sl_subscriber_bucket_obtain_logs_handles_exception(mock_wazuh_integ
 @patch('s3_log_handler.AWSSLSubscriberBucket.obtain_logs')
 @patch('wazuh_integration.WazuhIntegration.send_msg')
 @patch('wazuh_integration.WazuhIntegration.get_sts_client')
-@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=wazuh_integration.WazuhIntegration.__init__)
+@patch('wazuh_integration.WazuhIntegration.__init__', side_effect=verprotect_integration.WazuhIntegration.__init__)
 def test_aws_sl_subscriber_bucket_process_file(mock_wazuh_integration, mock_sts_client, mock_send, mock_obtain):
     """Test 'process_file' method sends the events inside the given message to AnalysisD."""
     instance = utils.get_mocked_aws_sl_subscriber_bucket()
